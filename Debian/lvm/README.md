@@ -43,10 +43,12 @@ mkfs.(formato) /dev/vgteste/lvteste
 
 mkfs.ext4 /dev/vgteste/lvteste
 
+
 ## Montando volume
 mount "nomedisco" "local"
 
 mount /dev/vgteste/lvteste /mnt
+
 
 ## Verificando utilização dos discos 
 df -h
@@ -55,6 +57,7 @@ df -h
 lvextend -L "tamanho" "nomelv"
 
 lvextend -L +5GB /dev/vgteste/lvteste
+
 
 ## Avisando SO sobre modificação no disco
 resize2fs "nomelv"
@@ -66,6 +69,7 @@ resize2fs "nomediscolv" "tamanhoesperado"
 
 resize2fs /dev/vgteste/lvteste 8GB
 
+
 lvreduce -L "tamanhoserreduzido" "nomediscolv"
 
 lvreduce -L 2GB /dev/vgteste/lvteste
@@ -74,6 +78,7 @@ lvreduce -L 2GB /dev/vgteste/lvteste
 pvcreate "nomepartição"
 
 pvcreate /dev/sdd
+
 
 ## Aumentando tamanho do VG
 vgextend "nomevg" "nomepartição"
@@ -85,17 +90,22 @@ vgreduce "nomevg" "nomepartição"
 
 vgreduce vgteste /dev/sdd
 
+
 ## Removendo volume VG
 lvremove "nomelv"
 
 lvremove /dev/vgteste/lvteste
 
+
 ## Quando for modificar os volumes, é interessante desmontá-los.
 unmount /mnt
+
 
 ## Para listar os discos, para digitar o comando 
 fdisk -l
 
+
 ## Algumas distribuições não contem o LVM, sendo assim, basta instalá-lo com o comando
 apt install lvm2 -y
+
 
