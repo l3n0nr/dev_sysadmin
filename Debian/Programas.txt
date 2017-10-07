@@ -1,0 +1,7 @@
+# Gerenciando volumes
+apt install lvm2 -y
+
+# Docker
+apt install docker.io -y
+
+
