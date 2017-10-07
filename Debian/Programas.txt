@@ -1,7 +1,18 @@
-# Gerenciando volumes
-apt install lvm2 -y
 
-# Docker
-apt install docker.io -y
+#### GERENCIAMENTO SERVER
+	# Gerenciando volumes
+	apt install lvm2 -y
 
+	# Docker
+	apt install docker.io -y
+
+#### DESENVOLVIMENTO
+	# Apache
+	apt install apache2 -y
+
+	# Mysql
+	apt install mysql-server -y
+
+	# PhpMyAdmin
+	apt install phpmyadmin -y
 
