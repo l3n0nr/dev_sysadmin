@@ -1,0 +1,131 @@
+#variaveis de sistema
+~ env
+~ set | more
+
+# verificando maximo de processos que podem ser executados pelo usuario usado
+~ ulimit -u
+
+# verificando tempo maximo de utilização da CPU pelo usuario usado
+~ ulimit -t
+
+# verificando numero maximo de arquivos que o usuario usado pode criar
+~ ulimit -f
+
+# comando para verificar quem esta logado no sistema
+~ who
+
+# verificando historico de login's no sistema
+~ last
+
+###################################
+###	COMANDOS DE A - Z	###
+###################################
+
+## LETRA A
+addgroups -  adicionando grupos
+	~ addgroups nomeusuario nomegrupo
+	~ cat /etc/groups
+
+adduser - adicionando usuario
+	~ addusuer nomeusuario
+
+alias - criando apelidos
+	~ alias apelido='comando'
+
+apropos - procura referencias dentro da documentação do linux
+	~ apropos expressao
+
+	~ cd /usr/share/man
+
+apt - não precisa explicar, né hahaha
+	~apt
+
+	~ var/cache/apt/archives
+
+ar - argrupando arquivos em diretorio
+	~ ar nomediretorio *.txt[extensao dos arquivos]
+
+	# visualizando arquivos dentro do diretorio
+	~ ar t nomediretorio
+
+	# extraindo arquivos de um diretorio agrupado
+	~ ar x nomediretorio nomearquivo especifico 
+
+at -  agendando tarefas simples
+	~ at | atq
+
+	# agendando tarefa script
+	~ at -f script.sh hora
+
+atq - mostrando lista de tarefas agendadas
+	~ atq
+
+atrm - removendo lista
+	~ atrm numerotarefa [1,2,3,4]	
+
+arch - mostrando arquiterura da maquina
+	~arch
+
+## LETRA B
+basename - remove componentes do comanho dos arquivos e suas extensões
+	~ basename /usr/bin/firefox 
+	~ basename -s .txt arquivo.txt
+
+bc - linguagem de programação para operações aritmeticas
+	~ echo "10*2" | bc
+	~ bc <<< 2+2
+	~ bc <<< 5^3
+
+bg - coloca processo parado em background
+	~ bg 1
+
+[root] biosdecode - mostra as informações da BIOS
+
+bzip2 - compactando arquivos
+	~ bzip2 -z arquivo.txt 
+	~ bzip2 -d arquivo.txt.bz2
+
+## LETRA C
+
+## LETRA D
+date - mostra date e hora
+	# Calculando data 
+	~ date -d '2 months 15 days'
+
+dd - converter e copiar arquivos
+	# criando imagem 
+	~ dd if=/dev/sdx of=/tmp/imagem.iso
+
+du - exibir informações de diretórios e arquivos
+	# mostrando tamanho arquivo
+	~ du arquivo
+
+dpkg - trabalho com pacotes em distribuições Debian-like
+	~ dpkg -i 'nomepacote' # instalando pacote
+	~ dpkg -r 'nomepacote' # removendo pacote
+
+delgroup - removendo um grupo do sistema
+	~ delgroup 'nomegrupo'
+
+deluser - removendo usuario do sistema
+	~ deluser 'nomeusuario'
+
+depmod - arquivo com dependencias do kernel
+	# cd /lib/modules/'kernel'/modules.dep # lista dependencias do kernel
+	~ depmod # gerando novo arquivo das dependencias
+
+df - mostra espaço livre nas partições
+
+diff - compara arquivos
+	# comparando dois arquivos
+	~ diff arquivo1 arquivo2 
+
+	# comparando dois arquivos | mostrando apenas diferença
+	~ diff -rq arquivo1 arquivo2
+
+dmesg - mensagens de inicialização do sistema
+	~ dmesg -n 1 # panic messages
+	~ dmesk -k # only kernel messages
+
+
+ 

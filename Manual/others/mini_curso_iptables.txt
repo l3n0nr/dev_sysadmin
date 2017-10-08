@@ -1,0 +1,23 @@
+Modelo OSI
+- Aplicação
+- Apresentação
+- Sessao
+- Transporte
+- Rede
+- Enlace
+- Fisico
+---------------------------
+TCP(Transmission Control Protocol)/IP
+
+- Aplicação/Processos(Aplicação/Apresentação/Sessão)
+- Transporte
+- Rede(Rede/Enlace)
+- Fisico
+
+---------------------------
+
+Pacotes TCP - garantia na entrada dos dados
+Pacotes UDP - integridade do pacote, nao ´e um dos conceitos necessarios.
+---------
+
+

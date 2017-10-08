@@ -1,0 +1,24 @@
+#####################################
+#       TRABALHANDO COM GRUPOS      #
+#####################################
+# usuario1 poderia realizar todas as operações (R/W/X)/similiar root
+#usuario1 ALL=(ALL) ALL
+
+# criando uma nova categoria de permissões dos usuarios
+# permitindo que os usuarios executem
+#       ping, apt, dhclient
+Cmnd_Alias funcionarios = /sbin/ping, /usr/bin/apt, /sbin/dhclient
+
+#criando regra para usuario individual
+usuario1 ALL = /sbin/ifconfig
+
+#definindo usuarios que irão estar dentro do grupo
+User_Alias NOVOS = usuario1, usuario2
+
+# definindo para os novos funcionarios, as funcoes definidas dentro do grupo
+# NOVOS ALL = funcionarios
+
+# definindo tempo para sessao usuario
+    # não salva senha, toda vez é necessario digitar a senha para executar os comandos
+    Defaults: lenonr timestamp_timeout = 0
+#####################################

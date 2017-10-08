@@ -1,0 +1,5 @@
+TODO: indica uma pendencia no script
+
+FIXME: indica um bug no sistema
+
+XXX: indica um recado

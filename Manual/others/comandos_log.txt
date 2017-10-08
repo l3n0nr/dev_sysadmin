@@ -1,0 +1,23 @@
+/var/log/syslog ou /var/log/messages: mensagens gerais, bem como informações relacionadas ao sistema. Essencialmente, este registro armazena todos os dados de atividade em todo o sistema global. 
+
+/var/log/auth.log ou /var/log/secure: armazena logs de autenticação, incluindo logins e métodos de autenticação bem-sucedidos e com falhas. 
+
+/var/log/boot.log: um repositório de todas as informações relacionadas à inicialização e quaisquer mensagens registradas durante a inicialização.
+
+/var/log/maillog ou /var/log/mail.log: armazena todos os logs relacionados aos servidores de e-mail, útil quando você precisa de informações sobre postfix, smtpd ou qualquer serviço relacionado ao email que esteja sendo executado em seu servidor.
+
+/var/log/kern: armazena logs do Kernel e dados de aviso. Esse registro também é útil para solucionar problemas de kernels personalizados.
+
+/var/log/dmesg: mensagens relacionadas aos drivers de dispositivo. O comando dmesg pode ser usado para visualizar mensagens neste arquivo.
+
+/var/log/faillog: contém informações sobre todas as tentativas de login falhas, o que é útil para obter informações sobre falhas de login, como aquelas que tentam hackear credenciais de login e ataques de força bruta.
+
+/var/log/cron: armazena todas as mensagens relacionadas a Crond (tarefas cron), como quando o daemon cron iniciou um trabalho, mensagens de falha relacionadas, etc.
+
+/var/log/yum.log: se você instalar pacotes usando o comando yum, este registro armazena todas as informações relacionadas, o que pode ser útil para determinar se um pacote e todos os componentes foram instalados corretamente.
+
+/var/log/httpd/: um diretório contendo arquivos error_log e access_log do daemon httpd Apache. O error_log contém todos os erros encontrados pelo httpd. Esses erros incluem problemas de memória e outros erros relacionados ao sistema. Access_log contém um registro de todos os pedidos recebidos em HTTP.
+
+/var/log/mysqld.log ou /var/log/mysql.log: arquivo de log do MySQL que registra todas as mensagens de depuração, falha e sucesso. Contém informações sobre o início, parada e reinício do MySQL daemon mysqld. Esta é outra instância onde o sistema determina o diretório; RedHat, CentOS, Fedora e outros sistemas baseados em RedHat usam /var/log/mysqld.log, enquanto o Debian/Ubuntu usa o diretório /var/log/mysql.log.
+
+Referência: <https://sempreupdate.com.br/2017/07/como-funciona-os-logs-no-linux.html>

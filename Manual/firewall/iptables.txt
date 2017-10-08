@@ -1,0 +1,37 @@
+#forma1
+	#tentando trancar entrada de dados na interface ath0.1
+	iptables -A INPUT -i ath0.1 -m state --state ! ESTABLISHED,RELATED -j DROP
+
+	#tentando trancar saida de dados pela interface ath0.1
+	iptables -A OUTPUT -i ath0.1 -m state --state ! ESTABLISHED,RELATED -j DROP
+
+		#TESTE2
+		#tentando trancar entrada de dados na interface ath0.1
+		iptables -A INPUT -i ath0.1 -m state --state ! ESTABLISHED,RELATED -j REJECT
+
+		#tentando trancar saida de dados pela interface ath0.1
+		iptables -A OUTPUT -i ath0.1 -m state --state ! ESTABLISHED,RELATED -j REJECT
+
+#forma 2
+	#tentando trancar entrada de dados na interface ath0.1
+	iptables -A INPUT -i ath0.1 --syn -j DROP
+
+	#tentando trancar saida de dados pela interface ath0.1
+	iptables -A OUTPUT -i ath0.1 --syn -j DROP
+
+
+#TESTE 3 - BUG
+#bloqueia entrada de dados no ip
+iptables -t filter -A INPUT -d 10.0.0.142/24 -j DROP
+
+#bloqueia saida de dados no ip
+iptables -t filter -A OUTPUT -d 10.0.0.142/24 -j DROP
+
+#TESTE 4 - ERRO
+#bloqueia entrada de dados no ip
+iptables -t filter -A REJECT -d 10.0.0.142/24 
+
+#TESTE 5 - BUG
+#bloqueia entrada e saida de dados no ip
+iptables -A INPUT -s 10.0.0.142 -j DROP
+iptables -A OUTPUT -s 10.0.0.142 -j DROP

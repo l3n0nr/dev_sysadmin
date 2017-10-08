@@ -1,0 +1,7 @@
+cat - lendo arquivo
+more - inicio do arquivo
+tail - final do arquivo
+
+wc - mostrando caracteres
+sort - conta linhas repetidas
+

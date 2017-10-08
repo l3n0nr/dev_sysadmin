@@ -1,0 +1,14 @@
+#imprimindo linhas que não contem a expressao #
+	sed '/^#/d' /etc/protocols 
+
+#substitui palavras especificas /lenon/teste/
+	sed -e 's/lenon/teste' arquivo.txt 
+
+	#caso exista mais palavras repetidas, o parametro g realiza as redundancias
+		sed -e 's/joao/teste/g' arquivo.txt > arquivo1.txt 
+
+#enviando para um segundo arquivo, os resultados do sed
+	sed -e 's/joao/teste/' arquivo.txt > arquivo1.txt 
+
+#mostra as informações dos arquivos | substitui palavra e depois remove da exibicao
+	cat arquivo.txt | sed -e 's/lenon/teste/;/julio/d'

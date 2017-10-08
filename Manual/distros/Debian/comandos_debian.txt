@@ -1,0 +1,30 @@
+########################################
+#alterando repositorios
+	/etc/apt/sources.list
+
+########################################
+#alterando keymap
+	apt install console-data -y
+
+########################################
+#alterando ssh
+	#negando permissão acesso root
+		/etc/ssh/sshd_config
+
+		"PermitRootLogin" = no
+
+	#alterando range porta ssh
+		port(range high)
+
+#######################################
+#alterando permissao de usuarios
+	#criando grupo de usuarios
+		User_Alias ADMINS = 'usuario'
+
+	#criando permissoes
+		ADMINS ALL = (ALL) ALL
+		aluno ALL=/sbin/ifconfig
+
+######################################
+
+

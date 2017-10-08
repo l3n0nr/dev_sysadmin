@@ -1,0 +1,3 @@
+Modo monitor: não há necessidade de estar conectado na rede, para a analise; Exemplo: airodump-ng
+Modo promiscuo: usado na rede cabeada, para capturar os dados transmitidos entre a maquina e o roteador. Exemplo: Wireshark, tcpdump;
+

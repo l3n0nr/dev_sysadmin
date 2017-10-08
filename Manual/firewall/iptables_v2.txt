@@ -1,0 +1,27 @@
+#Allow guest bridge access to Internet
+iptables -I FORWARD -i br1 -m state --state NEW -j ACCEPT
+iptables -I FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
+
+#Block access between private and guest
+iptables -I FORWARD -i br0 -o br1 -m state --state NEW -j DROP
+iptables -I FORWARD -i br1 -d `nvram get lan_ipaddr`/`nvram get lan_netmask` -m state --state NEW -j DROP
+
+#NAT to make Internet work
+iptables -t nat -I POSTROUTING -o br0 -j SNAT --to `nvram get lan_ipaddr`
+
+#Block torrent and p2p
+#change the IP address to the IP of your guest network x.x.x.x/24
+#iptables -I FORWARD -p tcp -s 192.168.99.0/24 -m connlimit --connlimit-above 50 -j DROP
+iptables -I FORWARD -p tcp -s 10.0.1.1/24 -m connlimit --connlimit-above 50 -j DROP
+#iptables -I FORWARD -p ! tcp -s 192.168.99.0/24 -m connlimit --connlimit-above 25 -j DROP
+iptables -I FORWARD -p ! tcp -s 10.0.1.1/24 -m connlimit --connlimit-above 25 -j DROP
+
+#Block guest access to router services
+iptables -I INPUT -i br1 -p tcp --dport telnet -j REJECT --reject-with tcp-reset
+iptables -I INPUT -i br1 -p tcp --dport ssh -j REJECT --reject-with tcp-reset
+iptables -I INPUT -i br1 -p tcp --dport www -j REJECT --reject-with tcp-reset
+iptables -I INPUT -i br1 -p tcp --dport https -j REJECT --reject-with tcp-reset
+
+#Referencia: <https://youtu.be/gQUVY5qAjFs>
+
+

@@ -1,0 +1,26 @@
+################
+# VERIFICANDO APLICATIVOS INICIADOS JUNTO COM O SISTEMA
+################
+# FORMA 01 - XFCE(interface)
+	cd /.config/autostart
+	ls
+
+# FORMA 02 - Local RC.D
+	cd /etc/rc(alguma coisa)
+	ls
+	
+	# Carregando arquivo inicialização
+		# Dar permissão de execução no arquivo, depois adicionar no arquivo rc.local
+			/etc/init.d/arquivo start
+		# Caso arquivo esteja fora do diretório, passar o caminho completo.
+			/home/$USER/arquivo start
+
+	# Carregando comandos inicialização
+		# Colar comando, no arquivo rc.local apenas
+			echo "AQUI" start
+
+	# Criando arquivo para ser executado, antes do desligamento
+		nano rc.local_shutdown
+		chmod +x rc.local_shutdown
+		
+

@@ -1,0 +1,7 @@
+Docker
+
+Container: virtuação da aplicação a ser executada e não de todo o sistema operacional.
+
+Instalando o versão mais atual do docker
+    ~curl -fsSL https://get.docker.com/ | sh
+

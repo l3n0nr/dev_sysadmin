@@ -1,0 +1,20 @@
+##### Verificador de trojans #####
+TROJAN_PORTS="12345 31336 31337 31338 3024 4092 5714 5742 2583 8787 5556 5557"
+iptables -t filter -N trojans-in
+for PORTA in ${TROJAN_PORTS};do
+    iptables -A trojans-in -p tcp --sport=1024: --dport=${PORTA} -j LOG \ --log-prefix "FIREWALL: Trojan ${PORTA} "
+    iptables -A trojans-in -p tcp --sport=1024: --dport=${PORTA} -j DROP
+done
+iptables -t filter -A INPUT -i ppp0 -j trojans-in
+
+##### Proteção contra IP Spoofing #####
+for i in /proc/sys/net/ipv4/conf/*/rp_filter; do
+    echo 1 >$i
+done
+
+#### Bloqueando portas Samba ####
+#iptables -A OUTPUT -p tcp --dport 139 -j REJECT
+#iptables -A FORWARD -p tcp --dport 139 -j REJECT
+
+#iptables -A OUTPUT -p tcp --dport 445 -j REJECT
+#iptables -A FORWARD -p tcp --dport 445 -j REJECT
