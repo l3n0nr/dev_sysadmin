@@ -1,3 +1,6 @@
+Referência: <https://sempreupdate.com.br/2017/07/como-funciona-os-logs-no-linux.html>
+
+######################
 /var/log/syslog ou /var/log/messages: mensagens gerais, bem como informações relacionadas ao sistema. Essencialmente, este registro armazena todos os dados de atividade em todo o sistema global. 
 
 /var/log/auth.log ou /var/log/secure: armazena logs de autenticação, incluindo logins e métodos de autenticação bem-sucedidos e com falhas. 
@@ -19,5 +22,4 @@
 /var/log/httpd/: um diretório contendo arquivos error_log e access_log do daemon httpd Apache. O error_log contém todos os erros encontrados pelo httpd. Esses erros incluem problemas de memória e outros erros relacionados ao sistema. Access_log contém um registro de todos os pedidos recebidos em HTTP.
 
 /var/log/mysqld.log ou /var/log/mysql.log: arquivo de log do MySQL que registra todas as mensagens de depuração, falha e sucesso. Contém informações sobre o início, parada e reinício do MySQL daemon mysqld. Esta é outra instância onde o sistema determina o diretório; RedHat, CentOS, Fedora e outros sistemas baseados em RedHat usam /var/log/mysqld.log, enquanto o Debian/Ubuntu usa o diretório /var/log/mysql.log.
-
-Referência: <https://sempreupdate.com.br/2017/07/como-funciona-os-logs-no-linux.html>
+###################
