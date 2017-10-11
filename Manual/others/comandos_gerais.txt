@@ -1,0 +1,30 @@
+############################################################################
+# FONTE: Cadernos de Informática - Curso sobre o sistema operacional Linux #
+###########################################################################
+
+# Diretorios
+~ mkdir 	# cria um novo diretorio
+~ rmdir 	# remove um diretorio
+
+# Arquivos
+~ find 		# procura arquivos
+~ wc 		# conta o numero de linhas, caracteres e palavras do arquivo
+
+# Log's
+~ $? 		# mostra o valor de saida do comando
+~ echo $SHELL 	# mostra caminho padrao execução scripts
+
+# Senhas
+~ cat /etc/passwd 	# arquivo que contem o nome e login dos usuarios do sistema
+~ cat /etc/shadow 	# arquivo que contem as senhas dos usuarios do sistema
+
+# Outros
+~
+
+Observações
+# "Comandos longos para o shell podem ser divididos em múltiplas linhas terminando cada linha, exceto a última, com \ (barra invertida). Neste caso, o prompt muda para “> “."
+# "No Unix, o sistema se preocupa apenas em arrumar espaço em disco para o arquivo. Ele
+não faz nenhuma interpretação do seu conteúdo[...]"
+# "No caminhar pela árvore de diretórios, usam-se os termos subir (ir para um diretório anterior (pai)) e descer (ir para um diretório contido no diretório em questão(filho)). Diretórios do mesmo nível e com o mesmo pai são chamados de irmãos."
+
+
