@@ -1,0 +1,11 @@
+# Configurando VPN
+
+# Instalando o OpenVPN(Servidor-Cliente da Rede Virtual Privada) e Easy-RSA(conjunto de scripts para gerar certificados de autentificação)
+apt install openvpn easy-rsa -y
+
+# A Virtual Private Network, basicamente é um roteador que faz a ligação entre duas redes distintas.
+
+OBS:
+# Boa prática - Manter atualizado os sistemas
+
+
