@@ -1,5 +1,4 @@
 # Criando VPN Linux
-# Referência: Youtube <youtu.be/91NWQldAEI0>
 
 # Instalando OPENVPN
 ~ apt install openvpn -y
