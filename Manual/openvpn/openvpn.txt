@@ -1,0 +1,36 @@
+# Criando VPN Linux
+# Referência: Youtube <youtu.be/91NWQldAEI0>
+
+# Instalando OPENVPN
+~ apt install openvpn -y
+
+# Gerando chave criptografica
+~ openvpn --genkey --secret /etc/openvpn/key
+
+	# Verificando se chave foi gerada
+	~ cat /etc/openvpn/key
+
+# Configurando servidor VPN
+~ cd /etc/openvpn
+~ nano server.conf
+
+# Copiando chaves criptograficas
+~ scp key root@'ip_origem':/etc/openvpn
+	Exemplo: ~ scp key root@192.168.1.50:/etc/openvpn
+
+# Configurando cliente VPN
+~ cd /etc/openvpn
+~ nano cliente.conf
+
+# Iniciando VPN
+	# Lado servidor
+	~ openvpn --config server.conf
+
+	# Lado cliente
+	~ openvpn --config cliente.conf
+
+OBS:
+# É necessário possuir o openssh instalado
+~ apt openssh-server || openssh-client # Modificar arquivo /etc/ssh/sshd_config modificado permissão de login como root
+
+
