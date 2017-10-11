@@ -1,0 +1,8 @@
+# Configurando SQUID para autentificação dos usuários
+
+OBS:
+# Similar à autenficação na rede Wi-fi(IFF Campus Alegrete), usado na Prefeitura de Alegrete.
+
+
+
+

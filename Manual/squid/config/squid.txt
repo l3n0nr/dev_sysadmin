@@ -1,0 +1,165 @@
+1. INSTALAR SQUID
+
+# apt-get install squid3 apache2
+
+2. Ir no diretório do squid 
+
+# cd /etc/squid3
+
+3. Fazer cópia do squid.conf
+
+# cp squid.conf squid.conf.original  (CONSULTA)
+
+4. Excluir o squid.conf
+
+# rm -rf squid.conf
+
+5. Criar um novo squid.conf
+
+# vim /squid.conf
+
+6. Vamos criar um arquivo de configuração do zero.
+
+#### AUTENTICAÇÃO ####
+
+
+###########################################################################################################
+# auth_param basic -  Especificar o tipo de autenticação básica do proxy.                                #
+#                                                                                                         #
+# basic_ncsa_auth   -  Método que autentica usuários criados através do utilitário do apache " htpasswd". #
+###########################################################################################################
+
+
+auth_param basic program /usr/lib/squid3/basic_ncsa_auth /etc/squid3/squid_passwd
+                                    
+
+auth_param basic children 10 ---> NÚMERO DE PROCESSOS AUTHENTICADOS QUE DEVEM SER INICIADOS JUNTOS COM O PROXY      
+                                    
+        
+auth_param basic realm Autentique-se para acessar a internet ---> TEXTO DO FORMULÁRIO DE AUTENTICAÇÃO
+
+                                    
+
+auth_param basic credentialsttl 4 hours ---> DEFINE PERÍODO DE VALIDADE DA AUTENTICAÇÃO
+
+
+auth_param basic casesensitive off --------> COMPORTAMENTO RELACIONADO A LETRAS MAIÚSCULAS E MINÚSCULAS
+
+
+
+####################################################################################
+
+
+
+############################ CONTROLE DE ACESSO ###########################################
+
+acl all src all                      --------------------------------> Bloquear acessos fora da rede interna
+acl redelocal src 192.168.1.0/24     --------------------------------> Define faixa da nossa rede local
+acl localhost src 192.168.1.80/24    --------------------------------> Abilita o uso do proxy localmente
+acl manager url_regex -i ^cache_object:// /squid-internal-mgr/
+acl SSL_ports port 443 563 ---------> Cria a ACL contendo as portas que são utilizadas no protocolo HTTPS.
+acl Safe_ports port 80 # http
+acl Safe_ports port 21 # ftp
+acl Safe_ports port 443 563 # https, snews
+acl Safe_ports port 70 # gopher            #acl de 80,21,443 563,70,210,280,488,591,777,901,1025-65535.
+acl Safe_ports port 210 # wais                              # PROTOCOLOS CONHECIDOS #
+acl Safe_ports port 280 # http-mgmt
+acl Safe_ports port 488 # gss-http
+acl Safe_ports port 591 # filemaker
+acl Safe_ports port 777 # multiling http
+acl Safe_ports port 1025-65535 # portas altas
+acl CONNECT method CONNECT ----- Cria acl CONNECT do tipo method (Especifica o tipo do método de requisição)
+
+acl autenticados proxy_auth REQUIRED
+acl bloqueados url_regex "/etc/squid3/bloqueados" -----------------> Arquivo que contém expressões bloqueadas
+acl permitidos url_regex "/etc/squid3/permitidos" -----------------> Arquivo que contém expressões permitidas
+
+http_access deny !Safe_ports -> O uso da “!” bloqueia conexões que não contenham o conteúdo da ACL Safe_Ports.
+http_access deny CONNECT !SSL_ports -----------> Bloqueia conexões fora do conteúdo da ACL SSL_ports.
+http_access deny manager 
+http_access deny bloqueados
+http_access allow permitidos
+
+http_access allow autenticados
+http_access allow localhost
+http_access allow redelocal -------------------> Micros dentro da nossa "rede local" podem usar o proxy
+
+
+http_access deny all --------------------------> Nega acesso para quem não estive dentro na nossa rede local
+
+
+################################# CONFIGURAÇÔES GERAIS #######################################################
+
+http_port 3128 -------------------------> Especifica porta na qual o servidor proxy deve oferecer o serviço
+
+visible_hostname srv_proxy -------------> Nome do nosso servidor proxy
+
+
+##################################### CACHE ##############################################################3
+
+cache_mem 256 MB ---------------------------> Quantidade de RAM disponibilizada para cache
+
+maximum_object_size_in_memory 5 MB ---------> Define tamanho dos arquivos que serão guardados em cache na RAM
+
+maximum_object_size 500 MB -----------------> Define tamanho disponibilizado para cache em disco
+
+minimum_object_size 0 KB -------------------> Define tamanho Mínimo
+
+cache_swap_low 90 --------------------------> Define que os arquivos serão mantidos em cache até atingir 90%
+
+cache_swap_high 95 ----------------> Define que ao atingir 95% o squid começa a descartar os arquivos mais antigos
+
+cache_dir ufs /var/spool/squid3 2048 16 256 ------> Define local onde são guardados os arquivos de cache
+
+cache_access_log /var/log/squid3/access.log ------> Local onde são guardados os logs de acesso do squid.(SARG)
+
+refresh_pattern ^ftp: 15 20% 2280 ------> #
+refresh_pattern ^gopher: 15 0% 2280 ----> # DEFINE PADRÃO DE ATUALIZAÇÃO DO CACHE .
+refresh_pattern . 15 20% 2280 ----------> # 
+
+15 ----> Indica que o squid verificará a cada acesso se as páginas e arquivos com mais de 15 minutos foram atualizados.
+
+
+2280 --> Indica o tempo máximo para que o objeto seja verificado.
+
+
+####################### CRIANDO USUÁRIO ######################################
+
+htpasswd -c /etc/squid3/squid_passwd nome_do_usuario
+
+
+####################### INSTALAR O SARG ####################################
+
+1. Instalar o SARG
+
+# apt-get install sarg
+
+2. ACESSAR /etc/sarg
+
+# cd /etc/sarg
+
+3. Editar o sarg.conf 
+
+# vim sarg.conf
+
+4. Indicar o caminho onde estão os logs do squid
+
+ALTERAR DE: access_log /var/log/squid/access.log
+
+PARA: access_log /var/log/squid3/access.log
+
+5. Alterar o título do relatório
+
+# title "RELATORIO DE NAVEGACAO WEB-SARG"
+
+6. Alterar a linha onde os relátorio serão salvos
+
+ALTERAR DE:
+
+#output_dir /var/www/html/squid-reports
+output_dir /var/lib/sarg
+
+PARA:
+
+output_dir /var/www/html/squid-reports
+#output_dir /var/lib/sarg
