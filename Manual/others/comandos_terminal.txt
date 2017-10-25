@@ -1,0 +1,13 @@
+##	COMANDOS INTERESSANTES NO TERMINAL	##
+
+Ctrl + a: move o cursor para o inicio da linha;
+Ctrl + e: move o cursor para o final da linha;
+
+Ctrl + w: remove ultima palavra digitada;
+Ctrl + r: busca no history as expressoes digitadas;
+
+Ctrl + k: remove texto a direita do cursor;
+Ctrl + u: remove texto a esquerda do cursor;
+
+###################################################
+
