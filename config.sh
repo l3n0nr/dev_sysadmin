@@ -30,7 +30,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.0.3.0.0.0]   #
+# # versão do script:           [0.0.4.0.0.0]   #
 # # data de criação do script:    [26/10/17]      #
 # # ultima ediçao realizada:      [26/10/17]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -77,6 +77,8 @@
 # 
     update()
     {    
+	clear
+
         #atualizando lista de repositorios            
         printf "[+] Atualizando lista de repositorios do sistema \n"   
         
@@ -85,6 +87,8 @@
     
     upgrade()
     {            
+	clear
+
         #atualizando lista de programas do sistema
         printf "[+] Atualizando lista de programas do sistema \n"  
         
