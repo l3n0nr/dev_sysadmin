@@ -1,0 +1,16 @@
+## CONFIGURAÇÕES BASICAS - AGENDAMENTO DE TAREFAS
+
+# Editando arquivo
+sudo crontab -e 
+
+## Definindo tarefas
+Exemplo 1:
+	#No minuto X, da hora Y, no dia W do mes, de Z mes e A semana
+	# 46 09 * * * ntpdate.ntp.org
+
+Exemplo 2:
+	# REINICIANDO SWAP - A CADA HORA
+	# 00 * * * * swapoff -a && sudo swapon -a
+
+
+
