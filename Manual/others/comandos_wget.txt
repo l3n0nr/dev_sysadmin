@@ -1,0 +1,13 @@
+## Realizando download via terminal
+
+Referencia: <https://youtu.be/pU9Uv9jp7Tw>
+
+wget "link": download de arquivo, via terminal(basico);
+
+wget -c "link": para continuar o download, partindo de um arquivo já existente.
+	-c: continua o download;
+
+wget -i -F -c "nomearquivo": passa arquivo como base, para elaboração de download de um pagina especifica.
+	-i: utiliza um arquivo;
+	-F: força para utilizar arquivo html;
+	-c: continua download;
