@@ -10,7 +10,7 @@ Exemplo 1:
 
 Exemplo 2:
 	# REINICIANDO SWAP - A CADA HORA
-	# 00 * * * * swapoff -a && sudo swapon -a
+	# 00 * * * * sudo swapoff -a && sudo swapon -a
 
 
 
