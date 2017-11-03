@@ -1,4 +1,0 @@
-# reboot ssh
-service sshd restart
-
-
