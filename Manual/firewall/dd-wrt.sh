@@ -1,10 +1,11 @@
 ##########################################################################################
 # FIREWALL PERSONALIZADO PARA DD-WRT
 # CRIAÇÃO SCRIPT: 14/09/17;
-# VERSAO: 0.18;
-# 
+# ULTIMA EDICAO: 17/11/17;
+# VERSAO: 0.20;
+#
 # # Referência: <https://www.vivaolinux.com.br/topico/Squid-Aptables/Firewall-Bloqueando-parcialmente-saida-de-Email>
-# 
+#
 #############################################
 
 # # # # FUNCIONANDO
@@ -50,7 +51,7 @@
 # # iptables -t filter -A INPUT -p tcp -m tcp --dport 809 -j ACCEPT
 # # iptables -t filter -A INPUT -p udp -m udp --sport 1194 -j ACCEPT #openvpn - OpenVPN
 # # iptables -t filter -A INPUT -p udp -m udp --dport 1194 -j ACCEPT
-# 
+#
 # # iptables -t filter -A INPUT -A eth1 -p udp -m udp --sport 137 -j ACCEPT #netbios-ns - NETBIOS Name Service
 # # iptables -t filter -A INPUT -A eth1 -p udp -m udp --dport 137 -j ACCEPT
 # # iptables -t filter -A INPUT -A eth1 -p tcp -m tcp --sport 139 -j ACCEPT #netbios-ns - NETBIOS Name Service
@@ -85,9 +86,9 @@
 # # iptables -t filter -A OUTPUT -p tcp -m multiport -s 0/0 -d 192.168.11.254 --sport 3050,3051 -j ACCEPT
 # # iptables -t filter -A INPUT -p gre -j ACCEPT
 # # iptables -t filter -A INPUT -p icmp -j ACCEPT
-# 
+#
 # iptables -t filter -A INPUT -j DROP
-# 
+#
 # #### DefiniÃ§Ã£o de Portas por IP ####
 # #Diogo
 # iptables -t filter -A FORWARD -d 192.168.11.48 -p tcp -m tcp --sport 443 -j ACCEPT #ssl
@@ -112,9 +113,9 @@
 # iptables -t filter -A FORWARD -d 192.168.11.48 -p tcp -m tcp --dport 3002 -j ACCEPT
 # iptables -t filter -A FORWARD -d 192.168.11.48 -p tcp -m tcp --sport 2082 -j ACCEPT
 # iptables -t filter -A FORWARD -d 192.168.11.48 -p tcp -m tcp --dport 2082 -j ACCEPT
-# 
+#
 # #### DefiniÃ§Ã£o de Portas Gerais ####
-# 
+#
 # iptables -t filter -A FORWARD -p tcp -m tcp --sport 1234 -j ACCEPT
 # iptables -t filter -A FORWARD -p tcp -m tcp --dport 1234 -j ACCEPT
 # iptables -t filter -A FORWARD -p tcp -m tcp --sport 5900 -j ACCEPT #vnc-server - VNC Server
@@ -141,9 +142,9 @@
 # iptables -t filter -A FORWARD -p udp -m udp --dport 110 -j ACCEPT
 # iptables -t filter -A FORWARD -p udp -m udp --sport 123 -j ACCEPT
 # iptables -t filter -A FORWARD -p udp -m udp --dport 123 -j ACCEPT
-# 
+#
 # iptables -t filter -A FORWARD -j DROP
-# 
+#
 # # # # ERRO
 # # iptables -t filter -A OUTPUT -j DROP
 
@@ -159,146 +160,146 @@
 #     iptables -A trojans-An -p tcp --sport=1024: --dport=${PORTA} -j DROP
 # done
 # iptables -t filter -A INPUT -A ppp0 -j trojans-An
-# 
+#
 # ################################
 # #   Proteção contra Spoofing   #
 # ################################
 # for i in /proc/sys/net/ipv4/conf/*/rp_filter; do
 #     echo 1 >$i
 # done
-# 
+#
 # #######################################
 # #   Libera conexoes estabelecidas     #
 # #######################################
 # iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 # iptables -A FORWARD -m state --state RELATED,ESTABLISHED,NEW -j ACCEPT
 # iptables -A OUTPUT -m state --state RELATED,ESTABLISHED,NEW -j ACCEPT
-# 
+#
 # ##################################################
 # #   Libera portas necessarias para utilização    #
 # ##################################################
 # # telnet
 # # source
 # # iptables -A INPUT -p tcp --sport 23 -j ACCEPT
-# # 
+# #
 # # # destination
 # iptables -A INPUT -p tcp --dport 23 -j ACCEPT
-# 
+#
 # iptables -t filter -A INPUT -p tcp -m tcp --sport 23 -j ACCEPT
 # iptables -t filter -A INPUT -p tcp -m tcp --dport 23 -j ACCEPT
-# 
+#
 # # dns
 # # # source
 # # iptables -A INPUT -p tcp --sport 53 -j ACCEPT
-# # 
+# #
 # # # destination
 # # iptables -A INPUT -p tcp --dport 53 -j ACCEPT
-# 
-# iptables -t filter -A INPUT -p tcp -m tcp --sport 53 -j ACCEPT 
+#
+# iptables -t filter -A INPUT -p tcp -m tcp --sport 53 -j ACCEPT
 # iptables -t filter -A INPUT -p tcp -m tcp --dport 53 -j ACCEPT
-# 
+#
 # # http
 # # # source
 # # iptables -A INPUT -p tcp --sport 80 -j ACCEPT
-# # 
+# #
 # # # destination
 # # iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-# 
-# iptables -t filter -A INPUT -p tcp -m tcp --sport 80 -j ACCEPT 
+#
+# iptables -t filter -A INPUT -p tcp -m tcp --sport 80 -j ACCEPT
 # iptables -t filter -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
-# 
+#
 # # https
 # # # source
 # # iptables -A INPUT -p tcp --sport 443 -j ACCEPT
-# # 
+# #
 # # # destination
 # # iptables -A INPUT -p tcp --dport 443 -j ACCEPT
-# 
-# iptables -t filter -A INPUT -p tcp -m tcp --sport 443 -j ACCEPT 
+#
+# iptables -t filter -A INPUT -p tcp -m tcp --sport 443 -j ACCEPT
 # iptables -t filter -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
-# 
+#
 # # transmission
 # # # source
 # # iptables -A INPUT -p tcp --sport 9091 -j ACCEPT
-# # 
+# #
 # # # destination
 # # iptables -A INPUT -p tcp --dport 9091 -j ACCEPT
-# 
-# iptables -t filter -A INPUT -p tcp -m tcp --sport 9091 -j ACCEPT 
+#
+# iptables -t filter -A INPUT -p tcp -m tcp --sport 9091 -j ACCEPT
 # iptables -t filter -A INPUT -p tcp -m tcp --dport 9091 -j ACCEPT
-# 
+#
 # # ssh
 # # # source
 # # iptables -A INPUT -p tcp --sport 22 -j ACCEPT
 # # iptables -A INPUT -p tcp --sport 22000 -j ACCEPT
-# # 
+# #
 # # # destination
 # # iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 # # iptables -A INPUT -p tcp --dport 22000 -j ACCEPT
-# 
-# iptables -t filter -A INPUT -p tcp -m tcp --sport 22000 -j ACCEPT 
+#
+# iptables -t filter -A INPUT -p tcp -m tcp --sport 22000 -j ACCEPT
 # iptables -t filter -A INPUT -p tcp -m tcp --dport 22000 -j ACCEPT
-# 
+#
 # # # RESTANTE DAS PORTAS SAO BLOQUEADAS
 # iptables -P INPUT DROP
-# 
-# 
+#
+#
 # # # FORWARD
-# 
+#
 # iptables -t filter -A FORWARD -p tcp -m tcp --sport 23 -j ACCEPT
 # iptables -t filter -A FORWARD -p tcp -m tcp --sport 53 -j ACCEPT
 # iptables -t filter -A FORWARD -p tcp -m tcp --sport 80 -j ACCEPT
 # iptables -t filter -A FORWARD -p tcp -m tcp --sport 9091 -j ACCEPT
 # iptables -t filter -A FORWARD -p tcp -m tcp --sport 22000 -j ACCEPT
-# 
+#
 # # # RESTANTE PORTAS BLOQUEADAS
 # iptables -P FORWARD DROP
-# 
+#
 # ##################################################
-# 
+#
 # TESTE 3
-# 
+#
 # ##################################################
 # # ADICIONANDO REDICIONAMENTO DE PACOTES
 # echo "1" > /proc/sys/net/ipv4/ip_forward
-# 
+#
 # # APAGANDO REGRAS ESCRITAS
 # iptables -F
 # iptables -X
 # iptables -t nat -F
 # iptables -t nat -X
-# 
-# # FECHANDO ENTRADA DE DADOS EM TODAS PORTAS 
+#
+# # FECHANDO ENTRADA DE DADOS EM TODAS PORTAS
 # iptables -P INPUT DROP
-# 
+#
 # # REDIRECIONAMENTO DE PORTAS BLOQUEADO
 # iptables -P FORWARD DROP
-# 
+#
 # # LIBERANDO PORTAS NECESSARIAS
 # # ping
 # iptables -A INPUT -p icmp -j ACCEPT
-# 
+#
 # # telnet
 # iptables -A INPUT -p tcp --dport 23 -j ACCEPT
-# 
+#
 # # dns
 # iptables -A INPUT -p udp --sport 53 -j ACCEPT
 # iptables -A INPUT -p tcp --dport 53 -j ACCEPT
-# 
+#
 # # http
 # iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-# 
+#
 # # https
 # iptables -A INPUT -p tcp --sport 443 -j ACCEPT
-# 
+#
 # # transmission
 # iptables -A INPUT -p tcp --sport 9091 -j ACCEPT
-# 
+#
 # # ssh
 # iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 # iptables -A INPUT -p tcp --dport 22000 -j ACCEPT
-# 
-# # 
+#
+# #
 # # LIBERANDO REDIRECIONAMENTO EM PORTAS ESPECIFICAS
 # iptables -A FORWARD -p tcp --dport 23 -j ACCEPT
 # iptables -A FORWARD -p tcp --sport 53 -j ACCEPT
@@ -307,7 +308,7 @@
 # iptables -A FORWARD -p tcp --dport 9091 -j ACCEPT
 # iptables -A FORWARD -p tcp --dport 22 -j ACCEPT
 # iptables -A FORWARD -p tcp --dport 22000 -j ACCEPT
-# 
+#
 # # REGRA DE MASCARAMENTO
 # iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
@@ -341,7 +342,7 @@ modprobe ipt_MASQUERADE
 
 ##### Proteção contra IP Spoofing #####
 for i in /proc/sys/net/ipv4/conf/*/rp_filter; do
-echo 1 >$i
+    echo 1 >$i
 done
 
 ### FILTRANDO PACOTES FRAGMENTADOS ###
@@ -362,7 +363,10 @@ echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
 # ----------------------------------------------------------
 #               LIBERANDO PORTAS DE ENTRADA
 # ----------------------------------------------------------
+# iptables -A INPUT -i lo -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -i eth0 -j ACCEPT
+iptables -A INPUT -i eth1 -j ACCEPT
 iptables -A INPUT -p icmp -j ACCEPT #ping
 iptables -A INPUT -p tcp --dport 23 -j ACCEPT #telnet
 iptables -A INPUT -p udp --sport 53 -j ACCEPT #dns
@@ -370,8 +374,8 @@ iptables -A INPUT -p tcp --dport 53 -j ACCEPT #dns
 iptables -A INPUT -p tcp --dport 80 -j ACCEPT  #http
 iptables -A INPUT -p tcp --sport 443 -j ACCEPT #https
 iptables -A INPUT -p tcp --sport 9091 -j ACCEPT #transmission
-# iptables -A INPUT -p tcp --dport 22 -j ACCEPT #ssh
-iptables -A INPUT -p tcp --dport 22000 -j ACCEPT #ssh
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT #ssh
+#iptables -A INPUT -p tcp --dport 22000 -j ACCEPT #ssh
 
 # ##################################################
 
@@ -397,5 +401,5 @@ iptables -t mangle -P PREROUTING ACCEPT
 iptables -t mangle -P OUTPUT ACCEPT
 
 # ##################################################
- 
+
 ##########################################################################################
