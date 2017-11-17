@@ -1,0 +1,7 @@
+# Verifying time of services in startup of the system.
+
+# basic form
+systemd-analyze
+
+# specific form
+systemd-analyze blame
