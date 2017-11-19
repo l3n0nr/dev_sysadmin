@@ -1,0 +1,48 @@
+# Referencia: <>
+# Titulo: <>
+
+# TTW - Time to White
+
+# modo normal
+	letra a = depois do cursor;
+	letra i = antes do cursor;
+	letra gg = inicio do arquivo;
+	letra G = final do arquivo;
+	ctrl + u = up;
+	ctrl + d = down;
+	102g = vai para a linha 102 do arquivo(se tiver);
+	50% = indo para a metade do arquivo;
+		100% = ultima linha;
+	
+	( e ) - pula entre frases;
+	{ e } - pula entre chaves
+
+	w - salta palavras;
+	W - salta grandes palavras;
+	b - volta uma palavra;
+	B - salta grandes palavras;
+
+	e - final da palavra
+	
+	$ - final da linha;
+	^ - inicio da linha;
+	0 - inicio da linha absoluto;
+
+	zz - centraliza linha na tela;
+	zb - alinha abaixo da tela;
+	zt - alinha acima;
+	
+	H - topo da tela;
+	M - meio da tela;
+	L - final da tela;	
+
+
+# mode inserção
+	letra I = insere no inicio da linha;
+	letra O = insere linha abaixo;
+	letra o = insere linha acima;
+	letra a = edita depois do cursor;
+	letra A = edita no final
+	letra s = substituir;
+	letra S = substitui a linha inteira;
+	
