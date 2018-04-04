@@ -9,20 +9,20 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [28/03/18]      #
-# # ultima ediçao realizada:      [03/04/18]      #
+# # ultima ediçao realizada:      [04/04/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 #
 # variaveis de ambiente
 servidor="google.com"						# servidor para teste
-tempo=300s									# tempo de intervalo do teste(segundos) - 5 minutos
+# tempo=300s									# tempo de intervalo do teste(segundos) - 5 minutos
 tempo_DATE="300 seconds"
 
 # realiza teste enquanto valor de internet for "0"(falso)	
 func_internet()
 {
 	# intervalo de tempo 
-	while true; do	
+	# while true; do	
 		# ====================================== #
 		# testando conexao internet
 		# ====================================== #	
@@ -51,8 +51,8 @@ func_internet()
 		date -d "$tempo_DATE" >> /tmp/internet.txt
 
 		# aguardando tempo especifico
-		sleep $tempo
-	done
+		# sleep $tempo
+	# done
 }
 
 echo "Inicio do script" > /tmp/internet.txt

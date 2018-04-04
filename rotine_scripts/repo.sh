@@ -17,7 +17,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[30/03/18]       #
-# Last modification script: 		[01/04/18]       #
+# Last modification script: 		[04/04/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 
 # # variaveis
@@ -28,16 +28,15 @@ LOCAL='/home/lenonr/Github/'		# pasta do repositorio
 REPOS=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo)		# repositorios
 
 # intervalo de tempo
-TEMPO=14400s 						# sera executado 3 vezes por dia a cada 4 horas
+# TEMPO=14400s 						# sera executado 3 vezes por dia a cada 4 horas
 TEMPO_DATE="14400 seconds"
 
 pull_git()
 {
 	# intervalo de tempo 
-	while true; do	
-
+	# while true; do	
 		#mostrando mensagem
-		notify-send -u normal "Atualizando repositorios do Github" -t 6000				
+		# notify-send -u normal "Atualizando repositorios do Github" -t 6000				
 
 		# # walk to the array
 		for (( i = 1; i <= ${#REPOS[@]}; i++ )); do	
@@ -73,8 +72,8 @@ pull_git()
 		date -d "$TEMPO_DATE" >> /tmp/repo.txt
 
 		# aguardando tempo especifico
-		sleep $TEMPO
-	done
+	# 	sleep $TEMPO
+	# done
 }
 
 # data de inicio do script
