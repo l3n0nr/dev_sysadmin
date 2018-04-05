@@ -1,15 +1,32 @@
-#!/bin/bash
-# chamando script's para rotina automatizadas
+#!/bin/zsh
+#
+# # # # # # # # # # # # #
+#   DESENVOLVIDO POR    #
+# # # # # # # # # # # # #
+#
+# por lenonr(Lenon Ricardo)
+#       contato: <lenonrmsouza@gmail.com>
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # #
+# # data de criação do script:    [04/04/18]      #
+# # ultima ediçao realizada:      [05/04/18]      #
+# # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+# DESCRICAO
+# Chamando script's para rotina automatizadas
+#
+#variaveis
+tempo=3600s					# 1 hora				
+tempo_DATE="3600 seconds"
+							# 1 min		 = 60 seconds;
+							# 60 min 	 = 3600 seconds;
 
-# tempo_internet="300 seconds"
-# tempo_repo="14400 seconds"
-# tempo_update_zshrc="seconds"
-
-tempo=3600s				# 1 hora
-						# 1 min		 = 60 seconds;
-						# 60 min 	 = 3600 seconds;
-
+# mostrando data de execucao inicial
 date > /tmp/main.txt
+
+# atualizando update_zshrc 				-				apenas uma vez(inicializaçao do script)
+printf "\nExecutando arquivo update_zshrc.sh" >> /tmp/main.txt
+./update_zshrc.sh 
 
 while true; do
 	printf "\nLoop executado em: " >> /tmp/main.txt
@@ -21,11 +38,10 @@ while true; do
 
 	# atualizando repositorios github
 	printf "\nExecutando arquivo repo.sh" >> /tmp/main.txt
-	./repo.sh
+	./repo.sh	
 
-	# atualizando zshrc
-	printf "\nExecutando arquivo update_zshrc.sh" >> /tmp/main.txt
-	./update_zshrc.sh 
+	echo "\n\nProxima verificação em:" >> /tmp/main.txt
+	date -d "$tempo_DATE" >> /tmp/main.txt
 
-	sleep $tempo
+	sleep $tempo	
 done
