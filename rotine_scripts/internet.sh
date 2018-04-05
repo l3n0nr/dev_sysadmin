@@ -16,7 +16,7 @@
 # variaveis de ambiente
 servidor="google.com"						# servidor para teste
 # tempo=300s									# tempo de intervalo do teste(segundos) - 5 minutos
-tempo_DATE="300 seconds"
+# tempo_DATE="300 seconds"
 
 # realiza teste enquanto valor de internet for "0"(falso)	
 func_internet()
@@ -47,8 +47,8 @@ func_internet()
 		fi	
 
 		# mostrando proxima verificacao
-		echo "Proxima verificação em:" >> /tmp/internet.txt
-		date -d "$tempo_DATE" >> /tmp/internet.txt
+		# echo "Proxima verificação em:" >> /tmp/internet.txt
+		# date -d "$tempo_DATE" >> /tmp/internet.txt
 
 		# aguardando tempo especifico
 		# sleep $tempo

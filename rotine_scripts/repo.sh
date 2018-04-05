@@ -29,7 +29,7 @@ REPOS=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo)		# repos
 
 # intervalo de tempo
 # TEMPO=14400s 						# sera executado 3 vezes por dia a cada 4 horas
-TEMPO_DATE="14400 seconds"
+# TEMPO_DATE="14400 seconds"
 
 pull_git()
 {
@@ -68,8 +68,8 @@ pull_git()
 		done	
 
 		# mostrando proxima verificacao
-		echo "Proxima verificação em:" >> /tmp/repo.txt
-		date -d "$TEMPO_DATE" >> /tmp/repo.txt
+		# echo "Proxima verificação em:" >> /tmp/repo.txt
+		# date -d "$TEMPO_DATE" >> /tmp/repo.txt
 
 		# aguardando tempo especifico
 	# 	sleep $TEMPO
