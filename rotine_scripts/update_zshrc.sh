@@ -18,7 +18,7 @@ pasta_home="/home/lenonr/"
 # local folder github
 local_git="/home/lenonr/Github/dev_xfce/Auto_Config/base"
 
-printf "\n\nArquivo update_zshrc.sh executado" >> /tmp/main.txt
+# printf "\n\nArquivo update_zshrc.sh executado" >> /tmp/main.txt
 
 if [ -e "$local_git" ]; then	
 	cat $local_git/.zshrc > $pasta_home/.zshrc 

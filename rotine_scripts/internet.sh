@@ -60,7 +60,7 @@ date >> /tmp/internet.txt
 printf "\n" >> /tmp/internet.txt
 
 # enviando saida para main.txt
-printf "\n\nArquivo internet.sh executado" >> /tmp/main.txt
+# printf "\n\nArquivo internet.sh executado" >> /tmp/main.txt
 
 # chamando funcao
 func_internet

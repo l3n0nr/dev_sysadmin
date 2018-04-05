@@ -82,7 +82,7 @@ date > /tmp/repo.txt
 printf "\n" >> /tmp/repo.txt
 
 # enviando saida para main.txt
-printf "\n\nArquivo repo.sh executado" >> /tmp/main.txt
+# printf "\n\nArquivo repo.sh executado" >> /tmp/main.txt
 
 # chamando funcao
 pull_git
