@@ -7,7 +7,7 @@
 
 date >> /tmp/main.txt
 
-tempo="3600 seconds"	# 1 hora
+tempo=3600s				# 1 hora
 						# 1 min		 = 60 seconds;
 						# 60 min 	 = 3600 seconds;
 
