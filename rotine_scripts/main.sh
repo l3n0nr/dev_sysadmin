@@ -11,6 +11,14 @@ tempo=3600s				# 1 hora
 
 date > /tmp/main.txt
 
+# atualizando zshrc
+printf "\nExecutando arquivo update_zshrc.sh" >> /tmp/main.txt
+./update_zshrc.sh 
+
+# reiniciando dropbox
+printf "\nExecutando arquivo dropbox.sh" >> /tmp/main.txt
+./dropbox.sh
+
 while true; do
 	printf "\nLoop executado em: " >> /tmp/main.txt
 	date >> /tmp/main.txt
@@ -21,11 +29,7 @@ while true; do
 
 	# atualizando repositorios github
 	printf "\nExecutando arquivo repo.sh" >> /tmp/main.txt
-	./repo.sh
-
-	# atualizando zshrc
-	printf "\nExecutando arquivo update_zshrc.sh" >> /tmp/main.txt
-	./update_zshrc.sh 
+	./repo.sh	
 
 	sleep $tempo
 done
