@@ -1,15 +1,21 @@
 #!/bin/bash
+# 
+# Descricao
 # chamando script's para rotina automatizadas
-
-# tempo_internet="300 seconds"
-# tempo_repo="14400 seconds"
-# tempo_update_zshrc="seconds"
-
+#
+#################
+# variaveis script
 tempo=3600s				# 1 hora
 						# 1 min		 = 60 seconds;
 						# 60 min 	 = 3600 seconds;
 
-date > /tmp/main.txt
+# iniciando arquivo
+printf "\nArquivo iniciado em: " > /tmp/main.txt
+date >> /tmp/main.txt
+
+# Inicio das tarefas
+#################################################################
+# executação de arquivos basicos 
 
 # atualizando zshrc
 printf "\nExecutando arquivo update_zshrc.sh" >> /tmp/main.txt
@@ -18,6 +24,10 @@ printf "\nExecutando arquivo update_zshrc.sh" >> /tmp/main.txt
 # reiniciando dropbox
 printf "\nExecutando arquivo dropbox.sh" >> /tmp/main.txt
 ./dropbox.sh
+
+# loop de execucao
+#################################################################
+# arquivos importantes
 
 while true; do
 	printf "\nLoop executado em: " >> /tmp/main.txt
@@ -31,5 +41,6 @@ while true; do
 	printf "\nExecutando arquivo repo.sh" >> /tmp/main.txt
 	./repo.sh	
 
+	# tempo entre loop de execucao
 	sleep $tempo
 done
