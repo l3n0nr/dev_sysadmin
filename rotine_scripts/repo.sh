@@ -53,6 +53,13 @@ pull_git()
 				  	# update repositories
 				  	git pull >> /tmp/repo.txt
 
+				  	# if update repositorie not work
+				  	if [[ $? == "0" ]]; then
+						# echo "Repositorie ${REPOS[$i]} fine!" >> /tmp/repo.txt
+				  	else				  		
+						echo "Repositorie Error ${REPOS[$i]}!" >> /tmp/repo.txt
+				  	fi
+
 				  	# REPO_FOUNDS=$(($REPO_FOUNDS + 1));        
 				  	let REPO_FOUNDS++		
 
