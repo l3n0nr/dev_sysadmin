@@ -41,7 +41,8 @@ status_git()
 					# if value = 0, then comparation is true
 					if [[ $? == "0" ]]; then
 						# show folder status
-						echo "\nRepositorio: $LOCAL${repos[$i]}\n"
+						echo "\nModificaçao necessaria: $LOCAL${repos[$i]}"
+						echo "#########################################################"
 						git status
 					else
 						printf ""
@@ -52,7 +53,8 @@ status_git()
 					# if value = 0, then comparation is true
 					if [[ $? == "0" ]]; then
 						#show folder status
-						echo "\nRepositorio: $LOCAL${repos[$i]}\n"
+						echo "\nModificaçao necessaria: $LOCAL${repos[$i]}"
+						echo "#########################################################"
 						git status
 					else
 						printf ""
