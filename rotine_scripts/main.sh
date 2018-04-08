@@ -24,6 +24,26 @@ tempo_DATE="3600 seconds"
 # mostrando data de execucao inicial
 date > /tmp/main.txt
 
+# iniciando arquivo
+printf "\nArquivo iniciado em: " > /tmp/main.txt
+date >> /tmp/main.txt
+
+# Inicio das tarefas
+#################################################################
+# executação de arquivos basicos 
+
+# atualizando zshrc
+printf "\nExecutando arquivo update_zshrc.sh" >> /tmp/main.txt
+./update_zshrc.sh 
+
+# reiniciando dropbox
+printf "\nExecutando arquivo dropbox.sh" >> /tmp/main.txt
+./dropbox.sh
+
+# loop de execucao
+#################################################################
+# arquivos importantes
+
 # atualizando update_zshrc 				-				apenas uma vez(inicializaçao do script)
 printf "\nExecutando arquivo update_zshrc.sh" >> /tmp/main.txt
 ./update_zshrc.sh 
