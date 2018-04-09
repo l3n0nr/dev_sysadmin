@@ -9,7 +9,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [04/04/18]      #
-# # ultima ediçao realizada:      [05/04/18]      #
+# # ultima ediçao realizada:      [08/04/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # DESCRICAO
@@ -36,17 +36,9 @@ date >> /tmp/main.txt
 printf "\nExecutando arquivo update_zshrc.sh" >> /tmp/main.txt
 ./update_zshrc.sh 
 
-# reiniciando dropbox
-printf "\nExecutando arquivo dropbox.sh" >> /tmp/main.txt
-./dropbox.sh
-
 # loop de execucao
 #################################################################
 # arquivos importantes
-
-# atualizando update_zshrc 				-				apenas uma vez(inicializaçao do script)
-printf "\nExecutando arquivo update_zshrc.sh" >> /tmp/main.txt
-./update_zshrc.sh 
 
 while true; do
 	printf "\nLoop executado em: " >> /tmp/main.txt
