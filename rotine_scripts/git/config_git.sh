@@ -1,4 +1,5 @@
 #!/bin/zsh
+
 # local do repositorio
 local_repo='/home/lenonr/Github/'			
 

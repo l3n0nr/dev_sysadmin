@@ -5,6 +5,9 @@
 # # repositorios
 # var_alias=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo)	
 
+# chamando script de configuracao	
+source config_git.sh
+
 auto_alias()	
 {		
 	# percorre vetor
@@ -36,9 +39,6 @@ menu()
 
 # limpando a tela
 clear
-
-# chamando script de configuracao	
-./config_git.sh
 
 # iniciando script
 menu $1
