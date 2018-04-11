@@ -41,16 +41,12 @@ status_git()
 					# if value = 0, then comparation is true
 					if [[ $? == "0" ]]; then
 						# show folder status
-						# echo "Modificaçao necessaria: $LOCAL${repos[$i]}"
+						echo "[~] Repositorio ${repos[$i]}"
 						echo "#########################################################"
 						git status
 						echo "#########################################################"
-						printf "\n" 						
-						ls
-						printf "\n"
-						echo "#########################################################"
 
-						break;						
+						# break;						
 					else
 						printf ""
 					fi				
@@ -85,10 +81,6 @@ status_git()
 				# repo_notfounds=$(($repo_notfounds + 1));        
 				let repo_notfounds++
 			fi
-		fi
-
-		if [[ $? == "" ]]; then
-			echo "Nada para mostrar"
 		fi
 	done		
 }
