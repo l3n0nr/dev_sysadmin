@@ -20,7 +20,9 @@ auto_alias()
 			cd $local_repo${var_alias[$i]}
 			ls
 			echo "######################################"	
-		 	fi					  						 	
+
+			exit
+		fi					  						 			
 	done
 }
 
