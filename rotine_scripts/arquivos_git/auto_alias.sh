@@ -14,12 +14,13 @@ auto_alias()
 	for (( i = 0; i <= ${#var_alias[@]}; i++ )); do	
 		# se parametro for igual ao vetor
 		if [[ $1 == ${var_alias[$i]} ]]; then						
-	 		#abrindo pasta posteriormente
+			cd $local_repo${var_alias[$i]}			
+
+			echo "########## MODIFICAÇOES ###############" 
+			printf "\n"			
+			git status					
+			printf "\n"			
 			echo "########## LISTA DE ARQUIVOS ##########" 
-			# cd $entra_pasta			
-			cd $local_repo${var_alias[$i]}
-			git status
-			echo "######################################"							
 			printf "\n"
 			ls
 			printf "\n"

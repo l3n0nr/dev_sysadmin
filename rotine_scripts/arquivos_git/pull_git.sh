@@ -31,6 +31,18 @@ REPOS=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo)		# repos
 # TEMPO=14400s 						# sera executado 3 vezes por dia a cada 4 horas
 # TEMPO_DATE="14400 seconds"
 
+internet()
+{
+	ping -q -c1 google.com
+
+	if [ $? = "0" ]; then		
+		pull_git
+	else			
+		# echo "Verificar internet!"
+		exit
+	fi	
+}
+
 pull_git()
 {
 	# intervalo de tempo 
@@ -92,7 +104,7 @@ printf "\n" >> /tmp/repo.txt
 # printf "\n\nArquivo repo.sh executado" >> /tmp/main.txt
 
 # chamando funcao
-pull_git
+internet
 
 # data do final do script
 date >> /tmp/repo.txt

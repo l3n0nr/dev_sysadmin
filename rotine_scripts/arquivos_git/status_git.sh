@@ -44,9 +44,10 @@ status_git()
 						echo "[~] Repositorio ${repos[$i]}"
 						echo "#########################################################"
 						git status
-						echo "#########################################################"
+						echo "#########################################################"	
 
-						# break;						
+						# chamando script externo
+						# $(auto_alias.sh) ${repos[$i]}
 					else
 						printf ""
 					fi				
@@ -56,11 +57,10 @@ status_git()
 					# if value = 0, then comparation is true
 					if [[ $? == "0" ]]; then
 						#show folder status
-						echo "Modificaçao necessaria: $LOCAL${repos[$i]}"
+						echo "[~] Repositorio ${repos[$i]}"
 						echo "#########################################################"
 						git status
-
-						break;
+						echo "#########################################################"
 					else
 						printf ""
 					fi			
