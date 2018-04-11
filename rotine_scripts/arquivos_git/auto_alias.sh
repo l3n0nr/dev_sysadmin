@@ -14,8 +14,13 @@ auto_alias()
 	for (( i = 0; i <= ${#var_alias[@]}; i++ )); do	
 		# se parametro for igual ao vetor
 		if [[ $1 == ${var_alias[$i]} ]]; then						
-	 		entra_pasta=$local_repo${var_alias[$i]}	
-	 	fi					  				
+	 		#abrindo pasta posteriormente
+			echo "########## LISTA DE ARQUIVOS ##########" 
+			# cd $entra_pasta
+			cd $local_repo${var_alias[$i]}
+			ls
+			echo "######################################"	
+		 	fi					  						 	
 	done
 }
 
@@ -27,13 +32,7 @@ menu()
 		exit;
 	else 		
 		# chamando funcao
-		auto_alias $1
-
-		#abrindo pasta posteriormente
-		echo "########## LISTA DE ARQUIVOS ##########" 
-		cd $entra_pasta
-		ls
-		echo "######################################"	
+		auto_alias $1		
 	fi
 }
 
