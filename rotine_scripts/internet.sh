@@ -26,7 +26,7 @@ func_internet()
 		# ====================================== #
 		# testando conexao internet
 		# ====================================== #	
-		ping -q -c5 $servidor > /dev/null
+		ping -q -c5 $servidor > /dev/null 
 		# ping -q -c1 $servidor >> /tmp/internet.txt
 
 		# verificando valor
