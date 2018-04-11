@@ -9,7 +9,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [04/04/18]      #
-# # ultima ediçao realizada:      [08/04/18]      #
+# # ultima ediçao realizada:      [11/04/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # DESCRICAO
@@ -50,7 +50,7 @@ while true; do
 
 	# atualizando repositorios github
 	printf "\nExecutando arquivo repo.sh" >> /tmp/main.txt
-	./repo.sh	
+	arquivos_git/pull_git.sh	
 
 	echo "\n\nProxima verificação em:" >> /tmp/main.txt
 	date -d "$tempo_DATE" >> /tmp/main.txt
