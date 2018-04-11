@@ -1,12 +1,12 @@
 #!/bin/zsh
 
-# local_repo='/home/lenonr/Github/'			
+local_repo='/home/lenonr/Github/'			
 
 # # repositorios
-# var_alias=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo)	
+var_alias=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo)	
 
 # chamando script de configuracao	
-source config_git.sh
+# source config_git.sh
 
 auto_alias()	
 {		
