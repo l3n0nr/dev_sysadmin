@@ -16,12 +16,14 @@ auto_alias()
 		if [[ $1 == ${var_alias[$i]} ]]; then						
 	 		#abrindo pasta posteriormente
 			echo "########## LISTA DE ARQUIVOS ##########" 
-			# cd $entra_pasta
+			# cd $entra_pasta			
 			cd $local_repo${var_alias[$i]}
+			git status
+			echo "######################################"							
+			printf "\n"
 			ls
+			printf "\n"
 			echo "######################################"	
-
-			exit
 		fi					  						 			
 	done
 }
