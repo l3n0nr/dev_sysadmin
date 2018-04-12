@@ -81,12 +81,12 @@ status_git()
 				# repo_notfounds=$(($repo_notfounds + 1));        
 				let repo_notfounds++
 			fi
-		fi
+		fi		
+	done
 
-		if [[ $? == "" ]]; then
-			echo "Tudo ok!"
-		fi
-	done		
+	if [[ $? == "" ]]; then
+		echo "Tudo ok!"
+	fi		
 }
 
 status_git
