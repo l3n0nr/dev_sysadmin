@@ -82,6 +82,10 @@ status_git()
 				let repo_notfounds++
 			fi
 		fi
+
+		if [[ $? == "" ]]; then
+			echo "Tudo ok!"
+		fi
 	done		
 }
 
