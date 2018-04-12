@@ -9,7 +9,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [04/04/18]      #
-# # ultima ediçao realizada:      [11/04/18]      #
+# # ultima ediçao realizada:      [12/04/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # DESCRICAO
