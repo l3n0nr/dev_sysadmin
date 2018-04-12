@@ -10,7 +10,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[08/04/18]       #
-# Last modification script: 		[11/04/18]       #
+# Last modification script: 		[12/04/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # # variaveis
@@ -36,10 +36,10 @@ status_git()
 				  	cd $LOCAL${repos[$i]}			  					
 
 					# check status
-					git status | grep "Changes not" > /dev/null
+					changes=$(git status | grep "Changes not" > /dev/null)
 						
 					# if value = 0, then comparation is true
-					if [[ $? == "0" ]]; then
+					if [[ $changes == "0" ]]; then
 						# show folder status
 						echo "[~] Repositorio ${repos[$i]}"						
 						echo "#########################################################"
@@ -52,10 +52,10 @@ status_git()
 						printf ""
 					fi				
 
-					git status | grep "Untracked files:" > /dev/null
+					untrack=$(git status | grep "Untracked files:" > /dev/null)
 
 					# if value = 0, then comparation is true
-					if [[ $? == "0" ]]; then
+					if [[ $untrack == "0" ]]; then
 						#show folder status
 						echo "[~] Repositorio ${repos[$i]}"
 						echo "#########################################################"
@@ -83,10 +83,6 @@ status_git()
 			fi
 		fi		
 	done
-
-	if [[ $? == "" ]]; then
-		echo "Tudo ok!"
-	fi		
 }
 
 status_git
