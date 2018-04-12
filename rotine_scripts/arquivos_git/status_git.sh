@@ -35,37 +35,42 @@ status_git()
 		  			# into folder location
 				  	cd $LOCAL${repos[$i]}			  					
 
-					# check status
-					# changes=$(git status | grep "Changes not" > /dev/null)
-					git status | grep "Changes not" > /dev/null
+				  	echo "[~] Repositorio ${repos[$i]}"						
+					echo "#########################################################"
+					git status						
+					echo "#########################################################"							
+
+					# # check status
+					# # changes=$(git status | grep "Changes not" > /dev/null)
+					# # git status | grep "Changes not" > /dev/null
 						
-					# if value = 0, then comparation is true
-					if [[ $? == "0" ]]; then
-						# show folder status
-						echo "[~] Repositorio ${repos[$i]}"						
-						echo "#########################################################"
-						git status						
-						echo "#########################################################"							
+					# # if value = 0, then comparation is true
+					# if [[ $? == "0" ]]; then
+					# 	# show folder status
+					# 	echo "[~] Repositorio ${repos[$i]}"						
+					# 	echo "#########################################################"
+					# 	git status						
+					# 	echo "#########################################################"							
 
-						# chamando script externo
-						# $(auto_alias.sh) ${repos[$i]}
-					else
-						printf ""
-					fi				
+					# 	# chamando script externo
+					# 	# $(auto_alias.sh) ${repos[$i]}
+					# else
+					# 	printf ""
+					# fi				
 
-					# untrack=$(git status | grep "Untracked files:" > /dev/null)
-					git status | grep "Untracked files:" > /dev/null
+					# # untrack=$(git status | grep "Untracked files:" > /dev/null)
+					# # git status | grep "Untracked files:" > /dev/null
 
-					# if value = 0, then comparation is true
-					if [[ $? == "0" ]]; then
-						#show folder status
-						echo "[~] Repositorio ${repos[$i]}"
-						echo "#########################################################"
-						git status
-						echo "#########################################################"
-					else
-						printf ""
-					fi			
+					# # if value = 0, then comparation is true
+					# if [[ $? == "0" ]]; then
+					# 	#show folder status
+					# 	echo "[~] Repositorio ${repos[$i]}"
+					# 	echo "#########################################################"
+					# 	git status
+					# 	echo "#########################################################"
+					# else
+					# 	printf ""
+					# fi			
 					
 				# if update repositorie not work		
 			  	else				  		
