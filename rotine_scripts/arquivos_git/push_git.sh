@@ -45,8 +45,10 @@ push_git()
 					# if update repositorie not work		
 				  	else				  		
 						echo "repositorie Error ${repos[$i]}!" >> /tmp/repo.txt
-				  	fi					
-				fi				
+				  	fi									
+				else
+					echo "Nenhum push pendente em $LOCAL${repos[$i]}"
+				fi		
 				
 				# add  
 			  	let repo_founds++		
