@@ -29,21 +29,24 @@ push_git()
 		# verify local repo disk
 		if [[ $LOCAL${repos[$i]} != $LOCAL ]]; then
 			# verify local repo
-			if [ -e "$LOCAL${repos[$i]}" ]; then 	  	 
-				# if update repositorie work
-			  	if [[ $? == "0" ]]; then
-		  			# into folder location
-				  	cd $LOCAL${repos[$i]}			  					
-					
-					echo "Subindo modicaçoes em $LOCAL${repos[$i]}"
+			if [ -e "$LOCAL${repos[$i]}" ]; then 
+				# into folder location
+				cd $LOCAL${repos[$i]}			  					
 
-					git push
+				git status | grep "to publish your local commits" >> /dev/null
 
-					printf "\n"
-				# if update repositorie not work		
-			  	else				  		
-					echo "repositorie Error ${repos[$i]}!" >> /tmp/repo.txt
-			  	fi				
+				if [[ $? == "0" ]]; then
+					# if update repositorie work
+				  	if [[ $? == "0" ]]; then			  									
+						echo "Subindo modicaçoes em $LOCAL${repos[$i]}"
+						git push
+
+						printf "\n"
+					# if update repositorie not work		
+				  	else				  		
+						echo "repositorie Error ${repos[$i]}!" >> /tmp/repo.txt
+				  	fi					
+				fi				
 				
 				# add  
 			  	let repo_founds++		
