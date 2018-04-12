@@ -41,10 +41,10 @@ status_git()
 					# if value = 0, then comparation is true
 					if [[ $? == "0" ]]; then
 						# show folder status
-						echo "[~] Repositorio ${repos[$i]}"
+						echo "[~] Repositorio ${repos[$i]}"						
 						echo "#########################################################"
-						git status
-						echo "#########################################################"	
+						git status						
+						echo "#########################################################"							
 
 						# chamando script externo
 						# $(auto_alias.sh) ${repos[$i]}
@@ -86,6 +86,8 @@ status_git()
 }
 
 status_git
+
+# echo "[~] Atual $(pwd)" 
 
 # data do final do script
 date >> /tmp/repo.txt

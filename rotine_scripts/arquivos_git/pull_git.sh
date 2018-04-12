@@ -33,7 +33,7 @@ REPOS=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo)		# repos
 
 internet()
 {
-	ping -q -c1 google.com
+	ping -q -c1 google.com > /dev/null
 
 	if [ $? = "0" ]; then		
 		pull_git
