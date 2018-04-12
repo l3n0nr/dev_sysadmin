@@ -84,7 +84,7 @@ status_git()
 		fi		
 	done
 
-	if [[ -z "$?" ]]; then
+	if ! [[ "$?" ]]; then
 		echo "Tudo ok!"
 	fi		
 }
