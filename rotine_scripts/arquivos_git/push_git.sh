@@ -47,7 +47,7 @@ push_git()
 						echo "repositorie Error ${repos[$i]}!" >> /tmp/repo.txt
 				  	fi									
 				else
-					echo "Nenhum push pendente em $LOCAL${repos[$i]}"
+					echo "Nenhum push pendente em $LOCAL${repos[$i]}\n"
 				fi		
 				
 				# add  
