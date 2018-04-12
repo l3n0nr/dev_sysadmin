@@ -36,10 +36,11 @@ status_git()
 				  	cd $LOCAL${repos[$i]}			  					
 
 					# check status
-					changes=$(git status | grep "Changes not" > /dev/null)
+					# changes=$(git status | grep "Changes not" > /dev/null)
+					git status | grep "Changes not" > /dev/null
 						
 					# if value = 0, then comparation is true
-					if [[ $changes == "0" ]]; then
+					if [[ $? == "0" ]]; then
 						# show folder status
 						echo "[~] Repositorio ${repos[$i]}"						
 						echo "#########################################################"
@@ -52,10 +53,11 @@ status_git()
 						printf ""
 					fi				
 
-					untrack=$(git status | grep "Untracked files:" > /dev/null)
+					# untrack=$(git status | grep "Untracked files:" > /dev/null)
+					git status | grep "Untracked files:" > /dev/null
 
 					# if value = 0, then comparation is true
-					if [[ $untrack == "0" ]]; then
+					if [[ $? == "0" ]]; then
 						#show folder status
 						echo "[~] Repositorio ${repos[$i]}"
 						echo "#########################################################"
