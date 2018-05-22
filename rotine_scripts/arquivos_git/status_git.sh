@@ -10,7 +10,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[08/04/18]       #
-# Last modification script: 		[12/04/18]       #
+# Last modification script: 		[21/04/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # # variaveis
@@ -18,7 +18,7 @@
 LOCAL='/home/lenonr/Github/'		# pasta do repositorio
 
 # repositorios disponiveis
-repos=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo)		# repositorios
+repos=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo dev_docker)		# repositorios
 
 status_git()
 {
