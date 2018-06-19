@@ -5,7 +5,8 @@
 
 #CORPO DO SCRIPT
 clear
-printf "\nLançamento de um foguete especifico de acordo com o SpaceFlight Insider"
+printf "Lançamento de um foguete especifico de acordo com o.."
+printf "SpaceFlight Insider(spaceflightinsider.com)"
 printf "\nDias restantes para o lançamento:"
 read dias
 
