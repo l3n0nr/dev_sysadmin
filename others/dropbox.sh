@@ -32,7 +32,7 @@ f_dropbox()
 		# 	kill $testa_dropbox	
 		# done	
 
-		echo $?
+		# echo $?
 
 		# if [[ $? -eq 1 ]]; then
 			# verificando se dropbox foi fechado corretamente
