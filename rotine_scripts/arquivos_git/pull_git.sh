@@ -1,4 +1,5 @@
-#!/bin/zsh
+#!/bin/bash
+#
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # # # # # # # # # # # #
@@ -22,45 +23,56 @@
 
 # # variaveis
 # pasta dos repositorios
-LOCAL='/home/lenonr/Github/'		# pasta do repositorio
+local='/home/lenonr/Github/'		# pasta do repositorio
 
 # repositorios disponiveis
-REPOS=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo dev_docker)		# repositorios
+repos=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo dev_docker)		# repositorios
+
+# endereco de teste
+ping_end="google.com"
 
 internet()
 {
-	ping -c1 google.com > /dev/null
+	ping -c1 $ping_end > /dev/null
 
-	if [ $? = "0" ]; then		
+	if [ $? == "0" ]; then		
 		pull_git
 	else			
-		# echo "Verificar internet!"
-		exit
+		zenity --info \
+			   --width "300" \
+			   --height "50" \
+			   --text "Verificar a internet! - pull_git"
+		exit 1
 	fi	
 }
 
 pull_git()
 {
+	# data de inicio do script
+	echo "Inicio do script" > /tmp/repo.txt
+	date > /tmp/repo.txt
+	printf "\n" >> /tmp/repo.txt
+
 	# # walk to the array
-	for (( i = 1; i <= ${#REPOS[@]}; i++ )); do	
+	for (( i = 1; i <= ${#repos[@]}; i++ )); do	
 		# verify local repo disk
-		if [[ $LOCAL${REPOS[$i]} != $LOCAL ]]; then
+		if [[ $local${repos[$i]} != $local ]]; then
 			# verify local repo
-			if [ -e "$LOCAL${REPOS[$i]}" ]; then 	  	 
+			if [ -e "$local${repos[$i]}" ]; then 	  	 
 				date >> /tmp/repo.txt
-			  	echo "[+] - Atualizando repositorio:" $LOCAL${REPOS[$i]} >> /tmp/repo.txt
+			  	echo "[+] - Atualizando repositorio:" $local${repos[$i]} >> /tmp/repo.txt
 
 			  	# into folder location
-			  	cd $LOCAL${REPOS[$i]}
+			  	cd $local${repos[$i]}
 
 			  	# update repositories
 			  	git pull >> /tmp/repo.txt
 
 			  	# if update repositorie not work
 			  	if [[ $? == "0" ]]; then
-					# echo "Repositorie ${REPOS[$i]} fine!" >> /tmp/repo.txt
+					# echo "repositorie ${repos[$i]} fine!" >> /tmp/repo.txt
 			  	else				  		
-					echo "Repositorie Error ${REPOS[$i]}!" >> /tmp/repo.txt
+					echo "repositorie Error ${repos[$i]}!" >> /tmp/repo.txt
 			  	fi
 
 			  	# REPO_FOUNDS=$(($REPO_FOUNDS + 1));        
@@ -69,22 +81,18 @@ pull_git()
 			  	printf "\n" >> /tmp/repo.txt  	
 			else
 				date >> /tmp/repo.txt
-				echo "[-] - Not found": $LOCAL${REPOS[$i]}
+				echo "[-] - Not found": $local${repos[$i]}
 
 				# REPO_NOTFOUNDS=$(($REPO_NOTFOUNDS + 1));        
 				let REPO_NOTFOUNDS++
 			fi
 		fi
 	done	
+
+	# data do final do script
+	date >> /tmp/repo.txt
 }
 
-# data de inicio do script
-echo "Inicio do script" > /tmp/repo.txt
-date > /tmp/repo.txt
-printf "\n" >> /tmp/repo.txt
-
 # chamando funcao
-internet
-
-# data do final do script
-date >> /tmp/repo.txt
+# internet
+pull_git
