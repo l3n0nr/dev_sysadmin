@@ -51,15 +51,8 @@ f_dropbox()
 	fi
 }
 
-main()
-{
-	clear
-
-	f_dropbox
-}
-
 ## chamando funcao
-main
+f_dropbox
 
 #dropbox stop && DBUS_SESSION_BUS_ADDRESS="" && dropbox start
 #dropbox start -i
