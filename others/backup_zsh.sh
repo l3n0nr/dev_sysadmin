@@ -30,7 +30,16 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # versao do script
-    VERSAO="0.0.10.0.0.0"             
+    VERSAO="0.0.10.0.0.0"    
+
+# pasta do usuario
+    local_home="/home/lenonr/"
+
+# pasta do git
+	git="/home/lenonr/Github/dev_xfce/Auto_Config/base/"
+
+# arquivo utilizado
+	arquivo=".zshrc"         
 #    
 # Legenda: a.b.c.d.e.f
 # 	a = alpha[0], beta[1], stable[2], freeze[3];
@@ -58,11 +67,6 @@
 #                               CORPO DO SCRIPT                               #
 #                                                                             #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-# # variaveis do script
-local_home="/home/lenonr/"
-git="/home/lenonr/Github/dev_xfce/Auto_Config/base/"
-arquivo=".zshrc"
 
 # # FUNCOES
 f_envia()
