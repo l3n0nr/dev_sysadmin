@@ -91,6 +91,8 @@ f_verifica()
 		printf "Digite como parametros " && \
 		printf "\n- envia(de $local_home$arquivo para $git$arquivo) ou " && \
 		printf "\n- restaura(de $git$arquivo para $local_home$arquivo)"
+
+	echo; echo
 }
 
 main()
