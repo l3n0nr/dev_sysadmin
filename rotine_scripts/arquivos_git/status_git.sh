@@ -10,7 +10,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[08/04/18]       #
-# Last modification script: 		[20/06/18]       #
+# Last modification script: 		[21/06/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
@@ -105,7 +105,7 @@ check_git()
   											
 					# if value = 0, then comparation is true
 					if [[ $? == "0" ]]; then
-						notify-send "\o $USER" "voce precisa dar push em ${repos[$i]}!"
+						notify-send "Voce precisa commitar ${repos[$i]}!"
 
 						let contador++
 					fi														
@@ -130,5 +130,15 @@ check_git()
 	fi
 }
 
-status_git
-check_git
+main()
+{
+	status_git	
+
+	# se estiver preenchido
+	if [[ $1 == "check" ]]; then
+		check_git
+	fi		
+}
+
+main $1 
+
