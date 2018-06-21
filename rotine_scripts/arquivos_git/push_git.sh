@@ -13,12 +13,9 @@
 # Last modification script: 		[21/04/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
-# # variaveis
-# pasta dos repositorios
-LOCAL='/home/lenonr/Github/'		# pasta do repositorio
 
-# repositorios disponiveis
-repos=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo dev_docker)		# repositorios
+# chamando arquivo de configuracao
+source git.conf
 
 push_git()
 {
@@ -27,18 +24,18 @@ push_git()
 	# # walk to the array
 	for (( i = 1; i <= ${#repos[@]}; i++ )); do	
 		# verify local repo disk
-		if [[ $LOCAL${repos[$i]} != $LOCAL ]]; then
+		if [[ $local${repos[$i]} != $local ]]; then
 			# verify local repo
-			if [ -e "$LOCAL${repos[$i]}" ]; then 
+			if [ -e "$local${repos[$i]}" ]; then 
 				# into folder location
-				cd $LOCAL${repos[$i]}			  					
+				cd $local${repos[$i]}			  					
 
 				git status | grep "to publish your local commits" >> /dev/null
 
 				if [[ $? == "0" ]]; then
 					# if update repositorie work
 				  	if [[ $? == "0" ]]; then			  									
-						echo "Subindo modicaçoes em $LOCAL${repos[$i]}"
+						echo "Subindo modicaçoes em $local${repos[$i]}"
 						git push
 
 						printf "\n"
@@ -47,7 +44,7 @@ push_git()
 						echo "repositorie Error ${repos[$i]}!" >> /tmp/repo.txt
 				  	fi									
 				# else
-				# 	echo "Nenhum push pendente em $LOCAL${repos[$i]}\n"
+				# 	echo "Nenhum push pendente em $local${repos[$i]}\n"
 				fi		
 				
 				# add  
@@ -56,16 +53,16 @@ push_git()
 			  	printf "\n" >> /tmp/repo.txt  	
 			else
 				date >> /tmp/repo.txt
-				echo "[-] - Not found": $LOCAL${repos[$i]}
+				echo "[-] - Not found": $local${repos[$i]}
 
 				# repo_notfounds=$(($repo_notfounds + 1));        
 				let repo_notfounds++
 			fi
 		fi
 	done		
+
+	# data do final do script
+	date >> /tmp/repo.txt
 }
 
 push_git
-
-# data do final do script
-date >> /tmp/repo.txt

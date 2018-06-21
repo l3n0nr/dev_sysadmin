@@ -1,9 +1,7 @@
 #!/bin/zsh
 
-local_repo='/home/lenonr/Github/'			
-
-# # repositorios
-var_alias=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo dev_docker)	
+# chamando arquivo de configuracao
+source git.conf
 
 # chamando script de configuracao	
 # source config_git.sh
@@ -30,7 +28,10 @@ auto_alias()
 }
 
 menu()
-{		
+{
+	# limpando a tela
+	clear		
+	
 	# se variavel for vazia, mostra mensagem e sai
 	if [[ -z $1 ]]; then
 		echo "Parametros disponiveis: $var_alias"
@@ -40,9 +41,6 @@ menu()
 		auto_alias $1		
 	fi
 }
-
-# limpando a tela
-clear
 
 # iniciando script
 menu $1

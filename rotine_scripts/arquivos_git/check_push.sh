@@ -29,7 +29,7 @@
 ## DESCRICAO: Verifica se existe repositorio do github, com push pendente.
 #
 # versao do script
-    versao="0.0.10.0.0"             
+    versao="0.0.15.0.0"             
 #    
 # Legenda: a.b.c.d.e.f
 # 	a = alpha[0], beta[1], stable[2], freeze[3];
@@ -73,7 +73,7 @@ check_git()
 					# if value = 0, then comparation is true
 					if [[ $? == "0" ]]; then
 						zenity --notification \
-							   --text "voce precisa dar push em ${repos[$i]}"
+							   --text "Ei $USER, voce precisa dar push em ${repos[$i]}!"
 					fi														
 				# if update repositorie not work		
 			  	else				  		

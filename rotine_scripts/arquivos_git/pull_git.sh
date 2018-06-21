@@ -21,30 +21,8 @@
 # Last modification script: 		[20/06/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 
-# # variaveis
-# pasta dos repositorios
-local="/home/lenonr/Github/"		# pasta do repositorio
-
-# repositorios disponiveis
-repos=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo dev_docker)		# repositorios
-
-# endereco de teste
-ping_end="google.com"
-
-internet()
-{
-	ping -c1 $ping_end > /dev/null
-
-	if [ $? == "0" ]; then		
-		pull_git
-	else			
-		zenity --info \
-			   --width "300" \
-			   --height "50" \
-			   --text "Verificar a internet! - pull_git"
-		exit 1
-	fi	
-}
+# chamando arquivo de configuracao
+source git.conf
 
 pull_git()
 {
@@ -94,6 +72,4 @@ pull_git()
 	date >> /tmp/repo.txt
 }
 
-# chamando funcao
-# internet
 pull_git

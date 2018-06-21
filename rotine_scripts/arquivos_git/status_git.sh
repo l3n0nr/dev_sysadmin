@@ -13,13 +13,10 @@
 # Last modification script: 		[20/06/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
-# # variaveis
-# pasta dos repositorios
-local='/home/lenonr/Github/'		# pasta do repositorio
+# chamando arquivo de configuracao
+source git.conf
 
-# repositorios disponiveis
-repos=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo dev_docker)		# repositorios
-
+## chamando funcao
 status_git()
 {
 	clear
@@ -85,11 +82,8 @@ status_git()
 			fi
 		fi		
 	done
+
+	date >> /tmp/repo.txt
 }
 
 status_git
-
-# echo "[~] Atual $(pwd)" 
-
-# data do final do script
-date >> /tmp/repo.txt
