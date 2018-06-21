@@ -23,7 +23,7 @@
 
 # # variaveis
 # pasta dos repositorios
-local='/home/lenonr/Github/'		# pasta do repositorio
+local="/home/lenonr/Github/"		# pasta do repositorio
 
 # repositorios disponiveis
 repos=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo dev_docker)		# repositorios
@@ -71,6 +71,7 @@ pull_git()
 			  	# if update repositorie not work
 			  	if [[ $? == "0" ]]; then
 					# echo "repositorie ${repos[$i]} fine!" >> /tmp/repo.txt
+					echo
 			  	else				  		
 					echo "repositorie Error ${repos[$i]}!" >> /tmp/repo.txt
 			  	fi
