@@ -88,7 +88,7 @@ status_git()
 
 check_git()
 {
-	# clear
+	contador=0
 
 	# # walk to the array
 	for (( i = 0; i <= ${#repos[@]}; i++ )); do	
@@ -106,14 +106,10 @@ check_git()
   											
 					# if value = 0, then comparation is true
 					if [[ $? == "0" ]]; then
-						# zenity --notification \
-						# 	   --text "Ei $USER, voce precisa dar push em ${repos[$i]}!"
-
 						notify-send "Ei $USER, voce precisa dar push em ${repos[$i]}!"
+
+						let contador++
 					fi														
-				# if update repositorie not work		
-			  	else				  		
-					echo "repositorie Error ${repos[$i]}!" >> /tmp/repo.txt
 			  	fi				
 				
 				# add  
@@ -129,6 +125,10 @@ check_git()
 			fi
 		fi		
 	done
+
+	if [[ $contador == "0" ]]; then
+		notify-send "Nada para commitar! Pode ficar tranquilo $USER!"
+	fi
 }
 
 status_git

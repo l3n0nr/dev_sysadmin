@@ -22,7 +22,7 @@ push_git()
 	clear
 
 	# # walk to the array
-	for (( i = 1; i <= ${#repos[@]}; i++ )); do	
+	for (( i = 0; i <= ${#repos[@]}; i++ )); do	
 		# verify local repo disk
 		if [[ $local${repos[$i]} != $local ]]; then
 			# verify local repo
