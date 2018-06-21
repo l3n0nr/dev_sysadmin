@@ -106,8 +106,10 @@ check_git()
   											
 					# if value = 0, then comparation is true
 					if [[ $? == "0" ]]; then
-						zenity --notification \
-							   --text "Ei $USER, voce precisa dar push em ${repos[$i]}!"
+						# zenity --notification \
+						# 	   --text "Ei $USER, voce precisa dar push em ${repos[$i]}!"
+
+						notify-send "Ei $USER, voce precisa dar push em ${repos[$i]}!"
 					fi														
 				# if update repositorie not work		
 			  	else				  		
