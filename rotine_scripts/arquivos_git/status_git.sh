@@ -16,6 +16,8 @@
 # chamando arquivo de configuracao
 source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/git.conf
 
+contador=0
+
 ## chamando funcao
 status_git()
 {
@@ -44,8 +46,7 @@ status_git()
 						git status						
 						echo "#########################################################"							
 
-						# chamando script externo
-						# $(auto_alias.sh) ${repos[$i]}
+						let contador++
 					else
 						printf ""
 					fi				
@@ -88,8 +89,6 @@ status_git()
 
 check_git()
 {
-	contador=0
-
 	# # walk to the array
 	for (( i = 0; i <= ${#repos[@]}; i++ )); do	
 		# verify local repo disk
