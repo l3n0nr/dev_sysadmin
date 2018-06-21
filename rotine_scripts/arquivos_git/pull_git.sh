@@ -18,7 +18,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[30/03/18]       #
-# Last modification script: 		[21/04/18]       #
+# Last modification script: 		[20/06/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 
 # # variaveis
@@ -54,7 +54,7 @@ pull_git()
 	printf "\n" >> /tmp/repo.txt
 
 	# # walk to the array
-	for (( i = 1; i <= ${#repos[@]}; i++ )); do	
+	for (( i = 0; i <= ${#repos[@]}; i++ )); do	
 		# verify local repo disk
 		if [[ $local${repos[$i]} != $local ]]; then
 			# verify local repo
