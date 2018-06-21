@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # # # # # # # # # # # #
@@ -14,7 +14,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
-source git.conf
+source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/git.conf
 
 ## chamando funcao
 status_git()

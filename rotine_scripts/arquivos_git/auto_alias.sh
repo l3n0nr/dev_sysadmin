@@ -1,18 +1,21 @@
-#!/bin/zsh
+#!/bin/bash
 
 # chamando arquivo de configuracao
-source git.conf
+source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/git.conf
 
-# chamando script de configuracao	
-# source config_git.sh
+# # pasta dos repositorios
+# local="/home/lenonr/Github/"		
+
+# # repositorios disponiveis
+# repos=(dev_xfce dev_scripts dev_ksp dev_sysadmin dev_web dev_clonerepo dev_docker)		
 
 auto_alias()	
 {		
 	# percorre vetor
-	for (( i = 0; i <= ${#var_alias[@]}; i++ )); do	
+	for (( i = 0; i <= ${#repos[@]}; i++ )); do	
 		# se parametro for igual ao vetor
-		if [[ $1 == ${var_alias[$i]} ]]; then						
-			cd $local_repo${var_alias[$i]}			
+		if [[ $1 == ${repos[$i]} ]]; then						
+			cd $local${repos[$i]}			
 
 			echo "########## MODIFICAÇOES ###############" 
 			printf "\n"			
@@ -34,7 +37,7 @@ menu()
 	
 	# se variavel for vazia, mostra mensagem e sai
 	if [[ -z $1 ]]; then
-		echo "Parametros disponiveis: $var_alias"
+		echo "Parametros disponiveis: $repos"
 		exit;
 	else 		
 		# chamando funcao
