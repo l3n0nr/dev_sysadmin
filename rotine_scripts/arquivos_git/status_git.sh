@@ -105,7 +105,7 @@ check_git()
   											
 					# if value = 0, then comparation is true
 					if [[ $? == "0" ]]; then
-						notify-send "Ei $USER, voce precisa dar push em ${repos[$i]}!"
+						notify-send "\o $USER" "voce precisa dar push em ${repos[$i]}!"
 
 						let contador++
 					fi														
