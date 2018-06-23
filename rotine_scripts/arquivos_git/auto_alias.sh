@@ -6,9 +6,13 @@ source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/git.conf
 auto_alias()	
 {		
 	# percorre vetor
-	for (( i = 0; i <= ${#repos[@]}; i++ )); do	
+	for (( i = 1; i <= ${#repos[@]}; i++ )); do	
+		## encurtando vetor
+		valor=${repos[$i]} 
+		parametro=$(echo $valor | sed -e "s;dev_;;g")
+		
 		# se parametro for igual ao vetor
-		if [[ $1 == ${repos[$i]} ]]; then						
+		if [[ $1 == $parametro ]]; then						
 			cd $local${repos[$i]}			
 
 			echo "########## MODIFICAÇOES ###############" 
@@ -32,7 +36,7 @@ menu()
 	# se variavel for vazia, mostra mensagem e sai
 	if [[ -z $1 ]]; then
 		echo "Parametros disponiveis: $repos"
-		exit;
+		exit 1
 	else 		
 		# chamando funcao
 		auto_alias $1		
