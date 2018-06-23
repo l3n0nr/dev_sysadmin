@@ -1,5 +1,18 @@
 #!/bin/bash
-
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+# # # # # # # # # # # #
+#   DEVELOPMENT BY 	  #
+# # # # # # # # # # # #
+#
+# por lenonr(Lenon Ricardo)
+#       contato: <lenonrmsouza@gmail.com>
+#
+# # # # # # # # # # # # # # # # # # # # # # # ## # # #
+# Last modification script: 		[23/06/18]       #
+# # # # # # # # # # # # # # # # # # # # # # # ## # # #
+#
 # chamando arquivo de configuracao
 source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/git.conf
 
