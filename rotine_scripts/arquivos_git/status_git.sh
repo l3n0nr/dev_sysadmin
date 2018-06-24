@@ -2,6 +2,13 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#                                                                             #
+#                           CABEÇALHO DO SCRIPT                               #
+#                                                                             #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
 # # # # # # # # # # # #
 #   DEVELOPMENT BY 	  #
 # # # # # # # # # # # #
@@ -16,7 +23,13 @@
 #
 # chamando arquivo de configuracao
 source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/git.conf
-
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#                                                                             #
+#                               CORPO DO SCRIPT                               #
+#                                                                             #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
 # verificando se existem repositorios modificados
 contador=0
 
@@ -36,24 +49,19 @@ status_git()
 		  			# into folder location
 				  	cd $local${repos[$i]}			  								
 
-					# check status
-					# changes=$(git status | grep "Changes not" > /dev/null)
 					git status | grep "Changes not" > /dev/null
 						
 					# if value = 0, then comparation is true
 					if [[ $? == "0" ]]; then
 						# show folder status
-						echo "[~] Repositorio ${repos[$i]}"						
+						echo "[+] Repositorio ${repos[$i]}"						
 						echo "#########################################################"
 						git status						
 						echo "#########################################################"							
 
-						let contador++
-					else
-						printf ""
+						let contador++						
 					fi				
 
-					# untrack=$(git status | grep "Untracked files:" > /dev/null)
 					git status | grep "Untracked files:" > /dev/null
 
 					# if value = 0, then comparation is true
@@ -79,8 +87,7 @@ status_git()
 			else
 				date >> /tmp/repo.txt
 				echo "[-] - Not found": $local${repos[$i]}
-
-				# repo_notfounds=$(($repo_notfounds + 1));        
+     
 				let repo_notfounds++
 			fi
 		fi		
@@ -147,12 +154,30 @@ main()
 
 main $1 
 
-
-### RODAPE
-
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#                                                                               #
+#                           RODAPE DO SCRIPT                                    #
+#                                                                               #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
 ## verificar menu
 # status_git	
 # [[ $@ == "" ]] && status_git && exit 0 ||
 # [[ $@ == "check" ]] && check_git && exit 0 || \
 # # [[ $@ == "push" ]] && push_auto && exit 0 || \
 # echo "nao entendi" && exit 1
+
+### entrando no diretorio que precisa fazer commit
+#
+# busca_cam=$(git status | grep "modified:" | sed -e "s;"modified:";;g")
+# converte_cam=$(echo $busca_cam | sed -e "s;    ;;g")
+# # echo $converte_cam | sed -e "s;.sh;;g"
+# # ls -f $local${repos[$i]}/$converte_cam 
+# # echo $local${repos[$i]}
+# # echo $converte_cam
+# ls $local${repos[$i]}/$converte_cam | sed 's/\,.*\| -.*//'
+# # find $local${repos[$i]}/ -type f -iname $converte_cam
+# exit 1
+# # for i in `cat lista.txt` ; do 
+# # 	find /local/origem -type f -iname $i -exec cp --parents {} /local/destino \; ; 
+# # done
