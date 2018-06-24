@@ -17,6 +17,7 @@
 # chamando arquivo de configuracao
 source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/git.conf
 
+# verificando se existem repositorios modificados
 contador=0
 
 ## chamando funcao
@@ -131,15 +132,27 @@ check_git()
 	fi
 }
 
+push_auto()
+{
+	## chamando arquivo para commit automatico
+	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/push_git.sh
+}
+
 main()
 {
 	status_git	
 
-	# se estiver preenchido
-	if [[ $1 == "check" ]]; then
-		check_git
-	fi		
+	[[ $@ == "check" ]] && check_git && exit 0
 }
 
 main $1 
 
+
+### RODAPE
+
+## verificar menu
+# status_git	
+# [[ $@ == "" ]] && status_git && exit 0 ||
+# [[ $@ == "check" ]] && check_git && exit 0 || \
+# # [[ $@ == "push" ]] && push_auto && exit 0 || \
+# echo "nao entendi" && exit 1
