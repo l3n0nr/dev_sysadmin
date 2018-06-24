@@ -11,7 +11,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[08/04/18]       #
-# Last modification script: 		[23/06/18]       #
+# Last modification script: 		[24/06/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
@@ -127,7 +127,7 @@ check_git()
 	done
 
 	if [[ $contador == "0" ]]; then
-		notify-send "Nada para commitar! Pode ficar tranquilo $USER!"
+		notify-send "Nada para commitar!!"
 	fi
 }
 
