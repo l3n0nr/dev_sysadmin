@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                             #
@@ -104,9 +104,12 @@ f_vetor_audio()
 			   --continue \
 			   --audio-quality "$quality" \
 			   --extract-audio \
-			   --audio-format "$format" -o "$local/%(title)s.%(ext)s" -a $local/list.txt ; \
-			    f_verifica && rm $local/list.txt || \
-			    zenity --notification --text "Download finalizado!" 
+			   --audio-format "$format" -o "$local/%(title)s.%(ext)s" -a $local/list.txt
+			    
+	f_verifica 
+	rm $local/list.txt 
+	
+	zenity --notification --text "Download finalizado!" 
 }
 
 f_vetor_video()
@@ -116,7 +119,9 @@ f_vetor_video()
 
 	mousepad $local/list.txt
 
-	youtube-dl -o "$local/%(title)s.%(ext)s" -a $local/list.txt; f_verifica && rm $local/list.txt	   	
+	youtube-dl -o "$local/%(title)s.%(ext)s" -a $local/list.txt 
+	f_verifica 
+	rm $local/list.txt	   	
 }
 
 main()

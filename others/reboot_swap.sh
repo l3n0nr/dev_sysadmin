@@ -150,3 +150,19 @@ verifica
 #                           RODAPE DO SCRIPT                                    #
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+# Referencia: <https://elias.praciano.com/2016/03/perguntas-e-respostas-sobre-o-swap/>
+
+## Limpando swap com script otimizado
+
+#!/bin/sh
+# mem=$(LC_ALL=C free  | awk '/Mem:/ {print $4}')
+# swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
+ 
+# if [ $mem -lt $swap ]; then
+#     echo "ERRO: não há espaço suficiente em RAM para transferir o conteúdo do swap. Não é possível prosseguir." >&2
+#     exit 1
+# fi
+ 
+# swapoff -a && 
+# swapon -a
