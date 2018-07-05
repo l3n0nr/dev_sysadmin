@@ -21,8 +21,8 @@ f_dropbox()
 
 	if [[ -e $var_dropbox ]]; then
 		# fechando dropbox
-		printf "\nReiniciando Dropbox"
-		printf "\nReiniciando Dropbox" >> /tmp/dropbox.txt
+		printf "[*] Reiniciando Dropbox"
+		printf "[*] Reiniciando Dropbox" >> /tmp/dropbox.txt
 
 		dropbox stop 2>> /dev/null
 
@@ -37,17 +37,17 @@ f_dropbox()
 		# if [[ $? -eq 1 ]]; then
 			# verificando se dropbox foi fechado corretamente
 			if [[ $? -eq 0 ]]; then
-				printf "\nIniciando Dropbox"
-				printf "\nIniciando Dropbox" >> /tmp/dropbox.txt
+				printf "[+] Iniciando Dropbox"
+				printf "[+] Iniciando Dropbox" >> /tmp/dropbox.txt
 
 				# iniciando dropbox
 				dbus-launch dropbox start 2>> /dev/null 
 			else
-				printf "\nERRO" >> /tmp/dropbox.txt
+				printf "[-] ERRO" >> /tmp/dropbox.txt
 			fi
 		# fi	
 	else
-		printf "\nDropbox nao esta instalado nesse sistema"
+		printf "[-] Dropbox nao esta instalado nesse sistema"
 	fi
 }
 
