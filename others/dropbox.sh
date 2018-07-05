@@ -9,7 +9,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [06/04/18]      #
-# # ultima ediçao realizada:      [19/06/18]      #
+# # ultima ediçao realizada:      [05/07/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # DESCRICAO
@@ -50,6 +50,9 @@ f_dropbox()
 		printf "\nDropbox nao esta instalado nesse sistema"
 	fi
 }
+
+# limpando a tela
+clear
 
 ## chamando funcao
 f_dropbox
