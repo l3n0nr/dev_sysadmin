@@ -157,8 +157,11 @@ basic()
 	# mostra informacoes sistema
 	neofetch 
 
+    # memoria utilizada
+    free -hm ; echo
+
 	# lista uso do disco - raiz
-	df -h / 
+	df -h / ; echo    
 
 	# lista uso do disco - home
 	df -h /home
