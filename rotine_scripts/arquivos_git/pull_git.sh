@@ -18,12 +18,12 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[30/03/18]       #
-# Last modification script: 		[20/06/18]       #
+# Last modification script: 		[21/06/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
-
+#
 # chamando arquivo de configuracao
 source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/git.conf
-
+#
 pull_git()
 {
 	# data de inicio do script
@@ -38,7 +38,7 @@ pull_git()
 			# verify local repo
 			if [ -e "$local${repos[$i]}" ]; then 	  	 
 				date >> /tmp/repo.txt
-			  	echo "[+] - Atualizando repositorio:" $local${repos[$i]} >> /tmp/repo.txt
+			  	echo "[+] - Update repositorie:" $local${repos[$i]} >> /tmp/repo.txt
 
 			  	# into folder location
 			  	cd $local${repos[$i]}
@@ -46,13 +46,12 @@ pull_git()
 			  	# update repositories
 			  	git pull >> /tmp/repo.txt
 
-			  	# if update repositorie not work
-			  	if [[ $? == "0" ]]; then
-					# echo "repositorie ${repos[$i]} fine!" >> /tmp/repo.txt
-					echo
-			  	else				  		
-					echo "repositorie Error ${repos[$i]}!" >> /tmp/repo.txt
-			  	fi
+			  	# if update repositorie not work - exit 1
+			  	# [[ $variavel -eq 1 ]] && echo "Repositorie Error ${repos[$i]}!" >> /tmp/repo.txt
+
+			  	# mostrando mensagem de verificao
+				[[ $? -eq 1 ]] && notify-send "Erro! Nao foi possivel sincronizar ${repos[$i]} com o servidor!" && exit 1 \
+			     	  				  # || notify-send "Repositorios ${repos[$i]} atualizado com o servidor!"
 
 			  	# REPO_FOUNDS=$(($REPO_FOUNDS + 1));        
 			  	let REPO_FOUNDS++		
@@ -71,5 +70,5 @@ pull_git()
 	# data do final do script
 	date >> /tmp/repo.txt
 }
-
+#
 pull_git
