@@ -148,11 +148,12 @@ push_auto()
 main()
 {
 	status_git	
+	check_git
 
-	[[ $@ == "check" ]] && check_git && exit 0
+	# [[ $@ == "check" ]] && check_git && exit 0
 }
 
-main $1 
+main
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                               #
