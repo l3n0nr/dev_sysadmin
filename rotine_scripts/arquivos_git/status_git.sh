@@ -114,7 +114,7 @@ check_git()
   											
 					# if value = 0, then comparation is true
 					if [[ $? == "0" ]]; then
-						notify-send "Voce precisa commitar, ${repos[$i]}!"
+						notify-send "Voce precisa comitar, ${repos[$i]}!"
 
 						let contador++
 					fi														
