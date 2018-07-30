@@ -28,6 +28,9 @@
 # A complete zenity dialog examples 2
 #	Source: <http://linux.byexamples.com/archives/265/a-complete-zenity-dialog-examples-2/>
 #
+# How to select video quality from youtube-dl
+#	Source: <https://askubuntu.com/questions/486297/how-to-select-video-quality-from-youtube-dl>
+#
 # # # # # # # # # # # # #
 #   DESENVOLVIDO POR    #
 # # # # # # # # # # # # #
@@ -45,7 +48,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [14/06/18]      #             
-# # ultima ediçao realizada:      [17/06/18]      #
+# # ultima ediçao realizada:      [30/07/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # Legenda: a.b.c.d.e.f
@@ -58,13 +61,14 @@
 #
 # variaveis do script
 	# versao do script
-	versao="0.0.35.0.0.0"  
+	versao="0.0.36.0.0.0"  
 
 	# formato do audio
-	format=mp3
+	format=mp3				# default
 
 	# variaveis	
-	quality="320k"	
+	quality="320k"			# default
+	quality_video="-f 18"	# medium
 
 	# iniciando variaveis de verificacao
 	local="0"
@@ -119,7 +123,8 @@ f_vetor_video()
 
 	mousepad $local/list.txt
 
-	youtube-dl -o "$local/%(title)s.%(ext)s" -a $local/list.txt 
+	# -f 18 = medium
+	youtube-dl $quality_video -o "$local/%(title)s.%(ext)s" -a $local/list.txt 
 	f_verifica 
 	rm $local/list.txt	   	
 }
