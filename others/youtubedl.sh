@@ -68,7 +68,8 @@
 
 	# variaveis	
 	quality="320k"			# default
-	quality_video="-f 18"	# medium
+	# quality_video="-f 18"	# medium
+	quality_video="-f 22"	# max
 
 	# iniciando variaveis de verificacao
 	local="0"
