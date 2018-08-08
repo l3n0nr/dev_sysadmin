@@ -50,7 +50,8 @@ pull_git()
 			  	# [[ $variavel -eq 1 ]] && echo "Repositorie Error ${repos[$i]}!" >> /tmp/repo.txt
 
 			  	# mostrando mensagem de verificao
-				[[ $? -eq 1 ]] && notify-send "Erro! Nao foi possivel sincronizar ${repos[$i]} com o servidor!" && exit 1 \
+				[[ $? -eq 1 ]] && notify-send "Erro! Nao foi possivel sincronizar ${repos[$i]} com o servidor!" 
+				# && exit 1 \
 			     	  				  # || notify-send "Repositorios ${repos[$i]} atualizado com o servidor!"
 
 			  	# REPO_FOUNDS=$(($REPO_FOUNDS + 1));        
