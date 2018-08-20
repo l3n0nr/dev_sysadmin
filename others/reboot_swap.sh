@@ -17,6 +17,9 @@
 # 
 # Referencia: <http://www.hardware.com.br/guias/programando-shell-script/variaveis-comparacao.html>
 #   Autor: Carlos E. Morimoto - Guia do Hardware
+#
+# Referencia: <https://elias.praciano.com/2016/03/perguntas-e-respostas-sobre-o-swap/>
+#	Autor: Limpando swap com script otimizado
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
@@ -28,17 +31,17 @@
 #       contato: <lenonrmsouza@gmail.com>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-#										#
-#	If I have seen further it is by standing on the shoulders of Giants.	#
-#	(Se vi mais longe foi por estar de pé sobre ombros de gigantes)		#
-#							~Isaac Newton		#
-#										#
+#																				#
+#	If I have seen further it is by standing on the shoulders of Giants.		#
+#	(Se vi mais longe foi por estar de pé sobre ombros de gigantes)				#
+#							~Isaac Newton										#
+#																				#
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.0.40.0.0.0]   #
+# # versão do script:           [0.0.50.0.0.0]   #
 # # data de criação do script:    [03/11/17]      #
-# # ultima ediçao realizada:      [02/06/18]      #
+# # ultima ediçao realizada:      [20/08/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # Legenda: a.b.c.d.e.f
@@ -77,42 +80,6 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
-## taxa de segurança em "%" de memoria extra(por swap), evitando travamentos da maquina
-## valores menores ja travaram!
-TAXA=50 
-
-# # # MEMORIA
-MEM_LIVRE=$(awk '/^MemFree/ { print $2; }' /proc/meminfo)
-
-# # # SWAP 
-## Kb
-SWAP_TOTAL=$(awk '/^SwapTotal/ { print $2; }' /proc/meminfo)
-## MB
-SWAP_TOTAL_MB=$(($SWAP_TOTAL / 1024))
-
-## Kb
-SWAP_LIVRE=$(awk '/^SwapFree/ { print $2; }' /proc/meminfo)
-## MB
-SWAP_LIVRE_MB=$(($SWAP_LIVRE / 1024))
-
-# calculo de espaço disponivel
-SWAP_USADA=$(($SWAP_TOTAL - $SWAP_LIVRE))
-
-# aplicando margem de segurança
-SWAP_USADA=$(((($SWAP_USADA * $TAXA)/100) + $SWAP_USADA))
-
-# realizando calculo para MB
-MEM_LIVRE_MB=$(($MEM_LIVRE / 1024))
-SWAP_USADA_MB=$(($SWAP_USADA / 1024))
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# -lt : (less than), menor que, equivalente ao <.
-# -gt : (greather than), maior que, equivalente ao >.
-# -le : (less or equal), menor ou igual, equivalente ao <=.
-# -ge : (greater or equal), maior ou igual, equivalente ao >=.
-# -eq : (equal), igual, equivale ao =.
-# -ne : (not equal) diferente. Equivale ao != que usamos a pouco.
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 # limpando tela
 clear
@@ -129,6 +96,34 @@ fi
 
 verifica()
 {
+	## taxa de segurança em "%" de memoria extra(por swap), evitando travamentos da maquina
+	## valores menores ja travaram!
+	TAXA=50 
+
+	# # # MEMORIA
+	MEM_LIVRE=$(awk '/^MemFree/ { print $2; }' /proc/meminfo)
+
+	# # # SWAP 
+	## Kb
+	SWAP_TOTAL=$(awk '/^SwapTotal/ { print $2; }' /proc/meminfo)
+	## MB
+	SWAP_TOTAL_MB=$(($SWAP_TOTAL / 1024))
+
+	## Kb
+	SWAP_LIVRE=$(awk '/^SwapFree/ { print $2; }' /proc/meminfo)
+	## MB
+	SWAP_LIVRE_MB=$(($SWAP_LIVRE / 1024))
+
+	# calculo de espaço disponivel
+	SWAP_USADA=$(($SWAP_TOTAL - $SWAP_LIVRE))
+
+	# aplicando margem de segurança
+	SWAP_USADA=$(((($SWAP_USADA * $TAXA)/100) + $SWAP_USADA))
+
+	# realizando calculo para MB
+	MEM_LIVRE_MB=$(($MEM_LIVRE / 1024))
+	SWAP_USADA_MB=$(($SWAP_USADA / 1024)) 
+
     if [[ $SWAP_USADA_MB -gt $MEM_LIVRE_MB ]]; then
         printf "[!] Não foi possivel reiniciar a SWAP, pois a memoria a ser restaurada $SWAP_USADA_MB MB, é maior do que a disponivel $MEM_LIVRE_MB MB! \n"
         
@@ -142,27 +137,30 @@ verifica()
     fi
 } 
 
+verifica_otimizado()
+{
+	mem=$(LC_ALL=C free  | awk '/Mem:/ {print $4}')
+	swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
+
+	if [ $mem -lt $swap ]; then
+		echo "ERRO: não há espaço suficiente em RAM para transferir o conteúdo do swap. Não é possível prosseguir." >&2
+		exit 1
+	fi
+
+	swapoff -a && 
+	swapon -a
+}
+
+main()
+{
+	varifica_otimizado
+}
+
 # # executando script
-verifica
+main
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
  
 #                           RODAPE DO SCRIPT                                    #
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-
-# Referencia: <https://elias.praciano.com/2016/03/perguntas-e-respostas-sobre-o-swap/>
-
-## Limpando swap com script otimizado
-
-#!/bin/sh
-# mem=$(LC_ALL=C free  | awk '/Mem:/ {print $4}')
-# swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
- 
-# if [ $mem -lt $swap ]; then
-#     echo "ERRO: não há espaço suficiente em RAM para transferir o conteúdo do swap. Não é possível prosseguir." >&2
-#     exit 1
-# fi
- 
-# swapoff -a && 
-# swapon -a
