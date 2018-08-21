@@ -48,7 +48,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [14/06/18]      #             
-# # ultima ediçao realizada:      [14/08/18]      #
+# # ultima ediçao realizada:      [21/08/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # Legenda: a.b.c.d.e.f
@@ -61,17 +61,23 @@
 #
 # variaveis do script
 	# versao do script
-	versao="0.0.40.1.0.0"  
+	versao="0.0.42.1.0.0"  
 
 	# formato do audio
 	format=mp3				# default
 
 	# variaveis	
-	quality="320k"			# default
+	quality_a="320k"			# default
+
+	# qualidade do video
+	quality_v="-f 18"
+		# quality_video="-f 14"	# minimium
+		# quality_video="-f 18"	# medium
+		# quality_video="-f 22"	# max
 
 	# iniciando variaveis de verificacao
 	local="0"
-	option_m="0"
+	option_m="0"	
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                             #
@@ -105,7 +111,7 @@ f_vetor_audio()
 
 	youtube-dl --embed-thumbnail \
 			   --continue \
-			   --audio-quality "$quality" \
+			   --audio-quality "$quality_a" \
 			   --extract-audio \
 			   --audio-format "$format" -o "$local/%(title)s.%(ext)s" -a $local/list.txt
 
@@ -117,10 +123,6 @@ f_vetor_audio()
 
 f_quality_video()
 {
-	# quality_video="-f 14"	# minimium
-	# quality_video="-f 18"	# medium
-	# quality_video="-f 22"	# max
-
 	video_quality=$(zenity --list --title="Qualidade do video" \
         	   --text="Qualidade"  \
         	   --column="Marque" --column="Modo" \
@@ -154,7 +156,7 @@ f_vetor_video()
 
 	# f_quality_video
 
-	youtube-dl $quality_video -o "$local/%(title)s.%(ext)s" -a $local/list.txt 
+	youtube-dl $quality_v -o "$local/%(title)s.%(ext)s" -a $local/list.txt 
 	f_verifica 
 	rm $local/list.txt	   	
 }

@@ -39,9 +39,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.0.50.0.0.0]   #
+# # versão do script:           [0.0.52.0.0.0]   #
 # # data de criação do script:    [03/11/17]      #
-# # ultima ediçao realizada:      [20/08/18]      #
+# # ultima ediçao realizada:      [21/08/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # Legenda: a.b.c.d.e.f
@@ -143,7 +143,7 @@ verifica_otimizado()
 	swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
 
 	if [ $mem -lt $swap ]; then
-		echo "ERRO: não há espaço suficiente em RAM para transferir o conteúdo do swap. Não é possível prosseguir." >&2
+		printf "[!] Não foi possivel reiniciar a SWAP, pois a memoria a ser restaurada $SWAP_USADA_MB MB, é maior do que a disponivel $MEM_LIVRE_MB MB! \n" >&2
 		exit 1
 	fi
 
@@ -153,7 +153,7 @@ verifica_otimizado()
 
 main()
 {
-	varifica_otimizado
+	verifica_otimizado
 }
 
 # # executando script
