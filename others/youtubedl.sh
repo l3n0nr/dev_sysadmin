@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env zsh
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                             #
@@ -48,7 +48,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [14/06/18]      #             
-# # ultima ediçao realizada:      [21/08/18]      #
+# # ultima ediçao realizada:      [05/09/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # Legenda: a.b.c.d.e.f
@@ -61,7 +61,7 @@
 #
 # variaveis do script
 	# versao do script
-	versao="0.0.42.1.0.0"  
+	versao="0.0.43.0.0.0"  
 
 	# formato do audio
 	format=mp3				# default
@@ -88,7 +88,7 @@
 ## status
 f_verifica()
 {
-	[[ $? == "1" ]] && \
+	[[ $? = "1" ]] && \
 		zenity --notification \
 			   --text "Script finalizado, antes do esperado!" && exit 1
 }
