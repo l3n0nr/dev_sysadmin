@@ -20,6 +20,9 @@
 # 	- Reduz/Aumenta o brilho
 #
 ## variaveis do script
+	# versao do script
+	versao="0.32"
+
 	# nome da maquina
 	hostname=$(echo $HOSTNAME)
 
@@ -116,7 +119,7 @@ f_notebook()
 	chave=1
 
 	otimiza=$(zenity --list \
-		   --title="Bateria" \
+		   --title="Otimized Battery $versao" \
 		   --text="O que deseja fazer? [Script $modo]"  \
 		   --width "300" \
 		   --height "200" \
