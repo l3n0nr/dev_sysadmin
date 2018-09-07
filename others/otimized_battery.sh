@@ -21,7 +21,7 @@
 #
 ## variaveis do script
 	# versao do script
-	versao="0.32"
+	versao="0.35"
 
 	# nome da maquina
 	hostname=$(echo $HOSTNAME)
@@ -37,7 +37,7 @@
 	chave=1
 
 	# status script
-	modo="Desativado"
+	modo="OFF"
 
 ## funcao de verificacao
 f_verifica()
@@ -47,7 +47,7 @@ f_verifica()
 
 f_ativa()
 {
-	if [[ $modo == "Desativado" ]]; then		
+	if [[ $modo == "OFF" ]]; then		
 		## processador
 		echo "| ======================================================= |"
 		echo "| Desativando nucleo do processador 1,2,3 respectivamente |"
@@ -81,7 +81,7 @@ f_ativa()
 
 f_desativa()
 {
-	if [[ $modo == "Ativado" ]]; then		
+	if [[ $modo == "ON" ]]; then		
 		## processador
 		echo "| ======================================================= |"
 		echo "| Ativando nucleo do processador 1,2,3 respectivamente    |"
@@ -119,7 +119,7 @@ f_notebook()
 	chave=1
 
 	otimiza=$(zenity --list \
-		   --title="Otimized Battery $versao" \
+		   --title="Otim. Bat. $versao - $modo" \
 		   --text="O que deseja fazer? [Script $modo]"  \
 		   --width "300" \
 		   --height "200" \
@@ -148,7 +148,7 @@ main()
 										 || f_notebook		
 
 		## se todos os modulos ativados - entao script "ON"
-		[[ $chave == "2" ]] && modo="Ativado" || modo="Desativado"
+		[[ $chave == "2" ]] && modo="ON" || modo="OFF"
 	done
 }
 
