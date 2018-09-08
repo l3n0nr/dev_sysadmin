@@ -9,8 +9,7 @@
 ## AUTOR
 #	lenonr(lenonrmsouza@gmail.com)
 #
-## REFERENCIA
-# 
+## REFERENCIAS
 ## por Slackjeff
 # 	<https://notabug.org/jeffersonrocha/ddp/src/master/ddp>
 #
@@ -18,8 +17,7 @@
 ## CORPO DO SCRIPT
 ######################
 #
-#
-## Teste inicial
+## VERIFICANDO ROOT
 #####################################
 if [[ `id -u` -ne 0 ]]; then
 	clear 
@@ -53,7 +51,10 @@ f_caminhos()
 	echo $l_grava
 	echo $l_iso
 
+	## VERIFICAR
 	## executar comando dd - ATENCAO AO FAZER ISSO!!
+	# dd if="origem" of="destino" bs=521k 
+	# dd if=$l_iso of=$l_grava bs=521k 
 }
 
 #
