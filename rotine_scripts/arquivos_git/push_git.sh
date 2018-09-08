@@ -10,13 +10,13 @@
 #       contato: <lenonrmsouza@gmail.com>
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
-# Date create script:    	  		[08/04/18]       #
-# Last modification script: 		[21/06/18]       #
+# Date create script:    	  		[30/03/18]       #
+# Last modification script: 		[08/09/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
 source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/git.conf
-#
+
 push_git()
 {
 	clear
@@ -65,16 +65,21 @@ push_git()
 	date >> /tmp/repo.txt
 }
 
-## limpando a tela
-clear
-#
-printf "[*] Verificando repositorios, antes de subir modificaçoes! Aguarde....\n"
-#
-# chamando arquivo para fazer pull, antes de subir modificacoes
-source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/pull_git.sh >> /dev/null 
-#
-# subindo modificacoes
-notify-send "Subindo modificacoes para o Github...."
-#
-# chamando funcao
-push_git
+main()
+{
+	## limpando a tela
+	clear
+	#
+	notify-send "Verificando repositorios, antes de subir modificaçoes! Aguarde..."
+	#
+	# chamando arquivo para fazer pull, antes de subir modificacoes
+	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/pull_git.sh >> /dev/null 
+	#
+	# subindo modificacoes
+	notify-send "Subindo modificacoes para o Github!"
+	#
+	# chamando funcao
+	push_git
+}
+
+main
