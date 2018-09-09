@@ -22,9 +22,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.20]       #
+# # versão do script:              [0.0.25]       #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [21/06/18]      #
+# # ultima ediçao realizada:      [08/09/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -43,6 +43,9 @@
 # # # # # # # # # #    
 # # DADOS DO SISTEMA
 # 
+install_system=$(ls -lct /etc | tail -1 | awk '{print $6, $7, $8}')
+date_now=$(date +%x-%k%M)
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #																				#
 #                               CORPO DO SCRIPT                               	#
@@ -69,6 +72,8 @@ basic()
 	# lista uso do disco - home
 	df -h /home
 
+	echo	
+	echo "Sistema instalado em: $install_system"
 	echo "##########################################################################"
 }
 
