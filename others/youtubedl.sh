@@ -48,7 +48,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [14/06/18]      #             
-# # ultima ediçao realizada:      [05/09/18]      #
+# # ultima ediçao realizada:      [11/09/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # Legenda: a.b.c.d.e.f
@@ -61,16 +61,16 @@
 #
 # variaveis do script
 	# versao do script
-	versao="0.0.43.0.0.0"  
+	versao="0.0.45.0.0.0"  
 
 	# formato do audio
-	format=mp3				# default
+	format=mp3					# default
 
 	# variaveis	
 	quality_a="320k"			# default
 
 	# qualidade do video
-	quality_v="-f 18"
+	# quality_v="-f 18"
 		# quality_video="-f 14"	# minimium
 		# quality_video="-f 18"	# medium
 		# quality_video="-f 22"	# max
@@ -88,9 +88,12 @@
 ## status
 f_verifica()
 {
+	# mostra notificacao de erro
+	# remove arquivo criado
+	# finaliza programa
 	[[ $? = "1" ]] && \
 		zenity --notification \
-			   --text "Script finalizado, antes do esperado!" && exit 1
+			   --text "Script finalizado, antes do esperado!" && rm $local/list.txt && exit 1
 }
 
 ## varios arquivos
@@ -129,22 +132,17 @@ f_quality_video()
         	   --radiolist \
         	   TRUE 720 \
         	   FALSE 480 \
+        	   FALSE 144 \
     )
-
-	# echo $video_quality
     
     if [[ $video_quality == 720 ]]; then
     	quality_video="-f 22"
-    elif [[ $video_quality == 480 ]]; then
-    	quality_video="-f 18"
+    elif [[ $video_quality == 144 ]]; then    	
+    	quality_video="-f 14"
     else
-    	printf "erro"
-    	exit 1
+    	# default
+    	quality_video="-f 18"
 	fi
-
-    echo $quality_video
-
-    # exit 1
 }
 
 f_vetor_video()
@@ -152,13 +150,12 @@ f_vetor_video()
 	echo "# Cole os links, um abaixo do outro..." > $local/list.txt
 	echo "# Salve(Ctrl+s) e apenas feche." >> $local/list.txt
 
-	mousepad $local/list.txt	
+	f_quality_video
 
-	# f_quality_video
+	mousepad $local/list.txt		
 
 	youtube-dl $quality_v -o "$local/%(title)s.%(ext)s" -a $local/list.txt 
-	f_verifica 
-	rm $local/list.txt	   	
+	f_verifica    	
 }
 
 main()
@@ -178,8 +175,9 @@ main()
 	f_vetor
 	if [[ $option_m == "Audio" ]]; then    		
 		f_vetor_audio
-	else		
-		f_vetor_video  	
+	else			
+		# f_quality_video
+		f_vetor_video  			
     fi
 }
 
