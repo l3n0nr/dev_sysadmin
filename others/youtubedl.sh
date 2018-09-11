@@ -129,14 +129,18 @@ f_quality_video()
         	   FALSE 144 \
     )
     
-    if [[ $video_quality == 720 ]]; then
+    # echo $video_quality
+
+    if [[ $video_quality == '720' ]]; then
     	quality_video="-f 22"
-    elif [[ $video_quality == 144 ]]; then    	
+    elif [[ $video_quality == '144' ]]; then    	
     	quality_video="-f 14"
     else
     	# default
     	quality_video="-f 18"
 	fi
+
+	# echo $quality_video
 }
 
 f_vetor_video()
@@ -176,6 +180,7 @@ main()
 
 ## chamando funcao principal
 main
+# f_quality_video
 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
