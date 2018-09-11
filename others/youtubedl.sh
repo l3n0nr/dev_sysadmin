@@ -61,19 +61,13 @@
 #
 # variaveis do script
 	# versao do script
-	versao="0.0.45.0.0.0"  
+	versao="0.0.50.0.0.0"  
 
 	# formato do audio
 	format=mp3					# default
 
 	# variaveis	
 	quality_a="320k"			# default
-
-	# qualidade do video
-	# quality_v="-f 18"
-		# quality_video="-f 14"	# minimium
-		# quality_video="-f 18"	# medium
-		# quality_video="-f 22"	# max
 
 	# iniciando variaveis de verificacao
 	local="0"
@@ -168,15 +162,14 @@ main()
 				--radiolist \
 				--column "Check" \
 				--column "Format" \
-							TRUE Audio \
-							FALSE Video
+							TRUE Video \
+							FALSE Audio
 	) ; f_verifica
 	
 	f_vetor
 	if [[ $option_m == "Audio" ]]; then    		
 		f_vetor_audio
 	else			
-		# f_quality_video
 		f_vetor_video  			
     fi
 }
