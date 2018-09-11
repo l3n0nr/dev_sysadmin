@@ -18,7 +18,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:               [30/03/18]       #
-# Last modification script:         [08/09/18]       #
+# Last modification script:         [11/09/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao

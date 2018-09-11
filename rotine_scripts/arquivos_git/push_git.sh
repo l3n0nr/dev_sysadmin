@@ -11,7 +11,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[30/03/18]       #
-# Last modification script: 		[08/09/18]       #
+# Last modification script: 		[11/09/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
@@ -67,15 +67,23 @@ push_git()
 
 main()
 {
+	site="www.github.com"
+
 	## limpando a tela
-	clear
-	#
-	notify-send "Verificando repositorios, antes de subir modificaçoes! Aguarde..."
-	#
-	# chamando arquivo para fazer pull, antes de subir modificacoes
-	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/pull_git.sh >> /dev/null 
-	#
-	# subindo modificacoes
+	clear	
+	
+	# testando a conexao para fazer pull nos repositorios
+	notify-send "Testando conexao com os repositorios, aguarde..."
+	ping -c4 $site >> /dev/null
+
+    if [[ $? != 0 ]]; then
+    	# atualizando repositorios antes de fazer o push
+    	notify-send "Verificando repositorios, antes de subir modificaçoes! Aguarde..."
+
+    	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/pull_git.sh >> /dev/null     
+    fi
+
+    # subindo modificacoes
 	notify-send "Subindo modificacoes para o Github!"
 	#
 	# chamando funcao
