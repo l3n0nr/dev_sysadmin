@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
  
@@ -39,9 +39,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.0.52.0.0.0]   #
+# # versão do script:           [0.0.60.0.0.0]   #
 # # data de criação do script:    [03/11/17]      #
-# # ultima ediçao realizada:      [21/08/18]      #
+# # ultima ediçao realizada:      [12/09/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # Legenda: a.b.c.d.e.f
@@ -53,25 +53,21 @@
 # 	f = desenvolver 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# 
-#       [+] - Açao realizada; 
-#       [*] - Processamento;
-#       [-] - Não executado;
-#       [!] - Mensagem de aviso;
-# 
+#   [+] - Açao realizada; 
+#   [*] - Processamento;
+#   [-] - Não executado;
+#   [!] - Mensagem de aviso;
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # Script testado em
 #	- Xubuntu 16.04
-#       - Debian 9
+#   - Debian 9
 #
 # # Compativel com
-#       - Ubuntu
-#       - Debian 9
+#   - Debian 9 Stable
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # FUNCOES
-# 
 #  REINICIANDO MEMORIA SWAP, DE ACORDO COM A QUANTIDADE DE MEMÓRIA RAM DISPONIVEL
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -147,13 +143,36 @@ verifica_otimizado()
 		exit 1
 	fi
 
-	swapoff -a && 
-	swapon -a
+	printf "[!] Memória SWAP, será reiniciada! \n"
+    printf "[+] Memória SWAP desligada! \n"
+    printf "[*] Limpando a memória Swap, aguarde.. \n"
+    sudo swapoff -a && sudo swapon -a
+    printf "[*] Memória SWAP ligada novamente! \n"        
+    printf "[+] Limpeza na memória SWAP realizada com sucesso! \n"
+}
+
+porcentagem()
+{
+	# minimo de memoria RAM para ser considerado
+	porcentagem_mem="40"
+
+	# variaveis de verificacao da memoria RAM
+	memoria_total=$(free | awk '/Mem:/ {print $2}')	
+	memoria_taxa=$(($porcentagem_mem * $memoria_total / 100))
+	memoria_livre=$(free | awk '/Mem:/ {print $4}')
+
+	# verificando a memoria SWAP
+	swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
+						
+	# realizando teste
+	if [[ $memoria_livre > $memoria_taxa && $swap > "0" ]]; then
+		verifica_otimizado
+	fi
 }
 
 main()
 {
-	verifica_otimizado
+	porcentagem
 }
 
 # # executando script
