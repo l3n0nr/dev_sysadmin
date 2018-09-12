@@ -11,7 +11,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[30/03/18]       #
-# Last modification script: 		[11/09/18]       #
+# Last modification script: 		[12/09/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
@@ -65,9 +65,10 @@ push_git()
 	date >> /tmp/repo.txt
 }
 
-main()
+pre_check()
 {
 	site="www.github.com"
+	error_connection="0"
 
 	## limpando a tela
 	clear	
@@ -76,18 +77,28 @@ main()
 	notify-send "Testando conexao com os repositorios, aguarde..."
 	ping -c4 $site >> /dev/null
 
-    if [[ $? != 0 ]]; then
+    if [[ $? == 0 ]]; then
     	# atualizando repositorios antes de fazer o push
     	notify-send "Verificando repositorios, antes de subir modificaçoes! Aguarde..."
 
-    	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/pull_git.sh >> /dev/null     
+    	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/pull_git.sh >> /dev/null 
+    else
+    	notify-send "Erro no ping!"  
+    	error_connection="1"
     fi
 
-    # subindo modificacoes
-	notify-send "Subindo modificacoes para o Github!"
-	#
-	# chamando funcao
-	push_git
+    if [[ $error_connection = "0" ]]; then
+    	# subindo modificacoes
+		notify-send "Subindo modificacoes para o Github!"
+		#
+		# chamando funcao
+		push_git	
+    fi    
+}
+
+main()
+{
+	pre_check	
 }
 
 main
