@@ -23,7 +23,7 @@ main()
 {
 	clear
 	if [[ $1 == "" ]]; then
-		echo "Por favor, passo como parametro um tempo em minutos"
+		echo "Por favor, passe como parametro um tempo em minutos"
 		echo "Exemplo: $0 10"
 	else				
 		pomodoro $1
