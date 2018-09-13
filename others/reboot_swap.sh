@@ -39,9 +39,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.0.60.0.0.0]   #
+# # versão do script:           [0.0.70.0.0.0]    #
 # # data de criação do script:    [03/11/17]      #
-# # ultima ediçao realizada:      [12/09/18]      #
+# # ultima ediçao realizada:      [13/09/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # Legenda: a.b.c.d.e.f
@@ -67,8 +67,8 @@
 #   - Debian 9 Stable
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # FUNCOES
-#  REINICIANDO MEMORIA SWAP, DE ACORDO COM A QUANTIDADE DE MEMÓRIA RAM DISPONIVEL
+# DESCRICAO
+#	Reinicia a memoria swap de acordo com a quantidade de memoria RAM disponivel.
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
  
@@ -146,7 +146,7 @@ verifica_otimizado()
 	printf "[!] Memória SWAP, será reiniciada! \n"
     printf "[+] Memória SWAP desligada! \n"
     printf "[*] Limpando a memória Swap, aguarde.. \n"
-    sudo swapoff -a && sudo swapon -a
+    swapoff -a && sudo swapon -a
     printf "[*] Memória SWAP ligada novamente! \n"        
     printf "[+] Limpeza na memória SWAP realizada com sucesso! \n"
 }
@@ -165,8 +165,13 @@ porcentagem()
 	swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
 						
 	# realizando teste
-	if [[ $memoria_livre > $memoria_taxa && $swap > "0" ]]; then
+	if [[ $memoria_livre < $memoria_taxa && $swap > "0" ]]; then
 		verifica_otimizado
+	elif [[ $swap = "0" ]]; then
+		echo "Memoria SWAP esta zerada!!"
+	else
+		echo "Memoria disponivel:" $(($memoria_livre/1024)) "MB"
+		echo "Porcentagem(menor ou igual a):" $(($memoria_taxa/1024)) "MB"		
 	fi
 }
 
