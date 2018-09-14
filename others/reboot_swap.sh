@@ -39,7 +39,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.0.70.0.0.0]    #
+# # versão do script:           [0.1.71.0.0.0]    #
 # # data de criação do script:    [03/11/17]      #
 # # ultima ediçao realizada:      [13/09/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -154,7 +154,7 @@ verifica_otimizado()
 porcentagem()
 {
 	# minimo de memoria RAM para ser considerado
-	porcentagem_mem="40"
+	porcentagem_mem="30"
 
 	# variaveis de verificacao da memoria RAM
 	memoria_total=$(free | awk '/Mem:/ {print $2}')	
