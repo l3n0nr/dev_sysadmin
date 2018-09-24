@@ -48,7 +48,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [14/06/18]      #             
-# # ultima ediçao realizada:      [11/09/18]      #
+# # ultima ediçao realizada:      [24/09/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # Legenda: a.b.c.d.e.f
@@ -61,7 +61,7 @@
 #
 # variaveis do script
 	# versao do script
-	versao="0.0.50.0.0.0"  
+	versao="0.0.60.0.0.0"  
 
 	# formato do audio
 	format=mp3					# default
@@ -127,20 +127,21 @@ f_quality_video()
         	   TRUE 720 \
         	   FALSE 480 \
         	   FALSE 144 \
-    )
-    
-    # echo $video_quality
+    )   
 
     if [[ $video_quality == '720' ]]; then
     	quality_video="-f 22"
-    elif [[ $video_quality == '144' ]]; then    	
-    	quality_video="-f 14"
-    else
-    	# default
+    elif [[ $video_quality == '480' ]]; then
     	quality_video="-f 18"
+    elif [[ $video_quality == '144' ]]; then    	
+    	quality_video="-f 36"    
+    else
+    	exit 1
 	fi
 
+	# echo $video_quality
 	# echo $quality_video
+	# exit 1
 }
 
 f_vetor_video()
@@ -152,7 +153,7 @@ f_vetor_video()
 
 	mousepad $local/list.txt		
 
-	youtube-dl $quality_v -o "$local/%(title)s.%(ext)s" -a $local/list.txt 
+	youtube-dl $quality_video -o "$local/%(title)s.%(ext)s" -a $local/list.txt 
 	f_verifica    	
 }
 
