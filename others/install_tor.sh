@@ -91,7 +91,7 @@ f_tor()
 
 	# executando vetor de acoes
     for (( i = 0; i <= ${#acoes[@]}; i++ )); do             
-        # executanco acao
+        # executando acoes
         ${acoes[$i]} 
 
         # verificando se existiu algum erro na execucao - se sim, sai do loop
@@ -102,7 +102,7 @@ f_tor()
 ## funcao - checa url
 f_check_url()
 {
-	echo "URL:" $url_tor
+	echo $url_tor
 }
 
 # chamando funcao principal
@@ -111,14 +111,19 @@ main()
 	# limpando a tela na inicializacao do script
 	clear
 
-	if [[ $1 == "checa" ]]; then
-		f_check_url
-	else
+	if [[ -z $1 ]]; then
+		echo "Voce precisa utilizar um dos seguintes parametros:"
+		echo "~" $0 "link ~"
+		echo "~" $0 "verifica ~"
+		echo "~" $0 "instala ~"		
+	elif [[ $1 == "verifica" ]]; then
+		f_check_file
+	elif [[ $1 == "instala" ]]; then
 		f_tor
+	elif [[ $1 == "link" ]]; then
+		echo "Arquivo que sera baixado:"
+		f_check_url
 	fi
-
-	# chamando funcao para baixar tor
-	# f_tor
 }
 
 # chamando script 
