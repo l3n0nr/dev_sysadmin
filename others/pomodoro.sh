@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# ULT_MOD: 13/09/18
+# ULT_MOD: 01/10/18
 # DESCRICAO
 # Simula o aplicativo pomodoro para controle de tempo na execucao das tarefas
 
@@ -17,6 +17,7 @@ pomodoro()
 	sleep $tempo
 
 	echo $mensagem_finaliza 
+	notify-send -t 10000 "GOSTOU?"
 }
 
 main()
