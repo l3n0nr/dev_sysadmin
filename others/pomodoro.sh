@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 #
-# ULT_MOD: 01/10/18
-# DESCRICAO
-# Simula o aplicativo pomodoro para controle de tempo na execucao das tarefas
-
-# variaveis do programa
-mensagem_inicia="Iniciando o pomodoro com"
-mensagem_finaliza="Acabou a sua sessao!"
-
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# ULT_MOD: 05/10/18
+# DESCRICAO:
+# 	SIMULA O POMODORO
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
 pomodoro()
 {
+	# variaveis do programa
+	mensagem_inicia="Iniciando o pomodoro com"
+	mensagem_finaliza="Acabou a sua sessao!"
+
 	tempo="$(($1*60))"
 
 	echo $mensagem_inicia $tempo "segundos!"
@@ -17,7 +19,7 @@ pomodoro()
 	sleep $tempo
 
 	echo $mensagem_finaliza 
-	notify-send -t 10000 "GOSTOU?"
+	notify-send -t 50000 "Pomodoro finalizado!"
 }
 
 main()
@@ -33,3 +35,5 @@ main()
 
 # chamando funcao principal
 main $1
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
