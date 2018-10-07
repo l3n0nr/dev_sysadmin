@@ -10,18 +10,19 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[20/06/18]       #
-# Last modification script: 		[07/09/18]       #
+# Last modification script: 		[07/10/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # DESCRICAO DO SCRIPT:
 # Otimiza recursos da maquina, para economizar bateria(notebook)
-# 	- Desliga/Liga nucleos extras(1-2-3) # Nucleo 0 nunca e desligado
+# 	- Desliga/Liga nucleos extras(1-2-3) 
+# 		Nucleo 0 sempre ligado - CUIDADO, nunca desliga-lo!!
 # 	- Desliga/Liga Wifi
 # 	- Reduz/Aumenta o brilho
 #
 ## variaveis do script
 	# versao do script
-	versao="0.35"
+	versao="0.40"
 
 	# nome da maquina
 	hostname=$(echo $HOSTNAME)
@@ -135,6 +136,39 @@ f_notebook()
 							    || f_ativa 
 }
 
+f_mensagem()
+{
+    dialog --msgbox "O script ira: \n-Desligar os nucleos do processador[1:2:3]; \n-Bluetooth + Wi-fi; \n-Reduzira o brilho! \n\n\n         TOME CUIDADO AO UTILIZA-LO!" 0 0
+}
+
+f_notebook_dialog()
+{
+	## valor padrao
+	chave=1
+
+	otimiza=$(dialog \
+            --stdout --ok-label "Executar" --cancel-label "Cancelar" \
+            --help-button --help-label "Ajuda" \
+            --menu "Otimizar recursos? [$modo]" \
+            0 0 0 \
+            "LIG" "Ativar" \
+            "DES" "Desativar" )
+
+    f_verifica
+
+    if [[ $otimiza == "HELP LIG" ]]; then
+        f_mensagem
+        echo $otimiza
+    elif [[ $otimiza == "DES" ]]; then
+        f_desativa
+    elif [[ $otimiza == "LIG" ]]; then
+        f_ativa
+    else
+        ## catch error
+        exit 1
+    fi
+}
+
 ## funcao principal
 main()
 {
@@ -144,8 +178,8 @@ main()
 
     while true; do    
 	    ## verifica hostname = notebook, senao for sai!
-		[[ ! $hostname -eq "notebook" ]] && echo "Nao serve!" && exit 1 \
-										 || f_notebook		
+		[[ ! $hostname -eq "notebook" ]] && echo "Entenda o script, antes de executa-lo!" && exit 1 \
+										 || f_notebook_dialog		
 
 		## se todos os modulos ativados - entao script "ON"
 		[[ $chave == "2" ]] && modo="ON" || modo="OFF"
