@@ -10,7 +10,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[20/06/18]       #
-# Last modification script: 		[07/10/18]       #
+# Last modification script: 		[08/10/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # DESCRICAO DO SCRIPT:
@@ -22,14 +22,15 @@
 #
 ## variaveis do script
 	# versao do script
-	versao="0.40"
+	versao="0.42"
 
 	# nome da maquina
 	hostname=$(echo $HOSTNAME)
 
 	# configuracoes de brilho padrao
-	brightness_min="1000"
-	brightness_med="2441"
+	# brightness_min="1000"
+	brightness_med="2440"
+	brightness_max="4000"
 
 	# arquivo do bluetooth
 	bluetooh="/etc/init.d/bluetooth"
@@ -65,8 +66,9 @@ f_ativa()
 
 		## brilho
 		echo "| ======================================================= |"
-		echo "| Reduzindo o brilho  |"
-		echo $brightness_min > /sys/class/backlight/intel_backlight/brightness		
+		echo "| Otimizando o brilho  |"
+		# echo $brightness_min > /sys/class/backlight/intel_backlight/brightness		
+		echo $brightness_med > /sys/class/backlight/intel_backlight/brightness		
 		echo "| ======================================================= |"
 
 		## bluetooth
@@ -99,8 +101,9 @@ f_desativa()
 
 		## brilho
 		echo "| ======================================================= |"
-		echo "| Aumentando o brilho	|"
-		echo $brightness_med > /sys/class/backlight/intel_backlight/brightness
+		echo "| Restaurando o brilho	|"
+		# echo $brightness_med > /sys/class/backlight/intel_backlight/brightness
+		echo $brightness_max > /sys/class/backlight/intel_backlight/brightness
 		echo "| ======================================================= |"
 
 		## bluetooth
