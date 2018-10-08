@@ -11,7 +11,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[30/03/18]       #
-# Last modification script: 		[12/09/18]       #
+# Last modification script: 		[08/10/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
@@ -98,7 +98,11 @@ pre_check()
 
 main()
 {
-	pre_check	
+	if [[ $1 == "--nocheck" ]]; then
+		push_git
+	else	
+		pre_check
+	fi
 }
 
-main
+main $1
