@@ -7,8 +7,8 @@
 # ERRO: Verificar permissao execucao arquivo /opt/tor
 #
 # TESTADO EM: Debian Stable
-# VERSAO: 0.51
-# ULT_EDICAO: 01/10/18 
+# VERSAO: 0.52
+# ULT_EDICAO: 08/10/18 
 #
 # DESCRICAO: Baixa arquivo tor e extrai na pasta $caminho
 # 
