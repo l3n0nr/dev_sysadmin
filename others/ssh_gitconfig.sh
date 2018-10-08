@@ -14,6 +14,11 @@
 email="lenonrmsouza@gmail.com"
 vetor=(f_localhome f_checkkeyssh f_ssh_key f_eval f_ssh_add f_xclip f_checkssh)
 
+f_verifica()
+{
+	[[ $? = "1" ]] && exit 1
+}        
+
 f_checkkeyssh()
 {
 	ls -la ~/.ssh | grep id_rsa >> 2
@@ -73,6 +78,7 @@ main()
 	# executando acoes na forma de vetor
     for (( i = 0; i <= ${#vetor[@]}; i++ )); do             
         ${vetor[$i]} 
+        f_verifica
         sleep 2
         echo
     done
