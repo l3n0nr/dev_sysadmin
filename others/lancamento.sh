@@ -34,8 +34,7 @@ jquery()
 	site="https://launchlibrary.net/1.2/launch?next=50&mode=verbose"
 
 	# lynx --dump $site | jq '.[]'	# funcionando
-	# curl -s $site | jq '.[] | {.net}'
-	curl -s $site | jq '.net[].net'
+	lynx --dump $site | jq '.{missions:.name}'	# funcionando
 }
 
 main()
