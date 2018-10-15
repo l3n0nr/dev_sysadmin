@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
  
@@ -22,9 +22,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.27]       #
+# # versão do script:              [0.0.28]       #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [13/10/18]      #
+# # ultima ediçao realizada:      [15/10/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -73,7 +73,7 @@ basic()
 	df -h /home
 
 	echo	
-	echo "Sistema instalado em: $install_system"
+	echo "Sistema instalado em $install_system"
 	echo "###############################################################################"
 }
 
