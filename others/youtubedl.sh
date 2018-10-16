@@ -48,7 +48,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [14/06/18]      #             
-# # ultima ediçao realizada:      [24/09/18]      #
+# # ultima ediçao realizada:      [15/10/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # Legenda: a.b.c.d.e.f
@@ -61,7 +61,7 @@
 #
 # variaveis do script
 	# versao do script
-	versao="0.0.60.0.0.0"  
+	versao="0.0.66.0.0.0"  
 
 	# formato do audio
 	format=mp3					# default
@@ -111,11 +111,6 @@ f_vetor_audio()
 			   --audio-quality "$quality_a" \
 			   --extract-audio \
 			   --audio-format "$format" -o "$local/%(title)s.%(ext)s" -a $local/list.txt
-
-	f_verifica 
-	rm $local/list.txt 
-	
-	zenity --notification --text "Download finalizado!" 
 }
 
 f_quality_video()
@@ -137,11 +132,7 @@ f_quality_video()
     	quality_video="-f 36"    
     else
     	exit 1
-	fi
-
-	# echo $video_quality
-	# echo $quality_video
-	# exit 1
+	fi	
 }
 
 f_vetor_video()
@@ -177,6 +168,11 @@ main()
 	else			
 		f_vetor_video  			
     fi
+
+    f_verifica 
+	rm $local/list.txt 
+	
+	zenity --notification --text "Download finalizado!" 
 }
 
 ## chamando funcao principal
