@@ -25,14 +25,14 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [19/06/18]      #             
-# # ultima ediçao realizada:      [20/06/18]      #
+# # ultima ediçao realizada:      [18/10/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # versao do script
-    VERSAO="0.0.10.0.0.0"    
+    VERSAO="0.0.15.0.0.0"    
 
 # pasta do usuario
-    local_home="/home/lenonr/"
+    local_home=$HOME
 
 # pasta do git
 	git="/home/lenonr/Github/dev_xfce/Auto_Config/base/"
@@ -59,7 +59,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # # Script testado em
-#   - Debian 10     - Testing
+#   - Debian 9
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                             #
@@ -97,22 +97,25 @@ f_verifica()
 
 main()
 {
-	clear
-	f_verifica
+	clear	
 
-	for i in "$@"; 
-	do
+	if [[ $1 == "" ]]; then
+		f_verifica
+		exit 0
+	fi
+
+	for i in "$1"; do
 	    # verificando o que foi digitado
 	    case $i in
 	        envia) f_envia;;
 	        restaura) f_restaura;;
-	        *) echo "nao entendi"
+			*) f_verifica
 	    esac    
-	done
+	done	
 }
 
 ## chamando script
-main $@
+main $1
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
