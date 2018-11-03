@@ -22,20 +22,15 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.28]       #
+# # versão do script:              [0.0.35]       #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [15/10/18]      #
+# # ultima ediçao realizada:      [03/11/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
-# # Script testado em
-#	- Xubuntu 16.04
-#       - Debian 9
-#
-# # Compativel com
-#       - Ubuntu
-#       - Debian 9
+## Compativel em
+#	Debian 9
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # 
@@ -45,48 +40,58 @@
 # 
 install_system=$(ls -lct /etc | tail -1 | awk '{print $6, $7, $8}')
 date_now=$(date +%x-%k%M)
+sistema=$(hostname)
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #																				#
 #                               CORPO DO SCRIPT                               	#
 #																				#
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# 
-#
-basic()
+neofetch_sistema()
 {
-	# limpa a tela
-	clear 
+	neofetch
+}
 
-	echo "###############################################################################"
-
-	# mostra informacoes sistema
-	neofetch 
-
-    # memoria utilizada
+memoria_utilizada()
+{
     free -hmt ; echo
+}
 
-	# lista uso do disco - raiz
-	df -h / ; echo    
+disco()
+{
+	df -h / ; echo
+	df -h /home ; echo
+}
 
-	# lista uso do disco - home
-	df -h /home
+instalacao_sistema()
+{
+	printn "Sistema instalado em $install_system"
+}
 
-	echo	
-	echo "Sistema instalado em $install_system"
+
+completo()
+{
+	echo "###############################################################################"
+	neofetch_sistema
+	memoria_utilizada
+	disco
+	instalacao_sistema	
 	echo "###############################################################################"
 }
 
 main()
-{
-	basic
+{	
+	if [[ $sistema == "notebook" ]]; then
+		echo "###############################################################################"
+		neofetch_sistema
+	else
+		completo
+	fi
 }
     
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # INICIANDO SCRIPT
-main
-# 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+main $1
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
  
