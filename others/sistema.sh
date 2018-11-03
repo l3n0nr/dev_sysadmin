@@ -65,9 +65,8 @@ disco()
 
 instalacao_sistema()
 {
-	printn "Sistema instalado em $install_system"
+	echo "Sistema instalado em $install_system"
 }
-
 
 completo()
 {
@@ -81,11 +80,11 @@ completo()
 
 main()
 {	
-	if [[ $sistema == "notebook" ]]; then
+	if [[ $1 == "-a" ]]; then
+		completo
+	elif [[ $sistema == "notebook" ]]; then
 		echo "###############################################################################"
 		neofetch_sistema
-	else
-		completo
 	fi
 }
     
