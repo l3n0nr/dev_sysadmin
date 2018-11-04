@@ -80,11 +80,11 @@ completo()
 
 main()
 {	
-	if [[ $1 == "-a" ]]; then
-		completo
-	elif [[ $sistema == "notebook" ]]; then
+	if [[ $sistema == "notebook" ]]; then
 		echo "###############################################################################"
 		neofetch_sistema
+	else
+		completo
 	fi
 }
     
