@@ -22,9 +22,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.40]       #
+# # versão do script:              [0.0.42]       #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [03/11/18]      #
+# # ultima ediçao realizada:      [05/11/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -84,6 +84,7 @@ main()
 		echo "-n: neofetch"
 		echo "-d: disco"
 		echo "-m: memoria utilizada"	
+		echo "-i: visualiza data que o sistema foi instalado"	
 		echo "-a: completo"
 	elif [[ $1 == "-a" ]]; then
 		completo
@@ -93,6 +94,8 @@ main()
 		disco
 	elif [[ $1 == "-m" ]]; then
 		memoria_utilizada
+	elif [[ $1 == "-i" ]]; then
+		instalacao_sistema
 	elif [[ $sistema == "notebook" ]]; then		
 		neofetch_sistema
 	else
