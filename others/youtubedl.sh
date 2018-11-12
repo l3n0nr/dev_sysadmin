@@ -48,7 +48,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [14/06/18]      #             
-# # ultima ediçao realizada:      [15/10/18]      #
+# # ultima ediçao realizada:      [12/11/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # Legenda: a.b.c.d.e.f
@@ -61,7 +61,7 @@
 #
 # variaveis do script
 	# versao do script
-	versao="0.0.66.0.0.0"  
+	versao="0.0.70.0.0.0"  
 
 	# formato do audio
 	format=mp3					# default
@@ -122,6 +122,7 @@ f_quality_video()
         	   TRUE 720 \
         	   FALSE 480 \
         	   FALSE 144 \
+        	   FALSE 000 \
     )   
 
     if [[ $video_quality == '720' ]]; then
@@ -130,6 +131,8 @@ f_quality_video()
     	quality_video="-f 18"
     elif [[ $video_quality == '144' ]]; then    	
     	quality_video="-f 36"    
+    elif [[ $video_quality == '000' ]]; then    	
+    	quality_video=""    
     else
     	exit 1
 	fi	
