@@ -10,7 +10,7 @@
 #       contato: <lenonrmsouza@gmail.com>
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
-# Last modification script: 		[05/10/18]       #
+# Last modification script: 		[17/11/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
@@ -55,8 +55,7 @@ menu()
 	
 	# se variavel for vazia, mostra mensagem e sai
 	if [[ -z $1 ]]; then
-		echo "Parametros disponiveis: $repos"
-		exit 1
+		printf "Parametros disponiveis: \n$repos\n"
 	else 		
 		# chamando funcao
 		auto_alias $1		
