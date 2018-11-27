@@ -10,7 +10,7 @@
 #       contato: <lenonrmsouza@gmail.com>
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
-# Last modification script: 		[17/11/18]       #
+# Last modification script: 		[27/11/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
@@ -42,8 +42,10 @@ auto_alias()
 
 	if [[ $1 == "ajuda" ]] || [[ $1 == "help" ]]; then
 		echo "############################## AJUDA ##############################"	
-		# echo "Voce pode escolher uma das seguintes opcoes:" 
-		echo $repos[@] | sed -e "s;dev;;g"
+		echo "Voce pode escolher uma das seguintes opcoes:" 		
+		for (( i = 1; i <= ${#repos[@]}; i++ )); do	
+			echo "+ repo" $repos[i] | sed -e "s;dev_;;g"
+		done		
 		echo "###################################################################"	
 	fi
 }
