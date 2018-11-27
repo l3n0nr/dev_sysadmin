@@ -18,7 +18,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[08/04/18]       #
-# Last modification script: 		[24/06/18]       #
+# Last modification script: 		[27/11/18]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
@@ -135,7 +135,7 @@ check_git()
 	done
 
 	if [[ $contador == "0" ]]; then
-		notify-send "Nada para commitar!!"
+		notify-send "Nada para comitar, por enquanto!"
 	fi
 }
 
