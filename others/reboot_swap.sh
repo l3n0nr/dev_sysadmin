@@ -39,9 +39,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.1.71.0.0.0]    #
+# # versão do script:           [0.1.80.0.0.0]    #
 # # data de criação do script:    [03/11/17]      #
-# # ultima ediçao realizada:      [13/09/18]      #
+# # ultima ediçao realizada:      [15/12/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # Legenda: a.b.c.d.e.f
@@ -127,7 +127,7 @@ verifica()
         printf "[!] Memória SWAP, será reiniciada pois a memoria a ser restaurada $SWAP_USADA_MB MB, é menor do que a disponivel $MEM_LIVRE_MB MB! \n"
         printf "[+] Memória SWAP desligada! \n"
         printf "[*] Limpando a memória Swap, aguarde.. \n"
-        sudo swapoff -a && sudo swapon -a
+        swapoff -a && swapon -a
         printf "[*] Memória SWAP ligada novamente! \n"        
         printf "[+] Limpeza na memória SWAP realizada com sucesso! \n"
     fi
@@ -135,18 +135,19 @@ verifica()
 
 verifica_otimizado()
 {
-	mem=$(LC_ALL=C free  | awk '/Mem:/ {print $4}')
-	swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
+	mem=$(LC_ALL=C free -h  | awk '/Mem:/ {print $4}')
+	swap=$(LC_ALL=C free -h | awk '/Swap:/ {print $3}')
 
-	if [ $mem -lt $swap ]; then
-		printf "[!] Não foi possivel reiniciar a SWAP, pois a memoria a ser restaurada $SWAP_USADA_MB MB, é maior do que a disponivel $MEM_LIVRE_MB MB! \n" >&2
+	# if [ $mem -lt $swap ]; then
+	if [ $mem > $swap ]; then
+		printf "[!] Não foi possivel reiniciar a SWAP, pois a memoria a ser restaurada $swap, é maior do que a disponivel $mem! \n" >&2
 		exit 1
 	fi
 
 	printf "[!] Memória SWAP, será reiniciada! \n"
     printf "[+] Memória SWAP desligada! \n"
     printf "[*] Limpando a memória Swap, aguarde.. \n"
-    swapoff -a && sudo swapon -a
+    swapoff -a && swapon -a
     printf "[*] Memória SWAP ligada novamente! \n"        
     printf "[+] Limpeza na memória SWAP realizada com sucesso! \n"
 }
@@ -177,7 +178,7 @@ porcentagem()
 
 main()
 {
-	porcentagem
+	verifica
 }
 
 # # executando script
