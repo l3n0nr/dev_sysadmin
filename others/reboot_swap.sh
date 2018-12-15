@@ -39,7 +39,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.1.80.0.0.0]    #
+# # versão do script:           [0.1.82.0.0.0]    #
 # # data de criação do script:    [03/11/17]      #
 # # ultima ediçao realizada:      [15/12/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -96,7 +96,8 @@ verifica()
 {
 	## taxa de segurança em "%" de memoria extra(por swap), evitando travamentos da maquina
 	## valores menores ja travaram!
-	TAXA=50 
+	# TAXA=50 
+	TAXA=30 
 
 	# # # MEMORIA
 	MEM_LIVRE=$(awk '/^MemFree/ { print $2; }' /proc/meminfo)
@@ -127,7 +128,7 @@ verifica()
        	printf "FAILED - " >> $local && date >> $local
         
     else
-        printf "[!] Memória SWAP, será reiniciada pois a memoria a ser restaurada $SWAP_USADA_MB MB, é menor do que a disponivel $MEM_LIVRE_MB MB! \n"
+        # printf "[!] Memória SWAP, será reiniciada pois a memoria a ser restaurada $SWAP_USADA_MB MB, é menor do que a disponivel $MEM_LIVRE_MB MB! \n"
         printf "[+] Memória SWAP desligada! \n"
         printf "[*] Limpando a memória Swap, aguarde.. \n"
         swapoff -a && swapon -a
