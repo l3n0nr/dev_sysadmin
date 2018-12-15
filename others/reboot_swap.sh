@@ -97,7 +97,7 @@ verifica()
 	## taxa de segurança em "%" de memoria extra(por swap), evitando travamentos da maquina
 	## valores menores ja travaram!
 	# TAXA=50 
-	TAXA=30 
+	TAXA=10 
 
 	# # # MEMORIA
 	MEM_LIVRE=$(awk '/^MemFree/ { print $2; }' /proc/meminfo)
@@ -140,14 +140,15 @@ verifica()
 
 verifica_otimizado()
 {
-	mem=$(LC_ALL=C free -h  | awk '/Mem:/ {print $4}')
-	swap=$(LC_ALL=C free -h | awk '/Swap:/ {print $3}')
+	# mem=$(LC_ALL=C free  | awk '/Mem:/ {print $4}')
+	# swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
 
 	# if [ $mem -lt $swap ]; then
-	if [ $mem > $swap ]; then
-		printf "[!] Não foi possivel reiniciar a SWAP, pois a memoria a ser restaurada $swap, é maior do que a disponivel $mem! \n" >&2
-		exit 1
-	fi
+	# # if [ $mem > $swap ]; then
+	# 	printf "[!] Não foi possivel reiniciar a SWAP, pois a memoria a ser restaurada $swap, é maior do que a disponivel $mem! \n" >&2
+	# 	printf "FAILED - " >> $local && date >> $local
+	# 	exit 1
+	# fi
 
 	printf "[!] Memória SWAP, será reiniciada! \n"
     printf "[+] Memória SWAP desligada! \n"
@@ -155,35 +156,36 @@ verifica_otimizado()
     swapoff -a && swapon -a
     printf "[*] Memória SWAP ligada novamente! \n"        
     printf "[+] Limpeza na memória SWAP realizada com sucesso! \n"
+    printf "SUCESS - " >> $local && date >> $local
 }
 
 porcentagem()
 {
 	# minimo de memoria RAM para ser considerado
-	porcentagem_mem="30"
+	# porcentagem_mem="30"
+	porcentagem_mem="10"
 
 	# variaveis de verificacao da memoria RAM
 	memoria_total=$(free | awk '/Mem:/ {print $2}')	
-	memoria_taxa=$(($porcentagem_mem * $memoria_total / 100))
+	memoria_taxa=$(($porcentagem_mem * ($memoria_total / 100)))
 	memoria_livre=$(free | awk '/Mem:/ {print $4}')
 
 	# verificando a memoria SWAP
 	swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
 						
 	# realizando teste
-	if [[ $memoria_livre < $memoria_taxa && $swap > "0" ]]; then
+	if [[ $memoria_livre < $memoria_taxa && $swap != "0" ]]; then
 		verifica_otimizado
-	elif [[ $swap = "0" ]]; then
-		echo "Memoria SWAP esta zerada!!"
 	else
-		echo "Memoria disponivel:" $(($memoria_livre/1024)) "MB"
-		echo "Porcentagem(menor ou igual a):" $(($memoria_taxa/1024)) "MB"		
+		# echo "Memoria disponivel:" $(($memoria_livre/1024)) "MB"
+		# echo "Porcentagem(menor ou igual a):" $(($memoria_taxa/1024)) "MB"
+		printf "FAILED - " >> $local && date >> $local		
 	fi
 }
 
 main()
 {
-	verifica
+	porcentagem
 }
 
 # # executando script
