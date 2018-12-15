@@ -80,6 +80,8 @@
 # limpando tela
 clear
 
+local="/tmp/clear_memory.txt"
+
 # realizando verificação de sudo
 if [[ `id -u` -ne 0 ]]; then
     clear        
@@ -122,6 +124,7 @@ verifica()
 
     if [[ $SWAP_USADA_MB -gt $MEM_LIVRE_MB ]]; then
         printf "[!] Não foi possivel reiniciar a SWAP, pois a memoria a ser restaurada $SWAP_USADA_MB MB, é maior do que a disponivel $MEM_LIVRE_MB MB! \n"
+       	printf "FAILED - " >> $local && date >> $local
         
     else
         printf "[!] Memória SWAP, será reiniciada pois a memoria a ser restaurada $SWAP_USADA_MB MB, é menor do que a disponivel $MEM_LIVRE_MB MB! \n"
@@ -130,6 +133,7 @@ verifica()
         swapoff -a && swapon -a
         printf "[*] Memória SWAP ligada novamente! \n"        
         printf "[+] Limpeza na memória SWAP realizada com sucesso! \n"
+        printf "SUCESS - " >> $local && date >> $local
     fi
 } 
 
