@@ -97,7 +97,7 @@ verifica()
 	## taxa de segurança em "%" de memoria extra(por swap), evitando travamentos da maquina
 	## valores menores ja travaram!
 	# TAXA=50 
-	TAXA=10 
+	TAXA=30 
 
 	# # # MEMORIA
 	MEM_LIVRE=$(awk '/^MemFree/ { print $2; }' /proc/meminfo)
@@ -125,8 +125,7 @@ verifica()
 
     if [[ $SWAP_USADA_MB -gt $MEM_LIVRE_MB ]]; then
         printf "[!] Não foi possivel reiniciar a SWAP, pois a memoria a ser restaurada $SWAP_USADA_MB MB, é maior do que a disponivel $MEM_LIVRE_MB MB! \n"
-       	printf "FAILED - " >> $local && date >> $local
-        
+       	printf "FAILED - " >> $local && date >> $local        
     else
         # printf "[!] Memória SWAP, será reiniciada pois a memoria a ser restaurada $SWAP_USADA_MB MB, é menor do que a disponivel $MEM_LIVRE_MB MB! \n"
         printf "[+] Memória SWAP desligada! \n"
@@ -173,9 +172,14 @@ porcentagem()
 	# verificando a memoria SWAP
 	swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
 						
+	# echo $memoria_taxa
+	# echo $memoria_livre
+
 	# realizando teste
-	if [[ $memoria_livre < $memoria_taxa && $swap != "0" ]]; then
-		verifica_otimizado
+	# if [[ $memoria_livre < $memoria_taxa && $swap != "0" ]]; then
+	if [[ $memoria_livre > $memoria_taxa ]]; then		
+		# verifica_otimizado
+		verifica
 	else
 		# echo "Memoria disponivel:" $(($memoria_livre/1024)) "MB"
 		# echo "Porcentagem(menor ou igual a):" $(($memoria_taxa/1024)) "MB"
@@ -185,7 +189,8 @@ porcentagem()
 
 main()
 {
-	porcentagem
+	# porcentagem
+	verifica
 }
 
 # # executando script
