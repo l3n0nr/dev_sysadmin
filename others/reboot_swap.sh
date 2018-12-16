@@ -123,10 +123,8 @@ verifica()
 	MEM_LIVRE_MB=$(($MEM_LIVRE / 1024))
 	SWAP_USADA_MB=$(($SWAP_USADA / 1024)) 
 
-    if [[ $SWAP_USADA_MB -gt $MEM_LIVRE_MB ]]; then
-        printf "[!] Não foi possivel reiniciar a SWAP, pois a memoria a ser restaurada $SWAP_USADA_MB MB, é maior do que a disponivel $MEM_LIVRE_MB MB! \n"
-       	printf "FAILED - " >> $local && date >> $local        
-    else
+    # if [[ $SWAP_USADA_MB -gt $MEM_LIVRE_MB ]]; then
+    if [[ $MEM_LIVRE_MB < $SWAP_USADA_MB ]]; then
         # printf "[!] Memória SWAP, será reiniciada pois a memoria a ser restaurada $SWAP_USADA_MB MB, é menor do que a disponivel $MEM_LIVRE_MB MB! \n"
         printf "[+] Memória SWAP desligada! \n"
         printf "[*] Limpando a memória Swap, aguarde.. \n"
@@ -134,20 +132,23 @@ verifica()
         printf "[*] Memória SWAP ligada novamente! \n"        
         printf "[+] Limpeza na memória SWAP realizada com sucesso! \n"
         printf "SUCESS - " >> $local && date >> $local
+    else        
+        printf "[!] Não foi possivel reiniciar a SWAP, pois a memoria a ser restaurada $SWAP_USADA_MB MB, é maior do que a disponivel $MEM_LIVRE_MB MB! \n"
+       	printf "FAILED - " >> $local && date >> $local        
     fi
 } 
 
 verifica_otimizado()
 {
-	# mem=$(LC_ALL=C free  | awk '/Mem:/ {print $4}')
-	# swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
+	mem=$(LC_ALL=C free  | awk '/Mem:/ {print $4}')
+	swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
 
-	# if [ $mem -lt $swap ]; then
+	if [ $mem -lt $swap ]; then
 	# # if [ $mem > $swap ]; then
-	# 	printf "[!] Não foi possivel reiniciar a SWAP, pois a memoria a ser restaurada $swap, é maior do que a disponivel $mem! \n" >&2
-	# 	printf "FAILED - " >> $local && date >> $local
-	# 	exit 1
-	# fi
+		printf "[!] Não foi possivel reiniciar a SWAP, pois a memoria a ser restaurada $swap, é maior do que a disponivel $mem! \n" >&2
+		printf "FAILED - " >> $local && date >> $local
+		exit 1
+	fi
 
 	printf "[!] Memória SWAP, será reiniciada! \n"
     printf "[+] Memória SWAP desligada! \n"
@@ -190,7 +191,7 @@ porcentagem()
 main()
 {
 	# porcentagem
-	verifica
+	verifica_otimizado
 }
 
 # # executando script
