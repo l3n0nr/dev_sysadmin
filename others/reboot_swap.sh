@@ -143,20 +143,19 @@ verifica_otimizado()
 	mem=$(LC_ALL=C free  | awk '/Mem:/ {print $4}')
 	swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
 
-	if [ $mem -lt $swap ]; then
+	if [[ $mem > $swap ]]; then
 	# # if [ $mem > $swap ]; then
-		printf "[!] Não foi possivel reiniciar a SWAP, pois a memoria a ser restaurada $swap, é maior do que a disponivel $mem! \n" >&2
-		printf "FAILED - " >> $local && date >> $local
+		# printf "[!] Não foi possivel reiniciar a SWAP, pois a memoria a ser restaurada $swap, é maior do que a disponivel $mem! \n" >&2
+		printf "[!] Não foi possivel reiniciar a SWAP \n" && printf "FAILED - " >> $local && date >> $local
 		exit 1
+	else
+		# printf "[!] Memória SWAP, será reiniciada! \n"
+	 #    printf "[+] Memória SWAP desligada! \n"    
+	 #    printf "[*] Limpando a memória Swap, aguarde.. \n"
+	    swapoff -a && swapon -a && printf "SUCESS - " >> $local && date >> $local
+	    # printf "[*] Memória SWAP ligada novamente! \n"        
+	    # printf "[+] Limpeza na memória SWAP realizada com sucesso! \n"	    
 	fi
-
-	printf "[!] Memória SWAP, será reiniciada! \n"
-    printf "[+] Memória SWAP desligada! \n"
-    printf "[*] Limpando a memória Swap, aguarde.. \n"
-    swapoff -a && swapon -a
-    printf "[*] Memória SWAP ligada novamente! \n"        
-    printf "[+] Limpeza na memória SWAP realizada com sucesso! \n"
-    printf "SUCESS - " >> $local && date >> $local
 }
 
 porcentagem()
