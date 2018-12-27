@@ -39,7 +39,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.1.90.0.0.0]    #
+# # versão do script:           [0.1.95.0.0.0]    #
 # # data de criação do script:    [03/11/17]      #
 # # ultima ediçao realizada:      [26/12/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -92,82 +92,20 @@ if [[ `id -u` -ne 0 ]]; then
     exit 1
 fi
 
-verifica()
+limpa()
 {
-	## taxa de segurança em "%" de memoria extra(por swap), evitando travamentos da maquina
-	## valores menores ja travaram!
-	# TAXA=50 
-	TAXA=30 
+	# swapoff -a && swapon -a && printf "SUCESS - " >> $local && date >> $local \
+	# 		   				|| printf "FAILED - " >> $local && date >> $local && exit 1		
 
-	# # # MEMORIA
-	MEM_LIVRE=$(awk '/^MemFree/ { print $2; }' /proc/meminfo)
+	swapoff -a && swapon -a && printf "SUCESS - " >> $local || printf "FAILED - " >> $local 
 
-	# # # SWAP 
-	## Kb
-	SWAP_TOTAL=$(awk '/^SwapTotal/ { print $2; }' /proc/meminfo)
-	## MB
-	SWAP_TOTAL_MB=$(($SWAP_TOTAL / 1024))
-
-	## Kb
-	SWAP_LIVRE=$(awk '/^SwapFree/ { print $2; }' /proc/meminfo)
-	## MB
-	SWAP_LIVRE_MB=$(($SWAP_LIVRE / 1024))
-
-	# calculo de espaço disponivel
-	SWAP_USADA=$(($SWAP_TOTAL - $SWAP_LIVRE))
-
-	# aplicando margem de segurança
-	SWAP_USADA=$(((($SWAP_USADA * $TAXA)/100) + $SWAP_USADA))
-
-	# realizando calculo para MB
-	MEM_LIVRE_MB=$(($MEM_LIVRE / 1024))
-	SWAP_USADA_MB=$(($SWAP_USADA / 1024)) 
-
-    # if [[ $SWAP_USADA_MB -gt $MEM_LIVRE_MB ]]; then
-    if [[ $MEM_LIVRE_MB < $SWAP_USADA_MB ]]; then
-        # printf "[!] Memória SWAP, será reiniciada pois a memoria a ser restaurada $SWAP_USADA_MB MB, é menor do que a disponivel $MEM_LIVRE_MB MB! \n"
-        printf "[+] Memória SWAP desligada! \n"
-        printf "[*] Limpando a memória Swap, aguarde.. \n"
-        swapoff -a && swapon -a
-        printf "[*] Memória SWAP ligada novamente! \n"        
-        printf "[+] Limpeza na memória SWAP realizada com sucesso! \n"
-        printf "SUCESS - " >> $local && date >> $local
-    else        
-        printf "[!] Não foi possivel reiniciar a SWAP, pois a memoria a ser restaurada $SWAP_USADA_MB MB, é maior do que a disponivel $MEM_LIVRE_MB MB! \n"
-       	printf "FAILED - " >> $local && date >> $local        
-    fi
-} 
-
-verifica_otimizado()
-{
-	# # mem=$(LC_ALL=C free  | awk '/Mem:/ {print $4}')
-	# mem=$(free  | awk '/Mem:/ {print $4}')
-	# # swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
-	# swap=$(free | awk '/Swap:/ {print $3}')
-
-	# if [[ $mem > $swap ]]; then
-	# # # if [ $mem > $swap ]; then
-	# 	# printf "[!] Não foi possivel reiniciar a SWAP, pois a memoria a ser restaurada $swap, é maior do que a disponivel $mem! \n" >&2
-	# 	printf "[!] Não foi possivel reiniciar a SWAP \n" && printf "FAILED - " >> $local && date >> $local
-	# 	exit 1
-	# else
-	# 	# printf "[!] Memória SWAP, será reiniciada! \n"
-	#  #    printf "[+] Memória SWAP desligada! \n"    
-	#  #    printf "[*] Limpando a memória Swap, aguarde.. \n"
-	#     swapoff -a && swapon -a && printf "SUCESS - " >> $local && date >> $local
-	#     # printf "[*] Memória SWAP ligada novamente! \n"        
-	#     # printf "[+] Limpeza na memória SWAP realizada com sucesso! \n"	    
-	# fi
-
-	swapoff -a && swapon -a && printf "SUCESS - " >> $local && date >> $local \
-			   || printf "FAILED - " >> $local && date >> $local		
+	date >> $local
 }
 
 porcentagem()
 {
 	# minimo de memoria RAM para ser considerado
 	porcentagem_mem="30"
-	# porcentagem_mem="10"
 
 	# variaveis de verificacao da memoria RAM
 	memoria_total=$(free | awk '/Mem:/ {print $2}')	
@@ -177,26 +115,17 @@ porcentagem()
 	# verificando a memoria SWAP
 	swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
 						
-	# echo $memoria_taxa
-	# echo $memoria_livre
-
 	# realizando teste
 	# if [[ $memoria_livre < $memoria_taxa && $swap != "0" ]]; then
 	if [[ $memoria_livre > $memoria_taxa ]]; then		
-		verifica_otimizado
-		# verifica
+		limpa
 	fi
-	# else
-	# 	# echo "Memoria disponivel:" $(($memoria_livre/1024)) "MB"
-	# 	# echo "Porcentagem(menor ou igual a):" $(($memoria_taxa/1024)) "MB"
-	# 	printf "FAILED - " >> $local && date >> $local		
-	# fi
 }
 
 main()
 {
-	# porcentagem
-	verifica_otimizado
+	# verifica_otimizado
+	porcentagem
 }
 
 # # executando script
