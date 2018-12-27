@@ -39,9 +39,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.1.82.0.0.0]    #
+# # versão do script:           [0.1.85.0.0.0]    #
 # # data de criação do script:    [03/11/17]      #
-# # ultima ediçao realizada:      [15/12/18]      #
+# # ultima ediçao realizada:      [26/12/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # Legenda: a.b.c.d.e.f
@@ -140,8 +140,10 @@ verifica()
 
 verifica_otimizado()
 {
-	mem=$(LC_ALL=C free  | awk '/Mem:/ {print $4}')
-	swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
+	# mem=$(LC_ALL=C free  | awk '/Mem:/ {print $4}')
+	mem=$(free  | awk '/Mem:/ {print $4}')
+	# swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
+	swap=$(free | awk '/Swap:/ {print $3}')
 
 	if [[ $mem > $swap ]]; then
 	# # if [ $mem > $swap ]; then
