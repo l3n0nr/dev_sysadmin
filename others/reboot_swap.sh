@@ -39,9 +39,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.1.95.0.0.0]    #
+# # versão do script:           [0.1.96.0.0.0]    #
 # # data de criação do script:    [03/11/17]      #
-# # ultima ediçao realizada:      [26/12/18]      #
+# # ultima ediçao realizada:      [27/12/18]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # Legenda: a.b.c.d.e.f
@@ -64,7 +64,7 @@
 #   - Debian 9
 #
 # # Compativel com
-#   - Debian 9 Stable
+#   - Debian Stable
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # DESCRICAO
@@ -94,17 +94,12 @@ fi
 
 limpa()
 {
-	# swapoff -a && swapon -a && printf "SUCESS - " >> $local && date >> $local \
-	# 		   				|| printf "FAILED - " >> $local && date >> $local && exit 1		
-
-	swapoff -a && swapon -a && printf "SUCESS - " >> $local || printf "FAILED - " >> $local 
-
-	date >> $local
+	swapoff -a && swapon -a && printf "SUCESS - " >> $local && date >> $local
 }
 
 porcentagem()
 {
-	# minimo de memoria RAM para ser considerado
+	# minimo de memoria RAM extra para ser realizada a limpeza(porcentagem)
 	porcentagem_mem="30"
 
 	# variaveis de verificacao da memoria RAM
@@ -116,15 +111,15 @@ porcentagem()
 	swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
 						
 	# realizando teste
-	# if [[ $memoria_livre < $memoria_taxa && $swap != "0" ]]; then
 	if [[ $memoria_livre > $memoria_taxa ]]; then		
 		limpa
+	else
+		printf "FAILED - " >> $local && date >> $local
 	fi
 }
 
 main()
 {
-	# verifica_otimizado
 	porcentagem
 }
 
