@@ -100,7 +100,7 @@ limpa()
 porcentagem()
 {
 	# minimo de memoria RAM extra para ser realizada a limpeza(porcentagem)
-	porcentagem_mem="35"
+	porcentagem_mem="40"
 
 	# variaveis de verificacao da memoria RAM
 	memoria_total=$(free | awk '/Mem:/ {print $2}')	
