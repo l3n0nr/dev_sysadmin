@@ -18,7 +18,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:               [30/03/18]       #
-# Last modification script:         [11/09/18]       #
+# Last modification script:         [06/01/19]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
@@ -51,7 +51,7 @@ pull_git()
                 # [[ $variavel -eq 1 ]] && echo "Repositorie Error ${repos[$i]}!" >> /tmp/repo.txt
 
                 # mostrando mensagem de verificao
-                [[ $? -eq 1 ]] && notify-send "Erro! Nao foi possivel sincronizar ${repos[$i]} com o servidor!" 
+                [[ $? -eq 1 ]] && notify-send "Nao foi possivel sincronizar ${repos[$i]} com o servidor!" 
                 # && exit 1 \
                                       # || notify-send "Repositorios ${repos[$i]} atualizado com o servidor!"
 
