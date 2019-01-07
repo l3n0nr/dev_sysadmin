@@ -16,8 +16,8 @@
 #################################################################################
 #
 ###################################################
-# versão do script:              0.0.70.0.0.0     #
-# # ultima ediçao realizada:      [07/06/18]      #
+# versão do script:              0.0.72.0.0.0     #
+# # ultima ediçao realizada:      [06/01/19]      #
 ###################################################
 #
 # legenda: a.b.c.d.e.f
@@ -117,7 +117,8 @@ filmes_assistidos()
 filmes_pendentes()
 {
     #criando variaveis
-    caminhofilmes_a_origem="/media/lenonr/BACKUP/Arquivos/Filmes"
+    # caminhofilmes_a_origem="/media/lenonr/BACKUP/Arquivos/Filmes"
+    caminhofilmes_a_origem="/home/lenonr/Downloads/Torrents/Finalized/Movies"
     
     caminhofilmes_a_destino="/home/lenonr/MEGA/Outros/Lista/Filmes_Pendentes.txt"
     caminhofilmes_a_destinohd="/media/lenonr/BACKUP/Arquivos/Filmes/Filmes_Pendentes.txt"    
@@ -171,7 +172,7 @@ if [ -e "$LOCAL_DESTINO" ]; then
     if [[ ! -e $var_tree ]]; then
         echo "[-] Tree não está instalado"
     else
-        filmes
+        # filmes
         filmes_assistidos
         filmes_pendentes
         seriados
