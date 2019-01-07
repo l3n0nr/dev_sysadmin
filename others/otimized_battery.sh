@@ -10,7 +10,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[20/06/18]       #
-# Last modification script: 		[08/10/18]       #
+# Last modification script: 		[07/01/19]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # DESCRICAO DO SCRIPT:
@@ -18,11 +18,11 @@
 # 	- Desliga/Liga nucleos extras(1-2-3) 
 # 		Nucleo 0 sempre ligado - CUIDADO, nunca desliga-lo!!
 # 	- Desliga/Liga Wifi
-# 	- Reduz/Aumenta o brilho
+# 	- Reduz/Aumenta o brilho automaticamente
 #
 ## variaveis do script
 	# versao do script
-	versao="0.42"
+	versao="0.50"
 
 	# nome da maquina
 	hostname=$(echo $HOSTNAME)
