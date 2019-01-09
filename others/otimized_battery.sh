@@ -22,7 +22,7 @@
 #
 ## variaveis do script
 	# versao do script
-	versao="0.50"
+	versao="0.51"
 
 	# nome da maquina
 	hostname=$(echo $HOSTNAME)
@@ -52,8 +52,9 @@ f_ativa()
 	if [[ $modo == "OFF" ]]; then		
 		## processador
 		echo "| ======================================================= |"
-		echo "| Desativando nucleo do processador 1,2,3 respectivamente |"
-		echo 0 >> /sys/devices/system/cpu/cpu1/online
+		# echo "| Desativando nucleo do processador 1,2,3 respectivamente |"
+		echo "| Desativando nucleo do processador 2,3 respectivamente |"
+		# echo 0 >> /sys/devices/system/cpu/cpu1/online
 		echo 0 >> /sys/devices/system/cpu/cpu2/online
 		echo 0 >> /sys/devices/system/cpu/cpu3/online       
 		echo "| ======================================================= |"		
