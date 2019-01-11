@@ -10,15 +10,15 @@
 ###########################
 #
 # variaveis
-mem_liv=$(($(free -t | awk '/Total:/ {print $4}') / 1024))
+mem_liv=$(($(free -t | awk '/Mem:/ {print $6}') / 1024))
 mem_lim="500"
 #
 verifica()
 {
-	if [[ $mem_liv > $mem_lim ]]; then
-		notify-send "Aparentemente esta lento, $USER?"
+	if [[ "$mem_lim" -ge "$mem_liv" ]]; then
+		notify-send "Aparentemente esta lento, apenas $mem_liv MB livre!"
 	else
-		notify-send "Normal, $USER!"
+		notify-send "Normal, $mem_liv MB $USER!"
 	fi
 }
 
