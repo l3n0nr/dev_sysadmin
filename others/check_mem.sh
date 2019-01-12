@@ -25,7 +25,7 @@ mem_lim="1000"
 verifica()
 {
 	if [[ "$mem_lim" -ge "$mem_liv" ]]; then
-		notify-send "Aparentemente esta lento, apenas $mem_liv MB livre!" -t 10000
+		notify-send -t 10000 "Aparentemente esta lento, apenas $mem_liv MB livre!"
 	# else
 	# 	notify-send "Normal, $mem_liv MB $USER!"
 	fi

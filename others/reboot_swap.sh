@@ -110,7 +110,7 @@ porcentagem()
 						
 	# realizando teste
 	if [[ $memoria_livre > $memoria_taxa ]]; then
-		notify-send "Reiniciando a SWAP!" -t 10000	
+		notify-send -t 10000 "Reiniciando a SWAP!"
 		limpa
 	else
 		printf "FAILED - " >> $local && date >> $local
