@@ -39,9 +39,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.1.100.0.0.0]    #
+# # versão do script:           [0.1.102.0.0.0]    #
 # # data de criação do script:    [03/11/17]      #
-# # ultima ediçao realizada:      [04/01/19]      #
+# # ultima ediçao realizada:      [11/01/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # Legenda: a.b.c.d.e.f
@@ -76,15 +76,13 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
-
-# limpando tela
 clear
 
+export DISPLAY=":0.0"
 local="/tmp/clear_memory.txt"
 
 # realizando verificação de sudo
-if [[ `id -u` -ne 0 ]]; then
-    clear        
+if [[ `id -u` -ne 0 ]]; then       
     printf "############################################################################ \n"
     printf "[!] O script para funcionar, precisa estar sendo executado como root! \n"
     printf "[!] Favor, logar na conta root e executar o script novamente. \n"
@@ -111,7 +109,8 @@ porcentagem()
 	swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
 						
 	# realizando teste
-	if [[ $memoria_livre > $memoria_taxa ]]; then		
+	if [[ $memoria_livre > $memoria_taxa ]]; then
+		notify-send "Reiniciando a SWAP!" -t 10000	
 		limpa
 	else
 		printf "FAILED - " >> $local && date >> $local
