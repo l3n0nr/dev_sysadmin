@@ -6,7 +6,7 @@
 #
 # DATA_CRIACAO: 09/01/19
 # ULT_MODIFIC:  12/01/19
-# VERSAO: 		0.46
+# VERSAO: 		0.50
 # AUTOR:		lenonr
 ###########################
 #
@@ -20,9 +20,9 @@ mem_lim="1000"
 verifica()
 {
 	if [[ "$mem_liv" -le "$mem_lim" ]]; then
-		notify-send -t 10000 "Aparentemente esta lento, apenas $mem_liv MB livre!"
+		notify-send -t 10000 "Computador lento, apenas $mem_liv MB livres!"
 	elif [[ "$mem_war" -ge "$mem_liv" ]]; then
-		notify-send -t 10000 "Memoria em atençao $mem_liv MB!"
+		notify-send -t 10000 "Computador começando a ficar lento, apenas $mem_liv MB livres!"
 	else
 		# notify-send -t 10000 "Memoria normal!"
 		echo ""
