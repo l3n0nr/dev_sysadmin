@@ -5,8 +5,8 @@
 #	Verifica memoria total e envia mensagem para usuario
 #
 # DATA_CRIACAO: 09/01/19
-# ULT_MODIFIC:  12/01/19
-# VERSAO: 		0.50
+# ULT_MODIFIC:  13/01/19
+# VERSAO: 		0.52
 # AUTOR:		lenonr
 ###########################
 #
@@ -14,8 +14,8 @@ export DISPLAY=":0.0"
 
 # variaveis
 mem_liv="$(($(free -t | awk '/Total:/ {print $4}') / 1024))"
-mem_war="1500"
-mem_lim="1000"
+mem_war="2048"
+mem_lim="1024"
 
 verifica()
 {
