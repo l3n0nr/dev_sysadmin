@@ -39,9 +39,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.1.102.0.0.0]    #
+# # versão do script:           [0.1.103.0.0.0]    #
 # # data de criação do script:    [03/11/17]      #
-# # ultima ediçao realizada:      [11/01/19]      #
+# # ultima ediçao realizada:      [13/01/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # Legenda: a.b.c.d.e.f
@@ -76,9 +76,8 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
-clear
-
 export DISPLAY=":0.0"
+
 local="/tmp/clear_memory.txt"
 
 # realizando verificação de sudo
@@ -109,8 +108,8 @@ porcentagem()
 	swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
 						
 	# realizando teste
-	if [[ $memoria_livre > $memoria_taxa ]]; then
-		notify-send -t 10000 "Reiniciando a SWAP!"
+	if [[ $memoria_livre > $memoria_taxa ]]; then		
+		notify-send -t 10000 "Reiniciando a memoria SWAP!"
 		limpa
 	else
 		printf "FAILED - " >> $local && date >> $local
