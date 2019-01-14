@@ -6,7 +6,7 @@
 #
 # DATA_CRIACAO: 09/01/19
 # ULT_MODIFIC:  14/01/19
-# VERSAO: 		0.70
+# VERSAO: 		0.80
 # AUTOR:		lenonr
 ###########################
 #
@@ -31,26 +31,27 @@ verifica()
 
 check()
 {
-	taxa_warn="40"
-	taxa_lim="25"
+	taxa_warn="35"
+	taxa_urg="20"
 
 	mem_total="$(($(free -t | awk '/Total:/ {print $2}') / 1024))"
 	mem_liv="$(($(free -t | awk '/Total:/ {print $4}') / 1024))"
 	mem_tax="$((($mem_liv * 100) / $mem_total))"
 
-	if [[ $mem_tax -le $taxa_warn ]]; then
+	if [[ $taxa_warn -ge $mem_tax ]]; then
 		notify-send -t 10000 "Computador começando a ficar lento, apenas $mem_liv MB livres!"
-	elif [[ $mem_tax -le $taxa_lim ]]; then
-		notify-send -t 10000 "Computador lento, apenas $mem_liv MB livres!"
+	elif [[ $mem_tax -le $taxa_urg ]]; then
+		notify-send -t 10000 "Computador lento, apenas $mem_liv MB livres!"	
 	else
-		# notify-send -t 10000 "Normal! $mem_liv MB livres!"
-		echo "Memoria disponivel:" $mem_tax "%"
-	fi
-
+		# notify-send -t 10000 "Memoria normal! $mem_tax% de memoria disponiveis."	
+		echo ""
+	fi		
 }
 
 main()
 {
+	clear
+
 	# verifica
 	check
 }
