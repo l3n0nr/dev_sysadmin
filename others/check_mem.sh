@@ -6,7 +6,7 @@
 #
 # DATA_CRIACAO: 09/01/19
 # ULT_MODIFIC:  14/01/19
-# VERSAO: 		0.80
+# VERSAO: 		0.82
 # AUTOR:		lenonr
 ###########################
 #
@@ -39,9 +39,10 @@ check()
 	mem_tax="$((($mem_liv * 100) / $mem_total))"
 
 	if [[ $taxa_warn -ge $mem_tax ]]; then
-		notify-send -t 10000 "Computador começando a ficar lento, apenas $mem_liv MB livres!"
+		# notify-send -t 10000 "Computador começando a ficar lento, apenas $mem_liv MB livres!"
+		notify-send -t 10000 "Ei, apenas $mem_tax% de memoria livre!"
 	elif [[ $mem_tax -le $taxa_urg ]]; then
-		notify-send -t 10000 "Computador lento, apenas $mem_liv MB livres!"	
+		notify-send -t 10000 "Atencao, apenas $mem_tax% de memoria livre!"	
 	else
 		# notify-send -t 10000 "Memoria normal! $mem_tax% de memoria disponiveis."	
 		echo ""
