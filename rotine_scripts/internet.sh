@@ -9,12 +9,12 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [28/03/18]      #
-# # ultima ediçao realizada:      [04/04/18]      #
+# # ultima ediçao realizada:      [17/01/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 #
 # variaveis de ambiente
-servidor="google.com"						# servidor para teste
+servidor="duckduckgo.com"						# servidor para teste
 # tempo=300s									# tempo de intervalo do teste(segundos) - 5 minutos
 # tempo_DATE="300 seconds"
 
