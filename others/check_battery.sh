@@ -42,7 +42,7 @@ check()
 	if [[ $current_now -le $med_res ]] ; then
 		# consuming_level="LOW"
 		consuming_level="[+++------]"
-	elif [[ $current_now -gt $med_res ]] && [[ $current_now -lt $hig_res ]] ; then
+	elif [[ $current_now -gt $med_res ]] || [[ $current_now -lt $hig_res ]] ; then
 		# consuming_level="MEDIUM"
 		consuming_level="[++++++---]"
 	elif [[ $current_now -ge $high_res ]] ; then
@@ -62,6 +62,9 @@ check()
 		else
 			echo "Time rest:" $(date -d $date_rest +%kh:%Mm) "/" $perc_batery "%"				
 		fi
+
+		echo "		$date_rest"
+		echo "		$battery_full | $current_now"
 
 		echo "Current battery now:" $current_now "mA"		
 		echo "Consuming level energy:" $consuming_level
