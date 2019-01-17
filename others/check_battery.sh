@@ -55,15 +55,17 @@ check()
 	echo "############################################"
 
 	if [[ $status == "Discharging" ]]; then						
-		# echo "Verified in:" $(date +%kh:%mm:%Ss)
-		# echo "########################"
 		echo "Status battery:" $status	
-		echo "Time rest:" $(date -d $date_rest +%kh:%Mm) "/" $perc_batery "%"			
+
+		if [[ $date_rest < "101" ]]; then
+			echo "Time rest:" $(date -d $date_rest +%Mm) "/" $perc_batery "%"			
+		else
+			echo "Time rest:" $(date -d $date_rest +%kh:%Mm) "/" $perc_batery "%"				
+		fi
+
 		echo "Current battery now:" $current_now "mA"		
 		echo "Consuming level energy:" $consuming_level
 	elif [[ $status == "Charging" ]]; then				
-		# echo "Verified in:" $(date +%kh:%mm:%Ss)
-		# echo "########################"
 		echo "Status battery:" $status	
 		echo "Percent to full:" $(((100 - $perc_batery))) "%"
 		echo "Current battery now:" $current_now "mA"		
