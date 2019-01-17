@@ -7,7 +7,7 @@
 #
 # DAT_CRIAC	:	07/01/19
 # LAST_MOD	:	17/01/19
-# VERSAO	:	0.50
+# VERSAO	:	0.55
 # AUTOR 	:	lenonr
 #
 ########################
@@ -40,13 +40,16 @@ check()
 	date_rest="$battery_res"
 
 	if [[ $current_now -le $med_res ]] ; then
-		consuming_level="LOW"
+		# consuming_level="LOW"
+		consuming_level="[+++------]"
 	elif [[ $current_now -gt $med_res ]] && [[ $current_now -lt $hig_res ]] ; then
-		consuming_level="MEDIUM"
+		# consuming_level="MEDIUM"
+		consuming_level="[++++++---]"
 	elif [[ $current_now -ge $high_res ]] ; then
-		consuming_level="HIGH"
+		# consuming_level="HIGH"
+		consuming_level="[+++++++++]"
 	else
-		consuming_level="ERROR"
+		consuming_level="[*********]"
 	fi
 
 	echo "############################################"
