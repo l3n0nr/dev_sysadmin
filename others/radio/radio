@@ -1,0 +1,8 @@
+STREAM=(
+	["Mission Control"]="http://ice1.somafm.com/missioncontrol-128-aac"
+	["Space Station"]="http://ice1.somafm.com/spacestation-128-aac"
+	["Deep Space One"]="http://ice1.somafm.com/deepspaceone-128-aac"
+	["Sonic Universe"]="http://ice1.somafm.com/sonicuniverse-128-aac"
+	["Indie Pop"]="http://ice1.somafm.com/indiepop-128-aac"
+	["Cafe Brasil"]="http://www.portalcafebrasil.com.br/radio/"		
+)	
