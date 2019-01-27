@@ -10,6 +10,7 @@
 #
 # DATA_CRIACAO: 26/01/19
 # ULT_MODIFIC:  27/01/19
+# VERSAO:		0.30
 #
 verifica_internet()
 {
@@ -23,7 +24,9 @@ radio()
 {
 	declare -A STREAM
 	
-	source radio
+	local="/home/lenonr/Github/dev_sysadmin/others/radio"
+
+	source $local/radio.conf
 
 	PS3=$'\nSelecione uma radio:'
 	select radio in "${!STREAM[@]}"; do
@@ -37,7 +40,7 @@ radio()
 main()
 {
 	clear
-	# verifica_internet
+	verifica_internet
 	radio
 }
 
