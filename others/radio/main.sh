@@ -10,10 +10,11 @@
 #
 # DATA_CRIACAO: 26/01/19
 # ULT_MODIFIC:  27/01/19
-# VERSAO:		0.30
+# VERSAO:		0.35
 #
 verifica_internet()
 {
+	echo "Verificando conexao, aguarde..."
 	ping_server="www.google.com"
 	
   	ping -c1 $ping_server >> /dev/null
