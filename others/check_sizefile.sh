@@ -18,7 +18,7 @@ main()
 	if [[ $1 == "" ]]; then
 		clear
 		printf "Necessita de um local para verificar\n" 
-		printf "Exemplo: '$0 /home'\n"
+		printf "Exemplo: '$0 /home 10'\n"
 	else
 		if [[ $2 == "" ]]; then
 			tamanho="10"
