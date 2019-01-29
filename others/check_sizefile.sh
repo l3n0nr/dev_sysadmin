@@ -3,12 +3,9 @@
 ## DESCRICAO
 # Verifica tamanho arquivos discos
 
-## DATA
-# Criacao: 13/08/18
-# Ultim. Mod: 13/08/18
-
-## VARIAVEIS
-tamanho="10"
+## DATA SCRIPT
+# CRIACAO: 13/08/18
+# ULT_MOD: 29/01/19
 
 ## FUNCOES
 check_file()
@@ -23,10 +20,17 @@ main()
 		printf "Necessita de um local para verificar\n" 
 		printf "Exemplo: '$0 /home'\n"
 	else
+		if [[ $2 == "" ]]; then
+			tamanho="10"
+		else
+			tamanho="$2"
+		fi
+
 		clear
-		check_file $1
+
+		check_file $1 $2
 	fi	
 }
 
 ## CHAMANDO SCRIPT
-main $1
+main $1 $2
