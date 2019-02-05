@@ -25,11 +25,11 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [19/06/18]      #             
-# # ultima ediçao realizada:      [18/10/18]      #
+# # ultima ediçao realizada:      [05/02/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # versao do script
-    VERSAO="0.0.15.0.0.0"    
+    VERSAO="0.0.20.0.0.0"    
 
 # pasta do usuario
     local_home=$HOME
@@ -71,7 +71,7 @@
 f_envia()
 {	
 	cd $local_home
-	printf "[*] Enviando arquivo $local_home$arquivo para $git$arquivo\n" 
+	printf "[*] Enviando arquivo $local_home$arquivo para $git/$arquivo\n" 
 	cat .zshrc > $git/$arquivo
 	printf "[+] Backup realizado! \n"
 }
@@ -79,7 +79,7 @@ f_envia()
 f_restaura()
 {
 	cd $git
-	printf "[*] Restaurando arquivo $git$arquivo para $local_home$arquivo\n" 
+	printf "[*] Restaurando arquivo $git$arquivo para $local_home/$arquivo\n" 
 	cat .zshrc > $local_home/$arquivo
 	printf "[+] Backup realizado! \n"
 }
@@ -89,7 +89,7 @@ f_verifica()
 	if [[ $# -eq 0 ]]; then
 		printf "Digite como parametros " 
 		printf "\n- envia(de $local_home$arquivo para $git$arquivo) ou "
-		printf "\n- restaura(de $git$arquivo para $local_home$arquivo)"
+		printf "\n- restaura(de $git$arquivo para $local_home/$arquivo)"
 		
 		echo; echo
 	fi
