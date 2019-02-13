@@ -68,6 +68,12 @@ instalacao_sistema()
 	echo "Sistema instalado em $install_system"
 }
 
+commits()
+{
+	echo $commits
+}
+
+################################################
 completo()
 {
 	neofetch_sistema
