@@ -123,6 +123,8 @@ check_git()
 				# add  
 			  	let repo_founds++		
 
+			  	commits=$(echo "Commits $repo_founds")
+
 			  	printf "\n" >> /tmp/repo.txt  	
 			else
 				date >> /tmp/repo.txt
