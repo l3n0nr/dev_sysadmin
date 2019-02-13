@@ -22,9 +22,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.45]       #
+# # versão do script:              [0.0.50]       #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [09/01/19]      #
+# # ultima ediçao realizada:      [13/02/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -49,37 +49,64 @@ sistema=$(hostname)
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 neofetch_sistema()
 {
-	neofetch
+	# neofetch
+
+	neofetch --cpu_temp 'on' --memory_display bar --color_blocks off --cpu_cores 'physical'
 }
 
 memoria_utilizada()
 {
-    free -hmt ; echo
+    # free -hmt ; echo
+
+    echo "- Memoria livre total: $(free -ht | awk '/Total:/ {print $4}')" ; echo
 }
 
 disco()
 {
-	df -h / ; echo
-	df -h /home ; echo
+	# df -h / ; echo
+	# df -h /home ; echo
+
+	echo "- Uso da raiz do usuario root: $(df -h / | awk '/dev/sda1 {print $5}' | tail -1)" ; echo 
+
+	echo "- Uso da raiz do usuario $(whoami): $(df -h /home | awk '/dev/sda1 {print $5}' | tail -1)" ; echo 
 }
 
 instalacao_sistema()
 {
-	echo "Sistema instalado em $install_system"
+	echo "- Sistema instalado em $install_system"
 }
 
 commits()
 {
-	echo $commits
+	# export COMMITS
+	
+	if [[ $COMMITS = "" ]]; then
+		echo "- ERROR"
+	elif [[ $COMMITS = "0" ]]; then
+		echo "- Voce nao possui commits pendentes!"
+	else
+		echo "- Voce possui $COMMITS commits, pendentes!"	
+	fi
+
+	echo
+}
+
+relatorio()
+{
+	echo "######### RELATORIO DO SISTEMA #########"
+	memoria_utilizada
+	disco
+	commits
+	instalacao_sistema	
+	echo "########################################"
 }
 
 ################################################
 completo()
-{
-	neofetch_sistema
-	memoria_utilizada
-	disco
-	instalacao_sistema	
+{	
+	neofetch_sistema	
+	relatorio
+	echo
 }
 
 echo_p()
