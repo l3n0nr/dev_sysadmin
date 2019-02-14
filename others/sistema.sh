@@ -22,7 +22,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.70]       #
+# # versão do script:              [0.0.75]       #
 # # data de criação do script:    [23/10/17]      #
 # # ultima ediçao realizada:      [13/02/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -85,12 +85,11 @@ commits()
 	if [[ $commits = "" ]]; then
 		echo "- ERROR"
 	elif [[ $commits = "0" ]]; then
-		echo "- Voce nao possui commits pendentes!"
+		echo "- Voce nao possui repositorios pendentes!"
 	elif [[ $commits = "1" ]]; then
-		echo "- Voce possui 1 commit pendente!"
-		# echo -e "\e[0;91m- Voce possui 1 commit pendente!"
+		echo "- Voce possui 1 repositorio pendente para comitar!"
 	else
-		echo "- Voce possui $commits commits, pendentes!"	
+		echo "- Voce possui $commits repositorios pendentes para comitar!"	
 	fi
 
 	echo
