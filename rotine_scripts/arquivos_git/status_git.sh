@@ -132,14 +132,14 @@ check_git()
 				# repo_notfounds=$(($repo_notfounds + 1));        
 				let repo_notfounds++
 			fi
+
+		if [[ $contador == "0" ]]; then
+			notify-send "Nada para comitar, por enquanto! :)"
+		else
+			echo $contador > /tmp/commits
 		fi		
 
-	if [[ $contador == "0" ]]; then
-		notify-send "Nada para comitar, por enquanto! :)"
-	else
-		echo $contador > /tmp/commits
-	fi		
-
+		fi			
 	done	
 }
 

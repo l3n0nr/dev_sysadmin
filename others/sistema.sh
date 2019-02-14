@@ -117,9 +117,10 @@ check_commit()
 {
 	if [[ ! -e "/tmp/commits"  ]]; then
 		touch /tmp/commits
-		echo "0" > /tmp/commits
-		source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/status_git.sh >> /dev/null 
+		echo "0" > /tmp/commits		
 	fi		
+
+	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/status_git.sh >> /dev/null 
 }
 
 ################################################
