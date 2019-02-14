@@ -118,8 +118,6 @@ check_git()
 						notify-send "Voce precisa comitar, ${repos[$i]}!"
 
 						let contador++
-
-						# let commit++
 					fi																
 			  	fi				
 				
@@ -138,8 +136,6 @@ check_git()
 
 	if [[ $contador == "0" ]]; then
 		notify-send "Nada para comitar, por enquanto! :)"
-
-		echo $contador > /tmp/commits
 	else
 		echo $contador > /tmp/commits
 	fi		
