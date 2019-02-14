@@ -87,9 +87,9 @@ commits()
 	elif [[ $commits = "0" ]]; then
 		echo "- Voce nao possui repositorios pendentes!"
 	elif [[ $commits = "1" ]]; then
-		echo "- Voce possui 1 repositorio pendente para comitar!"
+		echo "- Voce possui 1 repositorio pendente!"
 	else
-		echo "- Voce possui $commits repositorios pendentes para comitar!"	
+		echo "- Voce possui $commits repositorios pendentes!"	
 	fi
 
 	echo
