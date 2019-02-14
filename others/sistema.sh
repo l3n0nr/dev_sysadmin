@@ -22,9 +22,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.75]       #
+# # versão do script:              [0.0.80]       #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [13/02/19]      #
+# # ultima ediçao realizada:      [14/02/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -118,6 +118,8 @@ check_commit()
 		touch /tmp/commits
 		echo "0" > /tmp/commits		
 	fi		
+
+	echo "0" > /tmp/commits
 
 	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/status_git.sh >> /dev/null 
 }
