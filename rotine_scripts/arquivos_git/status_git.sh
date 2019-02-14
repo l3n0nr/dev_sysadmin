@@ -18,13 +18,12 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[08/04/18]       #
-# Last modification script: 		[12/12/18]       #
+# Last modification script: 		[13/02/19]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
-COMMITS="0"
-export COMMITS
 source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/git.conf
+
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                             #
@@ -34,8 +33,6 @@ source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/git.conf
 #
 # verificando se existem repositorios modificados
 contador=0
-
-# export COMMITS
 
 ## chamando funcao
 status_git()
@@ -123,13 +120,11 @@ check_git()
 						let contador++
 
 						# let commit++
-					fi														
+					fi																
 			  	fi				
 				
 				# add  
 			  	let repo_founds++		
-
-			  	# COMMITS=$(let $contador++)
 
 			  	printf "\n" >> /tmp/repo.txt  	
 			else
@@ -140,15 +135,16 @@ check_git()
 				let repo_notfounds++
 			fi
 		fi		
-	done
 
 	if [[ $contador == "0" ]]; then
 		notify-send "Nada para comitar, por enquanto! :)"
 
-		export COMMITS='0'
+		echo $contador > /tmp/commits
 	else
-		export COMMITS=$contador
-	fi
+		echo $contador > /tmp/commits
+	fi		
+
+	done	
 }
 
 push_auto()

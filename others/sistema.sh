@@ -22,7 +22,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.50]       #
+# # versão do script:              [0.0.70]       #
 # # data de criação do script:    [23/10/17]      #
 # # ultima ediçao realizada:      [13/02/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -51,14 +51,16 @@ neofetch_sistema()
 {
 	# neofetch
 
-	neofetch --cpu_temp 'on' --memory_display bar --color_blocks off --cpu_cores 'physical'
+	neofetch --disable terminal resolution memory --color_blocks off --distro_shorthand 'tiny' --gtk3 off
+	echo
+
 }
 
 memoria_utilizada()
 {
     # free -hmt ; echo
 
-    echo "- Memoria livre total: $(free -ht | awk '/Total:/ {print $4}')" ; echo
+    echo "- Memoria RAM livre: $(free -h | awk '/Mem/ {print $4}')" ; echo
 }
 
 disco()
@@ -78,35 +80,62 @@ instalacao_sistema()
 
 commits()
 {
-	# export COMMITS
-	
-	if [[ $COMMITS = "" ]]; then
+	commits=$(cat /tmp/commits)
+
+	if [[ $commits = "" ]]; then
 		echo "- ERROR"
-	elif [[ $COMMITS = "0" ]]; then
+	elif [[ $commits = "0" ]]; then
 		echo "- Voce nao possui commits pendentes!"
+	elif [[ $commits = "1" ]]; then
+		echo "- Voce possui 1 commit pendente!"
+		# echo -e "\e[0;91m- Voce possui 1 commit pendente!"
 	else
-		echo "- Voce possui $COMMITS commits, pendentes!"	
+		echo "- Voce possui $commits commits, pendentes!"	
 	fi
 
 	echo
 }
 
-relatorio()
+report()
 {
-	echo "######### RELATORIO DO SISTEMA #########"
+	if [[ $sistema = "notebook" ]]; then
+		# echo "##########################################################################"
+		echo "############################# SYSTEM REPORT ##############################"
+	else
+		# echo "###############################################################################"
+		echo "################################ SYSTEM REPORT ################################"
+	fi
+	echo
 	memoria_utilizada
 	disco
 	commits
-	instalacao_sistema	
-	echo "########################################"
+	instalacao_sistema
+	echo	
+}
+
+check_commit()
+{
+	if [[ ! -e "/tmp/commits"  ]]; then
+		touch /tmp/commits
+		echo "0" > /tmp/commits
+	fi	
+
+	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/status_git.sh >> /dev/null 
 }
 
 ################################################
 completo()
 {	
+	if [[ $sistema = "notebook" ]]; then
+		echo "################################ NEOFETCH ################################"
+		echo
+	else
+		echo "################################### NEOFETCH ##################################"
+		echo
+	fi
+
 	neofetch_sistema	
-	relatorio
-	echo
+	report
 }
 
 echo_p()
@@ -122,7 +151,9 @@ main()
 {	
 	clear 
 
-	echo_p
+	check_commit
+
+	# echo_p		
 
 	if [[ $1 == "" ]]; then
 		echo "Parametros disponiveis:"
@@ -130,6 +161,7 @@ main()
 		echo "-d: disco"
 		echo "-m: memoria utilizada"	
 		echo "-i: visualiza data que o sistema foi instalado"	
+		echo "-r: report do sistema"
 		echo "-a: completo"
 	elif [[ $1 == "-a" ]]; then
 		completo
@@ -141,6 +173,8 @@ main()
 		memoria_utilizada
 	elif [[ $1 == "-i" ]]; then
 		instalacao_sistema
+	elif [[ $1 == "-r" ]]; then
+		report
 	elif [[ $sistema == "notebook" ]]; then		
 		neofetch_sistema
 	else
