@@ -22,7 +22,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.80]       #
+# # versão do script:              [0.0.81]       #
 # # data de criação do script:    [23/10/17]      #
 # # ultima ediçao realizada:      [14/02/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -51,7 +51,7 @@ neofetch_sistema()
 {
 	# neofetch
 
-	neofetch --disable terminal resolution memory --color_blocks off --distro_shorthand 'tiny' --gtk3 off
+	neofetch --disable terminal resolution --color_blocks off --distro_shorthand 'tiny' --gtk3 off
 	echo
 
 }
