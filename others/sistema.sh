@@ -22,9 +22,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.81]       #
+# # versão do script:              [0.0.83]       #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [14/02/19]      #
+# # ultima ediçao realizada:      [15/02/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -51,7 +51,7 @@ neofetch_sistema()
 {
 	# neofetch
 
-	neofetch --disable terminal resolution --color_blocks off --distro_shorthand 'tiny' --gtk3 off
+	neofetch --disable terminal resolution memory --color_blocks off --distro_shorthand 'tiny' --gtk3 off
 	echo
 
 }
@@ -60,7 +60,7 @@ memoria_utilizada()
 {
     # free -hmt ; echo
 
-    echo "- Memoria RAM livre: $(free -h | awk '/Mem/ {print $4}')" ; echo
+    echo "- Memoria RAM livre: $(free -h | awk '/Mem/ {print $4}') / $(free -h | awk '/Mem/ {print $2}')." ; echo
 }
 
 disco()
@@ -68,9 +68,9 @@ disco()
 	# df -h / ; echo
 	# df -h /home ; echo
 
-	echo "- Uso da raiz do usuario root: $(df -h / | awk '/dev/sda1 {print $5}' | tail -1)" ; echo 
+	echo "- Uso da raiz do usuario root: $(df -h / | awk '/dev/sda1 {print $5}' | tail -1) / 100%." ; echo 
 
-	echo "- Uso da raiz do usuario $(whoami): $(df -h /home | awk '/dev/sda1 {print $5}' | tail -1)" ; echo 
+	echo "- Uso da raiz do usuario $(whoami): $(df -h /home | awk '/dev/sda1 {print $5}' | tail -1) / 100%." ; echo 
 }
 
 instalacao_sistema()
