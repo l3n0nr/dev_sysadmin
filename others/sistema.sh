@@ -22,9 +22,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.83]       #
+# # versão do script:              [0.0.90]       #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [15/02/19]      #
+# # ultima ediçao realizada:      [16/02/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -49,25 +49,16 @@ sistema=$(hostname)
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 neofetch_sistema()
 {
-	# neofetch
-
-	neofetch --disable terminal resolution memory --color_blocks off --distro_shorthand 'tiny' --gtk3 off
-	echo
-
+	neofetch --disable terminal resolution memory --color_blocks off --distro_shorthand 'tiny' --gtk3 off ; echo
 }
 
 memoria_utilizada()
 {
-    # free -hmt ; echo
-
     echo "- Memoria RAM livre: $(free -h | awk '/Mem/ {print $4}') / $(free -h | awk '/Mem/ {print $2}')." ; echo
 }
 
 disco()
 {
-	# df -h / ; echo
-	# df -h /home ; echo
-
 	echo "- Uso da raiz do usuario root: $(df -h / | awk '/dev/sda1 {print $5}' | tail -1) / 100%." ; echo 
 
 	echo "- Uso da raiz do usuario $(whoami): $(df -h /home | awk '/dev/sda1 {print $5}' | tail -1) / 100%." ; echo 
@@ -149,36 +140,9 @@ echo_p()
 main()
 {	
 	clear 
-
+	
 	check_commit
-
-	# echo_p		
-
-	if [[ $1 == "" ]]; then
-		echo "Parametros disponiveis:"
-		echo "-n: neofetch"
-		echo "-d: disco"
-		echo "-m: memoria utilizada"	
-		echo "-i: visualiza data que o sistema foi instalado"	
-		echo "-r: report do sistema"
-		echo "-a: completo"
-	elif [[ $1 == "-a" ]]; then
-		completo
-	elif [[ $1 == "-n" ]]; then
-		neofetch_sistema
-	elif [[ $1 == "-d" ]]; then
-		disco
-	elif [[ $1 == "-m" ]]; then
-		memoria_utilizada
-	elif [[ $1 == "-i" ]]; then
-		instalacao_sistema
-	elif [[ $1 == "-r" ]]; then
-		report
-	elif [[ $sistema == "notebook" ]]; then		
-		neofetch_sistema
-	else
-		completo
-	fi
+	completo
 	
 	echo_p
 }
