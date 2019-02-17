@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#
-#
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                             #
 #                           CABEÇALHO DO SCRIPT                               #
 #                                                                             #
@@ -18,7 +15,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[08/04/18]       #
-# Last modification script: 		[13/02/19]       #
+# Last modification script: 		[19/02/19]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
@@ -118,7 +115,7 @@ check_git()
 						notify-send "Voce precisa comitar, ${repos[$i]}!"
 
 						let contador++
-					fi																
+					fi
 			  	fi				
 				
 				# add  
@@ -150,37 +147,13 @@ push_auto()
 main()
 {
 	status_git	
-	check_git
-
-	# [[ $@ == "check" ]] && check_git && exit 0
+	check_git $1
 }
 
-main
+main $1
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                               #
 #                           RODAPE DO SCRIPT                                    #
 #                                                                               #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#
-## verificar menu
-# status_git	
-# [[ $@ == "" ]] && status_git && exit 0 ||
-# [[ $@ == "check" ]] && check_git && exit 0 || \
-# # [[ $@ == "push" ]] && push_auto && exit 0 || \
-# echo "nao entendi" && exit 1
-
-### entrando no diretorio que precisa fazer commit
-#
-# busca_cam=$(git status | grep "modified:" | sed -e "s;"modified:";;g")
-# converte_cam=$(echo $busca_cam | sed -e "s;    ;;g")
-# # echo $converte_cam | sed -e "s;.sh;;g"
-# # ls -f $local${repos[$i]}/$converte_cam 
-# # echo $local${repos[$i]}
-# # echo $converte_cam
-# ls $local${repos[$i]}/$converte_cam | sed 's/\,.*\| -.*//'
-# # find $local${repos[$i]}/ -type f -iname $converte_cam
-# exit 1
-# # for i in `cat lista.txt` ; do 
-# # 	find /local/origem -type f -iname $i -exec cp --parents {} /local/destino \; ; 
-# # done
