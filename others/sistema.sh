@@ -21,15 +21,19 @@
 #																				#
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
+## REFERENCIAS
+# https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
+# 	
+#
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.96]       #
+# # versão do script:              [0.0.98]       #
 # # data de criação do script:    [23/10/17]      #
 # # ultima ediçao realizada:      [17/02/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
-## Compativel em
+## COMPATIVEL COM
 #	Debian Stable
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -76,11 +80,11 @@ commits()
 	if [[ $commits = "" ]]; then
 		echo "- ERROR"
 	elif [[ $commits = "0" ]]; then
-		echo "- Voce nao possui repositorios pendentes!"
+		echo "Voce nao possui repositorios pendentes!"
 	elif [[ $commits = "1" ]]; then
-		echo "- Voce possui 1 repositorio pendente!"
+		echo -e "\e[1;34m- Voce possui 1 repositorio pendente! \e[0m"
 	else
-		echo "- Voce possui $commits repositorios pendentes!"	
+		echo -e "\e[1;34m- Voce possui $commits repositorios pendentes! \e[0m"
 	fi
 
 	echo
@@ -110,10 +114,10 @@ check_updates()
 	verifica=$(cat $arquivo_verifica)
 
 	if [[ $verifica != "" ]]; then
-		echo "- Atualizacoes de programas disponiveis!" ; echo
+		echo -e "\e[1;31m- Atualizaçoes disponiveis! \e[0m" ; echo
 	else
-		echo "- Tudo atualizado! :)" ; echo
-	fi
+		echo "Tudo atualizado" ; echo
+	fi	
 }
 
 report()
@@ -175,3 +179,12 @@ main $1
 #                           RODAPE DO SCRIPT                                    #
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+# Black        0;30     Dark Gray     1;30
+	# Red          0;31     Light Red     1;31
+	# Green        0;32     Light Green   1;32
+	# Brown/Orange 0;33     Yellow        1;33
+	# Blue         0;34     Light Blue    1;34
+	# Purple       0;35     Light Purple  1;35
+	# Cyan         0;36     Light Cyan    1;36
+	# Light Gray   0;37     White         1;37
