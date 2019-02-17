@@ -22,9 +22,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.90]       #
+# # versão do script:              [0.0.95]       #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [16/02/19]      #
+# # ultima ediçao realizada:      [17/02/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -49,7 +49,7 @@ sistema=$(hostname)
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 neofetch_sistema()
 {
-	neofetch --disable terminal resolution memory --color_blocks off --distro_shorthand 'tiny' --gtk3 off ; echo
+	neofetch --disable terminal resolution memory --color_blocks off --gtk3 off ; echo
 }
 
 memoria_utilizada()
@@ -96,7 +96,7 @@ report()
 	echo
 	memoria_utilizada
 	disco
-	commits
+	commits	
 	instalacao_sistema
 	echo	
 }
