@@ -22,7 +22,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.95]       #
+# # versão do script:              [0.0.96]       #
 # # data de criação do script:    [23/10/17]      #
 # # ultima ediçao realizada:      [17/02/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -86,6 +86,36 @@ commits()
 	echo
 }
 
+check_commit()
+{
+	if [[ ! -e "/tmp/commits"  ]]; then
+		touch /tmp/commits
+		echo "0" > /tmp/commits		
+	fi		
+
+	echo "0" > /tmp/commits
+
+	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/status_git.sh >> /dev/null 
+}
+
+check_updates()
+{
+	arquivo_verifica="/tmp/checa_atualizacao"
+
+	if [[ ! -e $arquivo_verifica  ]]; then
+		touch $arquivo_verifica
+		echo "" > $arquivo_verifica
+	fi		
+
+	verifica=$(cat $arquivo_verifica)
+
+	if [[ $verifica != "" ]]; then
+		echo "- Atualizacoes de programas disponiveis!" ; echo
+	else
+		echo "- Tudo atualizado! :)" ; echo
+	fi
+}
+
 report()
 {
 	if [[ $sistema = "notebook" ]]; then
@@ -97,20 +127,9 @@ report()
 	memoria_utilizada
 	disco
 	commits	
+	check_updates
 	instalacao_sistema
 	echo	
-}
-
-check_commit()
-{
-	if [[ ! -e "/tmp/commits"  ]]; then
-		touch /tmp/commits
-		echo "0" > /tmp/commits		
-	fi		
-
-	echo "0" > /tmp/commits
-
-	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/status_git.sh >> /dev/null 
 }
 
 ################################################
@@ -142,7 +161,7 @@ main()
 	clear 
 	
 	check_commit
-	completo
+	completo	
 	
 	echo_p
 }
