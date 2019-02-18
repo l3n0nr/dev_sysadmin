@@ -95,7 +95,7 @@ pre_check()
 
 		checa=$(cat /tmp/commits)
 
-    	if [[ $checa != "" ]] || [[ $checa != "0" ]]; then
+    	if [[ $checa != "0" ]]; then
     		# subindo modificacoes
 			notify-send "Subindo modificacoes para o Github!"
 			#
