@@ -87,10 +87,15 @@ pre_check()
     	error_connection="1"
     fi
 
-    if [[ $error_connection = "0" ]]; then
-    	checa=$(cat /tmp/commits)
+    if [[ $error_connection = "0" ]]; then  	
+    	if [[ ! -e "/tmp/commits"  ]]; then
+			touch /tmp/commits
+			echo "0" > /tmp/commits		
+		fi		
 
-    	if [[ $checa != "0" ]]; then
+		checa=$(cat /tmp/commits)
+
+    	if [[ $checa != "" ]] || [[ $checa != "0" ]]; then
     		# subindo modificacoes
 			notify-send "Subindo modificacoes para o Github!"
 			#
