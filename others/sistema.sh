@@ -26,7 +26,7 @@
 # 	
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.99]       #
+# # versão do script:              [0.0.100]      #
 # # data de criação do script:    [23/10/17]      #
 # # ultima ediçao realizada:      [18/02/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -113,8 +113,8 @@ check_updates()
 
 	verifica=$(cat $arquivo_verifica)
 
-	if [[ $verifica != "" ]]; then
-		echo -e "\e[1;31m- Atualizaçoes disponiveis! \e[0m" ; echo
+	if [[ $verifica != "Listing..." ]]; then
+		echo -e "\e[1;31m- Atualizaçoes de programas disponiveis! \e[0m" ; echo
 	else
 		echo "- Tudo atualizado!" ; echo
 	fi	
