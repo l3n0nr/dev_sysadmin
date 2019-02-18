@@ -57,6 +57,8 @@ status_git()
 						git status						
 						echo "#########################################################"							
 
+						notify-send "| ${repos[$i]} - ADD |"
+
 						let contador++						
 					fi				
 
@@ -112,7 +114,7 @@ check_git()
   											
 					# if value = 0, then comparation is true
 					if [[ $? == "0" ]]; then
-						notify-send "Voce precisa comitar, ${repos[$i]}!"
+						notify-send "| ${repos[$i]} - COM |"
 
 						let contador++
 					fi
