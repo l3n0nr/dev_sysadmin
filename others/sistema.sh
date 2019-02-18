@@ -26,9 +26,9 @@
 # 	
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.98]       #
+# # versão do script:              [0.0.99]       #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [17/02/19]      #
+# # ultima ediçao realizada:      [18/02/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -80,7 +80,7 @@ commits()
 	if [[ $commits = "" ]]; then
 		echo "- ERROR"
 	elif [[ $commits = "0" ]]; then
-		echo "Voce nao possui repositorios pendentes!"
+		echo "- Voce nao possui repositorios pendentes!"
 	elif [[ $commits = "1" ]]; then
 		echo -e "\e[1;34m- Voce possui 1 repositorio pendente! \e[0m"
 	else
@@ -116,7 +116,7 @@ check_updates()
 	if [[ $verifica != "" ]]; then
 		echo -e "\e[1;31m- Atualizaçoes disponiveis! \e[0m" ; echo
 	else
-		echo "Tudo atualizado" ; echo
+		echo "- Tudo atualizado!" ; echo
 	fi	
 }
 
