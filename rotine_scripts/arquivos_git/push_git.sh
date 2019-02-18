@@ -88,11 +88,16 @@ pre_check()
     fi
 
     if [[ $error_connection = "0" ]]; then
-    	# subindo modificacoes
-		notify-send "Subindo modificacoes para o Github!"
-		#
-		# chamando funcao
-		push_git	
+    	checa=$(cat /tmp/commits)
+
+    	if [[ $checa != "0" ]]; then
+    		# subindo modificacoes
+			notify-send "Subindo modificacoes para o Github!"
+			#
+			# chamando funcao
+			push_git	
+    	fi
+    	
     fi    
 }
 
