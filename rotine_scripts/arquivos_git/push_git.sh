@@ -11,7 +11,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[30/03/18]       #
-# Last modification script: 		[18/02/19]       #
+# Last modification script: 		[19/02/19]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
@@ -74,12 +74,12 @@ pre_check()
 	clear	
 	
 	# testando a conexao para fazer pull nos repositorios
-	notify-send "Testando conexao com os repositorios, aguarde..."
+	notify-send "Testando conexao, aguarde..."
 	ping -c4 $site >> /dev/null
 
     if [[ $? == 0 ]]; then
     	# atualizando repositorios antes de fazer o push
-    	notify-send "Verificando repositorios, antes de subir modificaçoes! Aguarde..."
+    	notify-send "Verificando atualizaçoes, aguarde..."
 
     	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/pull_git.sh >> /dev/null 
     else
