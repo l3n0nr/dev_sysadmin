@@ -10,7 +10,7 @@
 #
 # DATA_CRIACAO: 26/01/19
 # ULT_MODIFIC:  20/02/19
-# VERSAO:		0.46
+# VERSAO:		0.48
 #
 ###########################################################################
 verifica_internet()
@@ -44,7 +44,7 @@ radio()
 func_verifica()
 {
 	if [[ $? == "1" ]]; then
-		echo "Saindo.."
+		# echo "Saindo.."
 		exit 0
 	else
 		# printf "\nTocando: $escolha.."
@@ -55,8 +55,8 @@ func_verifica()
 radio_dialog()
 {
 	escolha=$(dialog \
-            --stdout --ok-label "Executar" --cancel-label "Cancelar" \
-            --menu "Escolha uma radio?" \
+            --stdout --ok-label "Ouvir" --cancel-label "Sair" \
+            --menu "Escolha uma radio:" \
             0 0 0 \
             "Dronezone" "1" \
             "Space Station" "2" \
