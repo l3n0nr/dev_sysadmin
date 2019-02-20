@@ -10,7 +10,7 @@
 #
 # DATA_CRIACAO: 26/01/19
 # ULT_MODIFIC:  20/02/19
-# VERSAO:		0.45
+# VERSAO:		0.46
 #
 ###########################################################################
 verifica_internet()
@@ -58,13 +58,13 @@ radio_dialog()
             --stdout --ok-label "Executar" --cancel-label "Cancelar" \
             --menu "Escolha uma radio?" \
             0 0 0 \
-            "Dronezone" "0" \
-            "Space Station" "1" \
-            "Deep Space One" "2" \
-            "Mission Control" "3" \
-            "Digitalis" "4" \
-            "Indie Pop" "5" \
-            "DEFCon" "6") ; 
+            "Dronezone" "1" \
+            "Space Station" "2" \
+            "Deep Space One" "3" \
+            "Mission Control" "4" \
+            "Digitalis" "5" \
+            "Indie Pop" "6" \
+            "DEFCon" "7") ; 
 
     func_verifica && func_radio
 }
