@@ -9,9 +9,10 @@
 ##########################################
 #
 # DATA_CRIACAO: 26/01/19
-# ULT_MODIFIC:  29/01/19
-# VERSAO:		0.38
+# ULT_MODIFIC:  20/02/19
+# VERSAO:		0.45
 #
+###########################################################################
 verifica_internet()
 {
 	echo "Verificando conexao, aguarde..."
@@ -40,40 +41,56 @@ radio()
 	done
 }
 
+func_verifica()
+{
+	if [[ $? == "1" ]]; then
+		echo "Saindo.."
+		exit 0
+	else
+		# printf "\nTocando: $escolha.."
+		dialog --infobox "$escolha" 0 0
+	fi
+}
+
 radio_dialog()
 {
+	escolha=$(dialog \
+            --stdout --ok-label "Executar" --cancel-label "Cancelar" \
+            --menu "Escolha uma radio?" \
+            0 0 0 \
+            "Dronezone" "0" \
+            "Space Station" "1" \
+            "Deep Space One" "2" \
+            "Mission Control" "3" \
+            "Digitalis" "4" \
+            "Indie Pop" "5" \
+            "DEFCon" "6") ; 
 
+    func_verifica && func_radio
+}
+
+func_radio()
+{
 	declare -A STREAM
 	
 	local="/home/lenonr/Github/dev_sysadmin/others/radio"
 
 	source $local/radio.conf
-	
-	# for (( i = 0; i <= ${!STREAM[@]}; i++ )); do  
-	# 	name = "${i}"
-	# 	ip   = "${STREAM[$i]}"
-	# done
 
-	# select radio in "${!STREAM[@]}"; do
-		# title="${radio}"
-		# ip="${STREAM[$radio]}"
-		# echo -e "\033[31;1mVoce esta ouvindo: $title (Ctrl+C para sair)\033[m"
-		# ffplay -nodisp $ip &> /dev/null\
-
-		# PS3=$(dialog \
-	 #            --stdout --ok-label "Ouvir" --cancel-label "Cancelar" \
-	 #            --menu "Escolha uma radio:" \
-	 #            0 0 0 \
-	 #            "${radio}" "${STREAM[$radio]}")
-	# done	
+	title="${escolha}"
+	ip="${STREAM[$escolha]}"
+	ffplay -nodisp $ip &> /dev/null
+	radio_dialog
 }
 
+###########################################################################
 main()
 {
 	clear
 	verifica_internet
-	radio
-	# radio_dialog
+	# radio
+	radio_dialog
 }
+###########################################################################
 
 main
