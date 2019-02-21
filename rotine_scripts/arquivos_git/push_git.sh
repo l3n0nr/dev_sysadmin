@@ -11,7 +11,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[30/03/18]       #
-# Last modification script: 		[19/02/19]       #
+# Last modification script: 		[21/02/19]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
@@ -79,7 +79,7 @@ pre_check()
 
     if [[ $? == 0 ]]; then
     	# atualizando repositorios antes de fazer o push
-    	notify-send "Verificando atualizaçoes, aguarde..."
+    	notify-send "Verificando modificacoes, aguarde..."
 
     	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/pull_git.sh >> /dev/null 
     else
