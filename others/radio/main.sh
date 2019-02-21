@@ -61,10 +61,11 @@ radio_dialog()
             "Dronezone" "1" \
             "Space Station" "2" \
             "Deep Space One" "3" \
-            "Mission Control" "4" \
-            "Digitalis" "5" \
-            "Indie Pop" "6" \
-            "DEFCon" "7") ; 
+            "Radio Gaucha" "4" \
+            "Mission Control" "5" \
+            "Digitalis" "6" \
+            "Indie Pop" "7" \
+            "DEFCon" "8") ; 
 
     func_verifica && func_radio
 }
