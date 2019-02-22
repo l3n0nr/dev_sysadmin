@@ -65,7 +65,9 @@ radio_dialog()
             "Mission Control" "5" \
             "Digitalis" "6" \
             "Indie Pop" "7" \
-            "DEFCon" "8") ; 
+            "DEFCon" "8" \
+            "Minuano" "9" \
+            "Nativa" "10" ) ; 
 
     func_verifica && func_radio
 }
