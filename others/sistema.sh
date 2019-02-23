@@ -25,9 +25,9 @@
 # 	<https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.102]      #
+# # versão do script:              [0.0.105]      #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [18/02/19]      #
+# # ultima ediçao realizada:      [22/02/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -115,7 +115,13 @@ check_updates()
 	if [[ $verifica == "" ]] || [[ $verifica == "Listing..." ]]; then
 		echo "- Tudo atualizado!" ; echo
 	else
-		echo -e "\e[1;31m- Atualizaçoes de programas disponiveis! \e[0m" ; echo		
+		conta=$(wc /tmp/checa_atualizacao | awk {'print $1'-1})
+
+		if [[ $conta > 0 ]]; then
+			echo -e "\e[1;31m- $conta atualizaçoes disponiveis! \e[0m" ; echo
+		else
+			echo -e "\e[1;31m- 1 atualizaçao disponivel! \e[0m" ; echo					
+		fi		
 	fi	
 }
 
