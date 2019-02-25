@@ -12,6 +12,9 @@
 #
 ########################
 #
+# LOG REPORT:
+## Check time less "99", error calculate time correct
+#
 # VARIAVEIS
 aguarda="1"
 divisao="0"
@@ -54,7 +57,6 @@ check()
 		consuming_level="[**ERROR**]"
 	fi
 
-
 	## Discharging
 	## Charging
 	## Full
@@ -62,16 +64,15 @@ check()
 	if [[ $status == "Discharging" ]]; then						
 		echo "Status battery:" $status	
 
-		if [[ $date_rest < "100" ]]; then
-			divisao="$(($date_rest * 0.6))"
-			echo "ola" $divisao
-			echo "Time rest:" $(date -d $divisao +%Mm) "/" $perc_batery "%"			
-		else
-			echo "Time rest:" $(date -d $date_rest +%kh:%Mm) "/" $perc_batery "%"				
-		fi
+		# if [[ $date_rest < "100" ]]; then
+		# 	divisao="$(($date_rest * 0.6))"
+		# 	echo "Time rest:" $(date -d $divisao +%Mm) "/" $perc_batery "%"			
+		# else
+		# 	echo "Time rest:" $(date -d $date_rest +%kh:%Mm) "/" $perc_batery "%"				
+		# fi
 
-		# echo "Time rest:" $(date -d $date_rest +%kh:%Mm) "/" $perc_batery "%"
-		echo "		$date_rest"
+		echo "Time rest:" $(date -d $date_rest +%kh:%Mm) "/" $perc_batery "%"
+		# echo "		$date_rest"
 
 		echo "Current battery now:" $current_now "mA"		
 		echo "Level energy:" $consuming_level
