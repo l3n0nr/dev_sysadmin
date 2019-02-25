@@ -97,11 +97,11 @@ commits_add()
 	if [[ $commits_add = "" ]]; then
 		echo "- ERROR"
 	elif [[ $commits_add = "0" ]]; then
-		echo "- 	Voce nao possui repositorios pendentes para adicionar."
+		echo -e "\e[1;32m 	Voce nao possui repositorios pendentes para adicionar. \e[0m"
 	elif [[ $commits_add = "1" ]]; then
 		echo -e "\e[1;34m 	1 repositorio para adicionar. \e[0m"
 	else
-		echo -e "\e[1;34m- 	$commits repositorios pendentes para adicionar. \e[0m"
+		echo -e "\e[1;34m 	$commits repositorios para adicionar. \e[0m"
 	fi
 }
 
@@ -112,7 +112,7 @@ commits_com()
 	if [[ $commits_com = "" ]]; then
 		echo "- ERROR"
 	elif [[ $commits_com = "0" ]]; then
-		echo "- 	Voce nao possui repositorios pendentes para comitar."
+		echo -e "\e[1;32m 	Voce nao possui repositorios pendentes para comitar. \e[0m"
 	elif [[ $commits_com = "1" ]]; then
 		echo -e "\e[1;34m 	1 repositorio para comitar. \e[0m"
 	else
