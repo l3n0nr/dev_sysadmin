@@ -25,9 +25,9 @@
 # 	<https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.105]      #
+# # versão do script:              [0.0.110]      #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [22/02/19]      #
+# # ultima ediçao realizada:      [24/02/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -86,17 +86,61 @@ commits()
 		echo -e "\e[1;34m- Voce possui $commits repositorios pendentes! \e[0m"
 	fi
 
+	commits_add
+	commits_com
+}
+
+commits_add()
+{
+	commits_add=$(cat /tmp/commits_add)
+
+	if [[ $commits_add = "" ]]; then
+		echo "- ERROR"
+	elif [[ $commits_add = "0" ]]; then
+		echo "- 	Voce nao possui repositorios pendentes para adicionar."
+	elif [[ $commits_add = "1" ]]; then
+		echo -e "\e[1;34m 	1 repositorio para adicionar. \e[0m"
+	else
+		echo -e "\e[1;34m- 	$commits repositorios pendentes para adicionar. \e[0m"
+	fi
+}
+
+commits_com()
+{
+	commits_com=$(cat /tmp/commits_com)
+
+	if [[ $commits_com = "" ]]; then
+		echo "- ERROR"
+	elif [[ $commits_com = "0" ]]; then
+		echo "- 	Voce nao possui repositorios pendentes para comitar."
+	elif [[ $commits_com = "1" ]]; then
+		echo -e "\e[1;34m 	1 repositorio para comitar. \e[0m"
+	else
+		echo -e "\e[1;34m- 	$commits repositorios pendentes para comitar. \e[0m"
+	fi
+
 	echo
 }
 
 check_commit()
 {
+	### GERANDO ARQUIVOS ##
 	if [[ ! -e "/tmp/commits"  ]]; then
 		touch /tmp/commits
-		echo "0" > /tmp/commits		
 	fi		
 
+	if [[ ! -e "/tmp/commits_add"  ]]; then
+		touch /tmp/commits_add
+	fi		
+
+	if [[ ! -e "/tmp/commits_com"  ]]; then
+		touch /tmp/commits_com
+	fi		
+
+	## Iniciando valores
 	echo "0" > /tmp/commits
+	echo "0" > /tmp/commits_add
+	echo "0" > /tmp/commits_com
 
 	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/status_git.sh >> /dev/null 
 }
@@ -135,7 +179,7 @@ report()
 	echo
 	memoria_utilizada
 	disco
-	commits	
+	commits		
 	check_updates
 	instalacao_sistema
 	echo	

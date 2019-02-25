@@ -15,7 +15,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[08/04/18]       #
-# Last modification script: 		[19/02/19]       #
+# Last modification script: 		[24/02/19]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
@@ -59,7 +59,11 @@ status_git()
 
 						notify-send "| ${repos[$i]} - ADD |"
 
-						let contador++						
+						let contador++	
+
+						let contador_add++
+
+						echo $contador_add > /tmp/commits_add					
 					fi				
 
 					git status | grep "Untracked files:" > /dev/null
@@ -117,6 +121,10 @@ check_git()
 						notify-send "| ${repos[$i]} - COM |"
 
 						let contador++
+
+						let contador_com++
+
+						echo $contador_com > /tmp/commits_com
 					fi
 			  	fi				
 				
