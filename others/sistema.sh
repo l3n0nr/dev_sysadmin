@@ -112,7 +112,7 @@ commits_com()
 	elif [[ $commits_com = "0" ]]; then
 		echo "	COM: 0."
 	else
-		echo -e "\e[1;34m- 	COM: $commits. \e[0m"
+		echo -e "\e[1;34m 	COM: $commits. \e[0m"
 	fi
 
 	echo
