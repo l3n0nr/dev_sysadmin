@@ -81,9 +81,9 @@ commits()
 	elif [[ $commits = "0" ]]; then
 		echo "- Voce nao possui repositorios pendentes!"
 	elif [[ $commits = "1" ]]; then
-		echo -e "\e[1;31m- Voce possui 1 repositorio pendente! \e[0m"
+		echo -e "\e[1;31m- Voce possui 1 açao pendente no GIT. \e[0m"
 	else
-		echo -e "\e[1;31m- Voce possui $commits repositorios pendentes! \e[0m"
+		echo -e "\e[1;31m- Voce possui $commits açoes pendentes no GIT. \e[0m"
 	fi
 
 	commits_add
