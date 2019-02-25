@@ -25,9 +25,9 @@
 # 	<https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.0.110]      #
+# # versão do script:              [0.111]        #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [24/02/19]      #
+# # ultima ediçao realizada:      [25/02/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -97,11 +97,9 @@ commits_add()
 	if [[ $commits_add = "" ]]; then
 		echo "- ERROR"
 	elif [[ $commits_add = "0" ]]; then
-		echo "	Voce nao possui repositorios pendentes para adicionar."
-	elif [[ $commits_add = "1" ]]; then
-		echo -e "\e[1;34m 	1 repositorio para adicionar. \e[0m"
+		echo "	ADD: 0."
 	else
-		echo -e "\e[1;34m 	$commits repositorios para adicionar. \e[0m"
+		echo -e "\e[1;34m 	ADD: $commits.\e[0m"
 	fi
 }
 
@@ -112,11 +110,9 @@ commits_com()
 	if [[ $commits_com = "" ]]; then
 		echo "- ERROR"
 	elif [[ $commits_com = "0" ]]; then
-		echo "	Voce nao possui repositorios pendentes para comitar."
-	elif [[ $commits_com = "1" ]]; then
-		echo -e "\e[1;34m 	1 repositorio para comitar. \e[0m"
+		echo "	COM: 0."
 	else
-		echo -e "\e[1;34m- 	$commits repositorios pendentes para comitar. \e[0m"
+		echo -e "\e[1;34m- 	COM: $commits. \e[0m"
 	fi
 
 	echo
