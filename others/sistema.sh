@@ -98,8 +98,6 @@ commits_add()
 
 	if [[ $commits_add = "" ]]; then
 		echo "- ERROR"
-	elif [[ $commits_add = "0" ]]; then
-		echo "	ADD: 0."
 	else
 		echo -e "\e[1;34m 	ADD: $commits_add.\e[0m"
 	fi
@@ -111,8 +109,6 @@ commits_com()
 
 	if [[ $commits_com = "" ]]; then
 		echo "- ERROR"
-	elif [[ $commits_com = "0" ]]; then
-		echo "	COM: 0."
 	else
 		echo -e "\e[1;34m 	COM: $commits_com. \e[0m"
 	fi
