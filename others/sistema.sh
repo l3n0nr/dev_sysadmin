@@ -25,7 +25,7 @@
 # 	<https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.111]        #
+# # versão do script:              [0.115]        #
 # # data de criação do script:    [23/10/17]      #
 # # ultima ediçao realizada:      [25/02/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -74,6 +74,8 @@ instalacao_sistema()
 
 commits()
 {
+	check_commit
+
 	commits=$(cat /tmp/commits)
 
 	if [[ $commits = "" ]]; then
@@ -99,7 +101,7 @@ commits_add()
 	elif [[ $commits_add = "0" ]]; then
 		echo "	ADD: 0."
 	else
-		echo -e "\e[1;34m 	ADD: $commits.\e[0m"
+		echo -e "\e[1;34m 	ADD: $commits_add.\e[0m"
 	fi
 }
 
@@ -112,7 +114,7 @@ commits_com()
 	elif [[ $commits_com = "0" ]]; then
 		echo "	COM: 0."
 	else
-		echo -e "\e[1;34m 	COM: $commits. \e[0m"
+		echo -e "\e[1;34m 	COM: $commits_com. \e[0m"
 	fi
 
 	echo
@@ -208,8 +210,7 @@ echo_p()
 main()
 {	
 	clear 
-	
-	check_commit
+		
 	completo	
 	
 	echo_p
