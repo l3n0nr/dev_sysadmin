@@ -6,14 +6,16 @@
 ###################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	17/01/19
-# VERSAO	:	0.55
+# LAST_MOD	:	24/02/19
+# VERSAO	:	0.60
 # AUTOR 	:	lenonr
 #
 ########################
 #
 # VARIAVEIS
 aguarda="1"
+divisao="0"
+lista=('[.  ]' '[.. ]' '[...]')	
 
 check()
 {
@@ -32,9 +34,9 @@ check()
 		calc_time=$(($battery_full - $battery_res))
 	fi				
 
-	low_res="$((($full_battery * 30) / 100))"
+	low_res="$((($full_battery * 25) / 100))"
 	med_res="$((($full_battery * 50) / 100))"
-	high_res="$((($full_battery * 70) / 100))"
+	high_res="$((($full_battery * 75) / 100))"
 
 	# date_rest="$(($(echo $battery_res / 6) | bc))"
 	date_rest="$battery_res"
@@ -49,50 +51,59 @@ check()
 		# consuming_level="HIGH"
 		consuming_level="[+++++++++]"
 	else
-		consuming_level="[*********]"
+		consuming_level="[**ERROR**]"
 	fi
 
-	echo "############################################"
+
+	## Discharging
+	## Charging
+	## Full
 
 	if [[ $status == "Discharging" ]]; then						
 		echo "Status battery:" $status	
 
-		if [[ $date_rest < "101" ]]; then
-			echo "Time rest:" $(date -d $date_rest +%Mm) "/" $perc_batery "%"			
+		if [[ $date_rest < "100" ]]; then
+			divisao="$(($date_rest * 0.6))"
+			echo "ola" $divisao
+			echo "Time rest:" $(date -d $divisao +%Mm) "/" $perc_batery "%"			
 		else
 			echo "Time rest:" $(date -d $date_rest +%kh:%Mm) "/" $perc_batery "%"				
 		fi
 
+		# echo "Time rest:" $(date -d $date_rest +%kh:%Mm) "/" $perc_batery "%"
 		echo "		$date_rest"
-		echo "		$battery_full | $current_now"
 
 		echo "Current battery now:" $current_now "mA"		
-		echo "Consuming level energy:" $consuming_level
-	elif [[ $status == "Charging" ]]; then				
+		echo "Level energy:" $consuming_level
+	elif [[ $status == "Charging" ]]; then						
 		echo "Status battery:" $status	
 		echo "Percent to full:" $(((100 - $perc_batery))) "%"
 		echo "Current battery now:" $current_now "mA"		
 		echo "Consuming level energy:" $consuming_level
+		echo "		$battery_full | $current_now"
 	elif [[ $status == "Full" ]]; then
 		echo "Status battery: Full"
 	else
 		echo "ERROR"
 	fi		
 
-	echo "		 -LOW | " $low_res
-	echo "		 -MED | " $med_res
-	echo "		 -HIG | " $high_res	
-
-	echo "############################################"
+	# echo "		 -LOW | " $low_res
+	# echo "		 -MED | " $med_res
+	# echo "		 -HIG | " $high_res	
 }
 
 ## funcao principal
 main()
 {	
 	while [[ TRUE ]]; do		
-		clear
-		check
-		sleep $aguarda
+		for (( i = 0; i <= ${#lista[@]}-1; i++ )); do  
+			clear
+			echo "###################################"
+			check
+			echo "###################################"
+			printf "${lista[$i]}"
+			sleep 0.5
+		done		
 	done	
 }
 
