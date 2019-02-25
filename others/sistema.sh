@@ -79,7 +79,7 @@ commits()
 	if [[ $commits = "" ]]; then
 		echo "- ERROR"
 	elif [[ $commits = "0" ]]; then
-		echo "- Voce nao possui repositorios pendentes!"
+		echo "- Voce nao possui acoes pendentes no GIT!"
 	elif [[ $commits = "1" ]]; then
 		echo -e "\e[1;31m- Voce possui 1 açao pendente no GIT. \e[0m"
 	else
