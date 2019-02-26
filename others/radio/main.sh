@@ -67,7 +67,8 @@ radio_dialog()
             "Indie Pop" "7" \
             "DEFCon" "8" \
             "Minuano" "9" \
-            "Nativa" "10" ) ; 
+            "Nativa" "10" \
+            "Atlantida" 11 ) ; 
 
     func_verifica && func_radio
 }
