@@ -6,8 +6,8 @@
 ###################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	24/02/19
-# VERSAO	:	0.60
+# LAST_MOD	:	27/02/19
+# VERSAO	:	0.65
 # AUTOR 	:	lenonr
 #
 ########################
@@ -17,7 +17,6 @@
 #
 # VARIAVEIS
 aguarda="1"
-divisao="0"
 lista=('[.  ]' '[.. ]' '[...]')	
 
 check()
@@ -25,7 +24,7 @@ check()
 	status="$(cat /sys/class/power_supply/BAT0/status)"
 	full_battery="$(($(cat /sys/class/power_supply/BAT0/charge_full) / 1000))"
 	charge_now="$(($(cat /sys/class/power_supply/BAT0/charge_now) / 1000))"
-	# current_now="$(($(cat /sys/class/power_supply/BAT0/current_now) / 1000))"
+	current_now="$(($(cat /sys/class/power_supply/BAT0/current_now) / 1000))"
 	current="$(cat /sys/class/power_supply/BAT0/current_now)"
 
 	if [[ $current > 0 ]]; then
@@ -45,13 +44,10 @@ check()
 	date_rest="$battery_res"
 
 	if [[ $current_now -le $med_res ]] ; then
-		# consuming_level="LOW"
 		consuming_level="[+++------]"
 	elif [[ $current_now -gt $med_res ]] || [[ $current_now -lt $hig_res ]] ; then
-		# consuming_level="MEDIUM"
 		consuming_level="[++++++---]"
 	elif [[ $current_now -ge $high_res ]] ; then
-		# consuming_level="HIGH"
 		consuming_level="[+++++++++]"
 	else
 		consuming_level="[**ERROR**]"
@@ -64,18 +60,23 @@ check()
 	if [[ $status == "Discharging" ]]; then						
 		echo "Status battery:" $status	
 
-		# if [[ $date_rest < "100" ]]; then
-		# 	divisao="$(($date_rest * 0.6))"
-		# 	echo "Time rest:" $(date -d $divisao +%Mm) "/" $perc_batery "%"			
-		# else
-		# 	echo "Time rest:" $(date -d $date_rest +%kh:%Mm) "/" $perc_batery "%"				
-		# fi
+		if [[ $date_rest -le "100" ]] && [[ $date_rest -ge "60" ]]; then
+			minuto="$(($date_rest-60))"
+			echo "Time rest:" $(date -d "01"$minuto +%kh%Mm) "/" $perc_batery "%"
+		elif [[ $date_rest -le "60" ]]; then
+			minuto="$(($date_rest))"
+			echo "Time rest:" $(date -d "00"$minuto +%Mm) "/" $perc_batery "%"		
+		elif [[ $date_rest -ge "100" ]]; then
+			echo "Time rest:" $(date -d $date_rest +%kh:%Mm) "/" $perc_batery "%"	
+		else
+			echo "Error"
+		fi
 
-		echo "Time rest:" $(date -d $date_rest +%kh:%Mm) "/" $perc_batery "%"
+		# echo "Time rest:" $(date -d $date_rest +%kh:%Mm) "/" $perc_batery "%"
 		# echo "		$date_rest"
 
 		echo "Current battery now:" $current_now "mA"		
-		echo "Level energy:" $consuming_level
+		echo "Level consuming:" $consuming_level
 	elif [[ $status == "Charging" ]]; then						
 		echo "Status battery:" $status	
 		echo "Percent to full:" $(((100 - $perc_batery))) "%"
