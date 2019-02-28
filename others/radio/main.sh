@@ -10,7 +10,7 @@
 #
 # DATA_CRIACAO: 26/01/19
 # ULT_MODIFIC:  28/02/19
-# VERSAO:		0.52
+# VERSAO:		0.53
 #
 ###########################################################################
 verifica_internet()
@@ -18,7 +18,7 @@ verifica_internet()
 	echo "Verificando conexao, aguarde..."
 	clear 
 
-	ping_server="www.duckduckgo.com"
+	ping_server="www.google.com"
 	
   	ping -c1 $ping_server >> /dev/null
   	[[ ! $? -eq 0 ]] && echo "SEM CONEXAO!" && exit 1
