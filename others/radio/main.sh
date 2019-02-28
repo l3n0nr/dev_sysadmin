@@ -10,7 +10,7 @@
 #
 # DATA_CRIACAO: 26/01/19
 # ULT_MODIFIC:  28/02/19
-# VERSAO:		0.50
+# VERSAO:		0.52
 #
 ###########################################################################
 verifica_internet()
@@ -18,7 +18,7 @@ verifica_internet()
 	echo "Verificando conexao, aguarde..."
 	clear 
 
-	ping_server="www.google.com"
+	ping_server="www.duckduckgo.com"
 	
   	ping -c1 $ping_server >> /dev/null
   	[[ ! $? -eq 0 ]] && echo "SEM CONEXAO!" && exit 1
@@ -44,10 +44,8 @@ radio()
 func_verifica()
 {
 	if [[ $? == "1" ]]; then
-		# echo "Saindo.."
 		exit 0
 	else
-		# printf "\nTocando: $escolha.."
 		dialog --infobox "$escolha" 0 0
 	fi
 }
@@ -58,7 +56,7 @@ radio_dialog()
             --stdout --ok-label "Ouvir" --cancel-label "Sair" \
             --menu "Escolha uma radio:" \
             0 0 0 \
-            "Gaucha" "1" \
+            "Radio Gaucha" "1" \
             "Dronezone" "2" \
             "Space Station" "3" \
             "Deep Space One" "4" \
