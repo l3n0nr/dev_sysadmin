@@ -9,8 +9,8 @@
 ##########################################
 #
 # DATA_CRIACAO: 26/01/19
-# ULT_MODIFIC:  20/02/19
-# VERSAO:		0.48
+# ULT_MODIFIC:  28/02/19
+# VERSAO:		0.50
 #
 ###########################################################################
 verifica_internet()
@@ -65,10 +65,8 @@ radio_dialog()
             "Mission Control" "5" \
             "Digitalis" "6" \
             "Indie Pop" "7" \
-            "DEFCon" "8" \
-            "Minuano" "9" \
-            "Nativa" "10" \
-            "Atlantida" 11 ) ; 
+            "Minuano" "8" \
+            "Nativa" "9" ) ; 
 
     func_verifica && func_radio
 }
