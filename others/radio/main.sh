@@ -58,10 +58,10 @@ radio_dialog()
             --stdout --ok-label "Ouvir" --cancel-label "Sair" \
             --menu "Escolha uma radio:" \
             0 0 0 \
-            "Dronezone" "1" \
-            "Space Station" "2" \
-            "Deep Space One" "3" \
-            "Radio Gaucha" "4" \
+            "Gaucha" "1" \
+            "Dronezone" "2" \
+            "Space Station" "3" \
+            "Deep Space One" "4" \
             "Mission Control" "5" \
             "Digitalis" "6" \
             "Indie Pop" "7" \
