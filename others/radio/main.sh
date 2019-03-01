@@ -9,8 +9,8 @@
 ##########################################
 #
 # DATA_CRIACAO: 26/01/19
-# ULT_MODIFIC:  28/02/19
-# VERSAO:		0.53
+# ULT_MODIFIC:  01/03/19
+# VERSAO:		0.54
 #
 ###########################################################################
 verifica_internet()
@@ -56,7 +56,7 @@ radio_dialog()
             --stdout --ok-label "Ouvir" --cancel-label "Sair" \
             --menu "Escolha uma radio:" \
             0 0 0 \
-            "Radio Gaucha" "1" \
+            "Gaucha" "1" \
             "Dronezone" "2" \
             "Space Station" "3" \
             "Deep Space One" "4" \
