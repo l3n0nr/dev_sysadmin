@@ -6,8 +6,8 @@
 ###################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	28/02/19
-# VERSAO	:	0.70
+# LAST_MOD	:	01/03/19
+# VERSAO	:	0.71
 # AUTOR 	:	lenonr
 #
 ########################
@@ -28,7 +28,7 @@ check()
 	current_now="$(($(cat /sys/class/power_supply/BAT0/current_now) / 1000))"
 	current="$(cat /sys/class/power_supply/BAT0/current_now)"
 
-	time="$(ibam --bios | grep "Bios time left:"| awk {'print $4'})"
+	time="$(ibam --percentbattery | grep "Battery time left:"| awk {'print $4'})"
 	percent="$(ibam --percentbattery | grep "Battery percentage:"| awk {'print $3$4'})"
 
 	if [[ $current > 0 ]]; then
