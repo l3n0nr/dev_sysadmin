@@ -16,8 +16,8 @@
 #################################################################################
 #
 ###################################################
-# versão do script:              0.0.72.0.0.0     #
-# # ultima ediçao realizada:      [06/01/19]      #
+# versão do script:              0.0.75.0.0.0     #
+# # ultima ediçao realizada:      [04/03/19]      #
 ###################################################
 #
 # legenda: a.b.c.d.e.f
@@ -62,7 +62,6 @@ install_tree()
 
     if [[ ! -e $var_tree ]]; then
         printf "O Tree nao foi encontrado, instalar por favor!"
-    	sudo apt install tree -y        
     fi
 }
 
