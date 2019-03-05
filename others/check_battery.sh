@@ -6,15 +6,14 @@
 ###################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	01/03/19
-# VERSAO	:	0.71
+# LAST_MOD	:	05/03/19
+# VERSAO	:	0.73
 # AUTOR 	:	lenonr
 #
 ########################
 #
 ## REFERENCE
 # https://github.com/sagarrakshe/battery-script/blob/master/battery.sh
-#
 #
 # VARIAVEIS
 aguarda="1"
@@ -44,7 +43,6 @@ check()
 	med_res="$((($full_battery * 50) / 100))"
 	high_res="$((($full_battery * 70) / 100))"
 
-	# date_rest="$(($(echo $battery_res / 6) | bc))"
 	date_rest="$battery_res"
 
 	if [[ $current_now -le $low_res ]] ; then
@@ -57,16 +55,11 @@ check()
 		consuming_level="[**ERROR**]"
 	fi
 
-	## Discharging
-	## Charging
-	## Full
-
 	if [[ $status == "Discharging" ]]; then						
 		echo "Status battery:" $status	
 		echo "Time rest:" $time "/" $percent	
-		echo "Current battery now:" $current_now "mA"
-		echo "Current rest:" $charge_now "mAh"
-		echo "Level consuming:" $consuming_level
+		echo "Consuming now:" $current_now "mA |" $consuming_level
+		echo "Baterry rest:" $charge_now "mAh"		
 	elif [[ $status == "Charging" ]]; then						
 		echo "Status battery:" $status	
 		echo "Percent to full:" $(((100 - $perc_batery))) "%"
@@ -78,6 +71,9 @@ check()
 	else
 		echo "ERROR"
 	fi		
+
+
+	echo "Temperature: "$(sensors | grep temp1 | awk {'print $2'})
 
 	# echo "		 -LOW | " $low_res
 	# echo "		 -MED | " $med_res
@@ -93,8 +89,9 @@ main()
 			echo "###################################"
 			check
 			echo "###################################"
-			printf "${lista[$i]}"
-			sleep 0.3
+			sleep 1
+			# printf "${lista[$i]}"
+			# sleep 0.3
 		done		
 	done	
 }
