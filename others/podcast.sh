@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
+podcast_pwd="/home/$USER/Música/Podcast"
+
 check()
 {
-	podcast_pwd="/home/$USER/Música/Podcast"
-
 	if [[ -e $podcast_pwd ]]; then
-		echo "## Podcast pendentes ##"
-		cd /home/lenonr/Música/Podcast && ls
+		cd $podcast_pwd
+		ls
 	else
 		mkdir -p "$podcast_pwd"
 
@@ -17,6 +17,7 @@ check()
 
 main()
 {
+	clear
 	check
 }
 
