@@ -6,8 +6,8 @@
 ###################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	05/03/19
-# VERSAO	:	0.73
+# LAST_MOD	:	07/03/19
+# VERSAO	:	0.75
 # AUTOR 	:	lenonr
 #
 ########################
@@ -39,27 +39,29 @@ check()
 		calc_time=$(($battery_full - $battery_res))
 	fi				
 
-	low_res="$((($full_battery * 30) / 100))"
-	med_res="$((($full_battery * 50) / 100))"
-	high_res="$((($full_battery * 70) / 100))"
+	low_res="$((($full_battery * 40) / 100))"
+	med_res="$((($full_battery * 60) / 100))"
+	high_res="$((($full_battery * 80) / 100))"
 
 	date_rest="$battery_res"
 
-	if [[ $current_now -le $low_res ]] ; then
+	if [[ $low_res -ge $current_now ]] ; then
 		consuming_level="[+++------]"
-	elif [[ $current_now -ge $med_res ]] ; then
+	elif [[ $med_res -ge $current_now ]] ; then
 		consuming_level="[++++++---]"
-	elif [[ $current_now -gt $high_res ]] ; then
+	elif [[ $high_res -ge $current_now ]] ; then
 		consuming_level="[+++++++++]"
 	else
 		consuming_level="[**ERROR**]"
 	fi
 
+	percent_level="[?????????]"
+
 	if [[ $status == "Discharging" ]]; then						
 		echo "Status battery:" $status	
 		echo "Time rest:" $time "/" $percent	
-		echo "Consuming now:" $current_now "mA |" $consuming_level
-		echo "Baterry rest:" $charge_now "mAh"		
+		echo "Consuming now:" $current_now "mA /" $consuming_level
+		echo "Baterry rest:" $charge_now "mAh / $percent_level"		
 	elif [[ $status == "Charging" ]]; then						
 		echo "Status battery:" $status	
 		echo "Percent to full:" $(((100 - $perc_batery))) "%"
