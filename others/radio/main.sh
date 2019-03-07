@@ -9,8 +9,8 @@
 ##########################################
 #
 # DATA_CRIACAO: 26/01/19
-# ULT_MODIFIC:  01/03/19
-# VERSAO:		0.54
+# ULT_MODIFIC:  07/03/19
+# VERSAO:		0.55
 #
 ###########################################################################
 verifica_internet()
@@ -59,9 +59,9 @@ radio_dialog()
             "Gaucha" "1" \
             "Dronezone" "2" \
             "Space Station" "3" \
-            "Deep Space One" "4" \
-            "Mission Control" "5" \
-            "Digitalis" "6" \
+            "Digitalis" "4" \
+            "Deep Space One" "5" \
+            "Mission Control" "6" \
             "Indie Pop" "7" \
             "Minuano" "8" \
             "Nativa" "9" ) ; 
