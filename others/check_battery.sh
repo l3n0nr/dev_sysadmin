@@ -6,14 +6,17 @@
 ###################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	07/03/19
-# VERSAO	:	0.80
+# LAST_MOD	:	08/03/19
+# VERSAO	:	0.86
 # AUTOR 	:	lenonr
 #
 ########################
 #
 ## REFERENCE
 # https://github.com/sagarrakshe/battery-script/blob/master/battery.sh
+#
+# CHECK
+# 		- Verify if battery exist
 #
 # VARIAVEIS
 aguarda="1"
