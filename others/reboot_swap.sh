@@ -39,9 +39,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.1.110.0.0.0]    #
+# # versão do script:           [0.1.115.0.0.0]    #
 # # data de criação do script:    [03/11/17]      #
-# # ultima ediçao realizada:      [25/02/19]      #
+# # ultima ediçao realizada:      [10/03/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # Legenda: a.b.c.d.e.f
@@ -60,8 +60,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # Script testado em
-#	- Xubuntu 16.04
-#   - Debian 9
+#   - Debian Stable
 #
 # # Compativel com
 #   - Debian Stable
@@ -91,7 +90,8 @@ fi
 
 limpa()
 {
-	swapoff -a && swapon -a && printf "SUCESS - " >> $local && date >> $local
+	# swapoff -a && swapon -a && printf "SUCESS - " >> $local && date >> $local
+	swapoff -a && swapon -a && printf "\e[1;32mSUCESS - \e[0m" >> $local && date >> $local
 }
 
 porcentagem()
@@ -112,7 +112,8 @@ porcentagem()
 		notify-send -t 10000 "Reiniciando a memoria SWAP!"
 		limpa
 	else
-		printf "FAILED - " >> $local && date >> $local
+		# printf "FAILED - " >> $local && date >> $local
+		printf "\e[1;31mFAILED - \e[0m" >> $local && date >> $local
 	fi
 }
 
