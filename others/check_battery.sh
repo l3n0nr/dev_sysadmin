@@ -6,8 +6,8 @@
 ######################################################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	11/03/19
-# VERSAO	:	0.90
+# LAST_MOD	:	12/03/19
+# VERSAO	:	0.92
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -35,7 +35,7 @@ check()
 	expected_time_s=${time:5:5}
 
 	expected_time="$(date -d "$expected_time_h hours $expected_time_m minutes" +%R)"
-	cpu_speed=$(lscpu | grep "CPU MHz" | awk '{print $3}')
+	# cpu_speed=$(lscpu | grep "CPU MHz" | awk '{print $3}')
 
 	low_res="$((($full_battery * 40) / 100))"
 	med_res="$((($full_battery * 60) / 100))"
@@ -93,7 +93,7 @@ check()
 		echo "Consuming now:" $current_now "mA"
 		echo "Baterry rest:" $charge_now "mAh / $percent_level"		
 		echo "Expected shutdown:" $expected_time
-		echo "Speed CPU:" $cpu_speed "MHz"
+		# echo "Speed CPU:" $cpu_speed "MHz"
 	elif [[ $status == "Charging" ]]; then						
 		echo -e "Status battery:\e[1;32m $status"" \e[0m"
 		echo "Percent to full:" $(((100 - $perc_batery))) "%"
