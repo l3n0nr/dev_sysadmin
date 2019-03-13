@@ -25,9 +25,9 @@
 # 	<https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.121]        #
+# # versão do script:              [0.125]        #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [06/03/19]      #
+# # ultima ediçao realizada:      [12/03/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -70,6 +70,17 @@ disco()
 instalacao_sistema()
 {
 	echo "- Sistema instalado em $install_system"
+}
+
+twitts()
+{
+	count=$(wc /home/lenonr/Dropbox/Arquivos/Twitter/posts | awk '{print $1}')
+
+	if [[ $count > 1 ]]; then
+		echo "- $count twitts do bot pendentes!" ; echo
+	else
+		echo "- 1 twitt do bot pendente!" ; echo					
+	fi		
 }
 
 commits()
@@ -170,6 +181,7 @@ report()
 	memoria_utilizada
 	disco
 	commits		
+	twitts
 	check_updates
 	instalacao_sistema
 	echo	
