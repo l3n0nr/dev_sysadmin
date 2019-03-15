@@ -6,8 +6,8 @@
 ######################################################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	12/03/19
-# VERSAO	:	0.92
+# LAST_MOD	:	15/03/19
+# VERSAO	:	0.93
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -81,7 +81,7 @@ check()
 		percent_level="[++++++++--]"
 	elif [[ "90" -ge $level ]]; then
 		percent_level="[+++++++++-]"
-	elif [[ "99" -ge $level ]]; then
+	elif [[ "100" -ge $level ]]; then
 		percent_level="[++++++++++]"
 	else
 		percent_level="[**ERROR**]"
