@@ -27,7 +27,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # versão do script:              [0.126]        #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [14/03/19]      #
+# # ultima ediçao realizada:      [18/03/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -74,13 +74,15 @@ instalacao_sistema()
 
 twitts()
 {
-	count=$(wc /home/lenonr/Dropbox/Arquivos/Twitter/posts | awk '{print $1}')
+	if [[ $sistema = "desktop" ]]; then
+		count=$(wc /home/lenonr/Dropbox/Arquivos/Twitter/posts | awk '{print $1}')
 
-	if [[ $count > 1 ]]; then
-		echo "- $count twitts pendentes do bot!" ; echo
-	else
-		echo "- 1 twitt pendente do bot!" ; echo					
-	fi		
+		if [[ $count > 1 ]]; then
+			echo "- $count twitts pendentes do bot!" ; echo
+		else
+			echo "- 1 twitt pendente do bot!" ; echo					
+		fi		
+	fi	
 }
 
 commits()
