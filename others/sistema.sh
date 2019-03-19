@@ -25,7 +25,7 @@
 # 	<https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [0.126]        #
+# # versão do script:              [0.127]        #
 # # data de criação do script:    [23/10/17]      #
 # # ultima ediçao realizada:      [18/03/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -69,7 +69,7 @@ disco()
 
 instalacao_sistema()
 {
-	echo "- Sistema instalado em $install_system"
+	echo "- Sistema instalado em $install_system."
 }
 
 twitts()
