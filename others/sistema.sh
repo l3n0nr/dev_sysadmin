@@ -25,9 +25,9 @@
 # 	<https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [1.10]         #
+# # versão do script:              [1.11]         #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [21/03/19]      #
+# # ultima ediçao realizada:      [23/03/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -74,8 +74,10 @@ instalacao_sistema()
 
 twitts()
 {
+	arquivo="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
+
 	if [[ $sistema = "desktop" ]]; then
-		count=$(wc /home/lenonr/Downloads/Arquivos/Twitter/posts | awk '{print $1}')
+		count=$(wc $arquivo | awk '{print $1}')
 
 		if [[ $count > 1 ]]; then
 			echo "- $count twitts pendentes do bot!" ; echo
