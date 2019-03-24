@@ -3,7 +3,7 @@
 ####################
 # DATA_CRIACAO: 23/03/19
 # ULT_MODIFIC : 23/03/19
-# VERSAO 	  : 0.15
+# VERSAO 	  : 0.16
 ####################
 #
 ## REFERENCE
@@ -18,8 +18,8 @@
 resolution()
 {
 	## porcentagem da resolução
-	taxa_width="93"
-	taxa_height="83"
+	taxa_width="90"
+	taxa_height="80"
 
 	width=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1)
 	height=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2)	
@@ -27,8 +27,8 @@ resolution()
 	calc_width=$((($width * $taxa_width) / 100))
 	calc_height=$((($height * $taxa_height) / 100))
 
-	# echo $calc_width
-	# echo $calc_height
+	center_width=$(($width / 2))
+	center_height=$(($height / 2))
 }
 
 check()
@@ -36,8 +36,8 @@ check()
 	WIDS=`xdotool search --onlyvisible --name "$1"`
 
 	for id in $WIDS; do
-	  xdotool windowsize $id $calc_width $calc_height && \
-	  xdotool windowmove -- $id 50 50
+	  xdotool windowsize $id $calc_width $calc_height
+	  xdotool windowmove -- $id 70 70
 	done
 }
 
