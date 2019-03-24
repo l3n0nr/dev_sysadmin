@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 #
-####################
+########################
 # DATA_CRIACAO: 23/03/19
-# ULT_MODIFIC : 23/03/19
-# VERSAO 	  : 0.16
-####################
+# ULT_MODIFIC : 24/03/19
+# VERSAO 	  : 0.17
+########################
 #
 ## REFERENCE
 # 	https://www.semicomplete.com/projects/xdotool/
 #	https://superuser.com/questions/196532/how-do-i-find-out-my-screen-resolution-from-a-shell-script
+#	https://www.sitepoint.com/community/t/keeping-chrome-window-position-and-size-constant/198439
 #
 ## CHECK
 # 	Spotify
 # 	Janelas multiplas do mesmo programa(sobreposicao estranha na tela)
-# 	Porcentagem monitor de diferente resolucao
 #
 resolution()
 {
@@ -27,8 +27,8 @@ resolution()
 	calc_width=$((($width * $taxa_width) / 100))
 	calc_height=$((($height * $taxa_height) / 100))
 
-	center_width=$(($width / 2))
-	center_height=$(($height / 2))
+	# center_width=$(($width / 2))
+	# center_height=$(($height / 2))
 }
 
 check()
