@@ -3,33 +3,20 @@
 ########################
 # DATA_CRIACAO: 23/03/19
 # ULT_MODIFIC : 24/03/19
-# VERSAO 	  : 0.17
+# VERSAO 	  : 0.20
 ########################
 #
 ## REFERENCE
 # 	https://www.semicomplete.com/projects/xdotool/
 #	https://superuser.com/questions/196532/how-do-i-find-out-my-screen-resolution-from-a-shell-script
-#	https://www.sitepoint.com/community/t/keeping-chrome-window-position-and-size-constant/198439
 #
 ## CHECK
 # 	Spotify
 # 	Janelas multiplas do mesmo programa(sobreposicao estranha na tela)
 #
-resolution()
-{
-	## porcentagem da resolução
-	taxa_width="90"
-	taxa_height="80"
 
-	width=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1)
-	height=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2)	
-
-	calc_width=$((($width * $taxa_width) / 100))
-	calc_height=$((($height * $taxa_height) / 100))
-
-	# center_width=$(($width / 2))
-	# center_height=$(($height / 2))
-}
+## chama arquivo externo
+source resolution.sh
 
 check()
 {
@@ -43,6 +30,7 @@ check()
 
 main()
 {
+	## chama funcao externa
 	resolution	
 
 	if [[ $1 = "" ]]; then
