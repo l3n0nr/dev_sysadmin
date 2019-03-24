@@ -1,15 +1,15 @@
 #!/usr/bin/env zsh
-
+#
+## REFERENCE
+#	https://www.sitepoint.com/community/t/keeping-chrome-window-position-and-size-constant/198439
+#
+## chama arquivo externo
+source resolution.sh
+#
 chromium()
 {
-	taxa_width="90"
-	taxa_height="80"
-
-	width=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1)
-	height=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2)	
-
-	calc_width=$((($width * $taxa_width) / 100))
-	calc_height=$((($height * $taxa_height) / 100))
+	## chama funcao externa
+	resolution
 
 	## call chromium and open in background
 	/usr/bin/chromium %U --password-store=basic --window-position=70,70 --window-size=$calc_width,$calc_height
