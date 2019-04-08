@@ -15,12 +15,11 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[08/04/18]       #
-# Last modification script: 		[24/02/19]       #
+# Last modification script: 		[08/04/19]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
 source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/git.conf
-
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                             #
@@ -57,7 +56,9 @@ status_git()
 						git status						
 						echo "#########################################################"							
 
-						notify-send "| ${repos[$i]} - ADD |"
+						if [[ $1 == "-on" ]]; then
+							notify-send "| ${repos[$i]} - ADD |"	
+						fi						
 
 						let contador++	
 
@@ -118,7 +119,9 @@ check_git()
   											
 					# if value = 0, then comparation is true
 					if [[ $? == "0" ]]; then
-						notify-send "| ${repos[$i]} - COM |"
+						if [[ $1 == "-on" ]]; then
+							notify-send "| ${repos[$i]} - COM |"
+						fi																		
 
 						let contador++
 
@@ -156,7 +159,7 @@ push_auto()
 
 main()
 {
-	status_git	
+	status_git $1
 	check_git $1
 }
 
