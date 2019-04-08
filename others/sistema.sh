@@ -23,11 +23,12 @@
 #
 ## REFERENCIAS
 # 	<https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux>
+# 	<https://stackoverflow.com/questions/3385003/shell-script-to-get-difference-in-two-dates>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [1.11]         #
+# # versão do script:              [1.18]         #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [23/03/19]      #
+# # ultima ediçao realizada:      [08/04/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -40,7 +41,6 @@
 # # FUNCOES
 # # # # # # # # # #    
 # # DADOS DO SISTEMA
-# 
 install_system=$(ls -lct /etc | tail -1 | awk '{print $6, $7, $8}')
 date_now=$(date +%x-%k%M)
 sistema=$(hostname)
@@ -215,30 +215,32 @@ echo_p()
 	fi
 }
 
+print_output()
+{
+	output="/tmp/sistema.txt"
+
+	if [[ -e $output ]]; then
+		touch $output
+	fi
+
+	completo > $output
+	cat $output	
+}
+
 main()
 {	
 	clear 
 		
-	completo	
-	
+	print_output	
 	echo_p
 }
     
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # INICIANDO SCRIPT
-main $1
+main
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
  
 #                           RODAPE DO SCRIPT                                    #
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-
-# Black        0;30     Dark Gray     1;30
-	# Red          0;31     Light Red     1;31
-	# Green        0;32     Light Green   1;32
-	# Brown/Orange 0;33     Yellow        1;33
-	# Blue         0;34     Light Blue    1;34
-	# Purple       0;35     Light Purple  1;35
-	# Cyan         0;36     Light Cyan    1;36
-	# Light Gray   0;37     White         1;37
