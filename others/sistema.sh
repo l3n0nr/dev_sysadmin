@@ -45,6 +45,9 @@ install_system=$(ls -lct /etc | tail -1 | awk '{print $6, $7, $8}')
 date_now=$(date +%x-%k%M)
 sistema=$(hostname)
 
+cont_com=$(cat /tmp/commit_com.txt | tail -1)
+cont_add=$(cat /tmp/commit_add.txt | tail -1)
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #																				#
 #                               CORPO DO SCRIPT                               	#
@@ -112,7 +115,7 @@ commits_add()
 	commits_add=$(cat /tmp/commits_add)
 
 	if [[ $commits_add > "0" ]]; then
-		echo -e "\e[1;34m 	ADD: $commits_add.\e[0m"
+		echo -e "\e[1;34m 	ADD: $commits_add [ $cont_add]\e[0m"
 	fi
 }
 
@@ -121,7 +124,7 @@ commits_com()
 	commits_com=$(cat /tmp/commits_com)
 
 	if [[ $commits_com > "0" ]]; then
-		echo -e "\e[1;34m 	COM: $commits_com. \e[0m"
+		echo -e "\e[1;34m 	COM: $commits_com [ $cont_com]\e[0m"
 	fi
 
 	echo

@@ -15,7 +15,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[08/04/18]       #
-# Last modification script: 		[08/04/19]       #
+# Last modification script: 		[11/04/19]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
@@ -29,6 +29,25 @@ source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/git.conf
 #
 # verificando se existem repositorios modificados
 contador=0
+
+## arquivos de saida
+saida_add="/tmp/commit_add.txt"
+saida_com="/tmp/commit_com.txt"
+
+check_files()
+{
+	if [[ -e $saida_add ]]; then
+		touch $saida_add
+	fi
+
+	if [[ -e $saida_com ]]; then
+		touch $saida_com
+	fi
+
+	## zerando arquivos
+	echo > $saida_add
+	echo > $saida_com
+}
 
 ## chamando funcao
 status_git()
@@ -58,10 +77,12 @@ status_git()
 
 						if [[ $1 == "-on" ]]; then
 							notify-send "| ${repos[$i]} - ADD |"	
-						fi						
+						fi				
 
+						printf "${repos[$i]} " >> $saida_add 		
+
+						## contador
 						let contador++	
-
 						let contador_add++
 
 						echo $contador_add > /tmp/commits_add					
@@ -123,8 +144,10 @@ check_git()
 							notify-send "| ${repos[$i]} - COM |"
 						fi																		
 
-						let contador++
+						printf "${repos[$i]} " >> $saida_com
 
+						## contador
+						let contador++
 						let contador_com++
 
 						echo $contador_com > /tmp/commits_com
@@ -159,6 +182,7 @@ push_auto()
 
 main()
 {
+	check_files
 	status_git $1
 	check_git $1
 }
