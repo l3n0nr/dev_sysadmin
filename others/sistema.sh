@@ -26,9 +26,9 @@
 # 	<https://stackoverflow.com/questions/3385003/shell-script-to-get-difference-in-two-dates>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [1.18]         #
+# # versão do script:              [1.20]         #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [08/04/19]      #
+# # ultima ediçao realizada:      [11/04/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
