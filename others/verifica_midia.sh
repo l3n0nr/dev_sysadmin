@@ -16,8 +16,8 @@
 #################################################################################
 #
 ###################################################
-# versão do script:              0.0.75.0.0.0     #
-# # ultima ediçao realizada:      [04/03/19]      #
+# versão do script:              0.0.76.0.0.0     #
+# # ultima ediçao realizada:      [11/04/19]      #
 ###################################################
 #
 # legenda: a.b.c.d.e.f
@@ -162,7 +162,7 @@ seriados()
 ################################################################################
 #
 clear
-if [ -e "$LOCAL_DESTINO" ]; then 
+if [ -e "$local_destino" ]; then 
     printf "[+] Executando leitura das pastas \n"
     printf "################################################### \n"
     install_tree
@@ -178,7 +178,7 @@ if [ -e "$LOCAL_DESTINO" ]; then
     fi
     printf "################################################### \n"
 else 
-    printf "[-] Pasta '$LOCAL_DESTINO' nao encontrada! \n"
+    printf "[-] Pasta '$local_destino' nao encontrada! \n"
     printf "[-] Backup nao realizado!!\n"
 fi
 
