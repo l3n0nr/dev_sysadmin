@@ -26,9 +26,9 @@
 # 	<https://stackoverflow.com/questions/3385003/shell-script-to-get-difference-in-two-dates>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [1.20]         #
+# # versão do script:              [1.21]         #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [11/04/19]      #
+# # ultima ediçao realizada:      [12/04/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -115,7 +115,11 @@ commits_add()
 	commits_add=$(cat /tmp/commits_add)
 
 	if [[ $commits_add > "0" ]]; then
-		echo -e "\e[1;34m 	ADD: $commits_add [ $cont_add]\e[0m"
+		if [[ $cont_add = "" ]]; then
+			echo -e "\e[1;34m 	ADD: $commits_add\e[0m"	
+		else
+			echo -e "\e[1;34m 	ADD: $commits_add [ $cont_add]\e[0m"	
+		fi		
 	fi
 }
 
@@ -124,7 +128,12 @@ commits_com()
 	commits_com=$(cat /tmp/commits_com)
 
 	if [[ $commits_com > "0" ]]; then
-		echo -e "\e[1;34m 	COM: $commits_com [ $cont_com]\e[0m"
+		if [[ $cont_com = "" ]]; then
+			echo -e "\e[1;34m 	COM: $commits_com\e[0m"	
+		else
+			echo -e "\e[1;34m 	COM: $commits_com [ $cont_com]\e[0m"	
+		fi
+		
 	fi
 
 	echo
