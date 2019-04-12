@@ -39,9 +39,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.1.117.0.0.0]   #
+# # versão do script:           [0.1.118.0.0.0]   #
 # # data de criação do script:    [03/11/17]      #
-# # ultima ediçao realizada:      [14/03/19]      #
+# # ultima ediçao realizada:      [11/04/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # Legenda: a.b.c.d.e.f
@@ -95,8 +95,9 @@ limpa()
 
 porcentagem()
 {
-	# minimo de memoria RAM extra para ser realizada a limpeza(porcentagem)
-	porcentagem_mem="65"
+	## minimo de memoria RAM para realizar limpeza
+	## evitando travamentos com $porcentagem_mem/100
+	porcentagem_mem="68"
 
 	# variaveis de verificacao da memoria RAM
 	memoria_total=$(free | awk '/Mem:/ {print $2}')	
