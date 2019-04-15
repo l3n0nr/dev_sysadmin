@@ -39,9 +39,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.1.119.0.0.0]   #
+# # versão do script:           [0.1.120.0.0.0]   #
 # # data de criação do script:    [03/11/17]      #
-# # ultima ediçao realizada:      [12/04/19]      #
+# # ultima ediçao realizada:      [15/04/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # Legenda: a.b.c.d.e.f
@@ -75,11 +75,13 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
-export DISPLAY=":0.0"
-
+## saida de log
 local="/tmp/clear_memory.txt"
 
-# realizando verificação de sudo
+## minimo de memoria RAM para realizar limpeza sem travamentos
+porcentagem_mem="70"
+
+# realizando verificação de root
 if [[ `id -u` -ne 0 ]]; then       
     printf "############################################################################ \n"
     printf "[!] O script para funcionar, precisa estar sendo executado como root! \n"
@@ -95,10 +97,6 @@ limpa()
 
 porcentagem()
 {
-	## minimo de memoria RAM para realizar limpeza
-	## evitando travamentos com $porcentagem_mem/100
-	porcentagem_mem="70"
-
 	# variaveis de verificacao da memoria RAM
 	memoria_total=$(free | awk '/Mem:/ {print $2}')	
 	memoria_taxa=$(($porcentagem_mem * ($memoria_total / 100)))
@@ -107,9 +105,8 @@ porcentagem()
 	# verificando a memoria SWAP
 	swap=$(LC_ALL=C free | awk '/Swap:/ {print $3}')
 						
-	# realizando teste
+	# verificando memoria
 	if [[ $memoria_livre > $memoria_taxa ]]; then		
-		notify-send -t 10000 "Reiniciando a memoria SWAP!"
 		limpa
 	else
 		printf "\e[1;31mFAILED - \e[0m" >> $local && date >> $local
