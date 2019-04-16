@@ -39,9 +39,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.1.120.0.0.0]   #
+# # versão do script:           [0.1.121.0.0.0]   #
 # # data de criação do script:    [03/11/17]      #
-# # ultima ediçao realizada:      [15/04/19]      #
+# # ultima ediçao realizada:      [16/04/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # Legenda: a.b.c.d.e.f
@@ -75,10 +75,11 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
-## saida de log
+## VARIAVEIS
+## log de saida
 local="/tmp/clear_memory.txt"
 
-## minimo de memoria RAM para realizar limpeza sem travamentos
+## minimo de memoria RAM para limpeza - taxa/100
 porcentagem_mem="70"
 
 # realizando verificação de root
@@ -99,7 +100,11 @@ porcentagem()
 {
 	# variaveis de verificacao da memoria RAM
 	memoria_total=$(free | awk '/Mem:/ {print $2}')	
+
+	# calculando taxa de memoria
 	memoria_taxa=$(($porcentagem_mem * ($memoria_total / 100)))
+
+	# memoria livre
 	memoria_livre=$(free | awk '/Mem:/ {print $4}')
 
 	# verificando a memoria SWAP
