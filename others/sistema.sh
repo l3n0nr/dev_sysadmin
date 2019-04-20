@@ -26,9 +26,9 @@
 # 	<https://stackoverflow.com/questions/3385003/shell-script-to-get-difference-in-two-dates>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [1.21]         #
+# # versão do script:              [1.23]         #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [12/04/19]      #
+# # ultima ediçao realizada:      [20/04/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -65,9 +65,9 @@ memoria_utilizada()
 
 disco()
 {
-	echo "- Uso da raiz do usuario root: $(df -h / | awk '/dev/sda1 {print $5}' | tail -1) / 100%." ; echo 
+	echo "- Uso da raiz do root: $(df -h / | awk '/dev/sda1 {print $5}' | tail -1) / 100%." ; echo 
 
-	echo "- Uso da raiz do usuario $(whoami): $(df -h /home | awk '/dev/sda1 {print $5}' | tail -1) / 100%." ; echo 
+	echo "- Uso da raiz do $(whoami): $(df -h /home | awk '/dev/sda1 {print $5}' | tail -1) / 100%." ; echo 
 }
 
 instalacao_sistema()
