@@ -9,8 +9,8 @@
 ##########################################
 #
 # DATA_CRIACAO: 26/01/19
-# ULT_MODIFIC:  18/04/19
-# VERSAO:		0.56
+# ULT_MODIFIC:  22/04/19
+# VERSAO:		0.57
 #
 ###########################################################################
 verifica_internet()
@@ -57,15 +57,16 @@ radio_dialog()
             --menu "Escolha uma radio:" \
             0 0 0 \
             "Gaucha" "1" \
-            "Dronezone" "2" \
-            "Space Station" "3" \
-            "Digitalis" "4" \
-            "Deep Space One" "5" \
-            "Mission Control" "6" \
-            "Indie Pop" "7" \
-            "Minuano" "8" \
-            "Nativa" "9" \
-            "UFRGS" "10") ; 
+            "USP" "2" \
+            "UFRGS" "3" \
+            "Dronezone" "4" \
+            "Space Station" "5" \
+            "Digitalis" "6" \
+            "Deep Space One" "7" \
+            "Mission Control" "8" \
+            "Indie Pop" "9" \
+            "Minuano" "10" \
+            "Nativa" "11" ) ; 
 
     func_verifica && func_radio
 }
