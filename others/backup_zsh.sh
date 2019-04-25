@@ -25,7 +25,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [19/06/18]      #             
-# # ultima ediçao realizada:      [05/02/19]      #
+# # ultima ediçao realizada:      [25/04/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # versao do script
@@ -35,7 +35,7 @@
     local_home=$HOME
 
 # pasta do git
-	git="/home/lenonr/Github/dev_xfce/Auto_Config/base/"
+	git="/home/lenonr/Github/dev_xfce/Auto_Config/base"
 
 # arquivo utilizado
 	arquivo=".zshrc"         
