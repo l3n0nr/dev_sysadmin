@@ -26,9 +26,9 @@
 # 	<https://stackoverflow.com/questions/3385003/shell-script-to-get-difference-in-two-dates>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [1.23]         #
+# # versão do script:              [1.24]         #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [20/04/19]      #
+# # ultima ediçao realizada:      [25/04/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -45,8 +45,8 @@ install_system=$(ls -lct /etc | tail -1 | awk '{print $6, $7, $8}')
 date_now=$(date +%x-%k%M)
 sistema=$(hostname)
 
-cont_com=$(cat /tmp/commit_com.txt | tail -1)
-cont_add=$(cat /tmp/commit_add.txt | tail -1)
+cont_com=$(cat /tmp/commit_com.txt | tail -1 | sed -e 's/\dev_//g')
+cont_add=$(cat /tmp/commit_add.txt | tail -1 | sed -e 's/\dev_//g')
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #																				#
