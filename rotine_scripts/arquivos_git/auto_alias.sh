@@ -10,7 +10,7 @@
 #       contato: <lenonrmsouza@gmail.com>
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
-# Last modification script: 		[27/11/18]       #
+# Last modification script: 		[29/04/19]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
@@ -39,15 +39,6 @@ auto_alias()
 			echo "######################################"	
 		fi					  						 			
 	done
-
-	if [[ $1 == "ajuda" ]] || [[ $1 == "help" ]]; then
-		echo "############################## AJUDA ##############################"	
-		echo "Voce pode escolher uma das seguintes opcoes:" 		
-		for (( i = 1; i <= ${#repos[@]}; i++ )); do	
-			echo "+ repo" $repos[i] | sed -e "s;dev_;;g"
-		done		
-		echo "###################################################################"	
-	fi
 }
 
 menu()
@@ -57,7 +48,11 @@ menu()
 	
 	# se variavel for vazia, mostra mensagem e sai
 	if [[ -z $1 ]]; then
-		printf "Parametros disponiveis: \n$repos\n"
+		echo "##### Opções #####"		
+		for (( i = 1; i <= ${#repos[@]}; i++ )); do	
+			echo "~ repo" $repos[i] | sed -e "s;dev_;;g"
+		done		
+		echo "##################"
 	else 		
 		# chamando funcao
 		auto_alias $1		
