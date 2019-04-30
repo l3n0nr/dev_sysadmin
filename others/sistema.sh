@@ -26,9 +26,9 @@
 # 	<https://stackoverflow.com/questions/3385003/shell-script-to-get-difference-in-two-dates>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [1.25]         #
+# # versão do script:              [1.26]         #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [29/04/19]      #
+# # ultima ediçao realizada:      [30/04/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -197,7 +197,7 @@ report()
 	memoria_utilizada
 	disco
 	commits		
-	# twitts
+	twitts
 	check_updates
 	instalacao_sistema
 	echo	
