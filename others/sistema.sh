@@ -26,7 +26,7 @@
 # 	<https://stackoverflow.com/questions/3385003/shell-script-to-get-difference-in-two-dates>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [1.26]         #
+# # versão do script:              [1.27]         #
 # # data de criação do script:    [23/10/17]      #
 # # ultima ediçao realizada:      [30/04/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -80,7 +80,7 @@ twitts()
 	arquivo="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
 
 	if [[ $sistema = "desktop" ]]; then
-		count=$(wc $arquivo | awk '{print $1}')
+		count=$(cat $arquivo | wc -l)
 
 		if [[ $count > 1 ]]; then
 			echo "- $count twitts pendentes do bot!" ; echo
