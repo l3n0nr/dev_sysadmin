@@ -10,7 +10,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [28/03/18]      #
 # # ultima ediçao realizada:      [02/05/19]      #
-# # versao do script :			  [	 0.20  ] 	  #
+# # versao do script :			  [	 0.25  ] 	  #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 #
@@ -27,7 +27,7 @@ check_internet()
 		mensagem="Internet funcionando!"
 		echo $mensagem $data
 		notify-send "$mensagem"
-		exit 1
+		exit 0
 	else				
 		mensagem="- Sem conexao!"		
 		echo $mensagem $data
