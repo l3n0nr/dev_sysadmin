@@ -9,8 +9,8 @@
 ##########################################
 #
 # DATA_CRIACAO: 26/01/19
-# ULT_MODIFIC:  22/04/19
-# VERSAO:		0.57
+# ULT_MODIFIC:  01/05/19
+# VERSAO:		1.10
 #
 ###########################################################################
 verifica_internet()
@@ -65,8 +65,7 @@ radio_dialog()
             "Deep Space One" "7" \
             "Mission Control" "8" \
             "Indie Pop" "9" \
-            "Minuano" "10" \
-            "Nativa" "11" ) ; 
+			"Bandeirantes" "10" ) ; 
 
     func_verifica && func_radio
 }
