@@ -2,22 +2,22 @@
 #
 ########################################################
 #
-## DESCRICAO
-# 	Converte audio para pasta especifica
-#
-## DATA_CRIACAO: 31/03/19
-## ULTIMA_MODIF: 31/03/19
-## VERSAO: 0.10
-#
-## REFERENCIAS
+# REFERENCIAS
 # 	https://ubuntuforums.org/showthread.php?t=1614765
 # 	https://stackoverflow.com/questions/20512865/batch-if-file-with-filename-exist
 #
 ########################################################
+## DESCRICAO
+# 	Converte audio para pasta especifica
+#
+## DATA_CRIACAO: 31/03/19
+## ULTIMA_MODIF: 05/04/19
+## VERSAO: 0.15
+########################################################
 #
 check_file()
 {
-	log="/tmp/convert_audio.txt"
+	log="/tmp/convert_audio"
 
 	if [[ -e $log ]]; then
 		touch $log
