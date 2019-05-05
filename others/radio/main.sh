@@ -9,8 +9,8 @@
 ##########################################
 #
 # DATA_CRIACAO: 26/01/19
-# ULT_MODIFIC:  04/05/19
-# VERSAO:		1.12
+# ULT_MODIFIC:  05/05/19
+# VERSAO:		1.25
 #
 ###########################################################################
 verifica_internet()
@@ -50,40 +50,86 @@ func_verifica()
 	fi
 }
 
-radio_dialog()
+select_local()
 {
-	escolha=$(dialog \
+	local=$(dialog \
             --stdout --ok-label "Ouvir" --cancel-label "Sair" \
-            --menu "Escolha uma radio:" \
-            0 0 0 \
-            "Gaucha" "1" \
-            "USP" "2" \
-            "UFRGS" "3" \
-            "Bandeirantes" "4" \
-            "Minuano" "5" \
-            "Nativa" "6" \
-            "Dronezone" "7" \
-            "Space Station" "8" \
-            "Digitalis" "9" \
-            "Deep Space One" "10" \
-            "Mission Control" "11" \
-            "Indie Pop" "12" ) ; 
+            --menu "Escolha um local:" 0 0 0 \
+            "Brasil" "+" \
+            "Others" "+" ) ; 
 		
-    func_verifica && func_radio
+    func_verifica && radio_dialog
 }
 
-func_radio()
+radio_dialog_brasil()
+{
+	escolha=$(dialog \
+			--stdout --ok-label "Ouvir" --cancel-label "Sair" \
+			--menu "Escolha uma radio:" 0 0 0 \
+			"Gaucha" "+" \
+			"USP" "+" \
+			"UFRGS" "+" \
+			"Bandeirantes" "+" \
+			"Minuano" "+" \
+			"Nativa" "+" \
+			"Atlantida" "+" \
+			"Jovem Pan" "+" ) ; 
+
+    func_verifica && func_radio_brasil 
+}
+
+radio_dialog_others()
+{
+	escolha=$(dialog \
+	    --stdout --ok-label "Ouvir" --cancel-label "Sair" \
+	    --menu "Escolha uma radio:" 0 0 0 \
+	    "Dronezone" "+" \
+	    "Space Station" "+" \
+	    "Digitalis" "+" \
+	    "Deep Space One" "+" \
+	    "Mission Control" "+" \
+	    "Indie Pop" "+" ) ;         
+
+	func_verifica && func_radio_others
+}
+
+radio_dialog()
+{
+	if [[ $local = "Brasil" ]]; then
+		radio_dialog_brasil
+	elif [[ $local = "Others" ]]; then
+		radio_dialog_others
+	else
+		select_local
+	fi
+}
+
+func_radio_brasil()
 {
 	declare -A STREAM
 	
 	local="/home/lenonr/Github/dev_sysadmin/others/radio"
 
-	source $local/radio.conf
+	source $local/radio_brasil.conf
 
 	title="${escolha}"
 	ip="${STREAM[$escolha]}"
 	ffplay -nodisp $ip &> /dev/null
-	radio_dialog
+	radio_dialog_brasil
+}
+
+func_radio_others()
+{
+	declare -A STREAM
+	
+	local="/home/lenonr/Github/dev_sysadmin/others/radio"
+
+	source $local/radio_others.conf
+
+	title="${escolha}"
+	ip="${STREAM[$escolha]}"
+	ffplay -nodisp $ip &> /dev/null
+	radio_dialog_others
 }
 
 ###########################################################################
@@ -91,8 +137,7 @@ main()
 {
 	clear
 	verifica_internet
-	# radio
-	radio_dialog
+	select_local
 }
 ###########################################################################
 
