@@ -9,8 +9,8 @@
 ##########################################
 #
 # DATA_CRIACAO: 26/01/19
-# ULT_MODIFIC:  05/05/19
-# VERSAO:		1.25
+# ULT_MODIFIC:  06/05/19
+# VERSAO:		1.26
 #
 ###########################################################################
 verifica_internet()
@@ -56,7 +56,7 @@ select_local()
             --stdout --ok-label "Ouvir" --cancel-label "Sair" \
             --menu "Escolha um local:" 0 0 0 \
             "Brasil" "+" \
-            "Others" "+" ) ; 
+            "Others" "-" ) ; 
 		
     func_verifica && radio_dialog
 }
@@ -83,12 +83,12 @@ radio_dialog_others()
 	escolha=$(dialog \
 	    --stdout --ok-label "Ouvir" --cancel-label "Sair" \
 	    --menu "Escolha uma radio:" 0 0 0 \
-	    "Dronezone" "+" \
-	    "Space Station" "+" \
-	    "Digitalis" "+" \
-	    "Deep Space One" "+" \
-	    "Mission Control" "+" \
-	    "Indie Pop" "+" ) ;         
+	    "Dronezone" "-" \
+	    "Space Station" "-" \
+	    "Digitalis" "-" \
+	    "Deep Space One" "-" \
+	    "Mission Control" "-" \
+	    "Indie Pop" "-" ) ;         
 
 	func_verifica && func_radio_others
 }
