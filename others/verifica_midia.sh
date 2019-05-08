@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 ####################
 # DESENVOLVIDO POR #
@@ -16,8 +16,8 @@
 #################################################################################
 #
 ###################################################
-# versão do script:              0.0.76.0.0.0     #
-# # ultima ediçao realizada:      [11/04/19]      #
+# versão do script:              0.0.80.0.0.0     #
+# # ultima ediçao realizada:      [08/05/19]      #
 ###################################################
 #
 # legenda: a.b.c.d.e.f
@@ -35,7 +35,6 @@
 ################################################################################
 #
 # Script testado em Linux
-#	- Xubuntu 16.04
 #	- Debian 10
 #
 ################################################################################
@@ -46,139 +45,106 @@
 #
 ################################################################################
 
-#criando variaveis globais
-# caminhoorigem="/media/lenonr/BACKUP/Arquivos/"
-# caminhodestino="/home/lenonr/MEGA/Outros/Lista/"
+## VARIAVEIS
+# verificacao
+var_tree=$(which tree)
+local_destino="/home/lenonr/MEGA/"
 
-# criando arquivo dentro de cada funcao, para evitar possiveis erros
-#     touch $caminhodestino/Filmes.txt
+# FILMES
+caminhofilmes_origem="/media/lenonr/BACKUP/Arquivos/Filmes"
+caminhofilmes_destino="/home/lenonr/MEGA/Outros/Lista/Filmes.txt"
+caminhofilmes_destinohd="/media/lenonr/BACKUP/Arquivos/Filmes/Filmes.txt"    
 
-LOCAL_DESTINO="/home/lenonr/MEGA/"
+	# assistidos
+	caminhofilmes_a_origem="/media/lenonr/BACKUP/Arquivos/Filmes"  
+	caminhofilmes_a_destino="/home/lenonr/MEGA/Outros/Lista/Filmes_Assistidos.txt"
+	caminhofilmes_a_destinohd="/media/lenonr/BACKUP/Arquivos/Filmes/Filmes_Assistidos.txt"    
+
+	# pendentes
+	caminhofilmes_p_origem="/home/lenonr/Downloads/Torrents/Finalized/Movies"    
+	caminhofilmes_p_destino="/home/lenonr/MEGA/Outros/Lista/Filmes_Pendentes.txt"
+	caminhofilmes_p_destinohd="/media/lenonr/BACKUP/Arquivos/Filmes/Filmes_Pendentes.txt"    
+
+# SERIADOS
+caminhoseriados_origem="/media/lenonr/BACKUP/Arquivos/Seriados"    
+caminhoseriados_destino="/home/lenonr/MEGA/Outros/Lista/Seriados.txt"    
+caminhoseriados_destinohd="/media/lenonr/BACKUP/Arquivos/Seriados/Seriados.txt"
 
 install_tree()
-{
-	# variavel de verificação
-    var_tree=$(which tree)
-
+{	
     if [[ ! -e $var_tree ]]; then
         printf "O Tree nao foi encontrado, instalar por favor!"
     fi
 }
 
 filmes()
-{    
-    #criando variaveis
-    caminhofilmesorigem="/media/lenonr/BACKUP/Arquivos/Filmes"
-        
-    caminhofilmesdestino="/home/lenonr/MEGA/Outros/Lista/Filmes.txt"
-    caminhofilmesdestinohd="/media/lenonr/BACKUP/Arquivos/Filmes/Filmes.txt"    
-    
-    # deletando arquivos por garantia
-#     printf "[*] Deletando arquivos já existentes...\n"
-#     rm $caminhofilmesdestino $caminhofilmesdestinohd
-    
-    # mostrando mensagem de execução 
+{       
     printf "[*] Verificando Filmes, aguarde...\n"
-    sleep 2
-    
-    # gerando arquivo
-    tree $caminhofilmesorigem > $caminhofilmesdestino
 
- #    f=`cat $caminhofilmes_destino | wc -l`
-	# printf "\n Este arquivo contem $f filmes listados!" >> $caminhofilmes_destino
-    
-    # copiando arquivo
-    cat $caminhofilmesdestino > $caminhofilmesdestinohd
+    tree $caminhofilmes_origem > $caminhofilmes_destino
+
+    cat $caminhofilmes_destino > $caminhofilmes_destinohd
 }
 
 filmes_assistidos()
-{
-    #criando variaveis
-    caminhofilmes_a_origem="/media/lenonr/BACKUP/Arquivos/Filmes"
-    
-    caminhofilmes_a_destino="/home/lenonr/MEGA/Outros/Lista/Filmes_Assistidos.txt"
-    caminhofilmes_a_destinohd="/media/lenonr/BACKUP/Arquivos/Filmes/Filmes_Assistidos.txt"    
- 
-    # mostrando mensagem de execução 
+{    
     printf "[*] Verificando Filmes Assistidos, aguarde...\n"
-    sleep 2
     
-    # gerando arquivo
     tree $caminhofilmes_a_origem | grep "[*]" | sort > $caminhofilmes_a_destino
 
     fa=`cat $caminhofilmes_a_destino | wc -l`
+
 	printf "\n Este arquivo contem $fa filmes listados!" >> $caminhofilmes_a_destino
     
-    # copiando arquivo
     cat $caminhofilmes_a_destino > $caminhofilmes_a_destinohd
 }
 
 filmes_pendentes()
-{
-    #criando variaveis
-    # caminhofilmes_a_origem="/media/lenonr/BACKUP/Arquivos/Filmes"
-    caminhofilmes_a_origem="/home/lenonr/Downloads/Torrents/Finalized/Movies"
-    
-    caminhofilmes_a_destino="/home/lenonr/MEGA/Outros/Lista/Filmes_Pendentes.txt"
-    caminhofilmes_a_destinohd="/media/lenonr/BACKUP/Arquivos/Filmes/Filmes_Pendentes.txt"    
- 
-    # mostrando mensagem de execução 
+{     
     printf "[*] Verificando Filmes Pendentes, aguarde...\n"
-    sleep 2
     
-    # gerando arquivo
-    tree $caminhofilmes_a_origem | grep "[+]" | sort > $caminhofilmes_a_destino
+    tree $caminhofilmes_p_origem | grep "[+]" | sort > $caminhofilmes_p_destino
     
-    fp=`cat $caminhofilmes_a_destino | wc -l`
-	printf "\n Este arquivo contem $fp filmes pendentes!" >> $caminhofilmes_a_destino
+    fp=`cat $caminhofilmes_p_destino | wc -l`
 
-    # copiando arquivo
+	printf "\n Este arquivo contem $fp filmes pendentes!" >> $caminhofilmes_p_destino
+
     cat $caminhofilmes_a_destino > $caminhofilmes_a_destinohd    
 }
 
 seriados()
 {   
-    #criando variaveis
-    caminhoseriadosorigem="/media/lenonr/BACKUP/Arquivos/Seriados"
-    
-    caminhoseriadosdestino="/home/lenonr/MEGA/Outros/Lista/Seriados.txt"    
-    caminhoseriadosdestinohd="/media/lenonr/BACKUP/Arquivos/Seriados/Seriados.txt"
-    
-    # deletando arquivos por garantia
-#     printf "[*] Deletando arquivos já existentes.. \n"
-#     rm $caminhoseriadosdestino $caminhoseriadosdestinohd
-    
-    # mostrando mensagem de execução
     printf "[*] Verificando Seriados, aguarde...\n"
-    sleep 2
+
+    tree $caminhoseriados_origem > $caminhoseriados_destino
     
-    # gerando arquivo
-    tree $caminhoseriadosorigem > $caminhoseriadosdestino
-    
-    # copiando arquivo
-    cat $caminhoseriadosdestino > $caminhoseriadosdestinohd
+    cat $caminhoseriados_destino > $caminhoseriados_destinohd
 }
 
 ################################################################################
 #
-clear
-if [ -e "$local_destino" ]; then 
-    printf "[+] Executando leitura das pastas \n"
-    printf "################################################### \n"
-    install_tree
+main()
+{
+	clear 
 
-    # executa somente se tree esta instalado
-    if [[ ! -e $var_tree ]]; then
-        echo "[-] Tree não está instalado"
-    else
-        # filmes
-        filmes_assistidos
-        filmes_pendentes
-        seriados
-    fi
-    printf "################################################### \n"
-else 
-    printf "[-] Pasta '$local_destino' nao encontrada! \n"
-    printf "[-] Backup nao realizado!!\n"
-fi
+	if [ -e "$local_destino" ]; then 
+	    printf "[+] Executando leitura das pastas \n"
+	    printf "################################################### \n"
+	    install_tree
 
+	    if [[ ! -e $var_tree ]]; then
+	        echo "[-] Tree não está instalado"
+	    else
+	        # filmes
+	        filmes_assistidos
+	        filmes_pendentes
+	        seriados
+	    fi
+	    printf "################################################### \n"
+	else 
+	    printf "[-] Pasta '$local_destino' nao encontrada! \n"
+	    printf "[-] Backup nao realizado!!\n"
+	fi
+}
+
+main
