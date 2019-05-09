@@ -9,8 +9,8 @@
 ##########################################
 #
 # DATA_CRIACAO: 26/01/19
-# ULT_MODIFIC:  06/05/19
-# VERSAO:		1.26
+# ULT_MODIFIC:  09/05/19
+# VERSAO:		1.28
 #
 ###########################################################################
 verifica_internet()
@@ -50,6 +50,15 @@ func_verifica()
 	fi
 }
 
+func_volta()
+{
+	if [[ $? == "1" ]]; then
+		main
+	else
+		dialog --infobox "$escolha" 0 0
+	fi
+}
+
 select_local()
 {
 	local=$(dialog \
@@ -64,7 +73,7 @@ select_local()
 radio_dialog_brasil()
 {
 	escolha=$(dialog \
-			--stdout --ok-label "Ouvir" --cancel-label "Sair" \
+			--stdout --ok-label "Ouvir" --cancel-label "Voltar" \
 			--menu "Escolha uma radio:" 0 0 0 \
 			"Gaucha" "+" \
 			"USP" "+" \
@@ -75,13 +84,13 @@ radio_dialog_brasil()
 			"Atlantida" "+" \
 			"Jovem Pan" "+" ) ; 
 
-    func_verifica && func_radio_brasil 
+    func_volta && func_radio_brasil 
 }
 
 radio_dialog_others()
 {
 	escolha=$(dialog \
-	    --stdout --ok-label "Ouvir" --cancel-label "Sair" \
+	    --stdout --ok-label "Ouvir" --cancel-label "Voltar" \
 	    --menu "Escolha uma radio:" 0 0 0 \
 	    "Dronezone" "-" \
 	    "Space Station" "-" \
@@ -90,7 +99,7 @@ radio_dialog_others()
 	    "Mission Control" "-" \
 	    "Indie Pop" "-" ) ;         
 
-	func_verifica && func_radio_others
+	func_volta && func_radio_others
 }
 
 radio_dialog()
