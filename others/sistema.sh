@@ -26,9 +26,9 @@
 # 	<https://stackoverflow.com/questions/3385003/shell-script-to-get-difference-in-two-dates>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [1.30]         #
+# # versão do script:              [1.35]         #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [05/05/19]      #
+# # ultima ediçao realizada:      [10/05/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -78,18 +78,21 @@ instalacao_sistema()
 twitts()
 {
 	arquivo="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
-	verificao=$(cat /home/lenonr/Dropbox/Arquivos/Twitter/twitter_scanner | tail -1)
+	check_lastscanner=$(tail -1 /home/lenonr/Dropbox/Arquivos/Twitter/twitter_scanner)
+	check_lastpost=$(tail -1 /tmp/twitter_log | sed 's/NEW POST   - //g' )
 
 	if [[ $sistema = "desktop" ]]; then
 		count=$(cat $arquivo | wc -l)
 
 		if [[ $count > 1 ]]; then
-			echo "- $count twitts pendentes do bot!"
-			echo "	- Last scanner: $verificao."; echo
+			echo "- $count twitts pendentes do bot!"			
 		else
-			echo "- 1 twitt pendente do bot!"
-			echo "	- Last scanner: $verificao."; echo
+			echo "- 1 twitt pendente do bot!"			
 		fi		
+				
+		echo "	- Last scanner: $check_lastscanner."
+		echo "	- Last post:    $check_lastpost."
+		echo
 	fi	
 }
 
