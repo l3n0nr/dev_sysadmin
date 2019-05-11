@@ -9,8 +9,8 @@
 ##########################################
 #
 # DATA_CRIACAO: 26/01/19
-# ULT_MODIFIC:  09/05/19
-# VERSAO:		1.28
+# ULT_MODIFIC:  10/05/19
+# VERSAO:		1.30
 #
 ###########################################################################
 verifica_internet()
@@ -65,7 +65,7 @@ select_local()
             --stdout --ok-label "Ouvir" --cancel-label "Sair" \
             --menu "Escolha um local:" 0 0 0 \
             "Brasil" "+" \
-            "Others" "-" ) ; 
+            "SomaFM" "-" ) ; 
 		
     func_verifica && radio_dialog
 }
@@ -87,7 +87,7 @@ radio_dialog_brasil()
     func_volta && func_radio_brasil 
 }
 
-radio_dialog_others()
+radio_dialog_somafm()
 {
 	escolha=$(dialog \
 	    --stdout --ok-label "Ouvir" --cancel-label "Voltar" \
@@ -97,7 +97,13 @@ radio_dialog_others()
 	    "Digitalis" "-" \
 	    "Deep Space One" "-" \
 	    "Mission Control" "-" \
-	    "Indie Pop" "-" ) ;         
+	    "Indie Pop" "-" \
+	    "Lush" "-" \
+	    "Groove Salad" "-" \
+	    "u80s" "-" \
+	    "Secret Agent" "-" \
+	    "Sonic Universe" "-" \
+	    "Beat Blender" "-" ) ;         
 
 	func_volta && func_radio_others
 }
@@ -106,8 +112,8 @@ radio_dialog()
 {
 	if [[ $local = "Brasil" ]]; then
 		radio_dialog_brasil
-	elif [[ $local = "Others" ]]; then
-		radio_dialog_others
+	elif [[ $local = "SomaFM" ]]; then
+		radio_dialog_somafm
 	else
 		select_local
 	fi
@@ -133,12 +139,12 @@ func_radio_others()
 	
 	local="/home/lenonr/Github/dev_sysadmin/others/radio"
 
-	source $local/radio_others.conf
+	source $local/radio_somafm.conf
 
 	title="${escolha}"
 	ip="${STREAM[$escolha]}"
 	ffplay -nodisp $ip &> /dev/null
-	radio_dialog_others
+	radio_dialog_somafm
 }
 
 ###########################################################################
