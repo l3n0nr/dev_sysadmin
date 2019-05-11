@@ -1,20 +1,17 @@
 #!/usr/bin/env bash
 #
 ##########################################
-# REFERENCIAS
-#		https://youtu.be/8Lam1iVZIGA
-# 		http://somafm.com
-#		https://www.internet-radio.com
 #
-# DESCRICAO
-#		Toca web radio no terminal
+# DESCRICAO: Toca web radio no terminal
+# AUTOR: 	 lenonr | lenonrmsouza@gmail
+#
 ##########################################
 #
 # DATA_CRIACAO: 26/01/19
 # ULT_MODIFIC:  11/05/19
-# VERSAO:		1.31
+# VERSAO:		1.35
 #
-###########################################################################
+##########################################
 #
 ## VARIAVEIS
 path="/home/lenonr/Github/dev_sysadmin/others/radio"
@@ -87,7 +84,8 @@ radio_dialog_brasil()
 			"Minuano" "+" \
 			"Nativa" "+" \
 			"Atlantida" "+" \
-			"Jovem Pan" "+" ) ; 
+			"Jovem Pan" "+" \
+			"Cafe Brasil" "+" ) ; 
 
     func_volta && func_radio_brasil 
 }
@@ -121,9 +119,10 @@ radio_dialog_others()
 	    "440 Rock" "*" \
 	    "Smooth Jazz" "*" \
 	    "Classical" "*" \
-	    "Blues" "*" \
-	    "Country" "*" \
-	    "Ambient" "*" ) ;   
+	    "Ambient" "*" \
+	    "Abiding" "*" \
+	    "Al-Radio" "*" \
+	    "Wonderful London" "*" ) ;   
 
 	func_volta && func_radio_others
 }
