@@ -11,39 +11,23 @@
 ##########################################
 #
 # DATA_CRIACAO: 26/01/19
-# ULT_MODIFIC:  10/05/19
-# VERSAO:		1.30
+# ULT_MODIFIC:  11/05/19
+# VERSAO:		1.31
 #
 ###########################################################################
 #
-## VARIAVEIS GLOBAIS
+## VARIAVEIS
 path="/home/lenonr/Github/dev_sysadmin/others/radio"
+ping_server="www.google.com"
 
 verifica_internet()
 {
 	clear 
 
-	echo "Verificando conexao, aguarde..."	
-
-	ping_server="www.google.com"
+	echo "Verificando conexao, aguarde..."		
 	
   	ping -c1 $ping_server >> /dev/null
   	[[ ! $? -eq 0 ]] && echo "SEM CONEXAO!" && exit 1 || clear
-}
-
-radio()
-{
-	declare -A STREAM
-
-	source $path/radio.conf
-
-	PS3=$'\nSelecione uma radio:'
-	select radio in "${!STREAM[@]}"; do
-		title="${radio}"
-		ip="${STREAM[$radio]}"
-		echo -e "\033[31;1mVoce esta ouvindo: $title (Ctrl+C para sair)\033[m"
-		ffplay -nodisp $ip &> /dev/null
-	done
 }
 
 func_verifica()
@@ -68,12 +52,27 @@ select_local()
 {
 	local=$(dialog \
             --stdout --ok-label "Ouvir" --cancel-label "Sair" \
-            --menu "Escolha um local:" 0 0 0 \
+            --menu "Selecione um gênero:" 0 0 0 \
             "Brasil" "+" \
             "SomaFM" "-" \
             "Others" "*" ) ; 
 		
     func_verifica && radio_dialog
+}
+
+radio()
+{
+	declare -A STREAM
+
+	source $path/radio.conf
+
+	PS3=$'\nSelecione uma radio:'
+	select radio in "${!STREAM[@]}"; do
+		title="${radio}"
+		ip="${STREAM[$radio]}"
+		echo -e "\033[31;1mVoce esta ouvindo: $title (Ctrl+C para sair)\033[m"
+		ffplay -nodisp $ip &> /dev/null
+	done
 }
 
 radio_dialog_brasil()
