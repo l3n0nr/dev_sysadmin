@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 #
 ##########################################
-# REFERENCIA 
+# REFERENCIAS
 #		https://youtu.be/8Lam1iVZIGA
+# 		http://somafm.com
+#		https://www.internet-radio.com
 #
 # DESCRICAO
 #		Toca web radio no terminal
@@ -13,24 +15,27 @@
 # VERSAO:		1.30
 #
 ###########################################################################
+#
+## VARIAVEIS GLOBAIS
+path="/home/lenonr/Github/dev_sysadmin/others/radio"
+
 verifica_internet()
 {
-	echo "Verificando conexao, aguarde..."
 	clear 
+
+	echo "Verificando conexao, aguarde..."	
 
 	ping_server="www.google.com"
 	
   	ping -c1 $ping_server >> /dev/null
-  	[[ ! $? -eq 0 ]] && echo "SEM CONEXAO!" && exit 1
+  	[[ ! $? -eq 0 ]] && echo "SEM CONEXAO!" && exit 1 || clear
 }
 
 radio()
 {
 	declare -A STREAM
-	
-	local="/home/lenonr/Github/dev_sysadmin/others/radio"
 
-	source $local/radio.conf
+	source $path/radio.conf
 
 	PS3=$'\nSelecione uma radio:'
 	select radio in "${!STREAM[@]}"; do
@@ -65,7 +70,8 @@ select_local()
             --stdout --ok-label "Ouvir" --cancel-label "Sair" \
             --menu "Escolha um local:" 0 0 0 \
             "Brasil" "+" \
-            "SomaFM" "-" ) ; 
+            "SomaFM" "-" \
+            "Others" "*" ) ; 
 		
     func_verifica && radio_dialog
 }
@@ -105,6 +111,21 @@ radio_dialog_somafm()
 	    "Sonic Universe" "-" \
 	    "Beat Blender" "-" ) ;         
 
+	func_volta && func_radio_somafm
+}
+
+radio_dialog_others()
+{
+	escolha=$(dialog \
+	    --stdout --ok-label "Ouvir" --cancel-label "Voltar" \
+	    --menu "Escolha uma radio:" 0 0 0 \
+	    "440 Rock" "*" \
+	    "Smooth Jazz" "*" \
+	    "Classical" "*" \
+	    "Blues" "*" \
+	    "Country" "*" \
+	    "Ambient" "*" ) ;   
+
 	func_volta && func_radio_others
 }
 
@@ -114,6 +135,8 @@ radio_dialog()
 		radio_dialog_brasil
 	elif [[ $local = "SomaFM" ]]; then
 		radio_dialog_somafm
+	elif [[ $local = "Others" ]]; then
+		radio_dialog_others
 	else
 		select_local
 	fi
@@ -123,9 +146,7 @@ func_radio_brasil()
 {
 	declare -A STREAM
 	
-	local="/home/lenonr/Github/dev_sysadmin/others/radio"
-
-	source $local/radio_brasil.conf
+	source $path/radio_brasil.conf
 
 	title="${escolha}"
 	ip="${STREAM[$escolha]}"
@@ -133,13 +154,11 @@ func_radio_brasil()
 	radio_dialog_brasil
 }
 
-func_radio_others()
+func_radio_somafm()
 {
 	declare -A STREAM
 	
-	local="/home/lenonr/Github/dev_sysadmin/others/radio"
-
-	source $local/radio_somafm.conf
+	source $path/radio_somafm.conf
 
 	title="${escolha}"
 	ip="${STREAM[$escolha]}"
@@ -147,10 +166,21 @@ func_radio_others()
 	radio_dialog_somafm
 }
 
+func_radio_others()
+{
+	declare -A STREAM
+	
+	source $path/radio_others.conf
+
+	title="${escolha}"
+	ip="${STREAM[$escolha]}"
+	ffplay -nodisp $ip &> /dev/null
+	radio_dialog_others
+}
+
 ###########################################################################
 main()
-{
-	clear
+{	
 	verifica_internet
 	select_local
 }
