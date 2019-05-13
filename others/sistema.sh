@@ -26,9 +26,9 @@
 # 	<https://stackoverflow.com/questions/3385003/shell-script-to-get-difference-in-two-dates>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [1.35]         #
+# # versão do script:              [1.36]         #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [10/05/19]      #
+# # ultima ediçao realizada:      [13/05/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -40,13 +40,9 @@
 # 
 # # FUNCOES
 # # # # # # # # # #    
-# # DADOS DO SISTEMA
-install_system=$(ls -lct /etc | tail -1 | awk '{print $6, $7, $8}')
+# variaveis globais
 date_now=$(date +%x-%k%M)
 sistema=$(hostname)
-
-cont_com=$(cat /tmp/commit_com.txt | tail -1 | sed -e 's/\dev_//g')
-cont_add=$(cat /tmp/commit_add.txt | tail -1 | sed -e 's/\dev_//g')
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #																				#
@@ -72,6 +68,8 @@ disco()
 
 instalacao_sistema()
 {
+	install_system=$(ls -lct /etc | tail -1 | awk '{print $6, $7, $8}')
+
 	echo "- Sistema instalado em $install_system."
 }
 
@@ -79,7 +77,7 @@ twitts()
 {
 	arquivo="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
 	check_lastscanner=$(tail -1 /home/lenonr/Dropbox/Arquivos/Twitter/twitter_scanner)
-	check_lastpost=$(tail -1 /tmp/twitter_log | sed 's/NEW POST   - //g' )
+	check_lastpost=$(cat /tmp/twitter_log | grep "NEW POST" | tail -1 | sed 's/NEW POST   - //g' )
 
 	if [[ $sistema = "desktop" ]]; then
 		count=$(cat $arquivo | wc -l)
@@ -119,6 +117,7 @@ commits()
 commits_add()
 {
 	commits_add=$(cat /tmp/commits_add)
+	cont_add=$(cat /tmp/commit_add.txt | tail -1 | sed -e 's/\dev_//g')
 
 	if [[ $commits_add > "0" ]]; then
 		if [[ $cont_add = "" ]]; then
@@ -132,6 +131,7 @@ commits_add()
 commits_com()
 {
 	commits_com=$(cat /tmp/commits_com)
+	cont_com=$(cat /tmp/commit_com.txt | tail -1 | sed -e 's/\dev_//g')
 
 	if [[ $commits_com > "0" ]]; then
 		if [[ $cont_com = "" ]]; then
@@ -150,20 +150,21 @@ check_commit()
 	### GERANDO ARQUIVOS ##
 	if [[ ! -e "/tmp/commits"  ]]; then
 		touch /tmp/commits
+	else
+		echo "0" > /tmp/commits	
 	fi		
 
 	if [[ ! -e "/tmp/commits_add"  ]]; then
 		touch /tmp/commits_add
+	else
+		echo "0" > /tmp/commits_add
 	fi		
 
 	if [[ ! -e "/tmp/commits_com"  ]]; then
 		touch /tmp/commits_com
-	fi		
-
-	## Iniciando valores
-	echo "0" > /tmp/commits
-	echo "0" > /tmp/commits_add
-	echo "0" > /tmp/commits_com
+	else
+		echo "0" > /tmp/commits_com
+	fi			
 
 	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/status_git.sh >> /dev/null 
 }
@@ -256,9 +257,3 @@ main()
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # INICIANDO SCRIPT
 main
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
- 
-#                           RODAPE DO SCRIPT                                    #
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
