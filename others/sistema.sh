@@ -26,9 +26,9 @@
 # 	<https://stackoverflow.com/questions/3385003/shell-script-to-get-difference-in-two-dates>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [1.36]         #
+# # versão do script:              [1.37]         #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [13/05/19]      #
+# # ultima ediçao realizada:      [14/05/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -37,13 +37,11 @@
 #	Debian Stable
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# 
-# # FUNCOES
-# # # # # # # # # #    
+#  
 # variaveis globais
 date_now=$(date +%x-%k%M)
 sistema=$(hostname)
-
+#
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #																				#
 #                               CORPO DO SCRIPT                               	#
@@ -80,7 +78,8 @@ twitts()
 	check_lastpost=$(cat /tmp/twitter_log | grep "NEW POST" | tail -1 | sed 's/NEW POST   - //g' )
 
 	if [[ $sistema = "desktop" ]]; then
-		count=$(cat $arquivo | wc -l)
+		# count=$(cat $arquivo | wc -l)
+		count=$(wc -l $arquivo | awk '{print $1}')
 
 		if [[ $count > 1 ]]; then
 			echo "- $count twitts pendentes do bot!"			
