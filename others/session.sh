@@ -2,7 +2,7 @@
 #
 ################################################
 # DESCRICAO		:  	Suspende/Hiberna computador
-# VERSAO		: 	0.15
+# VERSAO		: 	0.16
 # AUTOR			: 	lenonr
 ################################################
 #
@@ -12,13 +12,16 @@ time="0"
 
 # tipo de acao
 action=""
+
+# data agora
+date_now=$(date +%X)
 ################################################
 #
 action_suspend()
 {
 	echo "Suspendendo o sistema em $time_conv segundos..."
 	sleep $time_conv
-	echo "...suspendendo AGORA!" && sleep 3
+	echo "...suspendendo AGORA! $date_now" && sleep 3
 
 	# suspendo sistema
 	xfce4-session-logout --suspend
