@@ -8,8 +8,8 @@
 ##########################################
 #
 # DATA_CRIACAO: 26/01/19
-# ULT_MODIFIC:  11/05/19
-# VERSAO:		1.35
+# ULT_MODIFIC:  17/05/19
+# VERSAO:		1.36
 #
 ##########################################
 #
@@ -116,11 +116,11 @@ radio_dialog_others()
 	escolha=$(dialog \
 	    --stdout --ok-label "Ouvir" --cancel-label "Voltar" \
 	    --menu "Escolha uma radio:" 0 0 0 \
+	    "Abiding" "*" \
 	    "440 Rock" "*" \
 	    "Smooth Jazz" "*" \
 	    "Classical" "*" \
 	    "Ambient" "*" \
-	    "Abiding" "*" \
 	    "Al-Radio" "*" \
 	    "Wonderful London" "*" ) ;   
 
