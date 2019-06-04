@@ -3,9 +3,9 @@
 # DESCRICAO
 #   Chama telnet do roteador via alias
 
-local_wrt='10.0.0.87'    
+# ULT_MOD = 03/06/19
 
-# ULT_MOD = 30/01/19
+local_wrt='192.168.1.1'
 
 wrt()
 {    
