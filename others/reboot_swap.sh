@@ -39,9 +39,9 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:           [0.1.121.0.0.0]   #
+# # versão do script:           [0.1.122.0.0.0]   #
 # # data de criação do script:    [03/11/17]      #
-# # ultima ediçao realizada:      [16/04/19]      #
+# # ultima ediçao realizada:      [07/06/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # Legenda: a.b.c.d.e.f
@@ -79,9 +79,6 @@
 ## log de saida
 local="/tmp/clear_memory.txt"
 
-## minimo de memoria RAM para limpeza - taxa/100
-porcentagem_mem="70"
-
 # realizando verificação de root
 if [[ `id -u` -ne 0 ]]; then       
     printf "############################################################################ \n"
@@ -96,8 +93,23 @@ limpa()
 	swapoff -a && swapon -a && printf "\e[1;32mSUCESS - \e[0m" >> $local && date >> $local
 }
 
+## minimo de memoria RAM para limpeza - taxa/100
+check_hostname()
+{
+	porc_hostname=$(echo $HOSTNAME)
+
+	if [[ $porc_hostname = "notebook" ]]; then
+		porcentagem_mem="80"
+	else
+		porcentagem_mem="70"
+	fi
+}
+
 porcentagem()
 {
+	## verifica hostname
+	check_hostname
+
 	# variaveis de verificacao da memoria RAM
 	memoria_total=$(free | awk '/Mem:/ {print $2}')	
 
@@ -120,7 +132,7 @@ porcentagem()
 
 main()
 {
-	porcentagem
+	porcentagem	
 }
 
 # # executando script
