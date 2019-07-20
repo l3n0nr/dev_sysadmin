@@ -8,13 +8,13 @@
 #
 # TESTADO EM: Debian Stable
 # VERSAO: 0.52
-# ULT_EDICAO: 08/10/18 
+# ULT_EDICAO: 20/07/19 
 #
 # DESCRICAO: Baixa arquivo tor e extrai na pasta $caminho
 # 
 ##### VARIAVEIS
 caminho="/opt/tor"
-versao_tor="8.0"
+versao_tor="8.5.4"
 url="https://dist.torproject.org/torbrowser"
 url_tor="$url/$versao_tor/tor-browser-linux64-"$versao_tor"_en-US.tar.xz"
 apelido="tor.tar.xz"
@@ -36,7 +36,7 @@ f_download_tor()
 	printf "[*] Baixando arquivo, aguarde.. \n"
 
 	# baixando arquivo via WGET, com possibilidade de contianuacao
-	wget -cb $url_tor -O $apelido > /dev/null
+	wget -c $url_tor -O $apelido > /dev/null
 }
 
 # funcao verificao pasta destino
