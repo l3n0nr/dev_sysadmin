@@ -6,8 +6,8 @@
 ######################################################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	15/03/19
-# VERSAO	:	0.93
+# LAST_MOD	:	28/07/19
+# VERSAO	:	0.94
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -98,8 +98,8 @@ check()
 		echo -e "Status battery:\e[1;32m $status"" \e[0m"
 		echo "Percent to full:" $(((100 - $perc_batery))) "%"
 		echo "Current battery now:" $current_now "mA"		
-		echo "Consuming level energy:" $consuming_level
-		echo "		$battery_full | $current_now"
+		# echo "Consuming level energy:" $consuming_level
+		# echo "		$battery_full | $current_now"
 	elif [[ $status == "Full" ]]; then
 		echo -e "Status battery:\e[1;34m Full"" \e[0m"
 	else
