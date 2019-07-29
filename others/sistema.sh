@@ -28,7 +28,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # versão do script:              [1.38]         #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [04/06/19]      #
+# # ultima ediçao realizada:      [28/07/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -49,7 +49,7 @@ sistema=$(hostname)
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 neofetch_sistema()
 {
-	neofetch --disable terminal resolution memory --color_blocks off --gtk3 off ; echo
+	neofetch --disable de wm theme icons memory resolution --color_blocks off ; echo
 }
 
 memoria_utilizada()
@@ -203,7 +203,7 @@ check_updates()
 report()
 {
 	if [[ $sistema = "notebook" ]]; then
-		echo "############################# SYSTEM REPORT ##############################"
+		echo "######################## SYSTEM REPORT ##########################"
 	else
 		echo "################################ SYSTEM REPORT ################################"
 	fi
@@ -221,7 +221,7 @@ report()
 completo()
 {	
 	if [[ $sistema = "notebook" ]]; then
-		echo "################################ NEOFETCH ################################"
+		echo "########################### NEOFETCH ############################"
 		echo
 	else
 		echo "################################### NEOFETCH ##################################"
@@ -235,7 +235,7 @@ completo()
 echo_p()
 {
 	if [[ $sistema = "notebook" ]]; then
-		echo "##########################################################################"
+		echo "#################################################################"
 	else
 		echo "###############################################################################"
 	fi
