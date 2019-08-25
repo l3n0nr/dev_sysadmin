@@ -6,8 +6,8 @@
 ######################################################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	28/07/19
-# VERSAO	:	0.94
+# LAST_MOD	:	25/08/19
+# VERSAO	:	0.95
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -26,7 +26,7 @@ check()
 	current_now="$(($(cat /sys/class/power_supply/BAT0/current_now) / 1000))"
 	current="$(cat /sys/class/power_supply/BAT0/current_now)"
 
-	time="$(ibam --percentbattery | grep "Battery time left:"| awk {'print $4'})"
+	time="$(ibam --percentbattery | grep "Adapted battery time left:"| awk {'print $5'})"
 	percent="$(ibam --percentbattery | grep "Battery percentage:"| awk {'print $3$4'})"
 	level="$(ibam --percentbattery | grep "Battery percentage:"| awk {'print $3'})"
 
