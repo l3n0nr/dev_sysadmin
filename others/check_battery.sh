@@ -7,7 +7,7 @@
 #
 # DAT_CRIAC	:	07/01/19
 # LAST_MOD	:	30/08/19
-# VERSAO	:	0.97
+# VERSAO	:	0.98
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -37,9 +37,9 @@ check()
 	expected_time="$(date -d "$expected_time_h hours $expected_time_m minutes" +%R)"
 	# cpu_speed=$(lscpu | grep "CPU MHz" | awk '{print $3}')
 
-	low_res="$((($full_battery * 40) / 100))"
+	low_res="$((($full_battery * 30) / 100))"
 	med_res="$((($full_battery * 60) / 100))"
-	high_res="$((($full_battery * 80) / 100))"
+	high_res="$((($full_battery * 75) / 100))"
 
 	date_rest="$battery_res"
 
@@ -49,18 +49,19 @@ check()
 		battery_res="$((($full_battery * 60) / $current_now))"
 		battery_res_h="$(($battery_res / 60))"
 		perc_batery="$(((($charge_now * 100)) / $full_battery))"
-		battery_full="$((($full_battery*60)/$current_now))"
+		battery_full="$((($full_battery * 60) / $current_now))"
 		calc_time=$(($battery_full - $battery_res))
 	fi					
 
-	if [[ $low_res -ge $current_now ]] ; then
-		consuming_level="[|--]"
-	elif [[ $med_res -ge $current_now ]] ; then
-		consuming_level="[||-]"
-	elif [[ $high_res -ge $current_now ]] ; then
-		consuming_level="[|||]"
+	# if [[ $current_now -le $low_res ]] ; then
+	if [[ $current_now -ge $low_res ]] && [[ $current_now -le $med_res ]]; then
+		consuming_level=$(echo -e "\e[1;32m[===]- \e[0m")
+	elif [[ $current_now -ge $med_res ]] && [[ $current_now -le $high_res ]] ; then
+		consuming_level=$(echo -e "\e[1;33m[===]- \e[0m")
+	elif [[ $current_now -ge $high_res ]] ; then
+		consuming_level=$(echo -e "\e[1;31m[===]- \e[0m")
 	else
-		consuming_level="[***]"
+		consuming_level="ERROR"
 	fi	
 
 	## check level battery
@@ -89,13 +90,11 @@ check()
 	fi	
 
 	if [[ $status == "Discharging" ]]; then						
-		echo -e "Status battery:\e[1;31m $status"" \e[0m"
+		echo -e "Status:\e[1;31m $status"" \e[0m"
 		echo "Time rest:" $time "/" $percent	
 		echo "Consuming now:" $current_now "mA /" $consuming_level
-		echo "Baterry rest:" $charge_now "mAh / $percent_level"		
+		echo "Battery rest:" $charge_now "mAh / $percent_level"		
 		echo "Expected shutdown:" $expected_time
-		# echo "Consuming level energy:" $consuming_level
-		# echo "Speed CPU:" $cpu_speed "MHz"
 	elif [[ $status == "Charging" ]]; then						
 		echo -e "Status battery:\e[1;32m $status"" \e[0m"
 		echo "Percent to full:" $(((100 - $perc_batery))) "%"
@@ -108,7 +107,7 @@ check()
 		echo "ERROR"
 	fi		
 
-	echo "Temperature: "$(sensors | grep temp1 | awk {'print $2'})
+	# echo "Temperature: "$(sensors | grep temp1 | awk {'print $2'})
 }
 
 main()
