@@ -6,8 +6,8 @@
 ######################################################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	27/08/19
-# VERSAO	:	0.96
+# LAST_MOD	:	30/08/19
+# VERSAO	:	0.97
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -54,15 +54,16 @@ check()
 	fi					
 
 	if [[ $low_res -ge $current_now ]] ; then
-		consuming_level="[+++-------]"
+		consuming_level="[|--]"
 	elif [[ $med_res -ge $current_now ]] ; then
-		consuming_level="[+++++++---]"
+		consuming_level="[||-]"
 	elif [[ $high_res -ge $current_now ]] ; then
-		consuming_level="[++++++++++]"
+		consuming_level="[|||]"
 	else
-		consuming_level="[**ERROR**]"
+		consuming_level="[***]"
 	fi	
 
+	## check level battery
 	if [[ "10" -ge $level ]]; then
 		percent_level="[+---------]"
 	elif [[ "20" -ge $level ]]; then
@@ -90,9 +91,10 @@ check()
 	if [[ $status == "Discharging" ]]; then						
 		echo -e "Status battery:\e[1;31m $status"" \e[0m"
 		echo "Time rest:" $time "/" $percent	
-		echo "Consuming now:" $current_now "mA"
+		echo "Consuming now:" $current_now "mA /" $consuming_level
 		echo "Baterry rest:" $charge_now "mAh / $percent_level"		
 		echo "Expected shutdown:" $expected_time
+		# echo "Consuming level energy:" $consuming_level
 		# echo "Speed CPU:" $cpu_speed "MHz"
 	elif [[ $status == "Charging" ]]; then						
 		echo -e "Status battery:\e[1;32m $status"" \e[0m"
