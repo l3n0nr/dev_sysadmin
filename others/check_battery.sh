@@ -53,7 +53,6 @@ check()
 		calc_time=$(($battery_full - $battery_res))
 	fi					
 
-	# if [[ $current_now -le $low_res ]] ; then
 	if [[ $current_now -ge $low_res ]] && [[ $current_now -le $med_res ]]; then
 		consuming_level=$(echo -e "\e[1;32m[===]- \e[0m")
 	elif [[ $current_now -ge $med_res ]] && [[ $current_now -le $high_res ]] ; then
@@ -98,9 +97,8 @@ check()
 	elif [[ $status == "Charging" ]]; then						
 		echo -e "Status battery:\e[1;32m $status"" \e[0m"
 		echo "Percent to full:" $(((100 - $perc_batery))) "%"
-		echo "Current battery now:" $current_now "mA"		
-		# echo "Consuming level energy:" $consuming_level
-		# echo "		$battery_full | $current_now"
+		echo "Consuming now:" $current_now "mA"
+		echo "Battery rest:" $charge_now "mAh / $percent_level"		
 	elif [[ $status == "Full" ]]; then
 		echo -e "Status battery:\e[1;34m Full"" \e[0m"
 	else
