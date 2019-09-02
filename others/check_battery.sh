@@ -6,8 +6,8 @@
 ######################################################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	30/08/19
-# VERSAO	:	0.98
+# LAST_MOD	:	02/09/19
+# VERSAO	:	0.99
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -19,12 +19,12 @@
 #
 check()
 {
-	## variables
 	status="$(cat /sys/class/power_supply/BAT0/status)"
 	full_battery="$(($(cat /sys/class/power_supply/BAT0/charge_full) / 1000))"
 	charge_now="$(($(cat /sys/class/power_supply/BAT0/charge_now) / 1000))"
 	current_now="$(($(cat /sys/class/power_supply/BAT0/current_now) / 1000))"
 	current="$(cat /sys/class/power_supply/BAT0/current_now)"
+	full_design="$(cat /sys/class/power_supply/BAT0/charge_full)"
 
 	time="$(ibam --percentbattery | grep "Adapted battery time left:"| awk {'print $5'})"
 	percent="$(ibam --percentbattery | grep "Battery percentage:"| awk {'print $3$4'})"
@@ -32,18 +32,18 @@ check()
 
 	expected_time_h=${time:0:1}
 	expected_time_m=${time:2:2}
-	expected_time_s=${time:5:5}
-
-	expected_time="$(date -d "$expected_time_h hours $expected_time_m minutes" +%R)"
-	# cpu_speed=$(lscpu | grep "CPU MHz" | awk '{print $3}')
+	expected_time_s=${time:5:5}	
 
 	low_res="$((($full_battery * 30) / 100))"
 	med_res="$((($full_battery * 60) / 100))"
 	high_res="$((($full_battery * 75) / 100))"
 
+	expected_time="$(date -d "$expected_time_h hours $expected_time_m minutes" +%R)"
+	expected_full_charge="$(ibam -a | grep "Bios time left:"| awk {'print $4'})"
+
 	date_rest="$battery_res"
 
-	## calc
+	######################################################################
 	if [[ $current > 0 ]]; then
 		current_now="$(($current / 1000))"	
 		battery_res="$((($full_battery * 60) / $current_now))"
@@ -96,9 +96,10 @@ check()
 		echo "Expected shutdown:" $expected_time
 	elif [[ $status == "Charging" ]]; then						
 		echo -e "Status battery:\e[1;32m $status"" \e[0m"
-		echo "Percent to full:" $(((100 - $perc_batery))) "%"
-		echo "Consuming now:" $current_now "mA"
-		echo "Battery rest:" $charge_now "mAh / $percent_level"		
+		echo "Percent to full:" $expected_full_charge / $(((100 - $perc_batery))) "%"
+		echo "Consuming now:" $current_now "mA / $consuming_level"
+		echo "Battery rest to full charge: $(($full_battery - $charge_now)) mAh"	
+		echo "Full battery:" $charge_now "mAh"
 	elif [[ $status == "Full" ]]; then
 		echo -e "Status battery:\e[1;34m Full"" \e[0m"
 	else
