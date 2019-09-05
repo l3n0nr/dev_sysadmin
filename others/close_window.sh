@@ -14,12 +14,16 @@
 #
 get_pid()
 {
-	wmctrl -c :ACTIVE:
+	window_name=$(xdotool getactivewindow getwindowname)
+
+	# se estiver na area de trabalho nao executa 
+	if [[ $window_name != "Área de trabalho" ]]; then
+		wmctrl -c :ACTIVE:		
+	fi
 }
 
 main()
 {
-	sleep 2
 	get_pid
 }
 
