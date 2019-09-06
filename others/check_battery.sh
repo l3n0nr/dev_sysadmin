@@ -6,8 +6,8 @@
 ######################################################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	02/09/19
-# VERSAO	:	0.99
+# LAST_MOD	:	06/09/19
+# VERSAO	:	1.05
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -53,7 +53,7 @@ check()
 		calc_time=$(($battery_full - $battery_res))
 	fi					
 
-	if [[ $current_now -ge $low_res ]] && [[ $current_now -le $med_res ]]; then
+	if [[ $current_now -le $low_res ]] && [[ $current_now -le $med_res ]]; then
 		consuming_level=$(echo -e "\e[1;32m[===]- \e[0m")
 	elif [[ $current_now -ge $med_res ]] && [[ $current_now -le $high_res ]] ; then
 		consuming_level=$(echo -e "\e[1;33m[===]- \e[0m")
