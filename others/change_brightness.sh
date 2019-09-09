@@ -8,8 +8,8 @@
 ################################################
 #
 # DATA_CRIACAO: 06/09/19
-# ULT_MODIFICA: 06/09/19
-# VERSAO:		0.15
+# ULT_MODIFICA: 09/09/19
+# VERSAO:		0.16
 #
 ################################################
 #
@@ -58,6 +58,10 @@ change_brightness()
 
 main()
 {
+	# verifica se root
+	[[ `id -u` -ne 0 ]] && \
+    	echo "## PRECISA DE ROOT ##" && exit 1    	
+
 	while [[ TRUE ]]; do
 		change_brightness
 	done	
