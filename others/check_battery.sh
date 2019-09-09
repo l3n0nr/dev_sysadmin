@@ -7,7 +7,7 @@
 #
 # DAT_CRIAC	:	07/01/19
 # LAST_MOD	:	09/09/19
-# VERSAO	:	1.08
+# VERSAO	:	1.10
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -17,7 +17,7 @@
 #
 ######################################################################
 #
-check()
+check_battery()
 {
 	status="$(cat /sys/class/power_supply/BAT0/status)"
 	full_battery="$(($(cat /sys/class/power_supply/BAT0/charge_full) / 1000))"
@@ -28,7 +28,7 @@ check()
 
 	time="$(ibam --percentbattery | grep "Adapted battery time left:"| awk {'print $5'})"
 	percent="$(ibam --percentbattery | grep "Battery percentage:"| awk {'print $3$4'})"
-	level="$(ibam --percentbattery | grep "Battery percentage:"| awk {'print $3'})"
+	level_battery="$(ibam --percentbattery | grep "Battery percentage:"| awk {'print $3'})"
 
 	expected_time_h=${time:0:1}
 	expected_time_m=${time:2:2}
@@ -42,9 +42,74 @@ check()
 	expected_full_charge="$(ibam -a | grep "Bios time left:"| awk {'print $4'})"
 
 	date_rest="$battery_res"
-	brightness=$(cat /sys/class/backlight/intel_backlight/brightness)
 
-	######################################################################
+	############################
+	## check level battery
+	if [[ "10" -ge $level_battery ]]; then
+		percent_level_battery="[+---------]"
+	elif [[ "20" -ge $level_battery ]]; then
+		percent_level_battery="[++--------]"
+	elif [[ "30" -ge $level_battery ]]; then
+		percent_level_battery="[+++-------]"
+	elif [[ "40" -ge $level_battery ]]; then
+		percent_level_battery="[++++------]"
+	elif [[ "50" -ge $level_battery ]]; then
+		percent_level_battery="[+++++-----]"
+	elif [[ "60" -ge $level_battery ]]; then
+		percent_level_battery="[++++++----]"
+	elif [[ "70" -ge $level_battery ]]; then
+		percent_level_battery="[+++++++---]"
+	elif [[ "80" -ge $level_battery ]]; then
+		percent_level_battery="[++++++++--]"
+	elif [[ "90" -ge $level_battery ]]; then
+		percent_level_battery="[+++++++++-]"
+	elif [[ "100" -ge $level_battery ]]; then
+		percent_level_battery="[++++++++++]"
+	else
+		percent_level_battery="[**ERROR**]"
+	fi		
+}
+
+check_brightness()
+{
+	max_brightness="4633"	
+	brightness=$(cat /sys/class/backlight/intel_backlight/brightness)
+	level_brightness="$(((( $brightness ) * 100) / $max_brightness ))"	
+
+	############################
+	## check level brightness
+	if [[ "10" -ge $level_brightness ]]; then
+		percent_level_brightness="[+---------]"
+	elif [[ "20" -ge $level_brightness ]]; then
+		percent_level_brightness="[++--------]"
+	elif [[ "30" -ge $level_brightness ]]; then
+		percent_level_brightness="[+++-------]"
+	elif [[ "40" -ge $level_brightness ]]; then
+		percent_level_brightness="[++++------]"
+	elif [[ "50" -ge $level_brightness ]]; then
+		percent_level_brightness="[+++++-----]"
+	elif [[ "60" -ge $level_brightness ]]; then
+		percent_level_brightness="[++++++----]"
+	elif [[ "70" -ge $level_brightness ]]; then
+		percent_level_brightness="[+++++++---]"
+	elif [[ "80" -ge $level_brightness ]]; then
+		percent_level_brightness="[++++++++--]"
+	elif [[ "90" -ge $level_brightness ]]; then
+		percent_level_brightness="[+++++++++-]"
+	elif [[ "100" -ge $level_brightness ]]; then
+		percent_level_brightness="[++++++++++]"
+	else
+		percent_level_brightness="[**ERROR**]"
+	fi	
+}
+
+check()
+{
+	## chamando funcoes especificas
+	check_brightness
+	check_battery
+
+	############################
 	if [[ $current > 0 ]]; then
 		current_now="$(($current / 1000))"	
 		battery_res="$((($full_battery * 60) / $current_now))"
@@ -62,39 +127,14 @@ check()
 		consuming_level=$(echo -e "\e[1;31m[===]- \e[0m")
 	else
 		consuming_level="ERROR"
-	fi	
-
-	## check level battery
-	if [[ "10" -ge $level ]]; then
-		percent_level="[+---------]"
-	elif [[ "20" -ge $level ]]; then
-		percent_level="[++--------]"
-	elif [[ "30" -ge $level ]]; then
-		percent_level="[+++-------]"
-	elif [[ "40" -ge $level ]]; then
-		percent_level="[++++------]"
-	elif [[ "50" -ge $level ]]; then
-		percent_level="[+++++-----]"
-	elif [[ "60" -ge $level ]]; then
-		percent_level="[++++++----]"
-	elif [[ "70" -ge $level ]]; then
-		percent_level="[+++++++---]"
-	elif [[ "80" -ge $level ]]; then
-		percent_level="[++++++++--]"
-	elif [[ "90" -ge $level ]]; then
-		percent_level="[+++++++++-]"
-	elif [[ "100" -ge $level ]]; then
-		percent_level="[++++++++++]"
-	else
-		percent_level="[**ERROR**]"
-	fi	
+	fi			
 
 	if [[ $status == "Discharging" ]]; then						
 		echo -e "Status:\e[1;31m $status"" \e[0m"
 		echo "Time rest:" $time "/" $percent	
 		echo "Consuming now:" $current_now "mA /" $consuming_level
-		echo "Battery rest:" $charge_now "mAh / $percent_level"	
-		echo "Brightness:" $brightness	
+		echo "Battery rest:" $charge_now "mAh / $percent_level_battery"		
+		echo "Brightness:" $brightness "/" $percent_level_brightness	
 		echo "Expected shutdown:" $expected_time
 		echo "Temperature: "$(sensors | grep temp1 | awk {'print $2'})""
 	elif [[ $status == "Charging" ]]; then						
@@ -127,6 +167,7 @@ main()
 			echo "BATTERY NOT FOUND!"
 			echo "##################"
 			sleep 5			
+			exit 0
 		fi		
 	done	
 }
