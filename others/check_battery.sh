@@ -6,8 +6,8 @@
 ######################################################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	06/09/19
-# VERSAO	:	1.05
+# LAST_MOD	:	09/09/19
+# VERSAO	:	1.08
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -42,6 +42,7 @@ check()
 	expected_full_charge="$(ibam -a | grep "Bios time left:"| awk {'print $4'})"
 
 	date_rest="$battery_res"
+	brightness=$(cat /sys/class/backlight/intel_backlight/brightness)
 
 	######################################################################
 	if [[ $current > 0 ]]; then
@@ -92,21 +93,23 @@ check()
 		echo -e "Status:\e[1;31m $status"" \e[0m"
 		echo "Time rest:" $time "/" $percent	
 		echo "Consuming now:" $current_now "mA /" $consuming_level
-		echo "Battery rest:" $charge_now "mAh / $percent_level"		
+		echo "Battery rest:" $charge_now "mAh / $percent_level"	
+		echo "Brightness:" $brightness	
 		echo "Expected shutdown:" $expected_time
+		echo "Temperature: "$(sensors | grep temp1 | awk {'print $2'})""
 	elif [[ $status == "Charging" ]]; then						
 		echo -e "Status battery:\e[1;32m $status"" \e[0m"
 		echo "Percent to full:" $expected_full_charge / $(((100 - $perc_batery))) "%"
 		echo "Consuming now:" $current_now "mA / $consuming_level"
 		echo "Battery rest to full charge: $(($full_battery - $charge_now)) mAh"	
+		echo "Brightness:" $brightness
 		echo "Full battery:" $charge_now "mAh"
+		echo "Temperature: "$(sensors | grep temp1 | awk {'print $2'})""
 	elif [[ $status == "Full" ]]; then
 		echo -e "Status battery:\e[1;34m Full"" \e[0m"
 	else
 		echo "ERROR"
 	fi		
-
-	# echo "Temperature: "$(sensors | grep temp1 | awk {'print $2'})
 }
 
 main()
