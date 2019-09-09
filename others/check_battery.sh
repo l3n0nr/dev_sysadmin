@@ -142,7 +142,7 @@ check()
 		echo "Percent to full:" $expected_full_charge / $(((100 - $perc_batery))) "%"
 		echo "Consuming now:" $current_now "mA / $consuming_level"
 		echo "Battery rest to full charge: $(($full_battery - $charge_now)) mAh"	
-		echo "Brightness:" $brightness
+		echo "Brightness:" $brightness "/" $percent_level_brightness	
 		echo "Full battery:" $charge_now "mAh"
 		echo "Temperature: "$(sensors | grep temp1 | awk {'print $2'})""
 	elif [[ $status == "Full" ]]; then
