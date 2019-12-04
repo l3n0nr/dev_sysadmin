@@ -8,8 +8,8 @@
 ##########################################
 #
 # DATA_CRIACAO: 26/01/19
-# ULT_MODIFIC:  17/05/19
-# VERSAO:		1.36
+# ULT_MODIFIC:  04/12/19
+# VERSAO:		1.37
 #
 ##########################################
 #
@@ -64,16 +64,15 @@ radio()
 	source $path/radio.conf
 
 	PS3=$'\nSelecione uma radio:'
-	select radio in "${!STREAM[@]}"; do
+	select radio in "${!STREAM[@]}"; do		
 		title="${radio}"
 		ip="${STREAM[$radio]}"
-		echo -e "\033[31;1mVoce esta ouvindo: $title (Ctrl+C para sair)\033[m"
 		ffplay -nodisp $ip &> /dev/null
 	done
 }
 
 radio_dialog_brasil()
-{
+{	
 	escolha=$(dialog \
 			--stdout --ok-label "Ouvir" --cancel-label "Voltar" \
 			--menu "Escolha uma radio:" 0 0 0 \
@@ -128,7 +127,7 @@ radio_dialog_others()
 }
 
 radio_dialog()
-{
+{	
 	if [[ $local = "Brasil" ]]; then
 		radio_dialog_brasil
 	elif [[ $local = "SomaFM" ]]; then
