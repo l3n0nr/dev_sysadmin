@@ -6,8 +6,8 @@
 ######################################################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	09/09/19
-# VERSAO	:	1.10
+# LAST_MOD	:	26/12/19
+# VERSAO	:	1.11
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -148,7 +148,7 @@ check()
 	elif [[ $status == "Full" ]]; then
 		echo -e "Status battery:\e[1;34m Full"" \e[0m"
 	else
-		echo "ERROR"
+		echo "	TEMP >60ºC - NOT CHARGING 	"
 	fi		
 }
 
