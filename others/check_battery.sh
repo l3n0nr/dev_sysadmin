@@ -6,8 +6,8 @@
 ######################################################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	29/01/20
-# VERSAO	:	1.15
+# LAST_MOD	:	12/02/20
+# VERSAO	:	1.16
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -154,7 +154,7 @@ check()
 		notify-send -t 250 "BATERRY FULL!"
 		echo -e "Status battery:\e[1;34m Full"" \e[0m"
 	else
-		notify-send -t 250 "BATTERY NOT CHARGING - HIGH TEMPERATURE"
+		# notify-send -t 250 "BATTERY NOT CHARGING - HIGH TEMPERATURE"
 		echo "	TEMP >60ºC - NOT CHARGING 	"
 	fi		
 }
