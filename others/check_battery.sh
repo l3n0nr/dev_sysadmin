@@ -6,8 +6,8 @@
 ######################################################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	12/02/20
-# VERSAO	:	1.16
+# LAST_MOD	:	22/02/20
+# VERSAO	:	1.17
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -50,14 +50,14 @@ check_battery()
 	elif [[ "20" -ge $level_battery ]]; then		
 		percent_level_battery="[++--------]"
 	elif [[ "30" -ge $level_battery ]]; then		
-		percent_level_battery="[+++-------]"	
+		percent_level_battery="[+++-------]"			
+	elif [[ "40" -ge $level_battery ]]; then
+		percent_level_battery="[++++------]"
 
 		if [[ $status == "Discharging" ]]; then
 			notify-send -t 100 "LOW BATERRY"	
 		fi
 
-	elif [[ "40" -ge $level_battery ]]; then
-		percent_level_battery="[++++------]"
 	elif [[ "50" -ge $level_battery ]]; then
 		percent_level_battery="[+++++-----]"
 	elif [[ "60" -ge $level_battery ]]; then
