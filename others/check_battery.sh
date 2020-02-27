@@ -141,7 +141,7 @@ check()
 		echo
 		echo "Consuming now:" $current_now "mA /" $consuming_level
 		echo "Full Design:" $full_battery " mAh / [++++++++++]"
-		echo "Battery rest:" $charge_now " mAh / $percent_level_battery"		
+		echo "Battery rest:" $charge_now "mAh / $percent_level_battery"		
 		echo
 		echo "Brightness:" $brightness "/" $percent_level_brightness			
 		echo "Temperature: "$(sensors | grep temp1 | awk {'print $2'})""
