@@ -6,8 +6,8 @@
 ######################################################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	22/02/20
-# VERSAO	:	1.17
+# LAST_MOD	:	27/02/20
+# VERSAO	:	1.25
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -27,8 +27,8 @@ check_battery()
 	full_design="$(cat /sys/class/power_supply/BAT0/charge_full)"
 
 	time="$(ibam --percentbattery | grep "Adapted battery time left:"| awk {'print $5'})"
-	percent="$(ibam --percentbattery | grep "Battery percentage:"| awk {'print $3$4'})"
-	level_battery="$(ibam --percentbattery | grep "Battery percentage:"| awk {'print $3'})"
+	percent="$(ibam --all | grep "Charge percentage:"| awk {'print $3$4'})"
+	level_battery="$(ibam --all | grep "Charge percentage:"| awk {'print $3'})"
 
 	expected_time_h=${time:0:1}
 	expected_time_m=${time:2:2}
@@ -45,30 +45,30 @@ check_battery()
 
 	############################
 	## check level battery
-	if [[ "10" -ge $level_battery ]]; then
+	if [[ "9" -ge $level_battery ]]; then
 		percent_level_battery="[+---------]"
-	elif [[ "20" -ge $level_battery ]]; then		
+	elif [[ "19" -ge $level_battery ]]; then		
 		percent_level_battery="[++--------]"
-	elif [[ "30" -ge $level_battery ]]; then		
-		percent_level_battery="[+++-------]"			
-	elif [[ "40" -ge $level_battery ]]; then
-		percent_level_battery="[++++------]"
+	elif [[ "29" -ge $level_battery ]]; then		
+		percent_level_battery="[+++-------]"
 
 		if [[ $status == "Discharging" ]]; then
 			notify-send -t 100 "LOW BATERRY"	
-		fi
+		fi	
 
-	elif [[ "50" -ge $level_battery ]]; then
+	elif [[ "39" -ge $level_battery ]]; then
+		percent_level_battery="[++++------]"		
+	elif [[ "49" -ge $level_battery ]]; then
 		percent_level_battery="[+++++-----]"
-	elif [[ "60" -ge $level_battery ]]; then
+	elif [[ "59" -ge $level_battery ]]; then
 		percent_level_battery="[++++++----]"
-	elif [[ "70" -ge $level_battery ]]; then
+	elif [[ "69" -ge $level_battery ]]; then
 		percent_level_battery="[+++++++---]"
-	elif [[ "80" -ge $level_battery ]]; then
+	elif [[ "79" -ge $level_battery ]]; then
 		percent_level_battery="[++++++++--]"
-	elif [[ "90" -ge $level_battery ]]; then
+	elif [[ "89" -ge $level_battery ]]; then
 		percent_level_battery="[+++++++++-]"
-	elif [[ "100" -ge $level_battery ]]; then
+	elif [[ "99" -ge $level_battery ]]; then
 		percent_level_battery="[++++++++++]"
 	else
 		percent_level_battery="[**ERROR**]"
@@ -136,19 +136,24 @@ check()
 
 	if [[ $status == "Discharging" ]]; then						
 		echo -e "Status:\e[1;31m $status"" \e[0m"
-		echo "Time rest:" $time "/" $percent	
-		echo "Consuming now:" $current_now "mA /" $consuming_level
-		echo "Battery rest:" $charge_now "mAh / $percent_level_battery"		
-		echo "Brightness:" $brightness "/" $percent_level_brightness	
+		echo "Time rest:" $time "/" $percent
 		echo "Expected shutdown:" $expected_time
+		echo
+		echo "Consuming now:" $current_now "mA /" $consuming_level
+		echo "Full Design:" $full_battery " mAh / [++++++++++]"
+		echo "Battery rest:" $charge_now " mAh / $percent_level_battery"		
+		echo
+		echo "Brightness:" $brightness "/" $percent_level_brightness			
 		echo "Temperature: "$(sensors | grep temp1 | awk {'print $2'})""
 	elif [[ $status == "Charging" ]]; then						
 		echo -e "Status battery:\e[1;32m $status"" \e[0m"
 		echo "Percent to full:" $expected_full_charge / $(((100 - $perc_batery))) "%"
-		echo "Consuming now:" $current_now "mA / $consuming_level"
-		echo "Battery rest to full charge: $(($full_battery - $charge_now)) mAh"	
-		echo "Brightness:" $brightness "/" $percent_level_brightness	
+		echo "Battery rest to full charge: $(($full_battery - $charge_now)) mAh"
+		echo
+		echo "Consuming now:" $current_now "mA / $consuming_level"		
 		echo "Full battery:" $charge_now "mAh"
+		echo
+		echo "Brightness:" $brightness "/" $percent_level_brightness	
 		echo "Temperature: "$(sensors | grep temp1 | awk {'print $2'})""
 	elif [[ $status == "Full" ]]; then
 		notify-send -t 250 "BATERRY FULL!"
