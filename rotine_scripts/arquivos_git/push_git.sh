@@ -11,7 +11,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[30/03/18]       #
-# Last modification script: 		[21/02/19]       #
+# Last modification script: 		[06/03/20]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
@@ -82,9 +82,6 @@ pre_check()
     	notify-send "Verificando modificacoes, aguarde..."
 
     	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/pull_git.sh >> /dev/null 
-    else
-    	notify-send "Erro no ping!"  
-    	error_connection="1"
     fi
 
     if [[ $error_connection = "0" ]]; then  	
