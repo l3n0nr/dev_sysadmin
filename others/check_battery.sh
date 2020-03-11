@@ -7,7 +7,7 @@
 #
 # DAT_CRIAC	:	07/01/19
 # LAST_MOD	:	11/03/20
-# VERSAO	:	1.29
+# VERSAO	:	1.30
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -55,7 +55,7 @@ check_battery()
 		percent_level_battery="[++++------]"
 
 		if [[ $status == "Discharging" ]]; then
-			notify-send -t 100 "LOW BATERRY"	
+			notify-send -t 100 "LOW BATERRY - $time / $percent"	
 		fi			
 	elif [[ "49" -ge $level_battery ]]; then
 		percent_level_battery="[+++++-----]"
