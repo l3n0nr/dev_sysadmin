@@ -6,8 +6,8 @@
 ######################################################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	05/03/20
-# VERSAO	:	1.27
+# LAST_MOD	:	11/03/20
+# VERSAO	:	1.28
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -166,20 +166,20 @@ check()
 main()
 {	
 	while [[ TRUE ]]; do		
+		clear
+
 		if [[ -e "/sys/class/power_supply/BAT0/status" ]]; then
-			clear
 			echo "#####################################"	
 			check
 			echo "#####################################"
-			sleep 2.5
 		else
-			clear
 			echo "##################"
 			echo "BATTERY NOT FOUND!"
-			echo "##################"
-			sleep 5			
+			echo "##################"			
 			exit 0
-		fi		
+		fi	
+
+		sleep 2.5	
 	done	
 }
 
