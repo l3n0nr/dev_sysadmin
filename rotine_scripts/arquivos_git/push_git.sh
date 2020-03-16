@@ -11,11 +11,11 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[30/03/18]       #
-# Last modification script: 		[06/03/20]       #
+# Last modification script: 		[16/03/20]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
-source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/git.conf
+source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/variables.conf
 
 push_git()
 {
@@ -43,8 +43,6 @@ push_git()
 				  	else				  		
 						echo "repositorie Error ${repos[$i]}!" >> /tmp/repo.txt
 				  	fi									
-				# else
-				# 	echo "Nenhum push pendente em $local${repos[$i]}\n"
 				fi		
 				
 				# add  

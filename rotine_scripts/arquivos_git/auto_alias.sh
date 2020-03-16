@@ -10,11 +10,11 @@
 #       contato: <lenonrmsouza@gmail.com>
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
-# Last modification script: 		[29/04/19]       #
+# Last modification script: 		[16/03/20]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
-source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/git.conf
+source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/variables.conf
 
 auto_alias()	
 {		
