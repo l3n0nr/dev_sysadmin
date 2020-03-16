@@ -15,7 +15,7 @@
 # ERRO: Verificar permissao execucao arquivo /opt/tor
 #
 ######################################################################
-# 
+#
 source variables.conf
 #
 # funcao verifica se arquivo existe
