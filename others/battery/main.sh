@@ -20,7 +20,20 @@
 source variables.conf
 #
 check_battery()
-{	
+{
+	expected_time_h=${time:0:1}
+	expected_time_m=${time:2:2}
+	expected_time_s=${time:5:5}	
+
+	low_res="$((($full_battery * 30) / 100))"
+	med_res="$((($full_battery * 60) / 100))"
+	high_res="$((($full_battery * 75) / 100))"
+
+	expected_time="$(date -d "$expected_time_h hours $expected_time_m minutes" +%R)"
+	expected_full_charge="$(ibam -a | grep "Bios time left:"| awk {'print $4'})"
+
+	date_rest="$battery_res"	
+
 	if [[ "9" -ge $level_battery ]]; then
 		percent_level_battery="[+---------]"
 	elif [[ "19" -ge $level_battery ]]; then		
@@ -48,7 +61,11 @@ check_battery()
 }
 
 check_brightness()
-{	
+{
+	max_brightness="4633"	
+	brightness=$(cat /sys/class/backlight/intel_backlight/brightness)
+	level_brightness="$(((( $brightness ) * 100) / $max_brightness ))"	
+	
 	if [[ "10" -ge $level_brightness ]]; then
 		percent_level_brightness="[+---------]"		
 	elif [[ "20" -ge $level_brightness ]]; then
