@@ -21,6 +21,17 @@ source variables.conf
 #
 check_battery()
 {
+	status="$(cat /sys/class/power_supply/BAT0/status)"
+	full_battery="$(($(cat /sys/class/power_supply/BAT0/charge_full) / 1000))"
+	charge_now="$(($(cat /sys/class/power_supply/BAT0/charge_now) / 1000))"
+	current_now="$(($(cat /sys/class/power_supply/BAT0/current_now) / 1000))"
+	current="$(cat /sys/class/power_supply/BAT0/current_now)"
+	full_design="$(cat /sys/class/power_supply/BAT0/charge_full)"
+
+	time="$(ibam --percentbattery | grep "Adapted battery time left:"| awk {'print $5'})"
+	percent="$(ibam --all | grep "Charge percentage:"| awk {'print $3$4'})"
+	level_battery="$(ibam --all | grep "Charge percentage:"| awk {'print $3'})"	
+
 	expected_time_h=${time:0:1}
 	expected_time_m=${time:2:2}
 	expected_time_s=${time:5:5}	
