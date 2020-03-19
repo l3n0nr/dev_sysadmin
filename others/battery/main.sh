@@ -7,7 +7,7 @@
 #
 # DAT_CRIAC	:	07/01/19
 # LAST_MOD	:	19/03/20
-# VERSAO	:	1.34
+# VERSAO	:	1.35
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -28,7 +28,7 @@ check_battery()
 	current="$(cat /sys/class/power_supply/BAT0/current_now)"
 	full_design="$(cat /sys/class/power_supply/BAT0/charge_full)"
 
-	time="$(ibam --percentbattery | grep "Adapted battery time left:"| awk {'print $5'})"
+	time="$(ibam --all | grep "Adapted battery time left:"| awk {'print $5'})"
 	percent="$(ibam --all | grep "Charge percentage:"| awk {'print $3$4'})"
 	level_battery="$(ibam --all | grep "Charge percentage:"| awk {'print $3'})"	
 
