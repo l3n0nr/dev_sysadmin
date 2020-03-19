@@ -6,8 +6,8 @@
 ######################################################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	18/03/20
-# VERSAO	:	1.33
+# LAST_MOD	:	19/03/20
+# VERSAO	:	1.34
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -55,9 +55,9 @@ check_battery()
 		percent_level_battery="[++++------]"		
 	elif [[ "49" -ge $level_battery ]]; then
 		percent_level_battery="[+++++-----]"
-		warning_level
 	elif [[ "59" -ge $level_battery ]]; then
 		percent_level_battery="[++++++----]"
+		warning_level
 	elif [[ "69" -ge $level_battery ]]; then
 		percent_level_battery="[+++++++---]"
 	elif [[ "79" -ge $level_battery ]]; then
