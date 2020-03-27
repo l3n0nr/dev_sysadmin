@@ -1,33 +1,30 @@
 #!/usr/bin/env bash
 #
+######################################################################
+#
+# ULT_EDICAO: 11/03/20
+# VERSAO: 0.52
 # AUTOR: lenonr
-# 
-##### LOG's
+#
+######################################################################
+#
+# DESCRICAO: Baixa arquivo tor e extrai na pasta $caminho
+#
+######################################################################
 #
 # ERRO: Verificar permissao execucao arquivo /opt/tor
 #
-# TESTADO EM: Debian Stable
-# VERSAO: 0.52
-# ULT_EDICAO: 08/10/18 
+######################################################################
 #
-# DESCRICAO: Baixa arquivo tor e extrai na pasta $caminho
-# 
-##### VARIAVEIS
-caminho="/opt/tor"
-versao_tor="8.0"
-url="https://dist.torproject.org/torbrowser"
-url_tor="$url/$versao_tor/tor-browser-linux64-"$versao_tor"_en-US.tar.xz"
-apelido="tor.tar.xz"
-check="$caminho/tor-browser_en-US"
-user="lenonr"
-acoes=(f_check_file f_download_tor f_check_local f_uncomp_file f_change_perm)
+source variables.conf
 #
-##### FUNCOES PRINCIPAIS
-# funcao verifica saida do ultimo comando
-f_check_status()
+# funcao verifica se arquivo existe
+f_check_file()
 {
-	# verifica se ultimo comando nao foi igual a zero 
-	[[ $? -ne 0 ]] && echo "[-] ERRO EM ${acoes[$i]}." && exit 1
+	if [[ -e $check ]]; then
+		printf "[-] Arquivo $check ja existe! Basta executa-lo..\n"
+		exit 1
+	fi
 }
 
 # funcao baixa arquivo
@@ -36,7 +33,7 @@ f_download_tor()
 	printf "[*] Baixando arquivo, aguarde.. \n"
 
 	# baixando arquivo via WGET, com possibilidade de contianuacao
-	wget -cb $url_tor -O $apelido > /dev/null
+	wget -c $url_tor -O $apelido > /dev/null
 }
 
 # funcao verificao pasta destino
@@ -46,15 +43,6 @@ f_check_local()
 
 	# criando caminho caso nao exista
 	mkdir -p $caminho > /dev/null
-}
-
-# funcao verifica se arquivo existe
-f_check_file()
-{
-	if [[ -e $check ]]; then
-		printf "[-] Arquivo $check ja existe! Basta executa-lo..\n"
-		exit 1
-	fi
 }
 
 # funcao descompacta arquivo
@@ -76,6 +64,13 @@ f_change_perm()
 
 	# alterando permissao para que usuario comum(nao root), consiga utilizar o lancador!
 	chown -R $user $check/Browser
+}
+
+# funcao verifica saida do ultimo comando
+f_check_status()
+{
+	# verifica se ultimo comando nao foi igual a zero 
+	[[ $? -ne 0 ]] && echo "[-] ERRO EM ${acoes[$i]}." && exit 1
 }
 
 ## funcao - chama outras acima

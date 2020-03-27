@@ -26,21 +26,14 @@
 # 	<https://stackoverflow.com/questions/3385003/shell-script-to-get-difference-in-two-dates>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [1.40]         #
+# # versão do script:              [1.46]         #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [08/12/19]      #
+# # ultima ediçao realizada:      [20/03/20]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# 
-## COMPATIVEL COM
-#	Debian Stable
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #  
-# variaveis globais
-date_now=$(date +%x-%k%M)
-sistema=$(hostname)
+source variables.conf
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #																				#
@@ -49,7 +42,7 @@ sistema=$(hostname)
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 neofetch_sistema()
 {
-	neofetch --disable terminal resolution memory --color_blocks off --gtk3 off ; echo
+	neofetch --disable de wm theme icons memory resolution --color_blocks off ; echo
 }
 
 memoria_utilizada()
@@ -65,39 +58,38 @@ disco()
 }
 
 instalacao_sistema()
-{
-	install_system=$(ls -lct /etc | tail -1 | awk '{print $6, $7, $8}')
-
+{	
 	echo "- Sistema instalado em $install_system."
 }
 
-twitts()
+commits_add()
 {
-	arquivo="/home/lenonr/Dropbox/Arquivos/Twitter/posts"
-	check_lastscanner=$(tail -1 /home/lenonr/Dropbox/Arquivos/Twitter/twitter_scanner)
-	check_lastpost=$(cat /tmp/twitter_log | grep "NEW POST" | tail -1 | sed 's/NEW POST   - //g' )
-
-	if [[ $sistema = "desktop" ]]; then
-		# count=$(cat $arquivo | wc -l)
-		count=$(wc -l $arquivo | awk '{print $1}')
-
-		if [[ $count > 1 ]]; then
-			echo "- $count twitts pendentes do bot!"			
+	if [[ $commits_add > "0" ]]; then
+		if [[ $cont_add = "" ]]; then
+			echo -e "\e[1;34m 	ADD: $commits_add\e[0m"	
 		else
-			echo "- 1 twitt pendente do bot!"			
+			echo -e "\e[1;34m 	ADD: $commits_add [ $cont_add]\e[0m"	
 		fi		
-				
-		echo "	- Last scanner: $check_lastscanner."
-		echo "	- Last post:    $check_lastpost."
-		echo
-	fi	
+	fi
+}
+
+commits_com()
+{	
+	if [[ $commits_com > "0" ]]; then
+		if [[ $cont_com = "" ]]; then
+			echo -e "\e[1;34m 	COM: $commits_com\e[0m"	
+		else
+			echo -e "\e[1;34m 	COM: $commits_com [ $cont_com]\e[0m"	
+		fi
+		
+	fi
+
+	echo
 }
 
 commits()
 {
-	check_commit
-
-	commits=$(cat /tmp/commits)
+	check_commit	
 
 	if [[ $commits = "" ]]; then
 		echo "- ERROR"
@@ -113,99 +105,44 @@ commits()
 	commits_com
 }
 
-commits_add()
-{
-	commits_add=$(cat /tmp/commits_add)
-	cont_add=$(cat /tmp/commit_add.txt | tail -1 | sed -e 's/\dev_//g')
-
-	if [[ $commits_add > "0" ]]; then
-		if [[ $cont_add = "" ]]; then
-			echo -e "\e[1;34m 	ADD: $commits_add\e[0m"	
-		else
-			echo -e "\e[1;34m 	ADD: $commits_add [ $cont_add]\e[0m"	
-		fi		
-	fi
-}
-
-commits_com()
-{
-	commits_com=$(cat /tmp/commits_com)
-	cont_com=$(cat /tmp/commit_com.txt | tail -1 | sed -e 's/\dev_//g')
-
-	if [[ $commits_com > "0" ]]; then
-		if [[ $cont_com = "" ]]; then
-			echo -e "\e[1;34m 	COM: $commits_com\e[0m"	
-		else
-			echo -e "\e[1;34m 	COM: $commits_com [ $cont_com]\e[0m"	
-		fi
-		
-	fi
-
-	echo
-}
-
 check_commit()
 {
-	### GERANDO ARQUIVOS ##
-	if [[ ! -e "/tmp/commits"  ]]; then
-		touch /tmp/commits
+	if [[ ! -e $output_commits ]]; then
+		touch $output_commits
 	else
-		echo "0" > /tmp/commits	
+		echo "0" > $output_commits
 	fi		
 
-	if [[ ! -e "/tmp/commits_add"  ]]; then
-		touch /tmp/commits_add
+	if [[ ! -e $output_commits_add  ]]; then
+		touch $output_commits_add
 	else
-		echo "0" > /tmp/commits_add
+		echo "0" > $output_commits_add
 	fi		
 
-	if [[ ! -e "/tmp/commits_com"  ]]; then
-		touch /tmp/commits_com
+	if [[ ! -e $output_commits_com  ]]; then
+		touch $output_commits_com
 	else
-		echo "0" > /tmp/commits_com
+		echo "0" > $output_commits_com
 	fi			
 
 	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/status_git.sh >> /dev/null 
 }
 
-check_updates()
-{
-	arquivo_verifica="/tmp/checa_atualizacao"
-
-	if [[ ! -e $arquivo_verifica  ]]; then
-		touch $arquivo_verifica
-		echo "" > $arquivo_verifica
-	fi		
-
-	verifica=$(cat $arquivo_verifica)
-
-	if [[ $verifica == "" ]] || [[ $verifica == "Listing..." ]]; then
-		echo "- Tudo atualizado!" ; echo
-	else
-		conta=$(wc /tmp/checa_atualizacao | awk {'print $1'-1})
-
-		if [[ $conta > 1 ]]; then
-			echo -e "\e[1;31m- $conta atualizaçoes disponiveis! \e[0m" ; echo
-		else
-			echo -e "\e[1;31m- 1 atualizaçao disponivel! \e[0m" ; echo					
-		fi		
-	fi	
-}
-
 report()
 {
 	if [[ $sistema = "notebook" ]]; then
-		echo "############################# SYSTEM REPORT ##############################"
-	else
+		echo "######################## SYSTEM REPORT ##########################"
+	elif [[ $sistema = "desktop" ]]; then
 		echo "################################ SYSTEM REPORT ################################"
+	else
+		echo ""
 	fi
+	
 	echo
-	memoria_utilizada
-	disco
-	# commits		
-	# twitts
-	# check_updates
-	instalacao_sistema
+		memoria_utilizada
+		disco
+		commits		
+		instalacao_sistema
 	echo	
 }
 
@@ -213,10 +150,12 @@ report()
 completo()
 {	
 	if [[ $sistema = "notebook" ]]; then
-		echo "################################ NEOFETCH ################################"
+		echo "########################### NEOFETCH ############################"
 		echo
-	else
+	elif [[ $sistema = "desktop" ]]; then
 		echo "################################### NEOFETCH ##################################"
+	else
+		echo
 		echo
 	fi
 
@@ -227,7 +166,7 @@ completo()
 echo_p()
 {
 	if [[ $sistema = "notebook" ]]; then
-		echo "##########################################################################"
+		echo "#################################################################"
 	else
 		echo "###############################################################################"
 	fi
@@ -235,9 +174,7 @@ echo_p()
 
 print_output()
 {
-	output="/tmp/sistema.txt"
-
-	if [[ -e $output ]]; then
+	if [[ ! -e $output ]]; then
 		touch $output
 	fi
 

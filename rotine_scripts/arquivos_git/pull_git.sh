@@ -18,11 +18,11 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:               [30/03/18]       #
-# Last modification script:         [06/01/19]       #
+# Last modification script:         [16/03/20]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
-source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/git.conf
+source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/variables.conf
 #
 
 pull_git()
