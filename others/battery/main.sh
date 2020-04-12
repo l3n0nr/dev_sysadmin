@@ -6,8 +6,8 @@
 ######################################################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	08/04/20
-# VERSAO	:	1.37
+# LAST_MOD	:	11/04/20
+# VERSAO	:	1.38
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -157,7 +157,7 @@ check()
 		echo "Brightness:" $brightness "/" $percent_level_brightness	
 		echo "Temperature: "$(sensors | grep temp1 | awk {'print $2'})""
 	elif [[ $status == "Full" ]]; then
-		notify-send -t 250 "BATERRY FULL!"
+		# notify-send -t 250 "BATERRY FULL!"
 		echo -e "Status battery:\e[1;34m Full"" \e[0m"
 	else
 		notify-send -t 250 "BATTERY NOT CHARGING - HIGH TEMPERATURE"
