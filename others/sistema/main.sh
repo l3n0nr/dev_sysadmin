@@ -87,7 +87,7 @@ commits_com()
 }
 
 check_commit()
-{
+{	
 	if [[ ! -e $output_commits ]]; then
 		touch $output_commits
 	else
@@ -106,7 +106,7 @@ check_commit()
 		echo "0" > $output_commits_com
 	fi			
 
-	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/status_git.sh >> /dev/null 
+	source $status_git >> /dev/null 
 }
 
 commits()
