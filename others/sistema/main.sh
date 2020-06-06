@@ -26,9 +26,9 @@
 # 	<https://stackoverflow.com/questions/3385003/shell-script-to-get-difference-in-two-dates>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [1.46]         #
+# # versão do script:              [1.48]         #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [20/03/20]      #
+# # ultima ediçao realizada:      [06/06/20]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -80,29 +80,10 @@ commits_com()
 			echo -e "\e[1;34m 	COM: $commits_com\e[0m"	
 		else
 			echo -e "\e[1;34m 	COM: $commits_com [ $cont_com]\e[0m"	
-		fi
-		
+		fi		
 	fi
 
 	echo
-}
-
-commits()
-{
-	check_commit	
-
-	if [[ $commits = "" ]]; then
-		echo "- ERROR"
-	elif [[ $commits = "0" ]]; then
-		echo "- Voce nao possui acoes pendentes no GIT!"
-	elif [[ $commits = "1" ]]; then
-		echo -e "\e[1;31m- Voce possui 1 açao pendente no GIT. \e[0m"
-	else
-		echo -e "\e[1;31m- Voce possui $commits açoes pendentes no GIT. \e[0m"
-	fi
-
-	commits_add
-	commits_com
 }
 
 check_commit()
@@ -128,8 +109,28 @@ check_commit()
 	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/status_git.sh >> /dev/null 
 }
 
+commits()
+{
+	# check_commit	
+
+	if [[ $commits = "" ]]; then
+		echo "- ERROR"
+	elif [[ $commits = "0" ]]; then
+		echo "- Voce nao possui acoes pendentes no GIT!"
+	elif [[ $commits = "1" ]]; then
+		echo -e "\e[1;31m- Voce possui 1 açao pendente no GIT. \e[0m"
+	else
+		echo -e "\e[1;31m- Voce possui $commits açoes pendentes no GIT. \e[0m"
+	fi
+
+	commits_add
+	commits_com
+}
+
 report()
 {
+	check_commit
+
 	if [[ $sistema = "notebook" ]]; then
 		echo "######################## SYSTEM REPORT ##########################"
 	elif [[ $sistema = "desktop" ]]; then
