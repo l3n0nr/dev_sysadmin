@@ -26,9 +26,9 @@
 # 	<https://stackoverflow.com/questions/3385003/shell-script-to-get-difference-in-two-dates>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [1.48]         #
+# # versão do script:              [1.49]         #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [06/06/20]      #
+# # ultima ediçao realizada:      [28/06/20]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -129,7 +129,7 @@ commits()
 
 report()
 {
-	check_commit
+	# check_commit
 
 	if [[ $sistema = "notebook" ]]; then
 		echo "######################## SYSTEM REPORT ##########################"
@@ -150,6 +150,8 @@ report()
 ################################################
 completo()
 {	
+	check_commit
+
 	if [[ $sistema = "notebook" ]]; then
 		echo "########################### NEOFETCH ############################"
 		echo
