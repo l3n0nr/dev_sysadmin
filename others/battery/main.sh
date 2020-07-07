@@ -6,8 +6,8 @@
 ######################################################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	20/03/20
-# VERSAO	:	1.36
+# LAST_MOD	:	11/04/20
+# VERSAO	:	1.38
 # AUTOR 	:	lenonr
 #
 ######################################################################
@@ -47,26 +47,21 @@ check_battery()
 
 	if [[ "9" -ge $level_battery ]]; then
 		percent_level_battery="[+---------]"
-		warning_level
 	elif [[ "19" -ge $level_battery ]]; then		
 		percent_level_battery="[++--------]"
-		warning_level
 	elif [[ "29" -ge $level_battery ]]; then		
 		percent_level_battery="[+++-------]"		
-		warning_level
 	elif [[ "39" -ge $level_battery ]]; then
 		percent_level_battery="[++++------]"		
-		warning_level
 	elif [[ "49" -ge $level_battery ]]; then
 		percent_level_battery="[+++++-----]"
-		warning_level
 	elif [[ "59" -ge $level_battery ]]; then
 		percent_level_battery="[++++++----]"
-		warning_level
 	elif [[ "69" -ge $level_battery ]]; then
 		percent_level_battery="[+++++++---]"
 	elif [[ "79" -ge $level_battery ]]; then
 		percent_level_battery="[++++++++--]"
+		warning_level
 	elif [[ "89" -ge $level_battery ]]; then
 		percent_level_battery="[+++++++++-]"
 	elif [[ "99" -ge $level_battery ]]; then
@@ -162,7 +157,7 @@ check()
 		echo "Brightness:" $brightness "/" $percent_level_brightness	
 		echo "Temperature: "$(sensors | grep temp1 | awk {'print $2'})""
 	elif [[ $status == "Full" ]]; then
-		notify-send -t 250 "BATERRY FULL!"
+		# notify-send -t 250 "BATERRY FULL!"
 		echo -e "Status battery:\e[1;34m Full"" \e[0m"
 	else
 		notify-send -t 250 "BATTERY NOT CHARGING - HIGH TEMPERATURE"
