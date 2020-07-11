@@ -26,14 +26,15 @@
 # 	<https://stackoverflow.com/questions/3385003/shell-script-to-get-difference-in-two-dates>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [1.49]         #
+# # versão do script:              [1.50]         #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [28/06/20]      #
+# # ultima ediçao realizada:      [11/07/20]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #  
 source variables.conf
+source commit.sh
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #																				#
@@ -62,29 +63,29 @@ instalacao_sistema()
 	echo "- Sistema instalado em $install_system."
 }
 
-commits_add()
-{
-	if [[ $commits_add > "0" ]]; then
-		if [[ $cont_add = "" ]]; then
-			echo -e "\e[1;34m 	ADD: $commits_add\e[0m"	
-		else
-			echo -e "\e[1;34m 	ADD: $commits_add [ $cont_add]\e[0m"	
-		fi		
-	fi
-}
+# commits_add()
+# {
+# 	if [[ $commits_add > "0" ]]; then
+# 		if [[ $cont_add = "" ]]; then
+# 			echo -e "\e[1;34m 	ADD: $commits_add\e[0m"	
+# 		else
+# 			echo -e "\e[1;34m 	ADD: $commits_add [ $cont_add]\e[0m"	
+# 		fi		
+# 	fi
+# }
 
-commits_com()
-{	
-	if [[ $commits_com > "0" ]]; then
-		if [[ $cont_com = "" ]]; then
-			echo -e "\e[1;34m 	COM: $commits_com\e[0m"	
-		else
-			echo -e "\e[1;34m 	COM: $commits_com [ $cont_com]\e[0m"	
-		fi		
-	fi
+# commits_com()
+# {	
+# 	if [[ $commits_com > "0" ]]; then
+# 		if [[ $cont_com = "" ]]; then
+# 			echo -e "\e[1;34m 	COM: $commits_com\e[0m"	
+# 		else
+# 			echo -e "\e[1;34m 	COM: $commits_com [ $cont_com]\e[0m"	
+# 		fi		
+# 	fi
 
-	echo
-}
+# 	echo
+# }
 
 check_commit()
 {	
@@ -111,8 +112,6 @@ check_commit()
 
 commits()
 {
-	# check_commit	
-
 	if [[ $commits = "" ]]; then
 		echo "- ERROR"
 	elif [[ $commits = "0" ]]; then
@@ -128,9 +127,7 @@ commits()
 }
 
 report()
-{
-	# check_commit
-
+{	
 	if [[ $sistema = "notebook" ]]; then
 		echo "######################## SYSTEM REPORT ##########################"
 	elif [[ $sistema = "desktop" ]]; then
