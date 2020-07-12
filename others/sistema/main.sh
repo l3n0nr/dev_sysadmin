@@ -26,9 +26,9 @@
 # 	<https://stackoverflow.com/questions/3385003/shell-script-to-get-difference-in-two-dates>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
-# # versão do script:              [1.50]         #
+# # versão do script:              [1.51]         #
 # # data de criação do script:    [23/10/17]      #
-# # ultima ediçao realizada:      [11/07/20]      #
+# # ultima ediçao realizada:      [12/07/20]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -87,28 +87,28 @@ instalacao_sistema()
 # 	echo
 # }
 
-check_commit()
-{	
-	if [[ ! -e $output_commits ]]; then
-		touch $output_commits
-	else
-		echo "0" > $output_commits
-	fi		
+# check_commit()
+# {	
+# 	if [[ ! -e $output_commits ]]; then
+# 		touch $output_commits
+# 	else
+# 		echo "0" > $output_commits
+# 	fi		
 
-	if [[ ! -e $output_commits_add  ]]; then
-		touch $output_commits_add
-	else
-		echo "0" > $output_commits_add
-	fi		
+# 	if [[ ! -e $output_commits_add  ]]; then
+# 		touch $output_commits_add
+# 	else
+# 		echo "0" > $output_commits_add
+# 	fi		
 
-	if [[ ! -e $output_commits_com  ]]; then
-		touch $output_commits_com
-	else
-		echo "0" > $output_commits_com
-	fi			
+# 	if [[ ! -e $output_commits_com  ]]; then
+# 		touch $output_commits_com
+# 	else
+# 		echo "0" > $output_commits_com
+# 	fi			
 
-	source $status_git >> /dev/null 
-}
+# 	source $status_git >> /dev/null 
+# }
 
 commits()
 {

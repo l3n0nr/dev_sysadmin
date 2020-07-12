@@ -4,6 +4,29 @@ source variables.conf
 #
 main_commit()
 {
+	check_commit()
+	{	
+		if [[ ! -e $output_commits ]]; then
+			touch $output_commits
+		else
+			echo "0" > $output_commits
+		fi		
+
+		if [[ ! -e $output_commits_add  ]]; then
+			touch $output_commits_add
+		else
+			echo "0" > $output_commits_add
+		fi		
+
+		if [[ ! -e $output_commits_com  ]]; then
+			touch $output_commits_com
+		else
+			echo "0" > $output_commits_com
+		fi			
+
+		source $status_git >> /dev/null 
+	}
+	
 	commits_add()
 	{
 		if [[ $commits_add > "0" ]]; then
@@ -26,30 +49,7 @@ main_commit()
 		fi
 
 		echo
-	}
-
-	# check_commit()
-	# {	
-	# 	if [[ ! -e $output_commits ]]; then
-	# 		touch $output_commits
-	# 	else
-	# 		echo "0" > $output_commits
-	# 	fi		
-
-	# 	if [[ ! -e $output_commits_add  ]]; then
-	# 		touch $output_commits_add
-	# 	else
-	# 		echo "0" > $output_commits_add
-	# 	fi		
-
-	# 	if [[ ! -e $output_commits_com  ]]; then
-	# 		touch $output_commits_com
-	# 	else
-	# 		echo "0" > $output_commits_com
-	# 	fi			
-
-	# 	source $status_git >> /dev/null 
-	# }
+	}	
 
 	# commits()
 	# {
