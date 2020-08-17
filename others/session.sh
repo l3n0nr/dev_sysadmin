@@ -1,69 +1,50 @@
 #!/usr/bin/env bash
 #
 ################################################
-# DESCRICAO		:  	Suspende/Hiberna computador
-# VERSAO		: 	0.16
-# AUTOR			: 	lenonr
+# DESCRICAO		:  	Suspende/Hiberna/Desliga
+# VERSAO		: 	0.20
+# AUTOR			: 	l3n0nr
 ################################################
 #
-## VARIAVEIS GLOBAIS
-# tempo em segundos
-time="0"
-
-# tipo de acao
-action=""
-
-# data agora
 date_now=$(date +%X)
+#
 ################################################
 #
-action_suspend()
-{
-	echo "Suspendendo o sistema em $time_conv segundos..."
-	sleep $time_conv
-	echo "...suspendendo AGORA! $date_now" && sleep 3
-
-	# suspendo sistema
-	xfce4-session-logout --suspend
-}
-
-action_hibernate()
-{
-	echo "Hibernando o sistema em $time_conv segundos..."
-	sleep $time_conv
-	echo "...hibernando AGORA!" && sleep 3
-
-	# hibernando sistema
-	xfce4-session-logout --hibernate
-}
-
+## general functions
 check()
 {
-	## verificando tempo
 	if [[ $2 == "" ]]; then		
-		time="3" 	# 3 minutos
+		time="1"
 	else
 		time=$2
 	fi
 
-	# convertendo tempo para minutos
-	time_conv=$(($time*60))
-
-	## verificando acao
 	if [[ $1 == "" ]]; then
-		echo "Please, call one option: $0 suspend/hibernate"
+		echo "Please, call one option: $0 suspend/hibernate/halt"
 	else
 		action=$1
 	fi	
 
+	# convertendo tempo para minutos
+	time_conv=$(($time*60))
+
 	## executando alguma acao
 	if [[ $action == "suspend" ]]; then
-		action_suspend
+		echo "Suspendendo o sistema em $time_conv segundos..."
+		sleep $time_conv
+		xfce4-session-logout --suspend
 	elif [[ $action == "hibernate" ]]; then
-		action_hibernate	
+		echo "Hibernando o sistema em $time_conv segundos..."
+		sleep $time_conv
+		xfce4-session-logout --hibernate
+	elif [[ $action == "halt" ]]; then
+		echo "Desligando o sistema em $time_conv segundos..."
+		sleep $time_conv
+		xfce4-session-logout --halt
 	fi
 }
 
+## main functions
 main()
 {
 	# limpando tela
