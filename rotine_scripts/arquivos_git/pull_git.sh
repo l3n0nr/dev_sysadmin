@@ -22,7 +22,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
-source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/variables.conf
+source /home/l3n0nr/Github/dev_sysadmin/rotine_scripts/arquivos_git/variables.conf
 #
 
 pull_git()
