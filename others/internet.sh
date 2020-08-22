@@ -18,6 +18,7 @@
 servidor="google.com"
 tempo=60
 contador=0
+tempo_desliga=30
 
 check_internet()
 {
@@ -40,7 +41,8 @@ check_internet()
 while_internet()
 {
 	while true; do			
-		if [[ $contador == "30" ]]; then
+		if [[ $contador == $tempo_desliga ]]; then
+			# desliga apos N minutos
 			xfce4-session-logout --halt
 		fi
 
