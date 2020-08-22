@@ -4,19 +4,20 @@
 #   DESENVOLVIDO POR    #
 # # # # # # # # # # # # #
 #
-# por lenonr(Lenon Ricardo)
+# por l3n0nr(Lenon Ricardo)
 #       contato: <lenonrmsouza@gmail.com>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [28/03/18]      #
-# # ultima ediçao realizada:      [02/05/19]      #
-# # versao do script :			  [	 0.25  ] 	  #
+# # ultima ediçao realizada:      [21/08/20]      #
+# # versao do script :			  [	 0.28  ] 	  #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 #
 ## VARIAVEIS
 servidor="google.com"
 tempo=60
+contador=0
 
 check_internet()
 {
@@ -27,19 +28,25 @@ check_internet()
 		mensagem="Internet funcionando!"
 		echo $mensagem $data
 		notify-send "$mensagem"
+		contador=0
 		exit 0
 	else				
-		mensagem="- Sem conexao!"		
+		mensagem="- Sem conexao!"	
 		echo $mensagem $data
+		let contador++	
 	fi		
 }
 
 while_internet()
 {
 	while true; do			
+		if [[ $contador == "30" ]]; then
+			xfce4-session-logout --halt
+		fi
+
 		check_internet
-		sleep $tempo
-	done
+		sleep $tempo		
+	done	
 }
 
 main()
