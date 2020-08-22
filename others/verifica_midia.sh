@@ -4,8 +4,8 @@
 # DESENVOLVIDO POR #
 ####################
 #
-# por lenonr(Lenon Ricardo) 
-# 	contato: <lenonrmsouza@gmail.com>
+# por l3n0nr(Lenon Ricardo) 
+# 	contato: <l3n0nrmsouza@gmail.com>
 #
 #################################################################################
 #										                                        #
@@ -16,8 +16,8 @@
 #################################################################################
 #
 ###################################################
-# versão do script:              0.0.80.0.0.0     #
-# # ultima ediçao realizada:      [08/05/19]      #
+# versão do script:              0.0.82.0.0.0     #
+# # ultima ediçao realizada:      [21/09/20]      #
 ###################################################
 #
 # legenda: a.b.c.d.e.f
@@ -48,27 +48,27 @@
 ## VARIAVEIS
 # verificacao
 var_tree=$(which tree)
-local_destino="/home/lenonr/MEGA/"
+local_destino="/home/l3n0nr/MEGA/"
 
 # FILMES
-caminhofilmes_origem="/media/lenonr/BACKUP/Arquivos/Filmes"
-caminhofilmes_destino="/home/lenonr/MEGA/Outros/Lista/Filmes.txt"
-caminhofilmes_destinohd="/media/lenonr/BACKUP/Arquivos/Filmes/Filmes.txt"    
+caminhofilmes_origem="/media/l3n0nr/BACKUP/Arquivos/Filmes"
+caminhofilmes_destino="/home/l3n0nr/MEGA/Outros/Lista/Filmes.txt"
+caminhofilmes_destinohd="/media/l3n0nr/BACKUP/Arquivos/Filmes/Filmes.txt"    
 
 	# assistidos
-	caminhofilmes_a_origem="/media/lenonr/BACKUP/Arquivos/Filmes"  
-	caminhofilmes_a_destino="/home/lenonr/MEGA/Outros/Lista/Filmes_Assistidos.txt"
-	caminhofilmes_a_destinohd="/media/lenonr/BACKUP/Arquivos/Filmes/Filmes_Assistidos.txt"    
+	caminhofilmes_a_origem="/media/l3n0nr/BACKUP/Arquivos/Filmes"  
+	caminhofilmes_a_destino="/home/l3n0nr/MEGA/Outros/Lista/Filmes_Assistidos.txt"
+	caminhofilmes_a_destinohd="/media/l3n0nr/BACKUP/Arquivos/Filmes/Filmes_Assistidos.txt"    
 
 	# pendentes
-	caminhofilmes_p_origem="/home/lenonr/Downloads/Torrents/Finalized/Movies"    
-	caminhofilmes_p_destino="/home/lenonr/MEGA/Outros/Lista/Filmes_Pendentes.txt"
-	caminhofilmes_p_destinohd="/media/lenonr/BACKUP/Arquivos/Filmes/Filmes_Pendentes.txt"    
+	caminhofilmes_p_origem="/home/l3n0nr/Downloads/Torrents/Finalized/Movies"    
+	caminhofilmes_p_destino="/home/l3n0nr/MEGA/Outros/Lista/Filmes_Pendentes.txt"
+	caminhofilmes_p_destinohd="/media/l3n0nr/BACKUP/Arquivos/Filmes/Filmes_Pendentes.txt"    
 
 # SERIADOS
-caminhoseriados_origem="/media/lenonr/BACKUP/Arquivos/Seriados"    
-caminhoseriados_destino="/home/lenonr/MEGA/Outros/Lista/Seriados.txt"    
-caminhoseriados_destinohd="/media/lenonr/BACKUP/Arquivos/Seriados/Seriados.txt"
+caminhoseriados_origem="/media/l3n0nr/BACKUP/Arquivos/Seriados"    
+caminhoseriados_destino="/home/l3n0nr/MEGA/Outros/Lista/Seriados.txt"    
+caminhoseriados_destinohd="/media/l3n0nr/BACKUP/Arquivos/Seriados/Seriados.txt"
 
 install_tree()
 {	
