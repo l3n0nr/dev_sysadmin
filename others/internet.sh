@@ -18,12 +18,19 @@
 servidor="google.com"
 tempo=60
 contador=0
-tempo_desliga=30
 
 check_internet()
 {
 	data=$(date +%k:%M:%S)
 	ping -q -c4 $servidor &> /dev/null 
+
+
+	# se usuario nao passar parametro, entao aguarda 15 minutos para desligar maquina sem conexao
+	if [[ $1 == "" ]]; then
+		tempo_desliga=15
+	else
+		tempo_desliga=$1
+	fi
 
 	if [ $? == "0" ]; then	
 		mensagem="Internet funcionando!"
@@ -54,7 +61,7 @@ while_internet()
 main()
 {
 	clear
-	while_internet
+	while_internet $1
 }
 
-main
+main $1
