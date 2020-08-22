@@ -10,8 +10,8 @@
 #   DESENVOLVIDO POR    #
 # # # # # # # # # # # # #
 #
-# por lenonr(Lenon Ricardo)
-#       contato: <lenonrmsouza@gmail.com>
+# por l3n0nr(Lenon Ricardo)
+#       contato: <l3n0nrmsouza@gmail.com>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #									      									  #

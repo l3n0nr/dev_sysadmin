@@ -6,15 +6,15 @@
 #   DEVELOPMENT BY 	  #
 # # # # # # # # # # # #
 #
-# por lenonr(Lenon Ricardo)
-#       contato: <lenonrmsouza@gmail.com>
+# por l3n0nr(Lenon Ricardo)
+#       contato: <l3n0nrmsouza@gmail.com>
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Last modification script: 		[16/03/20]       #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 #
 # chamando arquivo de configuracao
-source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/variables.conf
+source /home/l3n0nr/Github/dev_sysadmin/rotine_scripts/arquivos_git/variables.conf
 
 auto_alias()	
 {		

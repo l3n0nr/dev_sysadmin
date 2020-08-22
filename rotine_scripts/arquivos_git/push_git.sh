@@ -6,8 +6,8 @@
 #   DEVELOPMENT BY 	  #
 # # # # # # # # # # # #
 #
-# por lenonr(Lenon Ricardo)
-#       contato: <lenonrmsouza@gmail.com>
+# por l3n0nr(Lenon Ricardo)
+#       contato: <l3n0nrmsouza@gmail.com>
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[30/03/18]       #
@@ -79,7 +79,7 @@ pre_check()
     	# atualizando repositorios antes de fazer o push
     	notify-send "Verificando modificacoes, aguarde..."
 
-    	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/pull_git.sh >> /dev/null 
+    	source /home/l3n0nr/Github/dev_sysadmin/rotine_scripts/arquivos_git/pull_git.sh >> /dev/null 
     fi
 
     if [[ $error_connection = "0" ]]; then  	

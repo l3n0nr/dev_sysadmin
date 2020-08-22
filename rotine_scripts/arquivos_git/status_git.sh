@@ -10,8 +10,8 @@
 #   DEVELOPMENT BY 	  #
 # # # # # # # # # # # #
 #
-# por lenonr(Lenon Ricardo)
-#       contato: <lenonrmsouza@gmail.com>
+# por l3n0nr(Lenon Ricardo)
+#       contato: <l3n0nrmsouza@gmail.com>
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Date create script:    	  		[08/04/18]       #
@@ -177,7 +177,7 @@ check_git()
 push_auto()
 {
 	## chamando arquivo para commit automatico
-	source /home/lenonr/Github/dev_sysadmin/rotine_scripts/arquivos_git/push_git.sh
+	source /home/l3n0nr/Github/dev_sysadmin/rotine_scripts/arquivos_git/push_git.sh
 }
 
 main()
