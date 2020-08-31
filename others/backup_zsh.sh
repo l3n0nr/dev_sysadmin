@@ -12,7 +12,7 @@
 #   DESENVOLVIDO POR    #
 # # # # # # # # # # # # #
 #
-# por lenonr(Lenon Ricardo)
+# por l3n0nr(Lenon Ricardo)
 #       contato: <lenonrmsouza@gmail.com>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -25,17 +25,17 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [19/06/18]      #             
-# # ultima ediçao realizada:      [25/04/19]      #
+# # ultima ediçao realizada:      [25/08/19]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # versao do script
-    VERSAO="0.0.20.0.0.0"    
+    VERSAO="0.0.22.0.0.0"    
 
 # pasta do usuario
     local_home=$HOME
 
 # pasta do git
-	git="/home/lenonr/Github/dev_xfce/Auto_Config/base"
+	git="/home/l3n0nr/Github/dev_xfce/Auto_Config/base"
 
 # arquivo utilizado
 	arquivo=".zshrc"         
@@ -71,7 +71,7 @@
 f_envia()
 {	
 	cd $local_home
-	printf "[*] Enviando arquivo $local_home$arquivo para $git/$arquivo\n" 
+	printf "[*] Enviando arquivo $local_home/$arquivo para $git/$arquivo\n" 
 	cat .zshrc > $git/$arquivo
 	printf "[+] Backup realizado! \n"
 }
