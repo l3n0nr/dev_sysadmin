@@ -16,8 +16,8 @@
 #################################################################################
 #
 ###################################################
-# versão do script:              0.0.83.0.0.0     #
-# # ultima ediçao realizada:      [25/08/20]      #
+# versão do script:              0.0.85.0.0.0     #
+# # ultima ediçao realizada:      [03/09/20]      #
 ###################################################
 #
 # legenda: a.b.c.d.e.f
@@ -28,9 +28,6 @@
 # 	e = pendencias
 # 	f = desenvolver
 #           - Definir variaveis globais como padrao, modificar apenas o caminho final nas variaveis locais dentro de cada função.
-#
-#       OBS: 
-#           - Criar os arquivos necessarios, antes de realizar o backup na primeira vez que o script for executado.           
 #
 ################################################################################
 #
@@ -48,37 +45,51 @@
 ## VARIAVEIS
 # verificacao
 var_tree=$(which tree)
-local_destino="/home/l3n0nr/MEGA/"
+local_destino="$HOME/MEGA/"
 
 # FILMES
 caminhofilmes_origem="/media/l3n0nr/BACKUP/Arquivos/Filmes"
-caminhofilmes_destino="/home/l3n0nr/MEGA/Outros/Lista/Filmes.txt"
+caminhofilmes_destino="$HOME/MEGA/Outros/Lista/Filmes.txt"
 caminhofilmes_destinohd="/media/l3n0nr/BACKUP/Arquivos/Filmes/Filmes.txt"    
 
 	# assistidos
 	caminhofilmes_a_origem="/media/l3n0nr/BACKUP/Arquivos/Filmes"  
-	caminhofilmes_a_destino="/home/l3n0nr/MEGA/Outros/Lista/Filmes_Assistidos.txt"
+	caminhofilmes_a_destino="$HOME/MEGA/Outros/Lista/Filmes_Assistidos.txt"
 	caminhofilmes_a_destinohd="/media/l3n0nr/BACKUP/Arquivos/Filmes/Filmes_Assistidos.txt"    
 
 	# pendentes
-	caminhofilmes_p_origem="/home/l3n0nr/Downloads/Torrents/Finalized/Movies"    
-	caminhofilmes_p_destino="/home/l3n0nr/MEGA/Outros/Lista/Filmes_Pendentes.txt"
+	caminhofilmes_p_origem="$HOME/Downloads/Torrents/Finalized/Movies"    
+	caminhofilmes_p_destino="$HOME/MEGA/Outros/Lista/Filmes_Pendentes.txt"
 	caminhofilmes_p_destinohd="/media/l3n0nr/BACKUP/Arquivos/Filmes/Filmes_Pendentes.txt"    
 
 # SERIADOS
 caminhoseriados_origem="/media/l3n0nr/BACKUP/Arquivos/Seriados"    
-caminhoseriados_destino="/home/l3n0nr/MEGA/Outros/Lista/Seriados.txt"    
+caminhoseriados_destino="$HOME/MEGA/Outros/Lista/Seriados.txt"    
 caminhoseriados_destinohd="/media/l3n0nr/BACKUP/Arquivos/Seriados/Seriados.txt"
 
 install_tree()
 {	
     if [[ ! -e $var_tree ]]; then
         printf "O Tree nao foi encontrado, instalar por favor!"
+        exit 1
     fi
 }
 
 filmes()
-{       
+{      
+	# check_files
+	if [[ ! -e $caminhofilmes_origem ]]; then
+		mkdir -p "${caminhofilmes_origem%/*}" && touch "$caminhofilmes_origem"
+	fi
+
+	if [[ ! -e $caminhofilmes_destino ]]; then
+		mkdir -p "${caminhofilmes_destino%/*}" && touch "$caminhofilmes_destino"	
+	fi
+
+	if [[ ! -e $caminhofilmes_destinohd ]]; then
+		mkdir -p "${caminhofilmes_destinohd%/*}" && touch "$caminhofilmes_destinohd"	
+	fi
+
     printf "[*] Verificando Filmes, aguarde...\n"
 
     tree $caminhofilmes_origem > $caminhofilmes_destino
@@ -101,6 +112,19 @@ filmes_assistidos()
 
 filmes_pendentes()
 {     
+	# check_files
+	if [[ ! -e $caminhofilmes_p_origem ]]; then
+		mkdir -p "${caminhofilmes_p_origem%/*}" && touch "$caminhofilmes_p_origem"
+	fi
+
+	if [[ ! -e $caminhofilmes_p_destino ]]; then
+		mkdir -p "${caminhofilmes_p_destino%/*}" && touch "$caminhofilmes_p_destino"
+	fi
+
+	if [[ ! -e $caminhofilmes_p_destinohd ]]; then
+		mkdir -p "${caminhofilmes_p_destinohd%/*}" && touch "$caminhofilmes_p_destinohd"
+	fi
+
     printf "[*] Verificando Filmes Pendentes, aguarde...\n"
     
     tree $caminhofilmes_p_origem | grep "[+]" | sort > $caminhofilmes_p_destino
@@ -114,11 +138,29 @@ filmes_pendentes()
 
 seriados()
 {   
+	# check_files
+	if [[ ! -e $caminhoseriados_origem ]]; then
+		mkdir -p "${caminhoseriados_origem%/*}" && touch "$caminhoseriados_origem"
+	fi
+
+	if [[ ! -e $caminhoseriados_destino ]]; then
+		mkdir -p "${caminhoseriados_destino%/*}" && touch "$caminhoseriados_destino"
+	fi
+
+	if [[ ! -e $caminhoseriados_destinohd ]]; then
+		mkdir -p "${caminhoseriados_destinohd%/*}" && touch "$caminhoseriados_destinohd"
+	fi
+
     printf "[*] Verificando Seriados, aguarde...\n"
 
     tree $caminhoseriados_origem > $caminhoseriados_destino
     
     cat $caminhoseriados_destino > $caminhoseriados_destinohd
+}
+
+list_files()
+{
+	printf "Movies:" && cat $caminhofilmes_a_destino | tail -1
 }
 
 ################################################################################
@@ -128,23 +170,25 @@ main()
 	clear 
 
 	if [ -e "$local_destino" ]; then 
-	    printf "[+] Executando leitura das pastas \n"
-	    printf "################################################### \n"
-	    install_tree
+    	if [[ $1 == "list" ]]; then
+    		list_files
+    	elif [[ $1 == "check" ]]; then
+    		install_tree
 
-	    if [[ ! -e $var_tree ]]; then
-	        echo "[-] Tree não está instalado"
-	    else
-	        # filmes
+	    	printf "[+] Executando leitura das pastas \n"
+    		printf "################################################### \n"
+    		# filmes
 	        filmes_assistidos
 	        filmes_pendentes
 	        seriados
-	    fi
-	    printf "################################################### \n"
+	    	printf "################################################### \n"
+    	else    		
+	    	echo "Please call, one parameter: list | check"
+    	fi
 	else 
 	    printf "[-] Pasta '$local_destino' nao encontrada! \n"
 	    printf "[-] Backup nao realizado!!\n"
 	fi
 }
 
-main
+main $1
