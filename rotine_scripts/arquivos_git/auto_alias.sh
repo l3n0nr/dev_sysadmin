@@ -7,7 +7,7 @@
 # # # # # # # # # # # #
 #
 # por l3n0nr(Lenon Ricardo)
-#       contato: <l3n0nrmsouza@gmail.com>
+#       contato: <lenonrmsouza@gmail.com>
 #
 # # # # # # # # # # # # # # # # # # # # # # # ## # # #
 # Last modification script: 		[16/03/20]       #
