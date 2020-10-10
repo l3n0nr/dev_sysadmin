@@ -6,8 +6,8 @@
 ######################################################################
 #
 # DAT_CRIAC	:	07/01/19
-# LAST_MOD	:	09/10/20
-# VERSAO	:	1.50
+# LAST_MOD	:	10/10/20
+# VERSAO	:	1.55
 # AUTOR 	:	l3n0nr
 #
 ######################################################################
@@ -31,7 +31,6 @@ check_temperature()
 {
 	check_files
 
-	# data personalizada
 	temp=$(tlp-stat -t | grep CPU | awk {'print $4'})
 	
 	tempo_verifica=$(date)
@@ -44,7 +43,7 @@ check_temperature()
 		notify-send -t 100 "Computador desligando AGORA!"
 	fi		
 	
-	echo "" $tempo_verifica >> $log_temp
+	echo $temp "C -" $tempo_verifica >> $log_temp
 }
 
 check_battery()
@@ -128,8 +127,7 @@ warning_level()
 
 check()
 {
-	## chamando funcoes especificas
-	check_files
+	## chamando funcoes especificas	
 	check_battery
 	check_brightness
 	check_temperature
@@ -176,7 +174,6 @@ check()
 		echo "Brightness:" $brightness "/" $percent_level_brightness	
 		echo "Temperature: "$(sensors | grep temp1 | awk {'print $2'})""
 	elif [[ $status == "Full" ]]; then
-		# notify-send -t 250 "BATERRY FULL!"
 		echo -e "Status battery:\e[1;34m Full"" \e[0m"
 	else
 		notify-send -t 250 "BATTERY NOT CHARGING - HIGH TEMPERATURE"
@@ -186,6 +183,7 @@ check()
 
 main()
 {	
+
 	while [[ TRUE ]]; do		
 		clear
 
