@@ -7,8 +7,8 @@
 #
 # DAT_CRIAC	:	07/01/19
 # LAST_MOD	:	09/10/20
-# VERSAO	:	1.40
-# AUTOR 	:	lenonr
+# VERSAO	:	1.50
+# AUTOR 	:	l3n0nr
 #
 ######################################################################
 #
@@ -17,6 +17,48 @@
 #
 ######################################################################
 #
+check_files()
+{
+	if [[ ! -e $log_temp ]]; then
+		touch $log_temp
+		echo "" > $log_temp
+	fi
+}
+
+check_temperature()
+{
+	check_files
+
+	temp=$(tlp-stat -t | grep CPU | awk {'print $4'})
+
+	# valores de referencia
+	margem_lim="95"
+	margem="85"
+
+	# mensagens para o usuario
+	mensagem="CPU à $temp C, é melhor desligar."
+	mensagem_limite="Computador desligando AGORA!"
+
+	# saida de log
+	log_temp="/tmp/log_temp"
+
+	# data personalizada
+	tempo_verifica=$(date)
+
+	temperature()
+	{	
+		if [[ $temp > $margem ]]; then
+			notify-send -t 10000 "$mensagem"
+		fi
+
+		if [[ $temp > $margem_lim ]]; then
+			notify-send -t 10000 "$mensagem_limite"
+		fi		
+		
+		echo "" $tempo_verifica >> $log_temp
+	}
+}
+
 check_battery()
 {
 	status="$(cat /sys/class/power_supply/BAT0/status)"
@@ -110,8 +152,10 @@ warning_level()
 check()
 {
 	## chamando funcoes especificas
+	check_files
 	check_brightness
 	check_battery
+	check_temperature
 
 	############################
 	if [[ $current > 0 ]]; then
