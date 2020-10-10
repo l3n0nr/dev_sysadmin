@@ -17,19 +17,7 @@
 #
 ######################################################################
 #
-## VARIAVEIS GLOBAIS
-temp=$(tlp-stat -t | grep CPU | awk {'print $4'})
-
-# valores de referencia
-margem_lim="95"
-margem="85"
-
-# mensagens para o usuario
-mensagem="CPU à $temp C, é melhor desligar."
-mensagem_limite="Computador desligando AGORA!"
-
-# saida de log
-log_temp="/tmp/log_temp"
+source variables.conf
 
 check_files()
 {
@@ -44,14 +32,16 @@ check_temperature()
 	check_files
 
 	# data personalizada
+	temp=$(tlp-stat -t | grep CPU | awk {'print $4'})
+	
 	tempo_verifica=$(date)
 	
 	if [[ $temp > $margem ]]; then
-		notify-send "$mensagem"
+		notify-send -t 100 "CPU à $temp C, é melhor desligar."
 	fi
 
 	if [[ $temp > $margem_lim ]]; then
-		notify-send "$mensagem_limite"
+		notify-send -t 100 "Computador desligando AGORA!"
 	fi		
 	
 	echo "" $tempo_verifica >> $log_temp
@@ -59,17 +49,6 @@ check_temperature()
 
 check_battery()
 {
-	status="$(cat /sys/class/power_supply/BAT0/status)"
-	full_battery="$(($(cat /sys/class/power_supply/BAT0/charge_full) / 1000))"
-	charge_now="$(($(cat /sys/class/power_supply/BAT0/charge_now) / 1000))"
-	current_now="$(($(cat /sys/class/power_supply/BAT0/current_now) / 1000))"
-	current="$(cat /sys/class/power_supply/BAT0/current_now)"
-	full_design="$(cat /sys/class/power_supply/BAT0/charge_full)"
-
-	time="$(ibam --all | grep "Adapted battery time left:"| awk {'print $5'})"
-	percent="$(ibam --all | grep "Charge percentage:"| awk {'print $3$4'})"
-	level_battery="$(ibam --all | grep "Charge percentage:"| awk {'print $3'})"	
-
 	expected_time_h=${time:0:1}
 	expected_time_m=${time:2:2}
 	expected_time_s=${time:5:5}	
@@ -99,7 +78,6 @@ check_battery()
 		percent_level_battery="[+++++++---]"
 	elif [[ "79" -ge $level_battery ]]; then
 		percent_level_battery="[++++++++--]"
-		warning_level
 	elif [[ "89" -ge $level_battery ]]; then
 		percent_level_battery="[+++++++++-]"
 	elif [[ "99" -ge $level_battery ]]; then
@@ -107,14 +85,15 @@ check_battery()
 	else
 		percent_level_battery="[**ERROR**]"
 	fi		
+
+	## warning level
+	if [[ $level_battery -le "79" ]]; then
+		warning_level
+	fi
 }
 
 check_brightness()
 {
-	max_brightness="4633"	
-	brightness=$(cat /sys/class/backlight/intel_backlight/brightness)
-	level_brightness="$(((( $brightness ) * 100) / $max_brightness ))"	
-	
 	if [[ "10" -ge $level_brightness ]]; then
 		percent_level_brightness="[+---------]"		
 	elif [[ "20" -ge $level_brightness ]]; then
