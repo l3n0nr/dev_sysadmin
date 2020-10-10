@@ -17,6 +17,20 @@
 #
 ######################################################################
 #
+## VARIAVEIS GLOBAIS
+temp=$(tlp-stat -t | grep CPU | awk {'print $4'})
+
+# valores de referencia
+margem_lim="95"
+margem="85"
+
+# mensagens para o usuario
+mensagem="CPU à $temp C, é melhor desligar."
+mensagem_limite="Computador desligando AGORA!"
+
+# saida de log
+log_temp="/tmp/log_temp"
+
 check_files()
 {
 	if [[ ! -e $log_temp ]]; then
@@ -29,34 +43,18 @@ check_temperature()
 {
 	check_files
 
-	temp=$(tlp-stat -t | grep CPU | awk {'print $4'})
-
-	# valores de referencia
-	margem_lim="95"
-	margem="85"
-
-	# mensagens para o usuario
-	mensagem="CPU à $temp C, é melhor desligar."
-	mensagem_limite="Computador desligando AGORA!"
-
-	# saida de log
-	log_temp="/tmp/log_temp"
-
 	# data personalizada
 	tempo_verifica=$(date)
+	
+	if [[ $temp > $margem ]]; then
+		notify-send "$mensagem"
+	fi
 
-	temperature()
-	{	
-		if [[ $temp > $margem ]]; then
-			notify-send -t 10000 "$mensagem"
-		fi
-
-		if [[ $temp > $margem_lim ]]; then
-			notify-send -t 10000 "$mensagem_limite"
-		fi		
-		
-		echo "" $tempo_verifica >> $log_temp
-	}
+	if [[ $temp > $margem_lim ]]; then
+		notify-send "$mensagem_limite"
+	fi		
+	
+	echo "" $tempo_verifica >> $log_temp
 }
 
 check_battery()
@@ -153,8 +151,8 @@ check()
 {
 	## chamando funcoes especificas
 	check_files
-	check_brightness
 	check_battery
+	check_brightness
 	check_temperature
 
 	############################
