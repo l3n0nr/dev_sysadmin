@@ -6,13 +6,11 @@ func_verifica_internet()
 
 	# verificando internet
   	# se nao tiver internet, fecha script
-  	ping -c1 $ping_server >> /dev/null
+  	ping -q -c1 $ping_server &> /dev/null 
 
   	if [[ $? -eq 0 ]]; then
-  		clear
   		printf "IP:" && curl icanhazip.com
   	else
-  		clear
   		echo "Sem conexao"
   	fi
 }
