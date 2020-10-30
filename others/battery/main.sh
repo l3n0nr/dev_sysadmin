@@ -31,19 +31,15 @@ check_temperature()
 {
 	check_files
 
-	temp=$(tlp-stat -t | grep CPU | awk {'print $4'})
-	
-	tempo_verifica=$(date)
-	
-	if [[ $temp > $margem ]]; then
-		notify-send -t 100 "CPU à $temp C, é melhor desligar."
-	fi
+	cputemp0=$(cat /sys/class/thermal/thermal_zone0/temp)
+	cputemp1=$(($cputemp0/1000))
+	cputemp2=$(($cputemp0/100))
+	cputemp=$(($cputemp2%$cputemp1))
+	cputemp_limit="60"
 
-	if [[ $temp > $margem_lim ]]; then
-		notify-send -t 100 "Computador desligando AGORA!"
-	fi		
-	
-	echo $temp "C -" $tempo_verifica >> $log_temp
+	if [[ $cputemp1 > $cputemp_limit ]]; then
+		notify-send "ALTA TEMPERATURA DO PC"
+	fi
 }
 
 check_battery()
