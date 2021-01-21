@@ -9,8 +9,8 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [28/03/18]      #
-# # ultima ediçao realizada:      [21/08/20]      #
-# # versao do script :			  [	 0.28  ] 	  #
+# # ultima ediçao realizada:      [20/01/21]      #
+# # versao do script :			  [	 0.29  ] 	  #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 #
@@ -24,29 +24,21 @@ check_internet()
 	data=$(date +%k:%M:%S)
 	ping -q -c4 $servidor &> /dev/null 
 
-
-	# se usuario nao passar parametro, entao aguarda 15 minutos para desligar maquina sem conexao
-	if [[ $1 == "" ]]; then
-		tempo_desliga=15
-	else
-		tempo_desliga=$1
-	fi
-
 	if [ $? == "0" ]; then	
-		mensagem="Internet funcionando!"
+		mensagem="- ON!"
 		echo $mensagem $data
-		notify-send "$mensagem"
+		notify-send "INTERNET FUNCIONANDO"
 		contador=0
 		exit 0
 	else				
-		mensagem="- Sem conexao!"	
+		mensagem="- OFF!"	
 		echo $mensagem $data
 		let contador++	
-	fi		
+	fi			
 }
 
 while_internet()
-{
+{	
 	while true; do			
 		if [[ $contador == $tempo_desliga ]]; then
 			# desliga apos N minutos
@@ -60,7 +52,17 @@ while_internet()
 
 main()
 {
-	clear
+	clear	
+	
+	# se usuario nao passar parametro, entao aguarda 15 minutos para desligar maquina sem conexao
+	if [[ $1 == "" ]]; then
+		tempo_desliga=15
+	else
+		tempo_desliga=$1
+	fi	
+
+	echo "# Tentando até" $tempo_desliga "minuto(s), antes de desligar."
+
 	while_internet $1
 }
 
