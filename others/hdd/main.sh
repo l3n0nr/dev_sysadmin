@@ -16,8 +16,8 @@
 #################################################################################
 #
 ###################################################
-# versão do script:              0.0.85.0.0.0     #
-# # ultima ediçao realizada:      [03/10/20]      #
+# versão do script:              0.0.86.0.0.0     #
+# # ultima ediçao realizada:      [28/01/21]      #
 ###################################################
 #
 # legenda: a.b.c.d.e.f
@@ -172,7 +172,7 @@ main()
 	clear 
 
 	## check hdd | CONNECTED
-	if [ -e "$local_hdd" ]; then 
+	if [ -e "$hdd" ]; then 
 	    if [ -e "$local_destino" ]; then 
 	    	if [[ $1 == "list" ]]; then
 	    		list_files
