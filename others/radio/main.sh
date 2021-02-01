@@ -8,7 +8,7 @@
 ##########################################
 #
 # DATA_CRIACAO: 26/01/19
-# ULT_MODIFIC:  04/12/19
+# ULT_MODIFIC:  01/02/21
 # VERSAO:		1.37
 #
 ##########################################
@@ -77,6 +77,7 @@ radio_dialog_brasil()
 			--stdout --ok-label "Ouvir" --cancel-label "Voltar" \
 			--menu "Escolha uma radio:" 0 0 0 \
 			"Gaucha" "+" \
+			"Santiago" "-" \
 			"USP" "+" \
 			"UFRGS" "+" \
 			"Bandeirantes" "+" \
