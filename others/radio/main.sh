@@ -9,7 +9,7 @@
 #
 # DATA_CRIACAO: 26/01/19
 # ULT_MODIFIC:  01/02/21
-# VERSAO:		1.39
+# VERSAO:		1.40
 #
 ##########################################
 #
@@ -23,7 +23,8 @@ verifica_internet()
 
 	echo "Verificando conexao, aguarde..."		
 	
-  	ping -c1 $ping_server >> /dev/null
+  	ping -c4 -q $ping_server &> /dev/null
+
   	[[ ! $? -eq 0 ]] && echo "SEM CONEXAO!" && exit 1 || clear
 }
 
