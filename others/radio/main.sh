@@ -8,8 +8,8 @@
 ##########################################
 #
 # DATA_CRIACAO: 26/01/19
-# ULT_MODIFIC:  01/02/21
-# VERSAO:		1.40
+# ULT_MODIFIC:  14/02/21
+# VERSAO:		1.41
 #
 ##########################################
 #
@@ -21,7 +21,7 @@ verifica_internet()
 {
 	clear 
 
-	echo "Verificando conexao, aguarde..."		
+	echo "Verificando conexao das radios, aguarde..."		
 	
   	ping -c4 -q $ping_server &> /dev/null
 
