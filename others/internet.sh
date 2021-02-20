@@ -9,44 +9,44 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [28/03/18]      #
-# # ultima ediçao realizada:      [20/01/21]      #
-# # versao do script :			  [	 0.29  ] 	  #
+# # ultima ediçao realizada:      [20/02/21]      #
+# # versao do script :			  [	 0.30  ] 	  #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 #
 ## VARIAVEIS
 servidor="google.com"
-tempo=60
+tempo=60	
 contador=0
+limite=4
+mensagem_on="- ON!"
+mensagem_off="- OFF!"
 
 check_internet()
 {
 	data=$(date +%k:%M:%S)
-	ping -q -c4 $servidor &> /dev/null 
+	ping -q -c$limite $servidor &> /dev/null 
 
 	if [ $? == "0" ]; then	
-		mensagem="- ON!"
-		echo $mensagem $data
-		notify-send "INTERNET FUNCIONANDO"
+		echo $mensagem_on $data
 		contador=0
-		exit 0
 	else				
-		mensagem="- OFF!"	
-		echo $mensagem $data
+		echo $mensagem_off $data
 		let contador++	
 	fi			
 }
 
 while_internet()
 {	
-	while true; do			
-		if [[ $contador == $tempo_desliga ]]; then
-			# desliga apos N minutos
+	for (( i = 0; i < $tempo_desliga; i++ )); do
+		if [[ $contador == $limite ]]; then
+			echo "Desligando computador"
 			xfce4-session-logout --halt
-		fi
+			exit 0
+	fi
 
 		check_internet
-		sleep $tempo		
+		sleep $tempo			
 	done	
 }
 
@@ -61,7 +61,7 @@ main()
 		tempo_desliga=$1
 	fi	
 
-	echo "# Tentando até" $tempo_desliga "minuto(s), antes de desligar."
+	echo "# Tentando até" $tempo_desliga "minuto(s)..."
 
 	while_internet $1
 }
