@@ -16,8 +16,8 @@
 #################################################################################
 #
 ###################################################
-# versão do script:              0.0.86.0.0.0     #
-# # ultima ediçao realizada:      [28/01/21]      #
+# versão do script:              0.0.90.0.0.0     #
+# # ultima ediçao realizada:      [22/02/21]      #
 ###################################################
 #
 # legenda: a.b.c.d.e.f
@@ -129,13 +129,13 @@ filmes_pendentes()
 
     printf "[*] Verificando Filmes Pendentes, aguarde...\n"
     
-    tree $caminhofilmes_p_origem | grep "[+]" | sort > $caminhofilmes_p_destino
+    ls $caminhofilmes_p_origem | grep "[+]" | sort > $caminhofilmes_p_destino
     
     fp=`cat $caminhofilmes_p_destino | wc -l`
 
 	printf "\n Este arquivo contem $fp filmes pendentes!" >> $caminhofilmes_p_destino
 
-    cat $caminhofilmes_a_destino > $caminhofilmes_a_destinohd    
+    cat $caminhofilmes_p_destino > $caminhofilmes_p_destinohd    
 }
 
 seriados()
