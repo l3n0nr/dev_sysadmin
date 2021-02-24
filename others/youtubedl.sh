@@ -35,7 +35,7 @@
 #   DESENVOLVIDO POR    #
 # # # # # # # # # # # # #
 #
-# por lenonr(Lenon Ricardo)
+# por l3n0nr(Lenon Ricardo)
 #       contato: <lenonrmsouza@gmail.com>
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -48,7 +48,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [14/06/18]      #             
-# # ultima ediçao realizada:      [12/11/18]      #
+# # ultima ediçao realizada:      [23/02/21]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # Legenda: a.b.c.d.e.f
@@ -61,7 +61,7 @@
 #
 # variaveis do script
 	# versao do script
-	versao="0.0.70.0.0.0"  
+	versao="0.2.05.0.0.0"  
 
 	# formato do audio
 	format=mp3					# default
@@ -82,12 +82,11 @@
 ## status
 f_verifica()
 {
-	# mostra notificacao de erro
-	# remove arquivo criado
-	# finaliza programa
-	[[ $? = "1" ]] && \
-		zenity --notification \
-			   --text "Script finalizado, antes do esperado!" && rm $local/list.txt && exit 1
+	if [[ $? == 1 ]]; then
+		zenity --notification --text "Script finalizado!" 
+		# rm $local/list.txt 
+		exit 1
+	fi
 }
 
 ## varios arquivos
@@ -136,6 +135,8 @@ f_quality_video()
     else
     	exit 1
 	fi	
+
+	f_verifica
 }
 
 f_vetor_video()
@@ -173,14 +174,16 @@ main()
     fi
 
     f_verifica 
-	rm $local/list.txt 
 	
-	zenity --notification --text "Download finalizado!" 
+	if [[ $? == 0 ]]; then
+		zenity --notification --text "Download finalizado!" 
+		rm $local/list.txt	
+	fi
+
 }
 
 ## chamando funcao principal
 main
-# f_quality_video
 
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
