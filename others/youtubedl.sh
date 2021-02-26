@@ -48,7 +48,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [14/06/18]      #             
-# # ultima ediçao realizada:      [23/02/21]      #
+# # ultima ediçao realizada:      [26/02/21]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # Legenda: a.b.c.d.e.f
@@ -61,7 +61,7 @@
 #
 # variaveis do script
 	# versao do script
-	versao="0.2.05.0.0.0"  
+	versao="0.2.10.0.0.0"  
 
 	# formato do audio
 	format=mp3					# default
@@ -83,8 +83,7 @@
 f_verifica()
 {
 	if [[ $? == 1 ]]; then
-		zenity --notification --text "Script finalizado!" 
-		# rm $local/list.txt 
+		zenity --notification --text "Script finalizado!"  
 		exit 1
 	fi
 }
@@ -97,13 +96,21 @@ f_vetor()
 				   --title="Selecione o local para salvar") ; f_verifica   	
 }
 
-f_vetor_audio()
-{	
+## introducao no arquivo, quando vazio
+f_intro()
+{
 	echo "# Cole os links, um abaixo do outro..." > $local/list.txt
 	echo "# Salve(Ctrl+s) e apenas feche." >> $local/list.txt
 	echo >> $local/list.txt
 
 	mousepad $local/list.txt
+}
+
+f_vetor_audio()
+{	
+	if [[ -s $local/list.txt ]]; then
+		f_intro
+	fi
 
 	youtube-dl --embed-thumbnail \
 			   --continue \
@@ -141,12 +148,11 @@ f_quality_video()
 
 f_vetor_video()
 {	
-	echo "# Cole os links, um abaixo do outro..." > $local/list.txt
-	echo "# Salve(Ctrl+s) e apenas feche." >> $local/list.txt
-
 	f_quality_video
-
-	mousepad $local/list.txt		
+	
+	if [[ ! -s $local/list.txt ]]; then
+		f_intro
+	fi	
 
 	youtube-dl $quality_video -o "$local/%(title)s.%(ext)s" -a $local/list.txt 
 	f_verifica    	
@@ -179,7 +185,6 @@ main()
 		zenity --notification --text "Download finalizado!" 
 		rm $local/list.txt	
 	fi
-
 }
 
 ## chamando funcao principal
