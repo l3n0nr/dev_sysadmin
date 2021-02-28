@@ -48,7 +48,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [14/06/18]      #             
-# # ultima ediçao realizada:      [26/02/21]      #
+# # ultima ediçao realizada:      [28/02/21]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # Legenda: a.b.c.d.e.f
@@ -61,7 +61,7 @@
 #
 # variaveis do script
 	# versao do script
-	versao="0.2.10.0.0.0"  
+	versao="0.2.11.0.0.0"  
 
 	# formato do audio
 	format=mp3					# default
@@ -125,8 +125,8 @@ f_quality_video()
         	   --text="Qualidade"  \
         	   --column="Marque" --column="Modo" \
         	   --radiolist \
-        	   TRUE 720 \
-        	   FALSE 480 \
+        	   FALSE 720 \
+        	   TRUE 480 \
         	   FALSE 144 \
         	   FALSE 000 \
     )   
