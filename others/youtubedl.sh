@@ -61,7 +61,7 @@
 #
 # variaveis do script
 	# versao do script
-	versao="0.2.13.0.0.0"  
+	versao="0.2.14.0.0.0"  
 
 	# formato do audio
 	format=mp3					# default
@@ -74,7 +74,7 @@
 	option_m="0"	
 
 	# local padrao para download
-	default_local="/home/lenonr/Vídeos/Assistir/list.txt"
+	default_local="/home/lenonr/Vídeos/Assistir/"
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                             #
@@ -119,7 +119,7 @@ f_vetor_audio()
 			   --continue \
 			   --audio-quality "$quality_a" \
 			   --extract-audio \
-			   --audio-format "$format" -o "$local/%(title)s.%(ext)s" -a $local/list.txt
+			   --audio-format "$format" -o "$local/%(title)s.%(ext)s" -a $local/list.txt			   
 }
 
 f_quality_video()
@@ -165,7 +165,7 @@ f_auto()
 {
 	quality_video="-f 18" 		# 480P
 
-	youtube-dl $quality_video -o "$local/%(title)s.%(ext)s" -a $default_local 	
+	youtube-dl $quality_video -o "$default_local/%(title)s.%(ext)s" -a $default_local/list.txt
 
 	f_verifica 
 	
