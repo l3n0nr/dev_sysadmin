@@ -48,7 +48,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # # data de criação do script:    [14/06/18]      #             
-# # ultima ediçao realizada:      [28/02/21]      #
+# # ultima ediçao realizada:      [21/03/21]      #
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 # Legenda: a.b.c.d.e.f
@@ -61,7 +61,7 @@
 #
 # variaveis do script
 	# versao do script
-	versao="0.2.11.0.0.0"  
+	versao="0.2.13.0.0.0"  
 
 	# formato do audio
 	format=mp3					# default
@@ -72,6 +72,9 @@
 	# iniciando variaveis de verificacao
 	local="0"
 	option_m="0"	
+
+	# local padrao para download
+	default_local="/home/lenonr/Vídeos/Assistir/list.txt"
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                             #
@@ -158,13 +161,24 @@ f_vetor_video()
 	f_verifica    	
 }
 
-main()
+f_auto()
 {
-	# limpando a tela
-	clear 
+	quality_video="-f 18" 		# 480P
 
+	youtube-dl $quality_video -o "$local/%(title)s.%(ext)s" -a $default_local 	
+
+	f_verifica 
+	
+	if [[ $? == 0 ]]; then
+		zenity --notification --text "Download finalizado!" 
+		rm $local/list.txt	
+	fi
+}
+
+f_manual()
+{
 	option_m=$(zenity  --list  \
-				--text "Midia Type.." \
+				--text "Tipo de midia.." \
 				--radiolist \
 				--column "Check" \
 				--column "Format" \
@@ -184,7 +198,35 @@ main()
 	if [[ $? == 0 ]]; then
 		zenity --notification --text "Download finalizado!" 
 		rm $local/list.txt	
+	fi	
+}
+
+f_auto_manual()
+{
+	option_auto=$(zenity  --list  \
+				--text "Modo de download" \
+				--radiolist \
+				--column "Check" \
+				--column "Format" \
+							TRUE AUTOMATICO \
+							FALSE MANUAL
+	) ; f_verifica
+
+	if [[ $option_auto == "MANUAL" ]]; then
+		f_manual
+	elif [[ $option_auto == "AUTOMATICO" ]]; then
+		f_auto
+	else
+		exit 1
 	fi
+}
+
+main()
+{
+	# limpando a tela
+	clear 
+
+	f_auto_manual
 }
 
 ## chamando funcao principal
