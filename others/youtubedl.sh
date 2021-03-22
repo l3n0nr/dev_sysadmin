@@ -74,7 +74,7 @@
 	option_m="0"	
 
 	# local padrao para download
-	default_local="/home/lenonr/Vídeos/Assistir/"
+	default_local="/home/lenonr/Vídeos/Assistir"
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                                                             #
